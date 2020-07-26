@@ -1,0 +1,41 @@
+.line-wrapper-page {
+    display: flex;
+    padding-left: 25px;
+    max-width: 756px;
+    width: 100%;
+}
+
+.content-wrapper-page {
+    .wrapper-subtitle:nth-child(2) {
+        margin-top: 16px;
+    }
+}
+
+.form-inner {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-line-right {
+    margin: 16px 9px 0 9px !important;
+}
+
+.form-line-left {
+    margin-right: 9px;
+}
+
+.form {
+    & > * {
+        margin-top: 16px;
+    }
+}
+
+.form-line-notification {
+    align-self: flex-end;
+    display: flex;
+}
+
+.notification-form {
+    align-self: flex-end;
+    margin-left: 9px;
+}
