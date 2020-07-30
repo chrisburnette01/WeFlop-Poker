@@ -3,13 +3,19 @@ import { BrowserRouter, Switch } from 'react-router-dom';
 import PublicRoute from './PublicRoute';
 import { ThemeProvider } from '../providers';
 import { Helmet } from 'react-helmet';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
+
 import './style.scss';
+import '../assets/animations/animations.scss'
 
 import { Welcome, SignUp, SignIn, Reset, ResetPassword } from '../pages';
 
 const App = () => {
+    const application = useSelector((state: RootState) => state.application);
+
     return (
-        <ThemeProvider mode={'light'}>
+        <ThemeProvider mode={application.isAuthenticated ? 'dark' : 'light'}>
             <Helmet defaultTitle="We Flop" titleTemplate="We Flop - %s" />
             <BrowserRouter>
                 <Switch>

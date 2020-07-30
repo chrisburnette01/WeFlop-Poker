@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Button, Input, Line } from '../../components';
-import { Title, Subtitle, Form, Navigation } from '../../layout';
+import { Title, Subtitle, Form, Navigation, FormNotification } from '../../layout';
 import { checkValidation } from '../../helpers';
 import Container from '../../layout/Container/Container';
 import { useForm } from 'react-hook-form';
+
+import './style.scss';
 
 const Reset = () => {
     const { register, errors, handleSubmit, watch } = useForm({
@@ -13,6 +15,7 @@ const Reset = () => {
     });
 
     const [isEmailSent, setIsEmailSent] = useState(false);
+    const [isClicked, setIsClicked] = useState(false);
 
     const onSubmit = (data) => {
         console.log(data);
@@ -28,10 +31,7 @@ const Reset = () => {
     };
 
     const isValidated = check.email;
-
-    const buttonSubmit = isValidated ? (
-        <Button type="submit" title={isEmailSent ? null : 'Enter'} size="small" align="right" />
-    ) : null;
+    const buttonSubmit = <Button variant="secondary" validated={isValidated} title="send reset" />;
 
     return (
         <>
@@ -40,43 +40,45 @@ const Reset = () => {
             </Helmet>
             <Container>
                 <Navigation type={'basic'} />
-                <div className="line-wrapper-page">
-                    <Line width="long" align="right" className="form-line-left" />
-                    <div className="content-wrapper-page">
-                        <Title>Forgot Your Password?</Title>
-                        <Subtitle>
-                            <p>Enter the email address attached to your WeFlop account.</p>
-                            <p>We’ll send you an email with the reset form.</p>
-                        </Subtitle>
-                        <Form resetForm={isEmailSent} onSubmit={handleSubmit(onSubmit)} buttonSubmit={buttonSubmit}>
-                            <Input
-                                placeholder="email adress"
-                                type="email"
-                                name="email"
-                                validation={check.email}
-                                disabled={isEmailSent}
-                                register={register({
-                                    required: {
-                                        value: true,
-                                        message: 'This field is required',
-                                    },
-                                    minLength: {
-                                        value: 4,
-                                        message: 'Email should be at least 4 symbols',
-                                    },
-                                    maxLength: {
-                                        value: 254,
-                                        message: 'Email should not be longer then 254 symbols',
-                                    },
-                                    pattern: {
-                                        value: /\S+@\S+\.\S+/,
-                                        message: 'Email should have form user@email.com',
-                                    },
-                                })}
-                                errorMessage={errors.email && errors.email.message}
-                            />
-                        </Form>
+                <div className="line-wrapper-page line-wrapper-page-reset-email">
+                    <div className="form-wrapper-inner">
+                        <Line width="long" align="right" className="form-line-left" />
+                        <div className="content-wrapper-page">
+                            <Title>Forgot Your Password?</Title>
+                            <Subtitle>Enter the email address associated with your account.</Subtitle>
+                            <Subtitle>We’ll send you an email with a reset form.</Subtitle>
+                            <Form onSubmit={handleSubmit(onSubmit)} buttonSubmit={buttonSubmit} isClicked={isClicked}>
+                                <Input
+                                    onFocus={() => setIsClicked(true)}
+                                    placeholder="email adress"
+                                    type="email"
+                                    name="email"
+                                    validated={check.email}
+                                    disabled={isEmailSent}
+                                    register={register({
+                                        required: {
+                                            value: true,
+                                            message: 'This field is required',
+                                        },
+                                        minLength: {
+                                            value: 4,
+                                            message: 'Email should be at least 4 symbols',
+                                        },
+                                        maxLength: {
+                                            value: 254,
+                                            message: 'Email should not be longer then 254 symbols',
+                                        },
+                                        pattern: {
+                                            value: /\S+@\S+\.\S+/,
+                                            message: 'Email should have form user@email.com',
+                                        },
+                                    })}
+                                    errorMessage={errors.email && errors.email.message}
+                                />
+                            </Form>
+                        </div>
                     </div>
+                    {isEmailSent ? <FormNotification email={isActive.email} /> : null}
                 </div>
             </Container>
         </>

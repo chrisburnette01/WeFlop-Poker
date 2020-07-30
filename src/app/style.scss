@@ -15,3 +15,9 @@
 	src: local('Avenir-Black'), url(../assets/fonts/Avenir-Black.woff2) format('woff2');
 	font-weight: 800;
 }
+
+@font-face {
+	font-family: 'Avenir';
+	src: local('Avenir-Heavy'), url(../assets/fonts/Avenir-Heavy.woff2) format('woff2');
+	font-weight: 600;
+}

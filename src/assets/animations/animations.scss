@@ -1,0 +1,60 @@
+@keyframes setHeight {
+    to {
+        height: 100%;
+    }
+}
+
+@keyframes fadeText {
+    from {
+        opacity: 0%;
+    }
+    to {
+        opacity: 100%;
+    }
+}
+
+@keyframes fadeInputs {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+@keyframes emailNotification {
+    from {
+        margin-top: 20px;
+        opacity: 0;
+    }
+    to {
+        margin-top: 0;
+        opacity: 1;
+    }
+}
+
+.tooltip-enter {
+    opacity: 0;
+    transform: translate(-15px, -50%);
+}
+.tooltip-enter-active {
+    opacity: 1;
+    transform: translate(0, -50%);
+    transition: opacity 0.5s, transform 0.5s;
+}
+.tooltip-enter-done {
+    transform: translate(0, -50%);
+}
+.tooltip-exit {
+    opacity: 1;
+    transform: translate(0, -50%);
+}
+.tooltip-exit-active {
+    opacity: 0;
+    transform: translate(-15px, -50%);
+    transition: opacity 0.5s, transform 0.5s;
+}
+.tooltip-exit-done {
+    transform: translate(-15px, -50%);
+}

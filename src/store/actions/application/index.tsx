@@ -1,38 +1,56 @@
-export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
-export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
-export const SIGN_UP_ERROR = 'SIGN_UP_ERROR';
+const SIGN_UP = {
+    REQUEST: 'SIGN_UP_REQUEST',
+    SUCCESS: 'SIGN_UP_SUCCESS',
+    ERROR: 'SIGN_UP_ERROR'
+}
 
-export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
-export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
-export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
+const SIGN_IN = {
+    REQUEST: 'SIGN_IN_REQUEST',
+    SUCCESS: 'SIGN_IN_SUCCESS',
+    ERROR: 'SIGN_IN_ERROR'
+}
 
-export const RESET_PASSWORD_REQUEST = 'RESET_PASSWORD_REQUEST';
-export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
-export const RESET_PASSWORD_ERROR = 'RESET_PASSWORD_ERROR';
+const RESET_PASSWORD = {
+    REQUEST: 'RESET_PASSWORD_REQUEST',
+    SUCCESS: 'RESET_PASSWORD_SUCCESS',
+    ERROR: 'RESET_PASSWORD_ERROR'
+}
 
-export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST';
-export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
-export const LOG_OUT_ERROR = 'LOG_OUT_ERROR';
+const LOG_OUT = {
+    REQUEST: 'LOG_OUT_REQUEST',
+    SUCCESS: 'LOG_OUT_SUCCESS',
+    ERROR: 'LOG_OUT_ERROR'
+}
 
-export const SEND_FEEDBACK_REQUEST = 'SEND_FEEDBACK_REQUEST';
-export const SEND_FEEDBACK_SUCCESS = 'SEND_FEEDBACK_SUCCESS';
-export const SEND_FEEDBACK_ERROR = 'SEND_FEEDBACK_ERROR';
+const SEND_FEEDBACK = {
+    REQUEST: 'SEND_FEEDBACK_REQUEST',
+    SUCCESS: 'SEND_FEEDBACK_SUCCESS',
+    ERROR: 'SEND_FEEDBACK_ERROR'
+}
 
-export const GET_UPDATES_REQUEST = 'GET_UPDATES_REQUEST';
-export const GET_UPDATES_SUCCESS = 'GET_UPDATES_SUCCESS';
-export const GET_UPDATES_ERROR = 'GET_UPDATES_ERROR';
+const GET_UPDATES = {
+    REQUEST: 'GET_UPDATES_REQUEST',
+    SUCCESS: 'GET_UPDATES_SUCCESS',
+    ERROR: 'GET_UPDATES_ERROR'
+}
 
-export const VOTE_POLL_REQUEST = 'VOTE_POLL_REQUEST';
-export const VOTE_POLL_SUCCESS = 'VOTE_POLL_SUCCESS';
-export const VOTE_POLL_ERROR = 'VOTE_POLL_ERROR';
+const VOTE_POLL = {
+    REQUEST: 'VOTE_POLL_REQUEST',
+    SUCCESS: 'VOTE_POLL_SUCCESS',
+    ERROR: 'VOTE_POLL_ERROR'
+}
 
-export const GET_TABLES_REQUEST = 'GET_TABLES_REQUEST';
-export const GET_TABLES_SUCCESS = 'GET_TABLES_SUCCESS';
-export const GET_TABLES_ERROR = 'GET_TABLES_ERROR';
+const GET_TABLES = {
+    REQUEST: 'GET_TABLES_REQUEST',
+    SUCCESS: 'GET_TABLES_SUCCESS',
+    ERROR: 'GET_TABLES_ERROR'
+}
 
-export const CREATE_TABLE_REQUEST = 'CREATE_TABLE_REQUEST';
-export const CREATE_TABLE_SUCCESS = 'CREATE_TABLE_SUCCESS';
-export const CREATE_TABLE_ERROR = 'CREATE_TABLE_ERROR';
+const CREATE_TABLE = {
+    REQUEST: 'CREATE_TABLE_REQUEST',
+    SUCCESS: 'CREATE_TABLE_SUCCESS',
+    ERROR: 'CREATE_TABLE_ERROR'
+}
 
 /*
 
@@ -40,23 +58,23 @@ Sign up
 
 */
 
-export const signUp = (payload) => {
+const signUp = (payload) => {
     return {
-        type: SIGN_UP_REQUEST,
+        type: SIGN_UP.REQUEST,
         payload,
     };
 };
 
-export const signUpSuccess = (payload) => {
+const signUpSuccess = (payload) => {
     return {
-        type: SIGN_UP_SUCCESS,
+        type: SIGN_UP.SUCCESS,
         payload,
     };
 };
 
-export const signUpError = (payload) => {
+const signUpError = (payload) => {
     return {
-        type: SIGN_UP_ERROR,
+        type: SIGN_UP.ERROR,
         payload,
     };
 };
@@ -67,23 +85,23 @@ Sign in
 
 */
 
-export const signIn = (payload) => {
+const signIn = (payload) => {
     return {
-        type: SIGN_IN_REQUEST,
+        type: SIGN_IN.REQUEST,
         payload,
     };
 };
 
-export const signInSuccess = (payload) => {
+const signInSuccess = (payload) => {
     return {
-        type: SIGN_IN_SUCCESS,
+        type: SIGN_IN.SUCCESS,
         payload,
     };
 };
 
-export const signInError = (payload) => {
+const signInError = (payload) => {
     return {
-        type: SIGN_IN_ERROR,
+        type: SIGN_IN.ERROR,
         payload,
     };
 };
@@ -94,23 +112,23 @@ Reset password
 
 */
 
-export const resetPassword = (payload) => {
+const resetPassword = (payload) => {
     return {
-        type: RESET_PASSWORD_REQUEST,
+        type: RESET_PASSWORD.REQUEST,
         payload,
     };
 };
 
-export const resetPasswordSuccess = (payload) => {
+const resetPasswordSuccess = (payload) => {
     return {
-        type: RESET_PASSWORD_SUCCESS,
+        type: RESET_PASSWORD.SUCCESS,
         payload,
     };
 };
 
-export const resetPasswordError = (payload) => {
+const resetPasswordError = (payload) => {
     return {
-        type: RESET_PASSWORD_ERROR,
+        type: RESET_PASSWORD.ERROR,
         payload,
     };
 };
@@ -121,22 +139,22 @@ Logout
 
 */
 
-export const logOut = () => {
+const logOut = () => {
     return {
-        type: LOG_OUT_REQUEST,
+        type: LOG_OUT.REQUEST,
     };
 };
 
-export const logOutSuccess = (payload) => {
+const logOutSuccess = (payload) => {
     return {
-        type: LOG_OUT_SUCCESS,
+        type: LOG_OUT.SUCCESS,
         payload,
     };
 };
 
-export const logOutError = (payload) => {
+const logOutError = (payload) => {
     return {
-        type: LOG_OUT_ERROR,
+        type: LOG_OUT.ERROR,
         payload,
     };
 };
@@ -147,23 +165,23 @@ Send feedback
 
 */
 
-export const sendFeedback = (payload) => {
+const sendFeedback = (payload) => {
     return {
-        type: SEND_FEEDBACK_REQUEST,
+        type: SEND_FEEDBACK.REQUEST,
         payload,
     };
 };
 
-export const sendFeedbackSuccess = (payload) => {
+const sendFeedbackSuccess = (payload) => {
     return {
-        type: SEND_FEEDBACK_SUCCESS,
+        type: SEND_FEEDBACK.SUCCESS,
         payload,
     };
 };
 
-export const sendFeedbackError = (payload) => {
+const sendFeedbackError = (payload) => {
     return {
-        type: SEND_FEEDBACK_ERROR,
+        type: SEND_FEEDBACK.ERROR,
         payload,
     };
 };
@@ -174,22 +192,22 @@ Get updates
 
 */
 
-export const getUpdates = () => {
+const getUpdates = () => {
     return {
-        type: GET_UPDATES_REQUEST,
+        type: GET_UPDATES.REQUEST,
     };
 };
 
-export const getUpdatesSuccess = (payload) => {
+const getUpdatesSuccess = (payload) => {
     return {
-        type: GET_UPDATES_SUCCESS,
+        type: GET_UPDATES.SUCCESS,
         payload,
     };
 };
 
-export const getUpdatesError = (payload) => {
+const getUpdatesError = (payload) => {
     return {
-        type: GET_UPDATES_ERROR,
+        type: GET_UPDATES.ERROR,
         payload,
     };
 };
@@ -200,23 +218,23 @@ Vote
 
 */
 
-export const votePoll = (payload) => {
+const votePoll = (payload) => {
     return {
-        type: VOTE_POLL_REQUEST,
+        type: VOTE_POLL.REQUEST,
         payload,
     };
 };
 
-export const votePollSuccess = (payload) => {
+const votePollSuccess = (payload) => {
     return {
-        type: VOTE_POLL_SUCCESS,
+        type: VOTE_POLL.SUCCESS,
         payload,
     };
 };
 
-export const votePollError = (payload) => {
+const votePollError = (payload) => {
     return {
-        type: VOTE_POLL_ERROR,
+        type: VOTE_POLL.ERROR,
         payload,
     };
 };
@@ -227,22 +245,22 @@ Get tables
 
 */
 
-export const getTables = () => {
+const getTables = () => {
     return {
-        type: GET_TABLES_REQUEST,
+        type: GET_TABLES.REQUEST,
     };
 };
 
-export const getTablesSuccess = (payload) => {
+const getTablesSuccess = (payload) => {
     return {
-        type: GET_TABLES_SUCCESS,
+        type: GET_TABLES.SUCCESS,
         payload,
     };
 };
 
-export const getTablesError = (payload) => {
+const getTablesError = (payload) => {
     return {
-        type: GET_TABLES_ERROR,
+        type: GET_TABLES.ERROR,
         payload,
     };
 };
@@ -253,23 +271,62 @@ Create table
 
 */
 
-export const createTable = (payload) => {
+const createTable = (payload) => {
     return {
-        type: CREATE_TABLE_REQUEST,
+        type: CREATE_TABLE.REQUEST,
         payload,
     };
 };
 
-export const createTableSuccess = (payload) => {
+const createTableSuccess = (payload) => {
     return {
-        type: CREATE_TABLE_SUCCESS,
+        type: CREATE_TABLE.SUCCESS,
         payload,
     };
 };
 
-export const createTableError = (payload) => {
+const createTableError = (payload) => {
     return {
-        type: CREATE_TABLE_ERROR,
+        type: CREATE_TABLE.ERROR,
         payload,
     };
 };
+
+export {
+    SIGN_UP,
+    SIGN_IN,
+    RESET_PASSWORD,
+    LOG_OUT,
+    SEND_FEEDBACK,
+    GET_UPDATES,
+    VOTE_POLL,
+    GET_TABLES,
+    CREATE_TABLE,
+    signUp,
+    signUpSuccess,
+    signUpError,
+    signIn,
+    signInSuccess,
+    signInError,
+    resetPassword,
+    resetPasswordSuccess,
+    resetPasswordError,
+    logOut,
+    logOutSuccess,
+    logOutError,
+    sendFeedback,
+    sendFeedbackSuccess,
+    sendFeedbackError,
+    getUpdates,
+    getUpdatesSuccess,
+    getUpdatesError,
+    votePoll,
+    votePollSuccess,
+    votePollError,
+    getTables,
+    getTablesSuccess,
+    getTablesError,
+    createTable,
+    createTableSuccess,
+    createTableError
+}

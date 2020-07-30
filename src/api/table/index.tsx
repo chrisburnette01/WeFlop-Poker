@@ -2,7 +2,7 @@
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export const signUpRequest = async (payload) => {
+export const getTablesRequest = async (payload) => {
     /*try {
 		const result = await axios.post("/signup", payload);
 		return result.data;
@@ -13,26 +13,10 @@ export const signUpRequest = async (payload) => {
     await wait(4000);
 
     return {
-        token: 'test',
-        firstName: 'Test',
     };
 };
 
-export const signInRequest = async (payload) => {
-    /*try {
-        const result = await axios.post("/signup", payload);
-        return result.data;
-    } catch (e) {
-        throw Error(e);
-    }*/
-
-    await wait(4000);
-
-    return {
-    };
-};
-
-export const resetPasswordRequest = async (payload) => {
+export const createTableRequest = async (payload) => {
     /*try {
         const result = await axios.post("/signup", payload);
         return result.data;

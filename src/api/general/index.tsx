@@ -2,7 +2,7 @@
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export const signUpRequest = async (payload) => {
+export const sendFeedbackRequest = async (payload) => {
     /*try {
 		const result = await axios.post("/signup", payload);
 		return result.data;
@@ -13,12 +13,10 @@ export const signUpRequest = async (payload) => {
     await wait(4000);
 
     return {
-        token: 'test',
-        firstName: 'Test',
     };
 };
 
-export const signInRequest = async (payload) => {
+export const getUpdatesRequest = async (payload) => {
     /*try {
         const result = await axios.post("/signup", payload);
         return result.data;
@@ -32,7 +30,7 @@ export const signInRequest = async (payload) => {
     };
 };
 
-export const resetPasswordRequest = async (payload) => {
+export const votePollRequest = async (payload) => {
     /*try {
         const result = await axios.post("/signup", payload);
         return result.data;

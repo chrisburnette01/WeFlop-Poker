@@ -1,4 +1,4 @@
-import { SIGN_UP_SUCCESS, SIGN_UP_ERROR } from '../../actions/application';
+import { SIGN_UP } from '../../actions/application';
 
 type User = {
     nickname: string;
@@ -49,9 +49,9 @@ const defaultApplicationState: ApplicationState = {
 
 const application = (state: ApplicationState = defaultApplicationState, action: ApplicationAction) => {
     switch (action.type) {
-        case SIGN_UP_SUCCESS:
+        case SIGN_UP.SUCCESS:
             return state;
-        case SIGN_UP_ERROR:
+        case SIGN_UP.ERROR:
             return state;
         default:
             return state;

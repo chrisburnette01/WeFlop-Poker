@@ -1,54 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
-interface BaseButtonProps {
-    styles: 'button1' | 'button2';
-    align: 'left' | 'right';
-    as: React.ElementType;
-    to?: string;
-    type?: 'button' | 'submit';
-    active: boolean;
-    bottomGutter: boolean;
-    color?: 'primary' | 'secondary' | 'initial';
-}
-
-const BaseButton = styled('div')<BaseButtonProps>`
-    font-family: ${({ theme, styles }) => theme.typography.fontFamily};
-    font-weight: ${({ theme, styles }) => theme.typography[styles]!.fontWeight};
-    font-size: ${({ theme, styles }) => theme.typography[styles]!.fontSize};
-    text-transform: ${({ theme, styles }) => theme.typography[styles]!.textTransform};
-    letter-spacing: ${({ theme, styles }) => theme.typography[styles]!.letterSpacing};
-    color: ${({ theme, color }) =>
-        color === 'primary' ? theme.palette.primary : color === 'initial' ? '#fff' : theme.palette.secondary};
-    ${({ theme, active }) => (active ? `color: ${active ? theme.palette.secondary : theme.palette.primary};` : null)}
-    text-align: ${({ align }) => align};
-    align-self: ${({ align }) => (align === 'right' ? 'flex-end' : null)};
-    height: ${({ styles }) => (styles === 'button1' ? '64px' : '48px')};
-    display: flex;
-    cursor: pointer;
-    text-decoration: none;
-    border: none;
-    background: transparent;
-    padding: 0;
-    margin-bottom: ${({ bottomGutter }) => (bottomGutter ? '64px' : null)};
-
-    .line {
-        width: 16px;
-        height: 100%;
-        background-color: ${({ theme, color }) =>
-            color === 'primary' ? theme.palette.primary : color === 'initial' ? '#fff' : theme.palette.secondary};
-        ${({ theme, active }) =>
-            active ? `background-color: ${active ? theme.palette.secondary : theme.palette.primary};` : null}
-    }
-
-    .title {
-        margin: ${({ align }) => (align === 'left' ? '0 0 0 16px' : '15px 16px 0 0')};
-    }
-`;
+import Primary from './Primary';
+import Secondary from './Secondary';
 
 interface ButtonProps {
     title: string | null;
+    variant?: 'primary' | 'secondary';
     size?: 'small' | 'big';
     align?: 'left' | 'right';
     onClick?: () => void;
@@ -57,27 +13,48 @@ interface ButtonProps {
     to?: string;
     active?: boolean;
     bottomGutter?: boolean;
+    validated?: boolean;
     color?: 'primary' | 'secondary' | 'initial';
+    disabled?: boolean;
 }
 
-const Button = ({ title, onClick, align, size, component, type, to, active, bottomGutter, color }: ButtonProps) => {
-    return (
-        <BaseButton
-            as={component === 'link' ? Link : 'button'}
-            type={type}
-            to={to}
-            onClick={onClick}
-            align={align!}
-            styles={size === 'big' ? 'button1' : 'button2'}
-            active={active!}
-            bottomGutter={bottomGutter!}
-            color={color!}
-        >
-            {(align === undefined || align === 'left') && <span className="line" />}
-            <span className="title">{title}</span>
-            {align && align === 'right' && <span className="line" />}
-        </BaseButton>
-    );
+const Button = ({
+    title,
+    onClick,
+    align,
+    size,
+    component,
+    type,
+    to,
+    active,
+    bottomGutter,
+    color,
+    validated,
+    variant,
+    disabled
+}: ButtonProps) => {
+    switch (variant) {
+        case 'primary':
+            return (
+                <Primary
+                    title={title}
+                    onClick={onClick}
+                    align={align}
+                    size={size}
+                    component={component}
+                    type={type}
+                    to={to}
+                    active={active}
+                    bottomGutter={bottomGutter}
+                    color={color}
+                    disabled={disabled}
+                />
+            );
+        case 'secondary':
+            return <Secondary title={title!} validated={validated} />;
+        default:
+            return null;
+    }
 };
 
 Button.defaultProps = {
@@ -88,6 +65,7 @@ Button.defaultProps = {
     align: 'left',
     component: 'button',
     type: 'button',
+    variant: 'primary',
 };
 
 export default Button;

@@ -2,28 +2,38 @@ import React from 'react';
 import { Line } from '../../components';
 import { LineContainer } from '../';
 import FormNotification from './FormNotification';
+import styled from 'styled-components';
 
 import './style.scss';
 
 interface FormProps {
     children?: JSX.Element[] | JSX.Element;
-    resetForm?: boolean;
     onSubmit?: any;
-    buttonSubmit?: any;
+    buttonSubmit?: JSX.Element;
+    isClicked?: boolean;
 }
 
-const Form = ({ children, resetForm, onSubmit, buttonSubmit }: FormProps) => {
-    const notification = resetForm ? <FormNotification /> : null;
+interface FormAnimationProps {
+    isClicked?: boolean;
+}
 
+const FormAnimationWrapper = styled.div<FormAnimationProps>`
+    animation: ${({ theme, isClicked }) => (isClicked ? null : theme.animations.inputs)};
+    & > * {
+        margin-top: 16px;
+    }
+`;
+
+const Form = ({ children, onSubmit, buttonSubmit, isClicked }: FormProps) => {
     return (
         <div className="form-inner">
             <form onSubmit={onSubmit} className="form form-signup" noValidate>
-                <LineContainer rightline />
-                {children}
-                <LineContainer height={'104px'} rightContent={buttonSubmit} />
+                <LineContainer />
+                <FormAnimationWrapper isClicked={isClicked}>{children}</FormAnimationWrapper>
+                <LineContainer height={'48px'} />
+                {buttonSubmit}
             </form>
             <Line width="long" align="left" className="form-line-right" />
-            {notification}
         </div>
     );
 };

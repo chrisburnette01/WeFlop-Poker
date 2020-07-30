@@ -9,7 +9,7 @@ interface ThemeProviderProps {
 }
 
 type Palette = {
-    common?: Record<string, unknown>;
+    initial: string;
     primary: string;
     secondary: string;
     error: string;
@@ -28,6 +28,13 @@ type Text = {
     textTransform?: string;
 };
 
+type Animations = {
+    line: string;
+    text: string;
+    inputs: string;
+    emailNotification: string;
+};
+
 type Typography = {
     fontFamily: string;
     fontSize: string;
@@ -37,6 +44,7 @@ type Typography = {
     h4?: Text;
     h5?: Text;
     h6?: Text;
+    title?: Text;
     subtitle1?: Text;
     subtitle2?: Text;
     body1?: Text;
@@ -51,6 +59,7 @@ type Typography = {
 interface Theme {
     palette: Palette;
     typography: Typography;
+    animations: Animations;
 }
 
 declare module 'styled-components' {
@@ -64,11 +73,8 @@ type ThemeContextType = {
 };
 
 const defaultLightPalette: Palette = {
-    common: {
-        white: '#fff',
-        black: '#000',
-    },
-    primary: '#031D38',
+    initial: '#fff',
+    primary: '#23578C',
     secondary: '#8B112F',
     error: '#8B112F',
     warning: 'yellow',
@@ -78,10 +84,7 @@ const defaultLightPalette: Palette = {
 };
 
 const defaultDarkPalette: Palette = {
-    common: {
-        white: '#fff',
-        black: '#000',
-    },
+    initial: '#fff',
     primary: '#fff',
     secondary: '#8B112F',
     error: '#8B112F',
@@ -104,8 +107,14 @@ const defaultTypography: Typography = {
         fontSize: '2.4rem',
         letterSpacing: '2.14px',
     },
-    subtitle1: {
+    title: {
+        letterSpacing: '2.86px',
+        textTransform: 'uppercase',
+        fontSize: '3.2rem',
         fontWeight: 800,
+    },
+    subtitle1: {
+        fontWeight: 600,
         fontSize: '1.8rem',
         letterSpacing: '1.61px',
     },
@@ -132,8 +141,10 @@ const defaultTypography: Typography = {
         fontWeight: 500,
     },
     tooltip: {
-        fontSize: '1.6rem',
-        fontWeight: 500,
+        fontSize: '1.2rem',
+        fontWeight: 800,
+        textTransform: 'uppercase',
+        letterSpacing: '1.07px',
     },
     display1: {
         fontSize: '3.2rem',
@@ -143,10 +154,18 @@ const defaultTypography: Typography = {
     },
 };
 
+const defaultAnimations: Animations = {
+    text: 'fadeText 0.4s ease-in-out 0.8s forwards',
+    line: 'setHeight 0.5s ease-in-out 0.3s forwards',
+    inputs: 'fadeInputs 3s infinite 2s ease-in-out',
+    emailNotification: 'emailNotification 0.5s ease-in-out forwards',
+};
+
 const themeContextState: ThemeContextType = {
     theme: {
         palette: defaultLightPalette,
         typography: defaultTypography,
+        animations: defaultAnimations,
     },
 };
 
@@ -161,6 +180,7 @@ export const ThemeProvider = ({ children, mode }: ThemeProviderProps) => {
     const theme = {
         palette: mode === 'light' ? lightPalette : darkPalette,
         typography: defaultTypography,
+        animations: defaultAnimations,
     };
 
     return (

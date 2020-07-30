@@ -1,17 +1,17 @@
 import React from 'react';
 import './style.scss';
-import { Line, Typography } from '../../components';
+import { Rectangle, Typography } from '../../components';
 
 interface SubtitleProps {
-    children: JSX.Element | JSX.Element[];
+    children: string;
     className?: string;
 }
 
 const Subtitle = ({ children }: SubtitleProps) => {
     return (
         <div className="wrapper-subtitle">
-            <Line width="short" align="left" />
-            <div style={{ padding: '5px 0 5px 0' }}>
+            <Rectangle size="small" border="small" color="secondary" />
+            <div className="subtitles-wrapper">
                 <Typography component="h3" variant="subtitle1">
                     {children}
                 </Typography>

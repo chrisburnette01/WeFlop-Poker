@@ -10,8 +10,8 @@ const Title = ({ children }: TitleProps) => {
     return (
         <div className="wrapper-title">
             <Line width="long" align="left" />
-            <div style={{ paddingBottom: '5px' }}>
-                <Typography component="h1">{children}</Typography>
+            <div style={{ padding: '10px 0 10px 0' }}>
+                <Typography component="h1" variant="title" color="secondary">{children}</Typography>
             </div>
         </div>
     );

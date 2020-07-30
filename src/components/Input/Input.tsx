@@ -3,27 +3,59 @@ import styled from 'styled-components';
 import ToolTip from './ToolTip';
 
 interface BaseInputProps {
-    validation?: boolean;
+    validated: boolean;
 }
 
 const BaseInput = styled('div')<BaseInputProps>`
     .wrapper {
+        opacity: 0%;
         position: relative;
+        animation: ${({ theme }) => theme.animations.text};
     }
 
     .input {
+        position: relative;
         width: 291px;
         background: transparent;
-        border: 8px solid
-            ${({ theme, validation }) => (validation === true ? theme.palette.success : theme.palette.primary)};
-        border-width: 0 8px 0 8px;
+        border-width: 0;
+        border-radius: 4px;
+        text-align: center;
         padding: 16px;
         font-size: ${({ theme }) => theme.typography.input!.fontSize};
         font-family: ${({ theme }) => theme.typography.fontFamily};
         outline: none;
-        color: ${({ theme, validation }) => (validation === true ? theme.palette.success : theme.palette.primary)};
+        color: ${({ theme, validated }) => (validated === true ? theme.palette.success : theme.palette.primary)};
         letter-spacing: ${({ theme }) => theme.typography.input?.letterSpacing};
         margin: 0 8px 0 8px;
+        transition: all 0.4s ease-in-out;
+    }
+    .wrapper::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 10px;
+        height: 100%;
+        border-radius: 2px;
+        margin-left: 3px;
+        transition: all 0.4s ease-in-out;
+        background-color: ${({ theme, validated }) =>
+            validated === true ? theme.palette.success : theme.palette.primary};
+    }
+    .wrapper::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 10px;
+        height: 100%;
+        border-radius: 2px;
+        margin-right: 3px;
+        transition: all 0.4s ease-in-out;
+        background-color: ${({ theme, validated }) =>
+            validated === true ? theme.palette.success : theme.palette.primary};
     }
     .input::placeholder {
         text-transform: uppercase;
@@ -34,21 +66,33 @@ const BaseInput = styled('div')<BaseInputProps>`
 interface InputProps {
     placeholder: string;
     type: string;
-    validation?: boolean;
+    validated?: boolean;
     errorMessage?: string;
     register?: React.Ref<HTMLInputElement>;
     name?: string;
     disabled?: boolean;
     defaultValue?: string;
+    onFocus?: any;
 }
 
-const Input = ({ placeholder, validation, type, name, errorMessage, register, disabled, defaultValue }: InputProps) => {
-    const icon = validation === false ? <ToolTip message={errorMessage!} name={name} /> : null;
+const Input = ({
+    placeholder,
+    validated,
+    type,
+    name,
+    errorMessage,
+    register,
+    disabled,
+    defaultValue,
+    onFocus,
+}: InputProps) => {
+    const show = !validated! && errorMessage !== undefined ? true : false;
     return (
-        <BaseInput validation={validation}>
+        <BaseInput validated={validated!}>
             <div className="wrapper">
-                {icon}
+                <ToolTip message={errorMessage!} name={name} show={show} />
                 <input
+                    onFocus={onFocus}
                     defaultValue={defaultValue}
                     className="input"
                     name={name}
@@ -60,6 +104,10 @@ const Input = ({ placeholder, validation, type, name, errorMessage, register, di
             </div>
         </BaseInput>
     );
+};
+
+Input.defaultProps = {
+    validated: false,
 };
 
 export default Input;

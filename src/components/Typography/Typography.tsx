@@ -26,6 +26,8 @@ const BaseTypography = styled('div')<BaseTypographyProps>`
     & > p {
         margin: 0;
     }
+    opacity: 0;
+    animation: ${({ theme }) => theme.animations.text};
 `;
 
 const Typography = ({ component, children, variant, color }: TypographyProps) => {

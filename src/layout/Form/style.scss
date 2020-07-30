@@ -17,25 +17,25 @@
 }
 
 .form-line-right {
-    margin: 16px 9px 0 9px !important;
+    margin: 16px 8px 0 8px !important;
 }
 
 .form-line-left {
-    margin-right: 9px;
+    margin-right: 8px;
 }
 
 .form {
+    position: relative;
     & > * {
         margin-top: 16px;
     }
 }
 
-.form-line-notification {
-    align-self: flex-end;
-    display: flex;
-}
-
 .notification-form {
-    align-self: flex-end;
-    margin-left: 9px;
+    margin: 200px 0 0 9px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    max-width: 356px;
+
 }

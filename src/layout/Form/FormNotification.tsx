@@ -1,17 +1,25 @@
 import React from 'react';
-import { LineContainer } from '../index';
 import { Typography } from '../../components';
+import styled from 'styled-components';
 
-const FormNotification = () => {
+const NotificationAnimationWrapper = styled.div`
+    animation: ${({ theme }) => theme.animations.emailNotification};
+`;
+
+const FormNotification = ({ email }) => {
     return (
-        <div className="form-line-notification">
-            <LineContainer height={'48px'} color="secondary" align="center" />
-            <div className="notification-form">
-                <Typography component="span" variant="button2" color="secondary">
-                    Your email was sent
-                </Typography>
+        <NotificationAnimationWrapper>
+            <div className="form-line-notification">
+                <div className="notification-form">
+                    <Typography component="span" variant="button2" color="primary">
+                        AN EMAIL WAS SENT TO:
+                    </Typography>
+                    <Typography component="span" variant="h2" color="primary">
+                        {email}
+                    </Typography>
+                </div>
             </div>
-        </div>
+        </NotificationAnimationWrapper>
     );
 };
 

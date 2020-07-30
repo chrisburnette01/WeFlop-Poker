@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Button, Input, Line } from '../../components';
 import { Title, Subtitle, Form, Navigation } from '../../layout';
@@ -11,6 +11,8 @@ const SignIn = () => {
         mode: 'all',
         shouldFocusError: true,
     });
+
+    const [isClicked, setIsClicked] = useState(false);
 
     const onSubmit = (data) => console.log(data);
 
@@ -25,8 +27,7 @@ const SignIn = () => {
     };
 
     const isValidated = check.email && check.password;
-
-    const buttonSubmit = isValidated ? <Button type="submit" title={'Enter'} size="small" align="right" /> : null;
+    const buttonSubmit = <Button variant="secondary" validated={isValidated} title="Enter" />;
 
     return (
         <>
@@ -38,17 +39,17 @@ const SignIn = () => {
                 <div className="line-wrapper-page">
                     <Line width="long" align="right" className="form-line-left" />
                     <div className="content-wrapper-page">
-                        <Title>WeFlop Beta v1.00</Title>
-                        <Subtitle>
-                            <p>WeFlop is a player-supported online poker platform.</p>
-                            <p>WeFlop lets you host home games with simple, intuitive ledgers.</p>
-                        </Subtitle>
-                        <Form onSubmit={handleSubmit(onSubmit)} buttonSubmit={buttonSubmit}>
+                        <Title>Welcome back!</Title>
+                        <Subtitle>WeFlop is a player-supported online poker platform.</Subtitle>
+                        <Subtitle>We are committed to building the features you want.</Subtitle>
+                        <Subtitle>Our beta supports home games with simple, intuitive ledgers.</Subtitle>
+                        <Form onSubmit={handleSubmit(onSubmit)} buttonSubmit={buttonSubmit} isClicked={isClicked}>
                             <Input
+                                onFocus={() => setIsClicked(true)}
                                 placeholder="email adress"
                                 type="email"
                                 name="email"
-                                validation={check.email}
+                                validated={check.email}
                                 register={register({
                                     required: {
                                         value: true,
@@ -70,10 +71,11 @@ const SignIn = () => {
                                 errorMessage={errors.email && errors.email.message}
                             />
                             <Input
+                                onFocus={() => setIsClicked(true)}
                                 placeholder="password"
                                 type="password"
                                 name="password"
-                                validation={check.password}
+                                validated={check.password}
                                 register={register({
                                     required: {
                                         value: true,
