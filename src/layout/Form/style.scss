@@ -32,10 +32,17 @@
 }
 
 .notification-form {
-    margin: 200px 0 0 9px;
+
     display: flex;
     flex-direction: column;
     text-align: center;
     max-width: 356px;
 
+}
+
+.lines-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-height: 48px;
 }

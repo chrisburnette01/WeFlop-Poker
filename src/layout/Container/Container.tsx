@@ -5,7 +5,7 @@ const Container = styled('div')`
     max-width: 1310px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
 `;
 
 export default Container;

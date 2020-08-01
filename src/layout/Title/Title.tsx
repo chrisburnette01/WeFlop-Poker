@@ -4,14 +4,18 @@ import { Line, Typography } from '../../components';
 
 interface TitleProps {
     children: any;
+    titleOnTop?: boolean;
 }
 
-const Title = ({ children }: TitleProps) => {
+const Title = ({ children, titleOnTop }: TitleProps) => {
+    const padding = titleOnTop ? '0 0 20px 0' : '10px 0 10px 0';
     return (
         <div className="wrapper-title">
-            <Line width="long" align="left" />
-            <div style={{ padding: '10px 0 10px 0' }}>
-                <Typography component="h1" variant="title" color="secondary">{children}</Typography>
+            <Line width="long" align="left" color="secondary" />
+            <div style={{ padding: padding }}>
+                <Typography component="h1" variant="title" color="primary">
+                    {children}
+                </Typography>
             </div>
         </div>
     );

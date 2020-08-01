@@ -21,3 +21,10 @@
 	src: local('Avenir-Heavy'), url(../assets/fonts/Avenir-Heavy.woff2) format('woff2');
 	font-weight: 600;
 }
+
+@font-face {
+	font-family: 'Avenir';
+	src: local('Avenir-Italic'), url(../assets/fonts/AvenirNextItalic.woff2) format('woff2');
+	font-weight: 400;
+	font-style: italic;
+}

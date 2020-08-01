@@ -4,21 +4,14 @@ import React from 'react';
 interface BaseLineProps {
     width: string;
     align?: 'left' | 'right';
-    color?: 'primary' | 'secondary' | 'button';
+    color: 'primary' | 'secondary' | 'button' | 'initial' | string;
 }
 
 const BaseLine = styled.span<BaseLineProps>`
     border-radius: ${({ width }) => (width === 'short' ? '2px' : '4px')};
-    background-color: ${({ theme, color }) =>
-        color === 'primary'
-            ? '#E9E9E9'
-            : color === 'secondary'
-            ? '#031D38'
-            : color === 'button'
-            ? theme.palette.primary
-            : theme.palette.secondary};
+    background-color: ${({ theme, color }) => theme.palette[color] ? theme.palette[color] : theme.palette.common[color]};
     display: block;
-    min-width: ${({ width }) => (width === 'short' ? '12px' : '16px')};
+    width: ${({ width }) => (width === 'short' ? '12px' : '16px')};
     margin-right: ${({ width, align }) => (align === 'left' ? '16px' : null)};
     margin-left: ${({ width, align }) => (align === 'right' ? '16px' : width === 'short' ? '7px' : null)};
     height: ${({ width }) => (width === 'short' ? '12px' : '16px')};
@@ -28,16 +21,20 @@ const BaseLine = styled.span<BaseLineProps>`
 interface LineProps {
     width: string;
     align?: 'left' | 'right';
-    color?: 'primary' | 'secondary' | 'button';
+    color?: 'primary' | 'secondary' | 'button' | 'initial' | string;
     className?: string;
 }
 
 const Line = ({ width, align, color, className }: LineProps) => {
     return (
         <div className={className}>
-            <BaseLine width={width} align={align} color={color} />
+            <BaseLine width={width} align={align} color={color!} />
         </div>
     );
+};
+
+Line.defaultProps = {
+    color: 'primary'
 };
 
 export default Line;

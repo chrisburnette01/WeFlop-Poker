@@ -6,17 +6,12 @@ const NotificationAnimationWrapper = styled.div`
     animation: ${({ theme }) => theme.animations.emailNotification};
 `;
 
-const FormNotification = ({ email }) => {
+const FormNotification = ({ children }) => {
     return (
         <NotificationAnimationWrapper>
             <div className="form-line-notification">
                 <div className="notification-form">
-                    <Typography component="span" variant="button2" color="primary">
-                        AN EMAIL WAS SENT TO:
-                    </Typography>
-                    <Typography component="span" variant="h2" color="primary">
-                        {email}
-                    </Typography>
+                    {children}
                 </div>
             </div>
         </NotificationAnimationWrapper>

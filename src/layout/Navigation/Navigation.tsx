@@ -2,6 +2,8 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Button } from '../../components';
 
+import './style.scss';
+
 interface NavigationProps {
     type: 'auth' | 'basic' | 'game';
 }
@@ -12,7 +14,7 @@ const Navigation = ({ type }: NavigationProps) => {
     switch (type) {
         case 'basic':
             return (
-                <div>
+                <div id="nav">
                     <Button
                         bottomGutter
                         title={'Sign up'}
@@ -37,7 +39,7 @@ const Navigation = ({ type }: NavigationProps) => {
             );
         case 'auth':
             return (
-                <div>
+                <div id="nav">
                     <Button
                         bottomGutter
                         title={'Updates'}
@@ -64,7 +66,7 @@ const Navigation = ({ type }: NavigationProps) => {
             );
         case 'game':
             return (
-                <div>
+                <div id="nav">
                     <Button
                         bottomGutter
                         title={'Sign up'}

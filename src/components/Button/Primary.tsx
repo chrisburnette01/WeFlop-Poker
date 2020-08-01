@@ -10,7 +10,7 @@ interface BaseButtonProps {
     type?: 'button' | 'submit';
     active: boolean;
     bottomGutter: boolean;
-    color?: 'primary' | 'secondary' | 'initial';
+    color?: 'primary' | 'secondary' | 'initial' | string;
     disabled?: boolean;
 }
 
@@ -47,7 +47,7 @@ const BaseButton = styled('div')<BaseButtonProps>`
     }
 
     .title {
-        margin: ${({ align, active }) => (active ? 0 : align === 'left' ? '0 0 0 16px' : '15px 16px 0 0')};
+        margin: ${({ align }) => (align === 'left' ? '0 0 0 16px' : '15px 16px 0 0')};
         animation: ${({ theme }) => theme.animations.text};
         opacity: 0;
     }
@@ -63,7 +63,7 @@ interface PrimaryButtonProps {
     to?: string;
     active?: boolean;
     bottomGutter?: boolean;
-    color?: 'primary' | 'secondary' | 'initial';
+    color?: 'primary' | 'secondary' | 'initial' | string;
     disabled?: boolean;
 }
 
@@ -93,7 +93,7 @@ const Primary = ({
             bottomGutter={bottomGutter!}
             color={color!}
         >
-            {active ? null : (align === undefined || align === 'left') && <span className="line" />}
+            {(align === undefined || align === 'left') && <span className="line" />}
             <span className="title">{title}</span>
             {align && align === 'right' && <span className="line" />}
         </BaseButton>

@@ -47,13 +47,13 @@ const Secondary = ({ title, validated }: SecondaryButtonProps) => {
         <BaseSecondaryButton>
             <div className="lines-wrapper">
                 <Rectangle size="middle" color={color} border="big" />
-                <Line width="long" color="button" className="line-button" />
+                <Line width="long" className="line-button" />
             </div>
             <Typography component="span" variant="button2">
                 {title}
             </Typography>
             <div className="lines-wrapper">
-                <Line width="long" color="button" className="line-button line-button-last" />
+                <Line width="long" className="line-button line-button-last" />
                 <Rectangle size="middle" color={color} border="big" />
             </div>
         </BaseSecondaryButton>

@@ -13,8 +13,8 @@ export const signUpRequest = async (payload) => {
     await wait(4000);
 
     return {
-        token: 'test',
-        firstName: 'Test',
+        username: payload.name,
+        email: payload.email
     };
 };
 
@@ -29,6 +29,8 @@ export const signInRequest = async (payload) => {
     await wait(4000);
 
     return {
+        username: 'test',
+        email: payload.email
     };
 };
 

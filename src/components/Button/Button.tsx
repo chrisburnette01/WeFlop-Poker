@@ -14,7 +14,7 @@ interface ButtonProps {
     active?: boolean;
     bottomGutter?: boolean;
     validated?: boolean;
-    color?: 'primary' | 'secondary' | 'initial';
+    color?: 'primary' | 'secondary' | 'initial' | string;
     disabled?: boolean;
 }
 

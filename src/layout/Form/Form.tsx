@@ -1,6 +1,6 @@
 import React from 'react';
 import { Line } from '../../components';
-import { LineContainer } from '../';
+import Lines from './Lines';
 import FormNotification from './FormNotification';
 import styled from 'styled-components';
 
@@ -28,12 +28,12 @@ const Form = ({ children, onSubmit, buttonSubmit, isClicked }: FormProps) => {
     return (
         <div className="form-inner">
             <form onSubmit={onSubmit} className="form form-signup" noValidate>
-                <LineContainer />
+                <Lines color="secondary" />
                 <FormAnimationWrapper isClicked={isClicked}>{children}</FormAnimationWrapper>
-                <LineContainer height={'48px'} />
+                <Lines color="secondary" />
                 {buttonSubmit}
             </form>
-            <Line width="long" align="left" className="form-line-right" />
+            <Line color="secondary" width="long" align="left" className="form-line-right" />
         </div>
     );
 };

@@ -17,9 +17,9 @@ const Welcome = () => {
                         </div>
                         <div className="content-enter">
                             <div className="content-inner">
-                                <Line width="long" color="secondary" />
-                                <Line width="long" color="primary" />
-                                <Line width="long" color="secondary" />
+                                <Line width="long" color="darkblue" />
+                                <Line width="long" color="gray" />
+                                <Line width="long" color="darkblue" />
                             </div>
                             <div className="typography-enter">
                                 <Typography component="h1" variant="display1" color="initial">
@@ -27,9 +27,9 @@ const Welcome = () => {
                                 </Typography>
                             </div>
                             <div className="content-inner content-inner-footer">
-                                <Line width="long" color="secondary" />
-                                <Line width="long" color="primary" />
-                                <Line width="long" color="secondary" />
+                                <Line width="long" color="darkblue" />
+                                <Line width="long" color="gray" />
+                                <Line width="long" color="darkblue" />
                             </div>
                         </div>
                     </div>

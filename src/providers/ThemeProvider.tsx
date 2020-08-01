@@ -9,6 +9,7 @@ interface ThemeProviderProps {
 }
 
 type Palette = {
+    common: Record<string, string>;
     initial: string;
     primary: string;
     secondary: string;
@@ -26,6 +27,7 @@ type Text = {
     lineHeight?: string;
     letterSpacing?: string;
     textTransform?: string;
+    fontStyle?: string;
 };
 
 type Animations = {
@@ -52,6 +54,7 @@ type Typography = {
     tooltip?: Text;
     button1?: Text;
     button2?: Text;
+    date?: Text;
     input?: Text;
     display1?: Text;
 };
@@ -73,6 +76,12 @@ type ThemeContextType = {
 };
 
 const defaultLightPalette: Palette = {
+    common: {
+        darkblue: "#042444",
+        blue: "#23578C",
+        red: "#8B112F",
+        gray: "#E9E9E9"
+    },
     initial: '#fff',
     primary: '#23578C',
     secondary: '#8B112F',
@@ -84,6 +93,12 @@ const defaultLightPalette: Palette = {
 };
 
 const defaultDarkPalette: Palette = {
+    common: {
+        darkblue: "#042444",
+        blue: "#23578C",
+        red: "#8B112F",
+        gray: "#E9E9E9"
+    },
     initial: '#fff',
     primary: '#fff',
     secondary: '#8B112F',
@@ -151,6 +166,12 @@ const defaultTypography: Typography = {
         fontWeight: 800,
         letterSpacing: '2.86px',
         textTransform: 'uppercase',
+    },
+    date: {
+        fontSize: '1.6rem',
+        fontStyle: 'italic',
+        letterSpacing: '1.43px',
+        fontWeight: 400,
     },
 };
 

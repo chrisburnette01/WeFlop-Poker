@@ -3,6 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import reducers from './reducers';
+import { ApplicationState } from './reducers/application/types';
 import sagas from './sagas';
 
 const persistConfig = {
@@ -22,4 +23,6 @@ export const persistor = persistStore(store);
 
 sagaMiddleware.run(sagas);
 
-export type RootState = ReturnType<typeof combinedReducer>;
+export type RootState = {
+	application: ApplicationState
+};

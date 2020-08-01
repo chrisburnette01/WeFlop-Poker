@@ -2,19 +2,23 @@ import React from 'react';
 import { Line } from '../../components';
 import './style.scss';
 
-interface LineContainerProps {
+interface LinesProps {
     height?: string;
     color?: 'primary' | 'secondary';
     align?: string | undefined;
 }
 
-const LineContainer = ({ height, color, align }: LineContainerProps) => {
+const Lines = ({ height, color, align }: LinesProps) => {
     return (
         <div className="lines-container" style={height ? { height } : {}}>
             <Line color={color} width="long" align={!align ? 'left' : undefined} />
-            <Line width="long" align="right" />
+            <Line color={color} width="long" align="right" />
         </div>
     );
 };
 
-export default LineContainer;
+Lines.defaultProps = {
+    color: 'primary'
+};
+
+export default Lines;
