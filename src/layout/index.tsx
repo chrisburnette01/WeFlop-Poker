@@ -4,7 +4,9 @@ import Subtitle from './Subtitle/Subtitle';
 import Form from './Form/Form';
 import FormNotification from './Form/FormNotification';
 import Navigation from './Navigation/Navigation';
-import UpdatesItem from './UpdatesItem/UpdatesItem';
+import UpdateItem from './UpdateItem/UpdateItem';
 import LineContent from './LineContent/LineContent';
+import Poll from './UpdateItem/Poll';
+import Description from './UpdateItem/Descripton';
 
-export { Container, Title, Subtitle, Form, FormNotification, Navigation, UpdatesItem, LineContent };
+export { Container, Title, Subtitle, Form, FormNotification, Navigation, UpdateItem, LineContent, Poll, Description };

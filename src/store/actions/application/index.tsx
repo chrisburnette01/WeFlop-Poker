@@ -22,10 +22,10 @@ const RESET_PASSWORD: Action = {
     ERROR: 'RESET_PASSWORD_ERROR'
 }
 
-const LOG_OUT: Action = {
-    REQUEST: 'LOG_OUT_REQUEST',
-    SUCCESS: 'LOG_OUT_SUCCESS',
-    ERROR: 'LOG_OUT_ERROR'
+const SIGN_OUT: Action = {
+    REQUEST: 'SIGN_OUT_REQUEST',
+    SUCCESS: 'SIGN_OUT_SUCCESS',
+    ERROR: 'SIGN_OUT_ERROR'
 }
 
 const SEND_FEEDBACK: Action = {
@@ -145,22 +145,21 @@ Logout
 
 */
 
-const logOut = () => {
+const signOut = () => {
     return {
-        type: LOG_OUT.REQUEST,
+        type: SIGN_OUT.REQUEST,
     };
 };
 
-const logOutSuccess = (payload) => {
+const signOutSuccess = () => {
     return {
-        type: LOG_OUT.SUCCESS,
-        payload,
+        type: SIGN_OUT.SUCCESS
     };
 };
 
-const logOutError = (payload) => {
+const signOutError = (payload) => {
     return {
-        type: LOG_OUT.ERROR,
+        type: SIGN_OUT.ERROR,
         payload,
     };
 };
@@ -302,7 +301,7 @@ export {
     SIGN_UP,
     SIGN_IN,
     RESET_PASSWORD,
-    LOG_OUT,
+    SIGN_OUT,
     SEND_FEEDBACK,
     GET_UPDATES,
     VOTE_POLL,
@@ -317,9 +316,9 @@ export {
     resetPassword,
     resetPasswordSuccess,
     resetPasswordError,
-    logOut,
-    logOutSuccess,
-    logOutError,
+    signOut,
+    signOutSuccess,
+    signOutError,
     sendFeedback,
     sendFeedbackSuccess,
     sendFeedbackError,

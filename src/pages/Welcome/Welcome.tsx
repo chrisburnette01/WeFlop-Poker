@@ -1,5 +1,4 @@
 import React from 'react';
-import './style.scss';
 import { Helmet } from 'react-helmet';
 import { Button, Line, Typography } from '../../components';
 

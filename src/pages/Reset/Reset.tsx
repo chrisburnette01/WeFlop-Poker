@@ -9,8 +9,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import { resetPassword, RESET_PASSWORD } from '../../store/actions/application';
 
-import './style.scss';
-
 const Reset = () => {
     const dispatch = useDispatch();
     const application = useSelector((state: RootState) => state.application);

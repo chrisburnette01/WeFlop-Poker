@@ -4,8 +4,8 @@ export type User = {
 };
 
 export type Poll = {
-    selected: number;
-    options: string[];
+    selected?: number;
+    options: object[];
 };
 
 export type Update = {

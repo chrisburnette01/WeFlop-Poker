@@ -1,8 +1,9 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Button } from '../../components';
-
-import './style.scss';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../store';
+import { signOut } from '../../store/actions/application';
 
 interface NavigationProps {
     type: 'auth' | 'basic' | 'game';
@@ -10,6 +11,8 @@ interface NavigationProps {
 
 const Navigation = ({ type }: NavigationProps) => {
     const location = useLocation();
+    const dispatch = useDispatch();
+    const application = useSelector((state: RootState) => state.application);
 
     switch (type) {
         case 'basic':
@@ -61,7 +64,7 @@ const Navigation = ({ type }: NavigationProps) => {
                         component="link"
                         active={location.pathname === '/contact'}
                     />
-                    <Button title={'Exit'} to="/logout" component="link" active={location.pathname === '/logout'} />
+                    <Button title={'Sign out'} onClick={() => dispatch(signOut())} component="link" />
                 </div>
             );
         case 'game':

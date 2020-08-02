@@ -1,11 +1,13 @@
+import React from 'react';
 import styled from 'styled-components';
+import './index.scss';
 
-const Container = styled('div')`
-    padding: 60px 60px 120px 60px;
-    max-width: 1310px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-`;
+const Container = ({ children }) => {
+	return (
+		<div className="container">
+			{ children }
+		</div>
+	);
+}
 
 export default Container;

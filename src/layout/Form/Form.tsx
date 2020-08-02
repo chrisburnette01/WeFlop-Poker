@@ -4,8 +4,6 @@ import Lines from './Lines';
 import FormNotification from './FormNotification';
 import styled from 'styled-components';
 
-import './style.scss';
-
 interface FormProps {
     children?: JSX.Element[] | JSX.Element;
     onSubmit?: any;

@@ -1,5 +1,4 @@
 import React from 'react';
-import './style.scss';
 import { Rectangle, Typography } from '../../components';
 
 interface SubtitleProps {

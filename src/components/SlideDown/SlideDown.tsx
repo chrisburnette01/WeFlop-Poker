@@ -8,7 +8,7 @@ interface SlideDownProps {
 }
 
 const SlideDown = ({ open, children }) => {
-    return <SlideDownBase className={'slidedown-updates'}>{open ? children : null}</SlideDownBase>;
+    return <SlideDownBase className="slidedown-updates">{open ? children : null}</SlideDownBase>;
 };
 
 export default SlideDown;

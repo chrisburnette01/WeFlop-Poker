@@ -2,8 +2,6 @@ import React from 'react';
 import { Line } from '../../components';
 import { Title, Subtitle } from '../';
 
-import './style.scss';
-
 const LineContent = ({ children }) => {
     return (
         <div className="title-wrapper-container">

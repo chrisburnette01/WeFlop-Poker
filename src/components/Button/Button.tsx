@@ -1,6 +1,7 @@
 import React from 'react';
 import Primary from './Primary';
 import Secondary from './Secondary';
+import './index.scss';
 
 interface ButtonProps {
     title: string | null;

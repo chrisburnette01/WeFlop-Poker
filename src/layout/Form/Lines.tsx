@@ -1,6 +1,5 @@
 import React from 'react';
 import { Line } from '../../components';
-import './style.scss';
 
 interface LinesProps {
     height?: string;

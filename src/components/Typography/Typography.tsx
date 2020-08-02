@@ -21,8 +21,7 @@ const BaseTypography = styled('div')<BaseTypographyProps>`
     font-weight: ${({ theme, variant }) => theme.typography[variant].fontWeight};
     letter-spacing: ${({ theme, variant }) => theme.typography[variant].letterSpacing};
     text-transform: ${({ theme, variant }) => theme.typography[variant].textTransform};
-    color: ${({ theme, color }) =>
-        theme.palette[color!] ? theme.palette[color!] : theme.palette.common[color!]};
+    color: ${({ theme, color }) => (theme.palette[color!] ? theme.palette[color!] : theme.palette.common[color!])};
     margin: 0;
     & > p {
         margin: 0;

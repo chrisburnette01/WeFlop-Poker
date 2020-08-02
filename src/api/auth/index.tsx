@@ -10,7 +10,7 @@ export const signUpRequest = async (payload) => {
 		throw Error(e);
 	}*/
 
-    await wait(4000);
+    // await wait(4000);
 
     return {
         username: payload.name,
@@ -26,7 +26,7 @@ export const signInRequest = async (payload) => {
         throw Error(e);
     }*/
 
-    await wait(4000);
+    // await wait(4000);
 
     return {
         username: 'test',

@@ -1,0 +1,13 @@
+.container {
+	padding: 60px 60px 120px 60px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+$breakpoint-tablet: 768px;
+@media (max-width: $breakpoint-tablet) {
+  	.container {
+		padding: 15px;
+	}
+}

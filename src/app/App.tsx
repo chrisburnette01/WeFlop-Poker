@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import PublicRoute from './PublicRoute';
 import { ThemeProvider } from '../providers';
@@ -6,17 +6,16 @@ import { Helmet } from 'react-helmet';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 
-import './style.scss';
-import '../assets/animations/animations.scss';
+import '../assets/styles/index.scss';
+import '../assets/styles/animations.scss';
 
-import { Welcome, SignUp, SignIn, Reset, ResetPassword, Updates } from '../pages';
+import { Welcome, SignUp, SignIn, Reset, ResetPassword, Updates, Play, Contact } from '../pages';
 
 const App = () => {
     const application = useSelector((state: RootState) => state.application);
 
     return (
-        // <ThemeProvider mode={application.isAuthenticated ? 'dark' : 'light'}>
-        <ThemeProvider mode={'dark'}>
+        <ThemeProvider mode={application.isAuthenticated ? 'dark' : 'light'}>
             <Helmet defaultTitle="We Flop" titleTemplate="We Flop - %s" />
             <BrowserRouter>
                 <Switch>
@@ -37,6 +36,12 @@ const App = () => {
                     </PublicRoute>
                     <PublicRoute path="/updates" exact>
                         <Updates />
+                    </PublicRoute>
+                    <PublicRoute path="/play" exact>
+                        <Play />
+                    </PublicRoute>
+                    <PublicRoute path="/contact" exact>
+                        <Contact />
                     </PublicRoute>
                 </Switch>
             </BrowserRouter>

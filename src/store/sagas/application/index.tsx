@@ -3,7 +3,7 @@ import {
 	SIGN_IN,
 	SIGN_UP,
 	RESET_PASSWORD,
-	LOG_OUT,
+	SIGN_OUT,
 	SEND_FEEDBACK,
 	GET_UPDATES,
 	VOTE_POLL,
@@ -15,8 +15,8 @@ import {
     signInError,
     resetPasswordSuccess,
     resetPasswordError,
-    logOutSuccess,
-    logOutError,
+    signOutSuccess,
+    signOutError,
     sendFeedbackSuccess,
     sendFeedbackError,
     getUpdatesSuccess,
@@ -58,6 +58,14 @@ const signUp = function* (action) {
         yield put(signUpSuccess(data));
     } catch (error) {
         yield put(signUpError(error));
+    }
+};
+
+const signOut = function* (action) {
+    try {
+        yield put(signOutSuccess());
+    } catch (error) {
+        yield put(signOutError(error));
     }
 };
 
@@ -118,6 +126,7 @@ const createTable = function* (action) {
 const application = function* () {
 	yield takeLatest(SIGN_IN.REQUEST, signIn);
     yield takeLatest(SIGN_UP.REQUEST, signUp);
+    yield takeLatest(SIGN_OUT.REQUEST, signOut);
     yield takeLatest(RESET_PASSWORD.REQUEST, resetPassword);
     yield takeLatest(SEND_FEEDBACK.REQUEST, sendFeedback);
     yield takeLatest(GET_UPDATES.REQUEST, getUpdates);

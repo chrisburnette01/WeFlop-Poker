@@ -1,0 +1,213 @@
+@font-face {
+	font-family: 'Avenir';
+	src: local('Avenir-Medium'), url(../fonts/Avenir-Medium.woff2) format('woff2');
+	font-weight: 500;
+}
+
+@font-face {
+	font-family: 'Avenir';
+	src: local('Avenir-Light'), url(../fonts/Avenir-Light.woff2) format('woff2');
+	font-weight: 200;
+}
+
+@font-face {
+	font-family: 'Avenir';
+	src: local('Avenir-Black'), url(../fonts/Avenir-Black.woff2) format('woff2');
+	font-weight: 800;
+}
+
+@font-face {
+	font-family: 'Avenir';
+	src: local('Avenir-Heavy'), url(../fonts/Avenir-Heavy.woff2) format('woff2');
+	font-weight: 600;
+}
+
+@font-face {
+	font-family: 'Avenir';
+	src: local('Avenir-Italic'), url(../fonts/AvenirNextItalic.woff2) format('woff2');
+	font-weight: 400;
+	font-style: italic;
+}
+
+// layout/Form
+
+.line-wrapper-page {
+    display: flex;
+    padding-left: 25px;
+    max-width: 756px;
+    width: 100%;
+}
+
+.content-wrapper-page {
+    .wrapper-subtitle:nth-child(2) {
+        margin-top: 16px;
+    }
+}
+
+.form-inner {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-line-right {
+    margin: 16px 8px 0 8px !important;
+}
+
+.form-line-left {
+    margin-right: 8px;
+}
+
+.form {
+    position: relative;
+    & > * {
+        margin-top: 16px;
+    }
+}
+
+.notification-form {
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    max-width: 356px;
+
+}
+
+// layout/LineContent
+
+.lines-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-height: 48px;
+}
+
+.title-wrapper-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.title-wrapper-text {
+    margin-left: 8px;
+}
+
+.subtitles-wrapper-inner {
+    margin: 10px 0 10px 0;
+}
+
+// layout/Navigation
+
+#nav {
+    margin-right: 200px;
+}
+
+// layout/Subtitle
+
+.wrapper-subtitle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 3px;
+}
+
+.subtitles-wrapper {
+    margin-left: 8px;
+}
+
+.wrapper-title {
+    display: flex;
+    flex-direction: row;
+}
+
+// layout/UpdatesItem
+
+.updates-note-item {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    margin: 8px 0 0 -100px;
+    &-line {
+        height: 48px;
+    }
+    &-wrapper {
+        display: flex;
+        flex-direction: row;
+    }
+    &-text-wrapper {
+        margin-left: 11px;
+    }
+    &-date-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        margin-right: 11px;
+    }
+}
+
+// pages/Welcome
+
+.wrapper-enter {
+    height: 100vh;
+    width: 100%;
+    background-color: #8b112f;
+}
+
+.inner-enter {
+    padding: 60px;
+    height: 100%;
+}
+
+.inner-enter-content {
+    position: relative;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.button-wrapper-enter {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.content-enter {
+    max-width: 337px;
+    width: 100%;
+}
+
+.content-inner {
+    margin: 0 auto 0 auto;
+    max-width: 304px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 60%;
+}
+
+.typography-enter {
+    padding: 34px 0 34px 0;
+}
+
+.content-inner-footer {
+    height: calc(40% - 112px)
+}
+
+// pages/Updates
+
+.line-bottom-updates {
+    height: 48px;
+}
+.patch-notes {
+    margin: 8px 0 0 20px;
+}
+
+// pages/Reset
+
+.form-wrapper-inner {
+    display: flex;
+}
+
+.line-wrapper-page-reset-email {
+    flex-direction: column;
+}

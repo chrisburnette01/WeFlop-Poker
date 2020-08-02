@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
+import { useHistory } from 'react-router-dom';
 import { Button, Input, Line } from '../../components';
 import { Title, LineContent, Subtitle, Form, Navigation } from '../../layout';
 import { checkValidation } from '../../helpers';
@@ -10,6 +11,7 @@ import { RootState } from '../../store';
 import { signIn, SIGN_IN } from '../../store/actions/application';
 
 const SignIn = () => {
+    const history = useHistory();
     const dispatch = useDispatch();
     const application = useSelector((state: RootState) => state.application);
     const { register, errors, handleSubmit, watch } = useForm({
@@ -50,8 +52,10 @@ const SignIn = () => {
     }, [application.error[SIGN_IN.ERROR]]);
 
     useEffect(() => {
-        console.log("User updated: ", application.user)
-    }, [application.user]);
+        if (application.isAuthenticated) {
+            history.push("/updates");
+        }
+    }, [application.isAuthenticated]);
 
     return (
         <>

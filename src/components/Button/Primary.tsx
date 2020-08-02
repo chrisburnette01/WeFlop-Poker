@@ -25,22 +25,10 @@ const BaseButton = styled('div')<BaseButtonProps>`
     text-align: ${({ align }) => align};
     align-self: ${({ align }) => (align === 'right' ? 'flex-end' : null)};
     height: ${({ styles }) => (styles === 'button1' ? '64px' : '48px')};
-    display: flex;
     cursor: ${({ disabled }) => (disabled ? 'unset' : 'pointer')};
-    outline: none;
-    text-decoration: none;
-    border: none;
-    background: transparent;
-    padding: 0;
     margin-bottom: ${({ bottomGutter }) => (bottomGutter ? '64px' : null)};
-    display: flex;
-    align-items:  center;
 
     .line {
-        margin-bottom: 3px;
-        border-radius: 4px;
-        width: 16px;
-        height: 16px;
         background-color: ${({ theme, color }) => theme.palette[color!]};
         ${({ theme, active }) =>
             active ? `background-color: ${active ? theme.palette.secondary : theme.palette.primary};` : null}
@@ -49,7 +37,6 @@ const BaseButton = styled('div')<BaseButtonProps>`
     .title {
         margin: ${({ align }) => (align === 'left' ? '0 0 0 16px' : '15px 16px 0 0')};
         animation: ${({ theme }) => theme.animations.text};
-        opacity: 0;
     }
 `;
 
@@ -92,6 +79,7 @@ const Primary = ({
             active={active!}
             bottomGutter={bottomGutter!}
             color={color!}
+            className='base_button__primary'
         >
             {(align === undefined || align === 'left') && <span className="line" />}
             <span className="title">{title}</span>

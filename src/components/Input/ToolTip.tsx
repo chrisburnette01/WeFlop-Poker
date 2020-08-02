@@ -13,13 +13,6 @@ interface ToolTipProps {
 }
 
 const BaseToolTip = styled('div')<BaseToolTipProps>`
-    .tooltip-img {
-        width: 24px;
-        height: 24px;
-        position: absolute;
-        top: 50%;
-        right: -63px;
-    }
     .tooltip-text {
         font-size: ${({ theme }) => theme.typography.tooltip!.fontSize};
         font-weight: ${({ theme }) => theme.typography.tooltip!.fontWeight};
@@ -28,14 +21,11 @@ const BaseToolTip = styled('div')<BaseToolTipProps>`
         color: ${({ theme }) => theme.palette.primary};
         font-family: ${({ theme }) => theme.typography.fontFamily};
     }
-    .__react_component_tooltip {
-        padding: 0px;
-    }
 `;
 
 const ToolTip = ({ message, name, show }: ToolTipProps) => {
     return (
-        <BaseToolTip>
+        <BaseToolTip className='base_tooltip'>
             <CSSTransition timeout={1000} in={show} classNames="tooltip" unmountOnExit>
                 <>
                     <img
