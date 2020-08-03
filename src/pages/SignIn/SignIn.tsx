@@ -40,15 +40,14 @@ const SignIn = () => {
 
     useEffect(() => {
         if (application.isLoading[SIGN_IN.REQUEST]) {
-            console.log("Started SIGN_IN request...")
+            console.log('Started SIGN_IN request...');
         } else {
-            console.log("SIGN_IN request finished!")
+            console.log('SIGN_IN request finished!');
         }
-        
     }, [application.isLoading[SIGN_IN.REQUEST]]);
 
     useEffect(() => {
-        console.log("Error updated: ", application.error[SIGN_IN.ERROR])
+        console.log('Error updated: ', application.error[SIGN_IN.ERROR]);
     }, [application.error[SIGN_IN.ERROR]]);
 
     useEffect(() => {

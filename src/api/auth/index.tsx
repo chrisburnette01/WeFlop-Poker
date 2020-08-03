@@ -1,4 +1,5 @@
 // import axios from "axios";
+import moment from 'moment';
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -29,6 +30,8 @@ export const signInRequest = async (payload) => {
     // await wait(4000);
 
     return {
+        token: "testtoken",
+        expire: moment().add(2, 'days').toDate(),
         username: 'test',
         email: payload.email
     };

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
-import PublicRoute from './PublicRoute';
+import Route from './Route';
 import { ThemeProvider } from '../providers';
 import { Helmet } from 'react-helmet';
 import { useSelector } from 'react-redux';
@@ -19,30 +19,30 @@ const App = () => {
             <Helmet defaultTitle="We Flop" titleTemplate="We Flop - %s" />
             <BrowserRouter>
                 <Switch>
-                    <PublicRoute path="/" exact>
+                    <Route path="/" exact publicRoute isAuthenticated={application.isAuthenticated}>
                         <Welcome />
-                    </PublicRoute>
-                    <PublicRoute path="/signup" exact>
+                    </Route>
+                    <Route path="/signup" exact publicRoute isAuthenticated={application.isAuthenticated}>
                         <SignUp />
-                    </PublicRoute>
-                    <PublicRoute path="/signin" exact>
+                    </Route>
+                    <Route path="/signin" exact publicRoute isAuthenticated={application.isAuthenticated}>
                         <SignIn />
-                    </PublicRoute>
-                    <PublicRoute path="/reset/password" exact>
+                    </Route>
+                    <Route path="/reset/password" exact publicRoute isAuthenticated={application.isAuthenticated}>
                         <Reset />
-                    </PublicRoute>
-                    <PublicRoute path="/reset/password/:token" exact>
+                    </Route>
+                    <Route path="/reset/password/:token" exact publicRoute isAuthenticated={application.isAuthenticated}>
                         <ResetPassword />
-                    </PublicRoute>
-                    <PublicRoute path="/updates" exact>
+                    </Route>
+                    <Route path="/updates" exact privateRoute isAuthenticated={application.isAuthenticated}>
                         <Updates />
-                    </PublicRoute>
-                    <PublicRoute path="/play" exact>
+                    </Route>
+                    <Route path="/play" exact privateRoute isAuthenticated={application.isAuthenticated}>
                         <Play />
-                    </PublicRoute>
-                    <PublicRoute path="/contact" exact>
+                    </Route>
+                    <Route path="/contact" exact privateRoute isAuthenticated={application.isAuthenticated}>
                         <Contact />
-                    </PublicRoute>
+                    </Route>
                 </Switch>
             </BrowserRouter>
         </ThemeProvider>

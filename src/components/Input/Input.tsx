@@ -56,7 +56,7 @@ const Input = ({
 }: InputProps) => {
     const show = !validated! && errorMessage !== undefined ? true : false;
     return (
-        <BaseInput validated={validated!} className='base_input'>
+        <BaseInput validated={validated!} className="base_input">
             <div className="wrapper">
                 <ToolTip message={errorMessage!} name={name} show={show} />
                 <input

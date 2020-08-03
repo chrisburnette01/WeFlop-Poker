@@ -1,11 +1,12 @@
 import { SIGN_UP, SIGN_IN, RESET_PASSWORD, SIGN_OUT } from '../../actions/application';
 import { ApplicationState, ApplicationAction } from './types';
+import moment from 'moment';
 
 const defaultApplicationState: ApplicationState = {
     user: undefined,
     updates: undefined,
     tables: undefined,
-    isAuthenticated: false,
+    isAuthenticated: localStorage.token != null && moment(localStorage.expire).isAfter(moment()),
     isLoading: { },
     error: { },
     success: { }

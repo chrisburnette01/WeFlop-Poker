@@ -5,19 +5,20 @@ interface LinesProps {
     height?: string;
     color?: 'primary' | 'secondary';
     align?: string | undefined;
+    noRightLine?: boolean;
 }
 
-const Lines = ({ height, color, align }: LinesProps) => {
+const Lines = ({ height, color, align, noRightLine }: LinesProps) => {
     return (
         <div className="lines-container" style={height ? { height } : {}}>
             <Line color={color} width="long" align={!align ? 'left' : undefined} />
-            <Line color={color} width="long" align="right" />
+            {!noRightLine && <Line color={color} width="long" align="right" />}
         </div>
     );
 };
 
 Lines.defaultProps = {
-    color: 'primary'
+    color: 'primary',
 };
 
 export default Lines;

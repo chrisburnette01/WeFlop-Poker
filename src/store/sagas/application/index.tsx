@@ -46,8 +46,15 @@ import {
 const signIn = function* (action) {
     try {
         const data = yield call(signInRequest, action.payload);
+
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("expire", data.expire);
+
         yield put(signInSuccess(data));
     } catch (error) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("expire");
+        
         yield put(signInError(error));
     }
 };
@@ -63,6 +70,9 @@ const signUp = function* (action) {
 
 const signOut = function* (action) {
     try {
+        localStorage.removeItem("token");
+        localStorage.removeItem("expire");
+        
         yield put(signOutSuccess());
     } catch (error) {
         yield put(signOutError(error));
