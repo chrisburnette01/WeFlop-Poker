@@ -4,6 +4,7 @@ import { Button } from '../../components';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import { signOut } from '../../store/actions/application';
+import './index.scss';
 
 interface NavigationProps {
     type: 'auth' | 'basic' | 'game';

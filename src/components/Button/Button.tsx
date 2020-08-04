@@ -1,14 +1,15 @@
 import React from 'react';
 import Primary from './Primary';
 import Secondary from './Secondary';
+import ButtonPlay from './ButtonPlay';
 import './index.scss';
 
 interface ButtonProps {
     title: string | null;
-    variant?: 'primary' | 'secondary';
+    variant?: 'primary' | 'secondary' | 'play';
     size?: 'small' | 'big';
     align?: 'left' | 'right';
-    onClick?: () => void;
+    onClick?: any;
     component?: 'button' | 'link';
     type?: 'button' | 'submit';
     to?: string;
@@ -32,7 +33,7 @@ const Button = ({
     color,
     validated,
     variant,
-    disabled
+    disabled,
 }: ButtonProps) => {
     switch (variant) {
         case 'primary':
@@ -53,6 +54,8 @@ const Button = ({
             );
         case 'secondary':
             return <Secondary title={title!} validated={validated} />;
+        case 'play':
+            return <ButtonPlay title={title!} active={active} align={align!} onClick={onClick} />;
         default:
             return null;
     }

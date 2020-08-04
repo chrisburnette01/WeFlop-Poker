@@ -1,0 +1,49 @@
+.play-options {
+    display: flex;
+    margin-top: 8px;
+}
+
+.left-button-wrapper {
+    margin-right: 8px;
+}
+
+.right-button-wrapper {
+    margin-left: 8px;
+}
+
+.left-button-wrapper.bottom {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.right-button-wrapper.bottom {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    align-self: flex-start;
+}
+
+.tables-subtitles-wrapper {
+    margin: 10px 0 10px 0;
+}
+
+.buttons-inside-wrapper {
+    display: flex;
+    align-content: flex-start;
+}
+
+.buttons-and-options-wrapper {
+    margin-left: -171px;
+}
+
+.content-inner-play {
+    margin-left: 136px;
+}
+
+.buttons-bottom-play {
+    display: flex;
+    flex-direction: column;
+}

@@ -10,7 +10,7 @@ interface PollItemProps {
 }
 
 const PollItem = styled.div<PollItemProps>`
-    margin-left: 8px;
+    margin-left: 12px;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -31,13 +31,13 @@ const PollItem = styled.div<PollItemProps>`
     }
 `;
 
-const Poll = ({ data, option }) => {
-    const [active, setActive] = useState(null);
+const Poll = ({ content, optional }) => {
+    const [active, setActive] = useState<number | undefined>(content.selected ? content.selected : undefined);
 
     const optionalText =
-        option !== undefined ? (
+        optional !== undefined ? (
             <div style={{ marginTop: '4px' }}>
-                <Description data={[option]} />
+                <Description content={optional} />
             </div>
         ) : null;
 
@@ -47,12 +47,12 @@ const Poll = ({ data, option }) => {
 
     const totalVotes = () => {
         const reducer = (accumulator, currentValue) => accumulator + currentValue.votes;
-        return data.reduce(reducer, 0);
+        return content.options.reduce(reducer, 0);
     };
 
     return (
         <div>
-            {data.map((element, index) => {
+            {content.options.map((element, index) => {
                 const star = index === active ? '*' : null;
                 const votes = active !== null ? ` (${Math.round((element.votes / totalVotes()) * 100)}%)` : null;
                 return (

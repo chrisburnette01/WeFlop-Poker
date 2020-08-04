@@ -1,4 +1,4 @@
-import { SIGN_UP, SIGN_IN, RESET_PASSWORD, SIGN_OUT } from '../../actions/application';
+import { SIGN_UP, SIGN_IN, RESET_PASSWORD, SIGN_OUT, GET_UPDATES } from '../../actions/application';
 import { ApplicationState, ApplicationAction } from './types';
 import moment from 'moment';
 
@@ -159,6 +159,40 @@ const application = (state: ApplicationState = defaultApplicationState, action: 
                 isLoading: {
                     ...state.isLoading,
                     [RESET_PASSWORD.REQUEST]: false,
+                }
+            };
+        // GET_UPDATES
+        case GET_UPDATES.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [GET_UPDATES.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [GET_UPDATES.ERROR]: undefined,
+                }
+            };
+        case GET_UPDATES.SUCCESS:
+            return {
+                ...state,
+                updates: action.payload!.updates,
+                isLoading: {
+                    ...state.isLoading,
+                    [GET_UPDATES.REQUEST]: false,
+                }
+            };
+        case GET_UPDATES.ERROR:
+            return {
+                ...state,
+                error: {
+                    ...state.error,
+                    [GET_UPDATES.ERROR]: action.payload,
+                },
+                isLoading: {
+                    ...state.isLoading,
+                    [GET_UPDATES.REQUEST]: false,
                 }
             };
         default:

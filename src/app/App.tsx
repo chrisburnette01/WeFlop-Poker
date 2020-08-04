@@ -31,7 +31,12 @@ const App = () => {
                     <Route path="/reset/password" exact publicRoute isAuthenticated={application.isAuthenticated}>
                         <Reset />
                     </Route>
-                    <Route path="/reset/password/:token" exact publicRoute isAuthenticated={application.isAuthenticated}>
+                    <Route
+                        path="/reset/password/:token"
+                        exact
+                        publicRoute
+                        isAuthenticated={application.isAuthenticated}
+                    >
                         <ResetPassword />
                     </Route>
                     <Route path="/updates" exact privateRoute isAuthenticated={application.isAuthenticated}>

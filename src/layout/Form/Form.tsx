@@ -2,7 +2,6 @@ import React from 'react';
 import { Line } from '../../components';
 import { PatreonIcon } from '../';
 import { Notification } from '../';
-import Lines from './Lines';
 import styled from 'styled-components';
 
 interface FormProps {
@@ -28,10 +27,12 @@ const FormAnimationWrapper = styled.div<FormAnimationProps>`
 const Form = ({ children, onSubmit, buttonSubmit, isClicked, isRightIcon, notification }: FormProps) => {
     return (
         <div className="form-inner">
-            <form onSubmit={onSubmit} className="form form-signup" noValidate>
-                <Lines color="secondary" noRightLine />
+            <form onSubmit={onSubmit} className="form" noValidate>
                 <FormAnimationWrapper isClicked={isClicked}>{children}</FormAnimationWrapper>
-                <Lines color="secondary" />
+                <div className="lines-container">
+                    <Line color="secondary" width="long" height='short' align="left" />
+                    <Line color="secondary" width="long" height='short' align="right" />
+                </div>
                 {buttonSubmit}
                 <Notification>
                     {notification}

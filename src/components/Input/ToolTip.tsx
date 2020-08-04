@@ -40,6 +40,8 @@ const ToolTip = ({ message, name, show }: ToolTipProps) => {
                         effect="solid"
                         place="right"
                         border={false}
+                        multiline={true}
+                        className="tooltip"
                         backgroundColor="transparent"
                     >
                         <span className="tooltip-text">{message}</span>

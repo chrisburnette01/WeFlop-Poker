@@ -3,15 +3,21 @@ export type User = {
     email?: string;
 };
 
+export type PollOption = {
+    title: string;
+    votes: number;
+}
+
 export type Poll = {
     selected?: number;
-    options: object[];
+    options: PollOption[];
 };
 
 export type Update = {
     title: string;
     content: string | Poll;
     type: 'poll' | 'text';
+    optionalText?: string;
     date: Date;
 };
 

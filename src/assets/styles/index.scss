@@ -1,32 +1,31 @@
 @font-face {
     font-family: 'Avenir';
-    src: local('Avenir-Medium'), url(../fonts/Avenir-Medium.woff2) format('woff2');
-    font-weight: 500;
-}
-
-@font-face {
-    font-family: 'Avenir';
-    src: local('Avenir-Light'), url(../fonts/Avenir-Light.woff2) format('woff2');
+    src: local('Avenir-Next-Light'), url(../fonts/AvenirNextCyr-Light.woff2) format('woff2');
     font-weight: 200;
 }
 
 @font-face {
     font-family: 'Avenir';
-    src: local('Avenir-Black'), url(../fonts/Avenir-Black.woff2) format('woff2');
-    font-weight: 800;
+    src: local('Avenir-Next-Medium'), url(../fonts/AvenirNextCyr-Medium.woff2) format('woff2');
+    font-weight: 500;
 }
 
 @font-face {
     font-family: 'Avenir';
-    src: local('Avenir-Heavy'), url(../fonts/Avenir-Heavy.woff2) format('woff2');
+    src: local('Avenir-Next-Demi'), url(../fonts/AvenirNextCyr-Demi.woff2) format('woff2');
     font-weight: 600;
 }
 
 @font-face {
     font-family: 'Avenir';
-    src: local('Avenir-Italic'), url(../fonts/AvenirNextItalic.woff2) format('woff2');
-    font-weight: 400;
-    font-style: italic;
+    src: local('Avenir-Next-Bold'), url(../fonts/AvenirNextCyr-Bold.woff2) format('woff2');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'Avenir';
+    src: local('Avenir-Next-Heavy'), url(../fonts/AvenirNextCyr-Heavy.woff2) format('woff2');
+    font-weight: 800;
 }
 
 // layout/Form
@@ -50,7 +49,7 @@
 }
 
 .form-line-right {
-    margin: 63px 8px 0 8px !important;
+    margin: 0 8px 0 8px !important;
 }
 
 .form-line-left {
@@ -78,7 +77,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    min-height: 48px;
 }
 
 .title-wrapper-container {
@@ -92,12 +90,6 @@
 
 .subtitles-wrapper-inner {
     margin: 10px 0 10px 0;
-}
-
-// layout/Navigation
-
-#nav {
-    margin-right: 200px;
 }
 
 // layout/Subtitle
@@ -124,7 +116,7 @@
     height: 48px;
     display: flex;
     align-items: center;
-    margin: 8px 0 0 -100px;
+    margin: 8px 0 0 -98px;
     &-line {
         height: 48px;
     }
@@ -171,6 +163,8 @@
 }
 
 .content-enter {
+    display: flex;
+    flex-direction: column;
     max-width: 337px;
     width: 100%;
 }
@@ -180,8 +174,8 @@
     max-width: 304px;
     width: 100%;
     display: flex;
+    flex: 3;
     justify-content: space-between;
-    height: 60%;
 }
 
 .typography-enter {
@@ -189,7 +183,7 @@
 }
 
 .content-inner-footer {
-    height: calc(40% - 112px);
+    flex: 1;
 }
 
 // pages/Updates
@@ -198,7 +192,7 @@
     height: 48px;
 }
 .patch-notes {
-    margin: 8px 0 0 20px;
+    margin: 8px 0 0 16px;
 }
 
 // pages/Reset

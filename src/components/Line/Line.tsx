@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
+import './index.scss';
 
 interface BaseLineProps {
     width: string;
@@ -20,15 +21,16 @@ const BaseLine = styled.span<BaseLineProps>`
 
 interface LineProps {
     width: string;
+    height?: 'long' | 'short';
     align?: 'left' | 'right';
     color?: 'primary' | 'secondary' | 'button' | 'initial' | string;
     className?: string;
 }
 
-const Line = ({ width, align, color, className }: LineProps) => {
+const Line = ({ width, height, align, color, className }: LineProps) => {
     return (
-        <div className={className}>
-            <BaseLine width={width} align={align} color={color!} />
+        <div className="line" style={height ? {height: height == 'long' ? '60px' : '48px'} : undefined}>
+            <BaseLine className={className} width={width} align={align} color={color!} />
         </div>
     );
 };

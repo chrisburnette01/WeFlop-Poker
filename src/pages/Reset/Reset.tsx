@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Button, Input, Line, Typography } from '../../components';
-import { Title, LineContent, Subtitle, Form, Navigation, Notification } from '../../layout';
+import { Title, LineContent, Subtitle, Form, Navigation, Notification, Content } from '../../layout';
 import { checkValidation } from '../../helpers';
 import Container from '../../layout/Container/Container';
 import { useForm } from 'react-hook-form';
@@ -67,13 +67,14 @@ const Reset = () => {
             </Helmet>
             <Container>
                 <Navigation type={'basic'} />
-                <div>
+                <Content>
                     <LineContent>
                         <Title>Forgot Your Password?</Title>
                         <div className="subtitles-wrapper-inner">
                             <Subtitle>Enter the email address associated with your account.</Subtitle>
                             <Subtitle>We’ll send you an email with a reset form.</Subtitle>
                         </div>
+                        <Line color="secondary" width="long" height='short' align="left" />
                         <Form onSubmit={handleSubmit(onSubmit)} buttonSubmit={buttonSubmit} isClicked={isClicked} notification={isEmailSent ? notification : null}>
                             <Input
                                 onFocus={() => setIsClicked(true)}
@@ -104,7 +105,7 @@ const Reset = () => {
                             />
                         </Form>
                     </LineContent>      
-                </div>
+                </Content>
             </Container>
         </>
     );
