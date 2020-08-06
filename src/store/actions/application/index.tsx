@@ -250,9 +250,10 @@ Get tables
 
 */
 
-const getTables = () => {
+const getTables = (payload) => {
     return {
         type: GET_TABLES.REQUEST,
+        payload
     };
 };
 

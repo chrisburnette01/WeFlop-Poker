@@ -1,14 +1,21 @@
 .play-options {
     display: flex;
     margin-top: 8px;
+    flex-direction: column;
 }
 
 .left-button-wrapper {
     margin-right: 8px;
+    height: 58px;
+}
+
+.rect-play-wrapper {
+    height: 40px;
 }
 
 .right-button-wrapper {
     margin-left: 8px;
+    height: 58px;
 }
 
 .left-button-wrapper.bottom {
@@ -36,7 +43,11 @@
 }
 
 .buttons-and-options-wrapper {
-    margin-left: -171px;
+    margin-left: 30px;
+}
+
+.button-wrapper-play {
+    display: flex;
 }
 
 .content-inner-play {
@@ -46,4 +57,15 @@
 .buttons-bottom-play {
     display: flex;
     flex-direction: column;
+    margin-left: 200px;
+}
+
+.play-rect-bottom {
+    align-self: flex-end;
+    margin: 8px 0 8px 197px;
+}
+
+.play-rect-bottom-left {
+    margin: 8px 0 8px 149px;
+
 }

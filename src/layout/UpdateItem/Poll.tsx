@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { RootState } from '../../store';
+import { votePoll } from '../../store/actions/application';
 
 import { Description } from '../';
-
 import { Typography } from '../../components';
 
 interface PollItemProps {
@@ -31,7 +33,8 @@ const PollItem = styled.div<PollItemProps>`
     }
 `;
 
-const Poll = ({ content, optional }) => {
+const Poll = ({ content, optional, updateId }) => {
+    const dispatch = useDispatch();
     const [active, setActive] = useState<number | undefined>(content.selected ? content.selected : undefined);
 
     const optionalText =
@@ -43,18 +46,18 @@ const Poll = ({ content, optional }) => {
 
     const onClickHandler = (id) => {
         setActive(id);
+        dispatch(votePoll({updateId, id}));
     };
 
     const totalVotes = () => {
-        const reducer = (accumulator, currentValue) => accumulator + currentValue.votes;
-        return content.options.reduce(reducer, 0);
+        return content.options.reduce((accumulator, currentValue) => accumulator + currentValue.votes, 0);
     };
 
     return (
         <div>
             {content.options.map((element, index) => {
-                const star = index === active ? '*' : null;
-                const votes = active !== null ? ` (${Math.round((element.votes / totalVotes()) * 100)}%)` : null;
+                const asterisk = index === active ? '*' : null;
+                const votes = active !== undefined ? ` (${Math.round((element.votes / totalVotes()) * 100)}%)` : null;
                 return (
                     <PollItem
                         key={`${element.title}${index}`}
@@ -68,10 +71,10 @@ const Poll = ({ content, optional }) => {
                                 variant="input"
                                 color={index === active ? 'secondary' : 'primary'}
                             >
-                                {star}
+                                {asterisk}
                                 {element.title}
                                 {votes}
-                                {star}
+                                {asterisk}
                             </Typography>
                         </div>
                     </PollItem>

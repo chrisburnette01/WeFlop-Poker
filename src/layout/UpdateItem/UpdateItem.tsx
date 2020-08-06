@@ -9,7 +9,7 @@ const UpdateItem = ({ element }) => {
     const list =
         element.type === 'poll' ? (
             <div style={{ marginTop: '8px' }}>
-                <Poll content={element.content} optional={element.optionalText} />
+                <Poll content={element.content} updateId={element.id} optional={element.optionalText} />
             </div>
         ) : element.type === 'text' ? (
             <Description content={element.content} />

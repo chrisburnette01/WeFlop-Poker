@@ -3,12 +3,9 @@
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const sendFeedbackRequest = async (payload) => {
-    /*try {
-		const result = await axios.post("/signup", payload);
-		return result.data;
-	} catch (e) {
-		throw Error(e);
-	}*/
+    // payload: {
+    //     feedback: string;
+    // }
 
     await wait(4000);
 
@@ -17,17 +14,20 @@ export const sendFeedbackRequest = async (payload) => {
 };
 
 export const getUpdatesRequest = async (payload) => {
-    /*try {
-        const result = await axios.post("/signup", payload);
-        return result.data;
-    } catch (e) {
-        throw Error(e);
-    }*/
+    // payload: {
+    //     updates: {
+    //         id: number;
+    //         title: string;
+    //         content: string | Poll;
+    //         type: string;
+    //         optionalText: string;
+    //         date: Date;
+    //     }[];
+    // }
 
-    // await wait(4000);
-    
     const updates = [
         {
+            id: 1,
             title: 'Patch Notes v1.01',
             content: `Added a new music track
                 Implemented bet size customization that - filler that mimicks a two line input - * - filler ends up going onto the next line and expanding the line to the left.
@@ -37,6 +37,7 @@ export const getUpdatesRequest = async (payload) => {
             date: Date.now(),
         },
         {
+            id: 2,
             title: 'Poll: What should our next feature be?',
             content: {
                 options: [
@@ -50,6 +51,7 @@ export const getUpdatesRequest = async (payload) => {
             date: Date.now(),
         },
         {
+            id: 3,
             title: 'Patch Notes v1.01',
             content: `Added a new music track
                 Implemented bet size customization that - filler that mimicks a two line input - * - filler ends up going onto the next line and expanding the line to the left.
@@ -59,6 +61,7 @@ export const getUpdatesRequest = async (payload) => {
             date: Date.now(),
         },
         {
+            id: 4,
             title: 'Poll: What should our next feature be?',
             content: {
                 options: [
@@ -79,12 +82,10 @@ export const getUpdatesRequest = async (payload) => {
 };
 
 export const votePollRequest = async (payload) => {
-    /*try {
-        const result = await axios.post("/signup", payload);
-        return result.data;
-    } catch (e) {
-        throw Error(e);
-    }*/
+    // payload: {
+    //     updateId: number;
+    //     id: number;
+    // }
 
     await wait(4000);
 

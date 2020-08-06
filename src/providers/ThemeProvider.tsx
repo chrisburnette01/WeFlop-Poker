@@ -216,9 +216,11 @@ const defaultTypography: Typography = {
         fontWeight: 400,
         fontSize: '1.2rem',
         letterSpacing: '1.07px',
+        textTransform: 'lowercase',
     },
     playTablesBold: {
-        fontWeight: 800,
+        textTransform: 'uppercase',
+        fontWeight: 700,
         fontSize: '1.2rem',
         letterSpacing: '1.07px',
     },

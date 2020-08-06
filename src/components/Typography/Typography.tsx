@@ -6,6 +6,7 @@ interface BaseTypographyProps {
     as: React.ElementType;
     color?: 'primary' | 'secondary' | 'initial' | string;
     className?: string;
+    style?: Record<string, unknown> | null;
 }
 
 interface TypographyProps {
@@ -14,6 +15,7 @@ interface TypographyProps {
     children: any;
     color?: 'primary' | 'secondary' | 'initial' | string;
     className?: string;
+    style?: Record<string, unknown> | null;
 }
 
 const BaseTypography = styled('div')<BaseTypographyProps>`
@@ -32,9 +34,15 @@ const BaseTypography = styled('div')<BaseTypographyProps>`
     animation: ${({ theme }) => theme.animations.text};
 `;
 
-const Typography = ({ component, children, variant, color, className }: TypographyProps) => {
+const Typography = ({ component, children, variant, color, className, style }: TypographyProps) => {
     return (
-        <BaseTypography color={color} variant={variant ? variant : component} as={component} className={className}>
+        <BaseTypography
+            color={color}
+            variant={variant ? variant : component}
+            as={component}
+            className={className}
+            style={style}
+        >
             {children}
         </BaseTypography>
     );

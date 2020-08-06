@@ -1,4 +1,4 @@
-import { SIGN_UP, SIGN_IN, RESET_PASSWORD, SIGN_OUT, GET_UPDATES } from '../../actions/application';
+import { SIGN_UP, SIGN_IN, RESET_PASSWORD, SIGN_OUT, GET_UPDATES, GET_TABLES } from '../../actions/application';
 import { ApplicationState, ApplicationAction } from './types';
 import moment from 'moment';
 
@@ -193,6 +193,40 @@ const application = (state: ApplicationState = defaultApplicationState, action: 
                 isLoading: {
                     ...state.isLoading,
                     [GET_UPDATES.REQUEST]: false,
+                }
+            };
+         // GET_TABLES
+        case GET_TABLES.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [GET_TABLES.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [GET_TABLES.ERROR]: undefined,
+                }
+            };
+        case GET_TABLES.SUCCESS:
+            return {
+                ...state,
+                tables: action.payload!.tables,
+                isLoading: {
+                    ...state.isLoading,
+                    [GET_TABLES.REQUEST]: false,
+                }
+            };
+        case GET_TABLES.ERROR:
+            return {
+                ...state,
+                error: {
+                    ...state.error,
+                    [GET_TABLES.ERROR]: action.payload,
+                },
+                isLoading: {
+                    ...state.isLoading,
+                    [GET_TABLES.REQUEST]: false,
                 }
             };
         default:

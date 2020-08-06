@@ -18,9 +18,9 @@ const Contact = () => {
     const [isClicked, setIsClicked] = useState(false);
     const [isMessageSent, setIsMessageSent] = useState(false);
 
-    const email = watch('textarea', '');
+    const feedback = watch('feedback', '');
 
-    const buttonSubmit = <Button variant="secondary" validated={Boolean(email)} title="Enter" />;
+    const buttonSubmit = <Button variant="secondary" validated={Boolean(feedback)} title="Enter" />;
     const notification = <Typography component="span" variant="button2" color="primary">
                             message was sent
                         </Typography>;
@@ -57,7 +57,7 @@ const Contact = () => {
                             <TextField
                                 onFocus={() => setIsClicked(true)}
                                 disabled={isMessageSent}
-                                name="textarea"
+                                name="feedback"
                                 register={register({
                                     required: true,
                                     minLength: 1,

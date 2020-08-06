@@ -14,6 +14,7 @@ export type Poll = {
 };
 
 export type Update = {
+    id: number;
     title: string;
     content: string | Poll;
     type: 'poll' | 'text';
@@ -22,19 +23,29 @@ export type Update = {
 };
 
 export type Table = {
-    title: string;
-    blinds: {
-        smallBlind: number;
-        bigBlind: number;
-    };
-    timeBank: number;
+    name: string;
+    createdBy: string;
+    dateCreated: number;
+    gameNumber: number;
+    type: string;
+    online: number;
+    max: number;
+    smallBlind: number;
+    bigBlind: number;
+    variant: string;
+    turnDuration: number;
+    minBuyIn: number;
     maxBuyIn: number;
+    ledger: Record<string, number>;
 };
 
 export interface ApplicationState {
     user?: User;
     updates?: Update[];
-    tables?: Table[];
+    tables?: {
+        archive?: Table[];
+        active?: Table[];
+    };
     isAuthenticated: boolean;
     isLoading: Record<string, unknown>;
     error: Record<string, unknown>;
