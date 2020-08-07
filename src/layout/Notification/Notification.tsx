@@ -6,11 +6,13 @@ const NotificationAnimationWrapper = styled.div`
     animation: ${({ theme }) => theme.animations.emailNotification};
 `;
 
-const Notification = ({ children }) => {
+const Notification = ({ children, type }) => {
     return (
         <NotificationAnimationWrapper>
             <div className="form-line-notification">
-                <div className="notification-form">{children}</div>
+                <div className={`notification-form ${type === 'auth' ? 'notification-auth' : 'notification-play'}`}>
+                    {children}
+                </div>
             </div>
         </NotificationAnimationWrapper>
     );

@@ -36,7 +36,7 @@ const SignIn = () => {
     };
 
     const isValidated = check.email && check.password;
-    const buttonSubmit = <Button variant="secondary" validated={isValidated} title="Enter" />;
+    const buttonSubmit = <Button variant="secondary" validated={isValidated} title="Enter" form="auth" />;
 
     useEffect(() => {
         if (application.isLoading[SIGN_IN.REQUEST]) {
@@ -52,7 +52,7 @@ const SignIn = () => {
 
     useEffect(() => {
         if (application.isAuthenticated) {
-            history.push("/updates");
+            history.push('/updates');
         }
     }, [application.isAuthenticated]);
 
@@ -71,7 +71,7 @@ const SignIn = () => {
                             <Subtitle>We are committed to building the features you want.</Subtitle>
                             <Subtitle>Our beta supports home games with simple, intuitive ledgers.</Subtitle>
                         </div>
-                        <Line width="long" height='short' align="left" color="secondary" />
+                        <Line width="long" height="short" align="left" color="secondary" />
                         <Form onSubmit={handleSubmit(onSubmit)} buttonSubmit={buttonSubmit} isClicked={isClicked}>
                             <Input
                                 onFocus={() => setIsClicked(true)}

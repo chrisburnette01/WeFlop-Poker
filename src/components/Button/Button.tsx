@@ -18,6 +18,7 @@ interface ButtonProps {
     validated?: boolean;
     color?: 'primary' | 'secondary' | 'initial' | string;
     disabled?: boolean;
+    form?: 'auth' | 'play';
 }
 
 const Button = ({
@@ -34,6 +35,7 @@ const Button = ({
     validated,
     variant,
     disabled,
+    form,
 }: ButtonProps) => {
     switch (variant) {
         case 'primary':
@@ -53,7 +55,7 @@ const Button = ({
                 />
             );
         case 'secondary':
-            return <Secondary title={title!} validated={validated} />;
+            return <Secondary title={title!} validated={validated} form={form} />;
         case 'play':
             return <ButtonPlay title={title!} active={active} align={align!} onClick={onClick} />;
         default:

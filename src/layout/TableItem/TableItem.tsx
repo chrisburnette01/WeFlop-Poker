@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Line, Typography, SlideDown, Rectangle } from '../../components';
 import moment from 'moment';
 
@@ -126,6 +127,7 @@ interface TableItemProps {
 }
 
 const TableItem = ({ table, type, onRemove }: TableItemProps) => {
+    const location = useLocation();
     const [active, setActive] = useState(false);
     const [selectedButton, setSelectedButton] = useState<string | undefined>();
 
@@ -167,7 +169,7 @@ const TableItem = ({ table, type, onRemove }: TableItemProps) => {
                                     selectedButton={selectedButton}
                                     onClick={() => {
                                         setSelectedButton('play');
-                                        window.open('https://vk.com/public110837426');
+                                        window.open(`${window.location.protocol}//${window.location.hostname}${window.location.port ? ':' + window.location.port: ''}/table/${table.gameNumber}`);
                                     }}
                                 />
                             ) : null}

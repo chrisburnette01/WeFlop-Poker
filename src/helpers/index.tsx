@@ -1,3 +1,4 @@
 import checkValidation from './checkValidation/checkValidation';
+import isCard from './isCard/isCard';
 
-export { checkValidation };
+export { checkValidation, isCard };

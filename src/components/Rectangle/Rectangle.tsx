@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 
 interface BaseRectangleProps {
-    size: 'small' | 'middle' | 'big' | 'button' | 'line';
+    size: 'small' | 'middle' | 'big' | 'button' | 'line' | 'input';
     color: 'primary' | 'secondary' | 'success' | string;
     border?: 'small' | 'big';
 }
@@ -21,6 +21,8 @@ const BaseRectangle = styled.span<BaseRectangleProps>`
             ? '12px'
             : size === 'line'
             ? '100%'
+            : size === 'input'
+            ? '32px'
             : '40px'};
     height: ${({ size }) =>
         size === 'small'
@@ -31,12 +33,14 @@ const BaseRectangle = styled.span<BaseRectangleProps>`
             ? '12px'
             : size === 'line'
             ? '12px'
+            : size === 'input'
+            ? '32px'
             : '40px'};
     transition: background-color 0.4s ease-in-out;
 `;
 
 interface RectangleProps {
-    size: 'small' | 'middle' | 'big' | 'button' | 'line';
+    size: 'small' | 'middle' | 'big' | 'button' | 'line' | 'input';
     color?: 'primary' | 'secondary' | 'success' | string;
     border?: 'small' | 'big';
     className?: string;
@@ -44,7 +48,7 @@ interface RectangleProps {
 
 const Rectangle = ({ color, size, border, className }: RectangleProps) => {
     return (
-        <div className={`rectangle-wrapper ${className}`}>
+        <div className={`rectangle-wrapper ${className ? className : ''}`}>
             <BaseRectangle size={size} color={color!} border={border} />
         </div>
     );

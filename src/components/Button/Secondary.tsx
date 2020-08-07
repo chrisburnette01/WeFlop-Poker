@@ -7,12 +7,13 @@ const BaseSecondaryButton = styled('button')``;
 interface SecondaryButtonProps {
     title: string;
     validated?: boolean;
+    form?: 'auth' | 'play';
 }
 
-const Secondary = ({ title, validated }: SecondaryButtonProps) => {
+const Secondary = ({ title, validated, form }: SecondaryButtonProps) => {
     const color = validated ? 'success' : 'primary';
     return (
-        <BaseSecondaryButton className='base_button__secondary'>
+        <BaseSecondaryButton className={`base_button__secondary ${form === 'auth' ? 'button-auth' : 'button-play'}`}>
             <div className="lines-wrapper">
                 <Rectangle size="middle" color={color} border="big" />
                 <Line width="long" className="line-button" />
@@ -28,5 +29,8 @@ const Secondary = ({ title, validated }: SecondaryButtonProps) => {
     );
 };
 
+Secondary.defaultProps = {
+    form: 'auth'
+}
 
 export default Secondary;

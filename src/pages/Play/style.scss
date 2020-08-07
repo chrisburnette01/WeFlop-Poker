@@ -67,5 +67,32 @@
 
 .play-rect-bottom-left {
     margin: 8px 0 8px 149px;
+}
 
+.create-table-slidedown {
+    margin-left: 128px;
+}
+
+.wrapper-subtitle {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.inner-inputs-play {
+    margin: 16px 0 16px 3px;
+}
+.input-and-title-wrapper {
+    display: flex;
+    align-items: center;
+    & + & {
+        margin-top: 8px;
+    }
+}
+.title-create-table {
+    margin-left: 16px !important;
+}
+.rect-play-input {
+    margin-left: 8px;
+}
+.play-button-notification-wrapper {
+    max-width: 240px;
 }

@@ -9,7 +9,7 @@ import { RootState } from '../store';
 import '../assets/styles/index.scss';
 import '../assets/styles/animations.scss';
 
-import { Welcome, SignUp, SignIn, Reset, ResetPassword, Updates, Play, Contact } from '../pages';
+import { Welcome, SignUp, SignIn, Reset, ResetPassword, Updates, Play, Contact, Table } from '../pages';
 
 const App = () => {
     const application = useSelector((state: RootState) => state.application);
@@ -47,6 +47,9 @@ const App = () => {
                     </Route>
                     <Route path="/contact" exact privateRoute isAuthenticated={application.isAuthenticated}>
                         <Contact />
+                    </Route>
+                    <Route path="/table/:id" exact privateRoute isAuthenticated={application.isAuthenticated}>
+                        <Table />
                     </Route>
                 </Switch>
             </BrowserRouter>

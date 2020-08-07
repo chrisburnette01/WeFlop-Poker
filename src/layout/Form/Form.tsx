@@ -30,13 +30,11 @@ const Form = ({ children, onSubmit, buttonSubmit, isClicked, isRightIcon, notifi
             <form onSubmit={onSubmit} className="form" noValidate>
                 <FormAnimationWrapper isClicked={isClicked}>{children}</FormAnimationWrapper>
                 <div className="lines-container">
-                    <Line color="secondary" width="long" height='short' align="left" />
-                    <Line color="secondary" width="long" height='short' align="right" />
+                    <Line color="secondary" width="long" height="short" align="left" />
+                    <Line color="secondary" width="long" height="short" align="right" />
                 </div>
                 {buttonSubmit}
-                <Notification>
-                    {notification}
-                </Notification>
+                <Notification type="auth">{notification}</Notification>
             </form>
             <Line color="secondary" width="long" align="left" className="form-line-right" />
             {isRightIcon && <PatreonIcon />}

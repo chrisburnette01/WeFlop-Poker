@@ -1,46 +1,19 @@
 import React from 'react';
-import styled from 'styled-components';
-import ToolTip from './ToolTip';
-import './index.scss';
-
-interface BaseInputProps {
-    validated: boolean;
-}
-
-const BaseInput = styled('div')<BaseInputProps>`
-    .wrapper {
-        animation: ${({ theme }) => theme.animations.text};
-    }
-
-    .input {
-        font-size: ${({ theme }) => theme.typography.input!.fontSize};
-        font-family: ${({ theme }) => theme.typography.fontFamily};
-        color: ${({ theme, validated }) => (validated === true ? theme.palette.success : theme.palette.primary)};
-        letter-spacing: ${({ theme }) => theme.typography.input?.letterSpacing};
-    }
-    .wrapper::before {
-        background-color: ${({ theme, validated }) =>
-            validated === true ? theme.palette.success : theme.palette.primary};
-    }
-    .wrapper::after {
-        background-color: ${({ theme, validated }) =>
-            validated === true ? theme.palette.success : theme.palette.primary};
-    }
-    .input::placeholder {
-        color: ${({ theme }) => theme.palette.primary};
-    }
-`;
+import Primary from './Primary';
+import Secondary from './Secondary';
 
 interface InputProps {
-    placeholder: string;
+    placeholder?: string;
     type: string;
     validated?: boolean;
     errorMessage?: string;
     register?: React.Ref<HTMLInputElement>;
     name?: string;
     disabled?: boolean;
-    defaultValue?: string;
+    defaultValue?: string | number;
     onFocus?: any;
+    variant?: 'primary' | 'secondary';
+    width?: number;
 }
 
 const Input = ({
@@ -53,29 +26,47 @@ const Input = ({
     disabled,
     defaultValue,
     onFocus,
+    variant,
+    width,
 }: InputProps) => {
-    const show = !validated! && errorMessage !== undefined ? true : false;
-    return (
-        <BaseInput validated={validated!} className="base_input">
-            <div className="wrapper">
-                <ToolTip message={errorMessage!} name={name} show={show} />
-                <input
-                    onFocus={onFocus}
-                    defaultValue={defaultValue}
-                    className="input"
-                    name={name}
-                    ref={register}
-                    type={type}
+    switch (variant) {
+        case 'primary':
+            return (
+                <Primary
                     placeholder={placeholder}
+                    validated={validated}
+                    type={type}
+                    name={name}
+                    errorMessage={errorMessage}
+                    register={register}
                     disabled={disabled}
+                    defaultValue={defaultValue}
+                    onFocus={onFocus}
                 />
-            </div>
-        </BaseInput>
-    );
+            );
+        case 'secondary':
+            return (
+                <Secondary
+                    width={width}
+                    placeholder={placeholder}
+                    validated={validated}
+                    type={type}
+                    name={name}
+                    errorMessage={errorMessage}
+                    register={register}
+                    disabled={disabled}
+                    defaultValue={defaultValue}
+                    onFocus={onFocus}
+                />
+            );
+        default:
+            return null;
+    }
 };
 
 Input.defaultProps = {
     validated: false,
+    variant: 'primary',
 };
 
 export default Input;

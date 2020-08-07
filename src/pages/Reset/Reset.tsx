@@ -34,15 +34,17 @@ const Reset = () => {
     };
 
     const isValidated = check.email;
-    const buttonSubmit = <Button variant="secondary" validated={isValidated} title="send reset" />;
-    const notification = <>
-                            <Typography component="span" variant="button2" color="primary">
-                                AN EMAIL WAS SENT TO:
-                            </Typography>
-                            <Typography component="span" variant="h2" color="primary">
-                                {isActive.email}
-                            </Typography>
-                        </>;
+    const buttonSubmit = <Button variant="secondary" validated={isValidated} title="send reset" form="auth" />;
+    const notification = (
+        <>
+            <Typography component="span" variant="button2" color="primary">
+                AN EMAIL WAS SENT TO:
+            </Typography>
+            <Typography component="span" variant="h2" color="primary">
+                {isActive.email}
+            </Typography>
+        </>
+    );
 
     useEffect(() => {
         if (application.isLoading[RESET_PASSWORD.REQUEST]) {
@@ -74,8 +76,13 @@ const Reset = () => {
                             <Subtitle>Enter the email address associated with your account.</Subtitle>
                             <Subtitle>We’ll send you an email with a reset form.</Subtitle>
                         </div>
-                        <Line color="secondary" width="long" height='short' align="left" />
-                        <Form onSubmit={handleSubmit(onSubmit)} buttonSubmit={buttonSubmit} isClicked={isClicked} notification={isEmailSent ? notification : null}>
+                        <Line color="secondary" width="long" height="short" align="left" />
+                        <Form
+                            onSubmit={handleSubmit(onSubmit)}
+                            buttonSubmit={buttonSubmit}
+                            isClicked={isClicked}
+                            notification={isEmailSent ? notification : null}
+                        >
                             <Input
                                 onFocus={() => setIsClicked(true)}
                                 placeholder="email adress"
@@ -104,7 +111,7 @@ const Reset = () => {
                                 errorMessage={errors.email && errors.email.message}
                             />
                         </Form>
-                    </LineContent>      
+                    </LineContent>
                 </Content>
             </Container>
         </>

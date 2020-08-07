@@ -4,7 +4,9 @@ import ReactTooltip from 'react-tooltip';
 import styled from 'styled-components';
 import { CSSTransition } from 'react-transition-group';
 
-interface BaseToolTipProps {}
+interface BaseToolTipProps {
+    align?: 'left';
+}
 
 interface ToolTipProps {
     message: string;
