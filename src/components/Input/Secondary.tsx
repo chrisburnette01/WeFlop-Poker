@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import ToolTip from './ToolTip';
 import './index.scss';
 
-interface BaseInputProps {
+interface SecondaryBaseInputProps {
     validated: boolean;
     width?: number;
 }
 
-const BaseInput = styled('div')<BaseInputProps>`
+const BaseInput = styled('div')<SecondaryBaseInputProps>`
     width: ${({ width }) => `${width}px}`};
     .wrapper {
         animation: ${({ theme }) => theme.animations.text};
@@ -50,7 +50,7 @@ const BaseInput = styled('div')<BaseInputProps>`
     }
 `;
 
-interface InputProps {
+interface SecondaryInputProps {
     placeholder?: string;
     type: string;
     validated?: boolean;
@@ -61,9 +61,10 @@ interface InputProps {
     defaultValue?: string | number;
     onFocus?: any;
     width?: number;
+    align?: 'left';
 }
 
-const Input = ({
+const Secondary = ({
     placeholder,
     validated,
     type,
@@ -74,12 +75,13 @@ const Input = ({
     defaultValue,
     onFocus,
     width,
-}: InputProps) => {
+    align,
+}: SecondaryInputProps) => {
     const show = !validated! && errorMessage !== undefined ? true : false;
     return (
         <BaseInput validated={validated!} className="base_input" width={width}>
             <div className="wrapper wrapper-secondary">
-                <ToolTip message={errorMessage!} name={name} show={show}/>
+                <ToolTip message={errorMessage!} name={name} show={show} align="left" />
                 <input
                     onFocus={onFocus}
                     defaultValue={defaultValue}
@@ -95,8 +97,8 @@ const Input = ({
     );
 };
 
-Input.defaultProps = {
+Secondary.defaultProps = {
     validated: false,
 };
 
-export default Input;
+export default Secondary;

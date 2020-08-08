@@ -67,6 +67,8 @@ type Typography = {
     playTablesBold: Text;
     playInput: Text;
     playInputTitle: Text;
+    gameSectionTitle: Text;
+    gameSectionItalic: Text;
 };
 
 interface Theme {
@@ -235,8 +237,21 @@ const defaultTypography: Typography = {
         fontWeight: 800,
         textTransform: 'uppercase',
         letterSpacing: '1.61px',
-        fontSize: '1.8rem'
-    }
+        fontSize: '1.8rem',
+    },
+    gameSectionTitle: {
+        fontWeight: 700,
+        textTransform: 'uppercase',
+        letterSpacing: '1.61px',
+        fontSize: '1.8rem',
+    },
+    gameSectionItalic: {
+        fontWeight: 400,
+        fontSize: '1.2rem',
+        letterSpacing: '1.07px',
+        fontStyle: 'italic',
+        textTransform: 'uppercase',
+    },
 };
 
 const defaultAnimations: Animations = {

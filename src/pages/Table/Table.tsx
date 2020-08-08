@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { useParams, useHistory } from "react-router-dom";
-import { Card } from './components';
+import { useParams, useHistory } from 'react-router-dom';
+import { Card, Player, ButtonsPanel, GameSection } from './components';
 import { Container } from '../../layout';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
@@ -19,7 +19,8 @@ const Table = () => {
             </Helmet>
             <Container>
                 <div>
-                    <Card variant="H1" />
+                    <ButtonsPanel />
+                    <GameSection />
                 </div>
             </Container>
         </>

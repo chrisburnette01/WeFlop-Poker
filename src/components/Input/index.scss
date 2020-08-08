@@ -17,7 +17,7 @@
     }
 
     .wrapper::before {
-        content: '';
+        content: "";
         display: block;
         position: absolute;
         top: 0;
@@ -30,7 +30,7 @@
     }
 
     .wrapper::after {
-        content: '';
+        content: "";
         display: block;
         position: absolute;
         top: 0;
@@ -55,9 +55,7 @@
         top: 50%;
         right: -63px;
     }
-
     .tooltip {
-        width: 400px;
         padding: 0;
     }
 }

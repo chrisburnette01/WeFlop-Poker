@@ -14,6 +14,7 @@ interface InputProps {
     onFocus?: any;
     variant?: 'primary' | 'secondary';
     width?: number;
+    align?: 'left';
 }
 
 const Input = ({
@@ -28,6 +29,7 @@ const Input = ({
     onFocus,
     variant,
     width,
+    align,
 }: InputProps) => {
     switch (variant) {
         case 'primary':
@@ -57,6 +59,7 @@ const Input = ({
                     disabled={disabled}
                     defaultValue={defaultValue}
                     onFocus={onFocus}
+                    align={align}
                 />
             );
         default:

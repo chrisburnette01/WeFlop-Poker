@@ -1,0 +1,15 @@
+.wrapper-gamesection {
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper-text {
+    text-align: center;
+}
+
+.wrapper-cards-gamesection {
+    max-width: 338px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
