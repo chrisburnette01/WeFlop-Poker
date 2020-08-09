@@ -69,6 +69,12 @@ type Typography = {
     playInputTitle: Text;
     gameSectionTitle: Text;
     gameSectionItalic: Text;
+    balanceSmall: Text;
+    balanceBig: Text;
+    buttonGroupLargeBold: Text;
+    buttonGroupLarge: Text;
+    buttonGroupMedium: Text;
+    buttonGroupSmall: Text;
 };
 
 interface Theme {
@@ -250,6 +256,36 @@ const defaultTypography: Typography = {
         fontSize: '1.2rem',
         letterSpacing: '1.07px',
         fontStyle: 'italic',
+        textTransform: 'uppercase',
+    },
+    balanceSmall: {
+        fontWeight: 400,
+        fontSize: '1.2rem',
+        letterSpacing: '1.07px',
+    },
+    balanceBig: {
+        fontWeight: 400,
+        fontSize: '1.6rem',
+        letterSpacing: '1.43px',
+    },
+    buttonGroupLargeBold: {
+        fontWeight: 700,
+        fontSize: '2rem',
+        textTransform: 'uppercase',
+    },
+    buttonGroupLarge: {
+        fontWeight: 400,
+        fontSize: '2rem',
+        textTransform: 'uppercase',
+    },
+    buttonGroupMedium: {
+        fontWeight: 400,
+        fontSize: '1.8rem',
+        textTransform: 'uppercase',
+    },
+    buttonGroupSmall: {
+        fontWeight: 400,
+        fontSize: '1rem',
         textTransform: 'uppercase',
     },
 };

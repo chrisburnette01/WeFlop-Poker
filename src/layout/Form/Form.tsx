@@ -11,6 +11,7 @@ interface FormProps {
     isClicked?: boolean;
     isRightIcon?: boolean;
     notification?: JSX.Element[] | JSX.Element | null;
+    className?: string;
 }
 
 interface FormAnimationProps {
@@ -24,9 +25,9 @@ const FormAnimationWrapper = styled.div<FormAnimationProps>`
     }
 `;
 
-const Form = ({ children, onSubmit, buttonSubmit, isClicked, isRightIcon, notification }: FormProps) => {
+const Form = ({ children, onSubmit, buttonSubmit, isClicked, isRightIcon, notification, className }: FormProps) => {
     return (
-        <div className="form-inner">
+        <div className={className}>
             <form onSubmit={onSubmit} className="form" noValidate>
                 <FormAnimationWrapper isClicked={isClicked}>{children}</FormAnimationWrapper>
                 <div className="lines-container">
@@ -36,10 +37,37 @@ const Form = ({ children, onSubmit, buttonSubmit, isClicked, isRightIcon, notifi
                 {buttonSubmit}
                 <Notification type="auth">{notification}</Notification>
             </form>
-            <Line color="secondary" width="long" align="left" className="form-line-right" />
+            <Line
+                color="secondary"
+                wrapperClassName="line-form-fix"
+                width="long"
+                align="left"
+                className="form-line-right"
+            />
             {isRightIcon && <PatreonIcon />}
         </div>
     );
 };
 
-export default Form;
+export default styled(Form)`
+    display: flex;
+    flex-direction: row;
+    .line-form-fix {
+        margin-top: 16px;
+    }
+    .line-wrapper-page {
+        display: flex;
+        padding-left: 25px;
+        max-width: 756px;
+        width: 100%;
+    }
+    .form-line-right {
+        margin: 0 8px 0 8px !important;
+    }
+    .form {
+        position: relative;
+        & > *:not(:first-child) {
+            margin-top: 16px;
+        }
+    }
+`;

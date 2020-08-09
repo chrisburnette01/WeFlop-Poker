@@ -1,8 +1,15 @@
 import React from 'react';
-import './index.scss';
+import styled from 'styled-components';
 
-const Content = ({ children }) => {
-    return <div id="content">{children}</div>;
+interface ContentProps {
+    children: JSX.Element[] | JSX.Element;
+    className?: string;
+}
+
+const Content = ({ children, className }: ContentProps) => {
+    return <div className={className}>{children}</div>;
 };
 
-export default Content;
+export default styled(Content)`
+    flex: 7;
+`;

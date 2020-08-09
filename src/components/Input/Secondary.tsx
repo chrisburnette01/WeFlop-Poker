@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import ToolTip from './ToolTip';
-import './index.scss';
 
 interface SecondaryBaseInputProps {
     validated: boolean;
@@ -12,13 +11,12 @@ const BaseInput = styled('div')<SecondaryBaseInputProps>`
     width: ${({ width }) => `${width}px}`};
     .wrapper {
         animation: ${({ theme }) => theme.animations.text};
-    }
-    .wrapper-secondary {
+        opacity: 0%;
+        position: relative;
         max-width: 234px;
         width: 100%;
     }
-
-    .input-secondary {
+    .input {
         font-size: ${({ theme }) => theme.typography.playInput!.fontSize};
         font-family: ${({ theme }) => theme.typography.fontFamily};
         color: ${({ theme }) => theme.palette.primary};
@@ -33,19 +31,36 @@ const BaseInput = styled('div')<SecondaryBaseInputProps>`
         text-align: center;
         height: 32px;
     }
-    .wrapper-secondary::before {
+    .wrapper::before {
         margin: 0;
         height: 32px;
         background-color: ${({ theme, validated }) =>
             validated === true ? theme.palette.secondary : theme.palette.initial};
+
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 10px;
+        border-radius: 2px;
+        transition: all 0.4s ease-in-out;
     }
-    .wrapper-secondary::after {
+    .wrapper::after {
         margin: 0;
         height: 32px;
         background-color: ${({ theme, validated }) =>
             validated === true ? theme.palette.secondary : theme.palette.initial};
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 10px;
+        border-radius: 2px;
+        transition: all 0.4s ease-in-out;
     }
-    .input-secondary::placeholder {
+    .input::placeholder {
         color: ${({ theme }) => theme.palette.primary};
     }
 `;
@@ -79,13 +94,13 @@ const Secondary = ({
 }: SecondaryInputProps) => {
     const show = !validated! && errorMessage !== undefined ? true : false;
     return (
-        <BaseInput validated={validated!} className="base_input" width={width}>
-            <div className="wrapper wrapper-secondary">
+        <BaseInput validated={validated!} width={width}>
+            <div className="wrapper">
                 <ToolTip message={errorMessage!} name={name} show={show} align="left" />
                 <input
                     onFocus={onFocus}
                     defaultValue={defaultValue}
-                    className="input-secondary"
+                    className="input"
                     name={name}
                     ref={register}
                     type={type}

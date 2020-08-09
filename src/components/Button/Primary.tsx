@@ -15,6 +15,14 @@ interface BaseButtonProps {
 }
 
 const BaseButton = styled('div')<BaseButtonProps>`
+    display: flex;
+    outline: none;
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    padding: 0;
+    display: flex;
+    align-items: center;
     font-family: ${({ theme, styles }) => theme.typography.fontFamily};
     font-weight: ${({ theme, styles }) => theme.typography[styles]!.fontWeight};
     font-size: ${({ theme, styles }) => theme.typography[styles]!.fontSize};
@@ -31,12 +39,18 @@ const BaseButton = styled('div')<BaseButtonProps>`
     .line {
         background-color: ${({ theme, color }) => theme.palette[color!]};
         ${({ theme, active }) =>
-            active ? `background-color: ${active ? theme.palette.secondary : theme.palette.primary};` : null}
+            active ? `background-color: ${active ? theme.palette.secondary : theme.palette.primary};` : null};
+        margin-bottom: 3px;
+        border-radius: 4px;
+        width: 16px;
+        height: 16px;
     }
 
     .title {
         margin: ${({ align }) => (align === 'left' ? '0 0 0 16px' : '15px 16px 0 0')};
         animation: ${({ theme }) => theme.animations.text};
+        opacity: 0;
+
     }
 `;
 
@@ -79,7 +93,6 @@ const Primary = ({
             active={active!}
             bottomGutter={bottomGutter!}
             color={color!}
-            className='base_button__primary'
         >
             {(align === undefined || align === 'left') && <span className="line" />}
             <span className="title">{title}</span>

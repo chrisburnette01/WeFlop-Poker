@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import React from 'react';
-import './index.scss';
 
 interface BaseLineProps {
     width: 'long' | 'short';
@@ -10,7 +9,8 @@ interface BaseLineProps {
 
 const BaseLine = styled.span<BaseLineProps>`
     border-radius: ${({ width }) => (width === 'short' ? '2px' : '4px')};
-    background-color: ${({ theme, color }) => theme.palette[color] ? theme.palette[color] : theme.palette.common[color]};
+    background-color: ${({ theme, color }) =>
+        theme.palette[color] ? theme.palette[color] : theme.palette.common[color]};
     display: block;
     height: inherit;
     width: ${({ width }) => (width === 'short' ? '12px' : '16px')};
@@ -25,18 +25,22 @@ interface LineProps {
     align?: 'left' | 'right';
     color?: 'primary' | 'secondary' | 'button' | 'initial' | string;
     className?: string;
+    wrapperClassName?: string;
 }
 
-const Line = ({ width, height, align, color, className }: LineProps) => {
+const Line = ({ width, height, align, color, className, wrapperClassName }: LineProps) => {
     return (
-        <div className="line" style={height ? {height: height == 'long' ? '60px' : '48px'} : undefined}>
+        <div
+            className={`${wrapperClassName} line`}
+            style={height ? { height: height == 'long' ? '60px' : '48px' } : { height: 'inherit' }}
+        >
             <BaseLine className={className} width={width} align={align} color={color!} />
         </div>
     );
 };
 
 Line.defaultProps = {
-    color: 'primary'
+    color: 'primary',
 };
 
 export default Line;

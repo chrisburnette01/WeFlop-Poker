@@ -1,6 +1,7 @@
 .wrapper-gamesection {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .wrapper-text {
@@ -8,8 +9,13 @@
 }
 
 .wrapper-cards-gamesection {
-    max-width: 338px;
-    width: 100%;
+    width: 338px;
     display: flex;
     justify-content: space-between;
+    margin: 10px 0 10px 0;
+}
+
+.gamesection-text {
+    display: flex;
+    flex-direction: row;
 }

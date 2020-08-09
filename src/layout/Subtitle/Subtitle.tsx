@@ -1,5 +1,6 @@
 import React from 'react';
 import { Rectangle, Typography } from '../../components';
+import styled from 'styled-components';
 
 interface SubtitleProps {
     children: string;
@@ -8,7 +9,7 @@ interface SubtitleProps {
 
 const Subtitle = ({ children, className }: SubtitleProps) => {
     return (
-        <div className={`wrapper-subtitle ${className ? className : ''}`}>
+        <div className={`wrapper-subtitle ${className}`}>
             <Rectangle size="small" border="small" color="secondary" />
             <div className="subtitles-wrapper">
                 <Typography component="h3" variant="subtitle1">
@@ -19,4 +20,13 @@ const Subtitle = ({ children, className }: SubtitleProps) => {
     );
 };
 
-export default Subtitle;
+export default styled(Subtitle)`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 3px;
+
+    .subtitles-wrapper {
+        margin-left: 8px;
+    }
+`;

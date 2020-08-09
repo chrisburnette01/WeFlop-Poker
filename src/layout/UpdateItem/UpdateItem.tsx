@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import { Line, Typography, SlideDown, Rectangle } from '../../components';
 import { Poll, Description } from '../';
+import styled from 'styled-components';
 import moment from 'moment';
 
-const UpdateItem = ({ element }) => {
+interface UpdateItemProps {
+    element?: any;
+    className?: string;
+}
+
+const UpdateItem = ({ element, className }: UpdateItemProps) => {
     const [open, setOpen] = useState<boolean>(false);
 
     const list =
@@ -16,7 +22,7 @@ const UpdateItem = ({ element }) => {
         ) : null;
 
     return (
-        <>
+        <div className={className}>
             <div className="updates-note-item" onClick={() => setOpen((prev) => !prev)}>
                 <div className="updates-note-item-date-wrapper">
                     <Typography variant="date" component="span">
@@ -37,8 +43,35 @@ const UpdateItem = ({ element }) => {
             <div className="rectangle-wrapper-item">
                 <Rectangle size="big" />
             </div>
-        </>
+        </div>
     );
 };
 
-export default UpdateItem;
+export default styled(UpdateItem)`
+    .updates-note-item {
+        height: 48px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        margin: 8px 0 0 -98px;
+        &-line {
+            height: 48px;
+        }
+        &-wrapper {
+            display: flex;
+            flex-direction: row;
+        }
+        &-text-wrapper {
+            margin-left: 11px;
+        }
+        &-date-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            margin-right: 11px;
+        }
+    }
+    .rectangle-wrapper-item {
+        margin-top: 8px;
+    }
+`;

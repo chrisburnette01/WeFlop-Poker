@@ -1,8 +1,19 @@
 import React from 'react';
-import './index.scss';
+import styled from 'styled-components';
 
-const Container = ({ children }) => {
-    return <div className="container">{children}</div>;
+interface ContainerProps {
+    children: JSX.Element[];
+    className?: string;
+}
+
+const Container = ({ children, className }: ContainerProps) => {
+    return <div className={className}>{children}</div>;
 };
 
-export default Container;
+export default styled(Container)`
+    height: 100vh;
+    padding: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+`;

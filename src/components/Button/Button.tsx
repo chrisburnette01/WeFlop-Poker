@@ -2,7 +2,6 @@ import React from 'react';
 import Primary from './Primary';
 import Secondary from './Secondary';
 import ButtonPlay from './ButtonPlay';
-import './index.scss';
 
 interface ButtonProps {
     title: string | null;

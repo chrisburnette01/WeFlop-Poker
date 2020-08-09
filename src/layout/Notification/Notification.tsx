@@ -4,6 +4,16 @@ import styled from 'styled-components';
 
 const NotificationAnimationWrapper = styled.div`
     animation: ${({ theme }) => theme.animations.emailNotification};
+    .notification-auth {
+        margin-top: 150px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        position: absolute;
+    }
+    .notification-play {
+        margin-top: 48px;
+    }
 `;
 
 const Notification = ({ children, type }) => {

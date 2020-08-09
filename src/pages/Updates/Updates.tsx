@@ -30,11 +30,12 @@ const Updates = () => {
                             <Subtitle>We are constantly working to make WeFlop a better product for you.</Subtitle>
                             <Subtitle>This is where we post our updates and poll our community.</Subtitle>
                         </div>
-                        <Line color="secondary" width="long" height='short' align="left" />
+                        <Line color="secondary" width="long" height="short" align="left" />
                     </LineContent>
-                    <div className="patch-notes">
+                    <div style={{ margin: '8px 0 0 16px' }}>
                         <Rectangle size="big" />
-                        {application.updates && application.updates.map((element, index) => <UpdateItem element={element} />)}
+                        {application.updates &&
+                            application.updates.map((element, index) => <UpdateItem element={element} />)}
                     </div>
                 </Content>
             </Container>

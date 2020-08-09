@@ -32,7 +32,7 @@ const BasePlayer = styled('div')`
 
         .block {
             flex: 1;
-            background: ${({theme}) => theme.palette.initial};
+            background: ${({ theme }) => theme.palette.initial};
             height: 6px;
             margin: 2px;
             border-radius: 1px;
@@ -57,68 +57,64 @@ const BasePlayer = styled('div')`
     .bottom-gutter {
         margin-bottom: 2px;
     }
-
-    
 `;
 
 const Border = styled('div')<BorderProps>`
-    background: ${({theme}) => theme.palette.secondary};
+    background: ${({ theme }) => theme.palette.secondary};
     height: 56px;
     width: 8px;
-    border-radius: ${({align}) => align === 'left' ? '4px 0 0 4px' : '0 4px 4px 0'};
+    border-radius: ${({ align }) => (align === 'left' ? '4px 0 0 4px' : '0 4px 4px 0')};
 `;
 
 const Line = styled('div')<LineProps>`
-    background: ${({theme, color}) => theme.palette[color] ? theme.palette[color] : theme.palette.common[color]};
-    height: ${({size}) => size === 'small' ? '12px' : '16px'};
-    width: ${({size}) => size === 'small' ? '6px' : '8px'};
+    background: ${({ theme, color }) => (theme.palette[color] ? theme.palette[color] : theme.palette.common[color])};
+    height: ${({ size }) => (size === 'small' ? '12px' : '16px')};
+    width: ${({ size }) => (size === 'small' ? '6px' : '8px')};
     border-radius: 1px;
 `;
 
 const Divider = styled('div')<DividerProps>`
-    background: ${({theme, color}) => theme.palette[color] ? theme.palette[color] : theme.palette.common[color]};
-    height: ${({size}) => size === 'small' ? '1px' : '2px'};
+    background: ${({ theme, color }) => (theme.palette[color] ? theme.palette[color] : theme.palette.common[color])};
+    height: ${({ size }) => (size === 'small' ? '1px' : '2px')};
     margin: 0 2px;
     border-radius: 1px;
 `;
 
-interface PlayerProps {
-    
-}
+interface PlayerProps {}
 
 const Player = ({}: PlayerProps) => {
     return (
         <BasePlayer>
-            <Border align='left' />
+            <Border align="left" />
 
-            <div className='player-content'>
-                <Divider size='big' color='secondary' />
-                <div className='line-container'>
-                    <Line size='big' color='secondary' />
-                    <Typography variant='body1' component='span'>
-                    test
+            <div className="player-content">
+                <Divider size="big" color="secondary" />
+                <div className="line-container">
+                    <Line size="big" color="secondary" />
+                    <Typography variant="body1" component="span">
+                        test
                     </Typography>
-                    <Line size='big' color='secondary' />
+                    <Line size="big" color="secondary" />
                 </div>
-                <div className='line-container'>
-                    <Line size='small' color='yellow' />
-                    <div className='block-container'>
-                        <Divider size='small' color='yellow' />
-                        <div className='block' />
-                        <Divider size='small' color='yellow' />
+                <div className="line-container">
+                    <Line size="small" color="yellow" />
+                    <div className="block-container">
+                        <Divider size="small" color="yellow" />
+                        <div className="block" />
+                        <Divider size="small" color="yellow" />
                     </div>
-                    <Line size='small' color='yellow' />
+                    <Line size="small" color="yellow" />
                 </div>
-                <div className='line-container bottom-gutter'>
-                    <Line size='big' color='secondary' />
-                    <Typography variant='body1' component='span'>
-                    test
+                <div className="line-container bottom-gutter">
+                    <Line size="big" color="secondary" />
+                    <Typography variant="body1" component="span">
+                        test
                     </Typography>
-                    <Line size='big' color='secondary' />
+                    <Line size="big" color="secondary" />
                 </div>
-                <Divider size='big' color='secondary' />
+                <Divider size="big" color="secondary" />
             </div>
-            <Border align='right' />
+            <Border align="right" />
         </BasePlayer>
     );
 };

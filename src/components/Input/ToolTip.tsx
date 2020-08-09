@@ -17,10 +17,17 @@ interface ToolTipProps {
 const BaseToolTip = styled('div')<BaseToolTipProps>`
     .tooltip {
         width: ${({ align }) => (align !== 'left' ? '400px' : 'unset')};
+        padding: 0;
+
     }
     .tooltip-img {
         right: ${({ align }) => (align !== 'left' ? '-63px' : null)};
         left: ${({ align }) => (align === 'left' ? '-32px' : null)};
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        top: 50%;
+        right: -63px;
     }
     .tooltip-text {
         font-size: ${({ theme }) => theme.typography.tooltip!.fontSize};

@@ -4,13 +4,13 @@ import { Button } from '../../components';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import { signOut } from '../../store/actions/application';
-import './index.scss';
-
+import styled from 'styled-components';
 interface NavigationProps {
     type: 'auth' | 'basic' | 'table';
+    className?: string;
 }
 
-const Navigation = ({ type }: NavigationProps) => {
+const Navigation = ({ type, className }: NavigationProps) => {
     const location = useLocation();
     const dispatch = useDispatch();
     const application = useSelector((state: RootState) => state.application);
@@ -18,7 +18,7 @@ const Navigation = ({ type }: NavigationProps) => {
     switch (type) {
         case 'basic':
             return (
-                <div id="nav">
+                <div className={className}>
                     <div>
                         <Button
                             bottomGutter
@@ -45,7 +45,7 @@ const Navigation = ({ type }: NavigationProps) => {
             );
         case 'auth':
             return (
-                <div id="nav">
+                <div className={className}>
                     <div>
                         <Button
                             bottomGutter
@@ -74,7 +74,7 @@ const Navigation = ({ type }: NavigationProps) => {
             );
         case 'table':
             return (
-                <div id="nav" style={{height: "100%"}}>
+                <div className={className} style={{ height: '100%' }}>
                     <div>
                         <Button
                             bottomGutter
@@ -97,20 +97,8 @@ const Navigation = ({ type }: NavigationProps) => {
                             component="link"
                             active={location.pathname === ''}
                         />
-                        <Button
-                            bottomGutter
-                            title={'Info'}
-                            to="/"
-                            component="link"
-                            active={location.pathname === ''}
-                        />
-                        <Button
-                            bottomGutter
-                            title={'Chat'}
-                            to="/"
-                            component="link"
-                            active={location.pathname === ''}
-                        />
+                        <Button bottomGutter title={'Info'} to="/" component="link" active={location.pathname === ''} />
+                        <Button bottomGutter title={'Chat'} to="/" component="link" active={location.pathname === ''} />
                     </div>
                     <div>
                         <Button
@@ -126,4 +114,12 @@ const Navigation = ({ type }: NavigationProps) => {
     }
 };
 
-export default Navigation;
+export default styled(Navigation)`
+    display: flex;
+    flex-direction: column;
+    flex: 3;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    justify-content: space-between;
+`;
