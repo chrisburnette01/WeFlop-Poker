@@ -152,10 +152,10 @@ const TableItem = ({ table, type, onRemove }: TableItemProps) => {
                         height="short"
                     />
                     <div className="table-item-text">
-                        <Typography component="span" variant="play">
+                        <Typography component="span" variant="h3">
                             {table.name}
                         </Typography>
-                        <Typography component="span" variant="playSmall" style={{ textTransform: 'capitalize' }}>
+                        <Typography component="span" variant="h5" textTransform='capitalize'>
                             {table.type}
                         </Typography>
                     </div>
@@ -214,7 +214,7 @@ const ActiveMenu = ({ selectedButton, table, onRemove }: ActiveMenuProps) => {
             return (
                 <div className="wrapper-play-button">
                     <Rectangle size="small" color="secondary" border="small" className="rectangle-small" />
-                    <Typography component="span" variant="playTablesItalic">
+                    <Typography component="span" variant="h6">
                         {`${table.name} has opened in a new tab.`}
                     </Typography>
                 </div>
@@ -245,19 +245,19 @@ const ActiveMenu = ({ selectedButton, table, onRemove }: ActiveMenuProps) => {
                 <>
                     <div className="hide-text-wrapper">
                         <Rectangle size="button" color="secondary" border="small" className="rectangle-ledger" />
-                        <Typography component="span" variant="playTablesItalic" className="hide-text-text">
+                        <Typography component="span" variant="h6" className="hide-text-text">
                             If you hide this table, it will no longer be displayed in this list.
                         </Typography>
                     </div>
                     <div className="hide-text-wrapper">
                         <Rectangle size="button" color="secondary" border="small" className="rectangle-ledger" />
-                        <Typography component="span" variant="playTablesItalic" className="hide-text-text">
+                        <Typography component="span" variant="h6" className="hide-text-text">
                             However, if you were to rejoin this game via link, it will reappear in this list.
                         </Typography>
                     </div>
                     <div className="hide-text-button" onClick={() => onRemove(table.gameNumber)}>
                         <Rectangle size="button" color="initial" border="small" className="rectangle-ledger" />
-                        <Typography component="span" variant="tableItemButton" className="hide-text-text">
+                        <Typography component="span" variant="h5" className="hide-text-text">
                             hide
                         </Typography>
                     </div>
@@ -278,7 +278,7 @@ const TablesButton = ({ name, selectedButton, onClick }: TablesButtonProps) => {
     const color = selectedButton === name ? 'secondary' : 'primary';
     return (
         <div className="button-wrapper" onClick={onClick}>
-            <Typography component="span" variant="tableItemButton" color={color}>
+            <Typography component="span" variant="h5" textTransform="uppercase" color={color}>
                 {name}
             </Typography>
             <Rectangle size="button" color={color} border="small" className="rect-wrapper-play" />
@@ -297,12 +297,12 @@ const LedgerItem = ({ balance, name }: LedgerItemProps) => {
         <div className="ledger-item">
             <div className="ledger-item-inner">
                 <Rectangle size="button" color={color} border="small" className="rectangle-ledger" />
-                <Typography variant="playTablesMedium" component="span" color={color} className="ledger-balance">
+                <Typography variant="h6" component="span" color={color} className="ledger-balance">
                     {balance}
                 </Typography>
                 <Rectangle size="line" color={color} border="small" className="line-horizontal-ledger" />
             </div>
-            <Typography variant="playTablesMedium" component="span" className="player-name-ledger">
+            <Typography variant="h6" component="span" className="player-name-ledger">
                 {name}
             </Typography>
         </div>
@@ -319,11 +319,11 @@ const InfoItem = ({ name, value, uppercase }: InfoItemProps) => {
     return (
         <div className="play-info-item">
             <Rectangle size="button" color="secondary" border="small" className="rectangle-ledger" />
-            <Typography component="p" variant="playTablesBold" className="info-item-text">
+            <Typography component="p" variant="h6" className="info-item-text" textTransform="uppercase">
                 {`${name}:`}
                 <Typography
                     component="span"
-                    variant="playTablesMedium"
+                    variant="h6"
                     style={uppercase ? { textTransform: 'uppercase' } : null}
                 >
                     {` ${value}`}

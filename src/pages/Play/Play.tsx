@@ -5,8 +5,6 @@ import { Title, LineContent, Subtitle, Navigation, Container, Content } from '..
 
 import { Form, Tabs } from './components';
 
-import './style.scss';
-
 const Play = () => {
     const [isCreated, setIsCreated] = useState(false);
 
@@ -29,7 +27,7 @@ const Play = () => {
             <Container>
                 <Navigation type={'auth'} />
                 <Content>
-                    <div className="content-inner-play">
+                    <div style={{ marginLeft: '136px' }}>
                         <LineContent>
                             <Title titleOnTop color="secondary">
                                 HOME GAMES

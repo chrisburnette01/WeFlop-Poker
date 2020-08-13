@@ -1,23 +1,26 @@
 import React from 'react';
-import Primary from './Primary';
-import Secondary from './Secondary';
+import Input from './Input';
+import TextArea from './TextArea';
 
 interface InputProps {
+    size?: 'large' | 'medium' | 'small';
+    className?: string; 
     placeholder?: string;
-    type: string;
+    type?: string;
     validated?: boolean;
     errorMessage?: string;
-    register?: React.Ref<HTMLInputElement>;
+    register?: any;
     name?: string;
     disabled?: boolean;
     defaultValue?: string | number;
     onFocus?: any;
-    variant?: 'primary' | 'secondary';
-    width?: number;
-    align?: 'left';
+    variant?: 'input' | 'textarea';
+    width?: string;
+    tooltipAlign?: 'left' | 'right';
 }
 
-const Input = ({
+const TextField = ({
+    size,
     placeholder,
     validated,
     type,
@@ -29,37 +32,38 @@ const Input = ({
     onFocus,
     variant,
     width,
-    align,
+    tooltipAlign,
+    className
 }: InputProps) => {
     switch (variant) {
-        case 'primary':
+        case 'input':
             return (
-                <Primary
-                    placeholder={placeholder}
-                    validated={validated}
-                    type={type}
-                    name={name}
-                    errorMessage={errorMessage}
-                    register={register}
-                    disabled={disabled}
-                    defaultValue={defaultValue}
-                    onFocus={onFocus}
-                />
-            );
-        case 'secondary':
-            return (
-                <Secondary
+                <Input
+                    className={className}
+                    size={size}
                     width={width}
                     placeholder={placeholder}
-                    validated={validated}
+                    validated={validated!}
                     type={type}
                     name={name}
                     errorMessage={errorMessage}
-                    register={register}
+                    register={register!}
                     disabled={disabled}
                     defaultValue={defaultValue}
                     onFocus={onFocus}
-                    align={align}
+                    tooltipAlign={tooltipAlign!}
+                />
+            );
+        case 'textarea':
+            return (
+                <TextArea
+                    className={className}
+                    placeholder={placeholder}
+                    name={name}
+                    register={register!}
+                    disabled={disabled}
+                    defaultValue={defaultValue}
+                    onFocus={onFocus}
                 />
             );
         default:
@@ -67,9 +71,10 @@ const Input = ({
     }
 };
 
-Input.defaultProps = {
+TextField.defaultProps = {
     validated: false,
-    variant: 'primary',
+    variant: 'input',
+    tooltipAlign: 'right'
 };
 
-export default Input;
+export default TextField;

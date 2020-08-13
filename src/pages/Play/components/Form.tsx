@@ -1,17 +1,20 @@
 import React from 'react';
 
-import { Rectangle, Button, Input, Typography } from '../../../components';
+import { Rectangle, Button, TextField, Typography } from '../../../components';
 import { Notification } from '../../../layout';
 
 import { checkValidation } from '../../../helpers';
 import { useForm } from 'react-hook-form';
 
+import styled from 'styled-components';
+
 interface FormProps {
     onSubmit: (data: any) => void;
     notification: JSX.Element | null;
+    className?: string;
 }
 
-const Form = ({ onSubmit, notification }: FormProps) => {
+const Form = ({ onSubmit, notification, className }: FormProps) => {
     const { register, errors, handleSubmit, watch } = useForm({
         mode: 'all',
         shouldFocusError: true,
@@ -33,14 +36,15 @@ const Form = ({ onSubmit, notification }: FormProps) => {
     const isValidated = check.name && check.blinds && check.max_buyin && check.min_buyin && check.time;
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form onSubmit={handleSubmit(onSubmit)} noValidate className={className}>
             <div className="inner-inputs-play">
                 <div className="input-and-title-wrapper">
-                    <Input
-                        variant="secondary"
+                    <TextField
+                        size='medium'
+                        tooltipAlign="left"
                         validated={check.name}
                         type="name"
-                        width={234}
+                        width="234px"
                         name="name"
                         register={register({
                             required: {
@@ -58,17 +62,18 @@ const Form = ({ onSubmit, notification }: FormProps) => {
                         })}
                         errorMessage={errors.name && errors.name.message}
                     />
-                    <Typography component="span" variant="playInputTitle" color="yellow" className="title-create-table">
+                    <Typography component="span" variant="h4" color="yellow" className="title-create-table">
                         TABLE NAME
                     </Typography>
                 </div>
                 <div className="input-and-title-wrapper">
-                    <Input
+                    <TextField
+                        size='medium'
+                        tooltipAlign="left"
                         validated={check.blinds}
-                        variant="secondary"
                         type="number"
                         name="blinds"
-                        width={114}
+                        width="114px"
                         register={register({
                             required: {
                                 value: true,
@@ -88,17 +93,18 @@ const Form = ({ onSubmit, notification }: FormProps) => {
                     <Rectangle size="input" color="yellow" className="rect-play-input" />
                     <Rectangle size="input" color="yellow" className="rect-play-input" />
                     <Rectangle size="input" color="yellow" className="rect-play-input" />
-                    <Typography component="span" variant="playInputTitle" color="yellow" className="title-create-table">
+                    <Typography component="span" variant="h4" color="yellow" className="title-create-table">
                         BLINDS
                     </Typography>
                 </div>
                 <div className="input-and-title-wrapper">
-                    <Input
+                    <TextField
+                        size='medium'
+                        tooltipAlign="left"
                         validated={check.max_buyin}
-                        variant="secondary"
                         type="number"
                         name="max_buyin"
-                        width={114}
+                        width="114px"
                         defaultValue={150}
                         register={register({
                             validate: (value) =>
@@ -121,17 +127,18 @@ const Form = ({ onSubmit, notification }: FormProps) => {
                     <Rectangle size="input" color="yellow" className="rect-play-input" />
                     <Rectangle size="input" color="yellow" className="rect-play-input" />
                     <Rectangle size="input" color="yellow" className="rect-play-input" />
-                    <Typography component="span" variant="playInputTitle" color="yellow" className="title-create-table">
+                    <Typography component="span" variant="h4" color="yellow" className="title-create-table">
                         MAX BUY-IN
                     </Typography>
                 </div>
                 <div className="input-and-title-wrapper">
-                    <Input
+                    <TextField
+                        size='medium'
+                        tooltipAlign="left"
                         validated={check.min_buyin}
-                        variant="secondary"
                         type="number"
                         name="min_buyin"
-                        width={114}
+                        width="114px"
                         defaultValue={50}
                         register={register({
                             validate: (value) =>
@@ -154,17 +161,18 @@ const Form = ({ onSubmit, notification }: FormProps) => {
                     <Rectangle size="input" color="yellow" className="rect-play-input" />
                     <Rectangle size="input" color="yellow" className="rect-play-input" />
                     <Rectangle size="input" color="yellow" className="rect-play-input" />
-                    <Typography component="span" variant="playInputTitle" color="yellow" className="title-create-table">
+                    <Typography component="span" variant="h4" color="yellow" className="title-create-table">
                         MIN BUY-IN
                     </Typography>
                 </div>
                 <div className="input-and-title-wrapper">
-                    <Input
-                        variant="secondary"
+                    <TextField
+                        size='medium'
+                        tooltipAlign="left"
                         validated={check.time}
                         type="number"
                         name="time"
-                        width={74}
+                        width="114px"
                         defaultValue={30}
                         register={register({
                             required: {
@@ -186,18 +194,38 @@ const Form = ({ onSubmit, notification }: FormProps) => {
                     <Rectangle size="input" color="yellow" className="rect-play-input" />
                     <Rectangle size="input" color="yellow" className="rect-play-input" />
                     <Rectangle size="input" color="yellow" className="rect-play-input" />
-                    <Typography component="span" variant="playInputTitle" color="yellow" className="title-create-table">
+                    <Typography component="span" variant="h4" color="yellow" className="title-create-table">
                         TIME BANK
                     </Typography>
                 </div>
             </div>
             <Rectangle size="middle" color="yellow" />
             <div className="play-button-notification-wrapper">
-                <Button variant="secondary" validated={isValidated} form='play' title="create" />
+                <Button variant="secondary" validated={isValidated} form="play" title="create" />
             </div>
             <Notification type="play">{notification}</Notification>
         </form>
     );
 };
 
-export default Form;
+export default styled(Form)`
+    .inner-inputs-play {
+        margin: 16px 0 16px 3px;
+    }
+    .input-and-title-wrapper {
+        display: flex;
+        align-items: center;
+    }
+    .title-create-table {
+        margin-left: 16px !important;
+    }
+    .rect-play-input {
+        margin-left: 8px;
+    }
+    .play-button-notification-wrapper {
+        max-width: 240px;
+    }
+    .input-and-title-wrapper + .input-and-title-wrapper {
+        margin-top: 8px;
+    }
+`;

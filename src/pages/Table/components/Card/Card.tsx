@@ -18,7 +18,7 @@ const BaseCard = styled('div')`
                 ? theme.palette[color]
                 : theme.palette.common[color]};
     border-radius: 3px;
-    width: 62px;
+    width: 58px;
 `;
 
 const Image = styled('div')<ImageProps>`

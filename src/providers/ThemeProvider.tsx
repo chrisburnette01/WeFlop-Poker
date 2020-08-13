@@ -55,26 +55,11 @@ type Typography = {
     tooltip?: Text;
     button1?: Text;
     button2?: Text;
-    buttonPlay?: Text;
+    button3?: Text;
     date?: Text;
-    input?: Text;
+    input1?: Text;
+    input2?: Text;
     display1?: Text;
-    play: Text;
-    playSmall: Text;
-    tableItemButton: Text;
-    playTablesItalic: Text;
-    playTablesMedium: Text;
-    playTablesBold: Text;
-    playInput: Text;
-    playInputTitle: Text;
-    gameSectionTitle: Text;
-    gameSectionItalic: Text;
-    balanceSmall: Text;
-    balanceBig: Text;
-    buttonGroupLargeBold: Text;
-    buttonGroupLarge: Text;
-    buttonGroupMedium: Text;
-    buttonGroupSmall: Text;
 };
 
 interface Theme {
@@ -142,18 +127,90 @@ const defaultTypography: Typography = {
         fontSize: '2.4rem',
         letterSpacing: '2.14px',
     },
-    title: {
-        letterSpacing: '2.86px',
+
+    // h3
+    h3: {
+        fontWeight: 400,
+        fontSize: '2rem',
         textTransform: 'uppercase',
-        fontSize: '3.2rem',
+        letterSpacing: '1.79px',
+    },
+
+    //h4
+    h4: {
+        fontWeight: 400,
+        fontSize: '1.8rem',
+        letterSpacing: '1.61px',
+    },
+    /*    playInputTitle: {
+        fontWeight: 800,
+        textTransform: 'uppercase',
+        letterSpacing: '1.61px',
+        fontSize: '1.8rem',
+    },
+    gameSectionTitle: {
         fontWeight: 700,
+        textTransform: 'uppercase',
+        letterSpacing: '1.61px',
+        fontSize: '1.8rem',
     },
-    subtitle1: {
-        fontWeight: 500,
+    buttonGroupMedium: {
+        fontWeight: 400,
+        fontSize: '1.8rem',
+        textTransform: 'uppercase',
+    },*/
+
+    //balanceBig
+
+    //h5
+    h5: {
+        fontWeight: 400,
+        fontSize: '1.4rem',
+        letterSpacing: '1.25px',
+    },
+    /*    tableItemButton: {
+        fontWeight: 400,
+        fontSize: '1.4rem',
+        letterSpacing: '1.25px',
+        textTransform: 'uppercase',
+    },
+    playInput: {
+        fontWeight: 600,
+        letterSpacing: '1.25px',
+        fontSize: '1.4rem',
+    },*/
+
+    //h6
+    h6: {
+        fontWeight: 400,
+        fontSize: '1.2rem',
+        letterSpacing: '1.07px',
+    },
+    /*    playTablesMedium: {
+        fontWeight: 400,
+        fontSize: '1.2rem',
+        letterSpacing: '1.07px',
+        textTransform: 'lowercase',
+    },
+    playTablesBold: {
+        textTransform: 'uppercase',
+        fontWeight: 700,
+        fontSize: '1.2rem',
+        letterSpacing: '1.07px',
+    },
+    gameSectionItalic: {
+        fontWeight: 400,
+        fontSize: '1.2rem',
+        letterSpacing: '1.07px',
         fontStyle: 'italic',
-        fontSize: '1.6rem',
-        letterSpacing: '1.43px',
+        textTransform: 'uppercase',
     },
+    balanceSmall: {
+        fontWeight: 400,
+        fontSize: '1.2rem',
+        letterSpacing: '1.07px',
+    },*/
+
     body1: {
         fontWeight: 500,
         fontSize: '1.6rem',
@@ -163,24 +220,26 @@ const defaultTypography: Typography = {
         fontWeight: 600,
         fontSize: '3.2rem',
         letterSpacing: '2.86px',
-        textTransform: 'uppercase',
     },
     button2: {
         fontWeight: 700,
         fontSize: '2.4rem',
         letterSpacing: '2.14px',
-        textTransform: 'uppercase',
     },
-    buttonPlay: {
+    button3: {
         fontWeight: 600,
         fontSize: '2.8rem',
         letterSpacing: '2.5px',
-        textTransform: 'uppercase',
     },
-    input: {
+    input1: {
         letterSpacing: '1.43px',
         fontSize: '1.6rem',
         fontWeight: 500,
+    },
+    input2: {
+        fontWeight: 600,
+        letterSpacing: '1.25px',
+        fontSize: '1.4rem',
     },
     tooltip: {
         fontSize: '1.2rem',
@@ -199,94 +258,6 @@ const defaultTypography: Typography = {
         fontStyle: 'italic',
         letterSpacing: '1.43px',
         fontWeight: 400,
-    },
-    play: {
-        fontWeight: 400,
-        fontSize: '1.8rem',
-        letterSpacing: '1.61px',
-    },
-    playSmall: {
-        fontWeight: 400,
-        fontSize: '1.4rem',
-        letterSpacing: '1.25px',
-    },
-    tableItemButton: {
-        fontWeight: 400,
-        fontSize: '1.4rem',
-        letterSpacing: '1.25px',
-        textTransform: 'uppercase',
-    },
-    playTablesItalic: {
-        fontWeight: 400,
-        fontSize: '1.2rem',
-        letterSpacing: '1.07px',
-        fontStyle: 'italic',
-    },
-    playTablesMedium: {
-        fontWeight: 400,
-        fontSize: '1.2rem',
-        letterSpacing: '1.07px',
-        textTransform: 'lowercase',
-    },
-    playTablesBold: {
-        textTransform: 'uppercase',
-        fontWeight: 700,
-        fontSize: '1.2rem',
-        letterSpacing: '1.07px',
-    },
-    playInput: {
-        fontWeight: 600,
-        letterSpacing: '1.25px',
-        fontSize: '1.4rem',
-    },
-    playInputTitle: {
-        fontWeight: 800,
-        textTransform: 'uppercase',
-        letterSpacing: '1.61px',
-        fontSize: '1.8rem',
-    },
-    gameSectionTitle: {
-        fontWeight: 700,
-        textTransform: 'uppercase',
-        letterSpacing: '1.61px',
-        fontSize: '1.8rem',
-    },
-    gameSectionItalic: {
-        fontWeight: 400,
-        fontSize: '1.2rem',
-        letterSpacing: '1.07px',
-        fontStyle: 'italic',
-        textTransform: 'uppercase',
-    },
-    balanceSmall: {
-        fontWeight: 400,
-        fontSize: '1.2rem',
-        letterSpacing: '1.07px',
-    },
-    balanceBig: {
-        fontWeight: 400,
-        fontSize: '1.6rem',
-        letterSpacing: '1.43px',
-    },
-    buttonGroupLargeBold: {
-        fontWeight: 700,
-        fontSize: '2rem',
-        textTransform: 'uppercase',
-    },
-    buttonGroupLarge: {
-        fontWeight: 400,
-        fontSize: '2rem',
-        textTransform: 'uppercase',
-    },
-    buttonGroupMedium: {
-        fontWeight: 400,
-        fontSize: '1.8rem',
-        textTransform: 'uppercase',
-    },
-    buttonGroupSmall: {
-        fontWeight: 400,
-        fontSize: '1rem',
-        textTransform: 'uppercase',
     },
 };
 

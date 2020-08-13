@@ -26,7 +26,7 @@ const Welcome = ({ className }: WelcomeProps) => {
                                 <Line width="long" color="darkblue" />
                             </div>
                             <div className="typography-enter">
-                                <Typography component="h1" variant="display1" color="initial">
+                                <Typography component="h1" variant="display1" color="initial" textTransform="uppercase">
                                     all bets are on
                                 </Typography>
                             </div>

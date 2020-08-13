@@ -68,7 +68,7 @@ const Poll = ({ content, optional, updateId }) => {
                         <div className="poll-vote-text">
                             <Typography
                                 component="a"
-                                variant="input"
+                                variant="body1"
                                 color={index === active ? 'secondary' : 'primary'}
                             >
                                 {asterisk}

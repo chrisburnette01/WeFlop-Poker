@@ -1,48 +1,78 @@
 import React from 'react';
-import './style.scss';
 
 import { Typography } from '../../../../components';
 import { Card, Balance } from '../';
 
+import styled from 'styled-components';
+
 interface GameSectionProps {
     totalPot: number;
-    balance: Record<string, unknown>;
+    balance: any;
     pot: number;
+    className?: string;
 }
 
-const GameSection = ({ totalPot, balance, pot }) => {
+const GameSection = ({ totalPot, balance, pot, className }: GameSectionProps) => {
     return (
-        <div>
-            <div className="wrapper-gamesection">
-                <Typography component="span" variant="gameSectionTitle" className="wrapper-text">
+        <div className={className}>
+            <div className="wrapper">
+                <Typography component="span" variant="h2" color="yellow">
                     {`TOTAL POT: $${totalPot.toFixed(2)}`}
                 </Typography>
-                <div className="gamesection-text">
-                    <Typography component="span" variant="gameSectionItalic" className="wrapper-text">
+                <div>
+                    <Typography component="span" variant="h6">
                         {`MAIN [${balance.main.toFixed(2)}]`}
                     </Typography>
                     {balance.sides.map((el) => (
                         <Typography
                             key={Date.now.toString()}
                             component="span"
-                            variant="gameSectionItalic"
+                            variant="h6"
                             className="wrapper-text"
                         >
-                            {`\u00A0/ SIDE [${el.toFixed(2)}]`}
+                            {` / SIDE [${el.toFixed(2)}]`}
                         </Typography>
                     ))}
                 </div>
-                <div className="wrapper-cards-gamesection">
-                    <Card color="yellow" />
-                    <Card color="yellow" />
-                    <Card color="yellow" />
-                    <Card color="yellow" />
-                    <Card color="yellow" />
+                <div className="wrapper-cards">
+                    <Card />
+                    <Card />
+                    <Card variant="H1" />
+                    <Card />
+                    <Card />
                 </div>
-                <Balance value={pot} size="big" />
+                <div className="wrapper-balances">
+                    <Balance value={pot} size="small" className="balance-gutter" />
+                    <Balance value={pot} size="small" className="balance-gutter" />
+                    <Balance value={pot} size="big" className="balance-gutter" />
+                    <Balance value={pot} size="small" className="balance-gutter" />
+                    <Balance value={pot} size="small" className="balance-gutter" />
+                </div>
             </div>
         </div>
     );
 };
 
-export default GameSection;
+export default styled(GameSection)`
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .wrapper-cards {
+        width: 338px;
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0 10px 0;
+    }
+
+    .wrapper-balances {
+        display: flex;
+        align-items: center;
+    }
+
+    .balance-gutter {
+        margin: 0 2.5px;
+    }
+`;

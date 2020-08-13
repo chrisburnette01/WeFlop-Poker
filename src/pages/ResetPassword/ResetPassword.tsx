@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { Button, Input, Line } from '../../components';
-import { Title, LineContent, Subtitle, Form, Content, Navigation } from '../../layout';
+import { Button, TextField, Line } from '../../components';
+import { Title, LineContent, Subtitle, Form, Content, Navigation, Container } from '../../layout';
 import { checkValidation } from '../../helpers';
-import Container from '../../layout/Container/Container';
 import { useForm } from 'react-hook-form';
 
 const ResetPassword = () => {
@@ -46,7 +45,7 @@ const ResetPassword = () => {
                             <Subtitle>{email}</Subtitle>
                         </div>
                         <Form onSubmit={handleSubmit(onSubmit)} buttonSubmit={buttonSubmit} isClicked={isClicked}>
-                            <Input
+                            <TextField
                                 onFocus={() => setIsClicked(true)}
                                 placeholder="password"
                                 type="password"
@@ -74,7 +73,7 @@ const ResetPassword = () => {
                                 })}
                                 errorMessage={errors.password && errors.password.message}
                             />
-                            <Input
+                            <TextField
                                 onFocus={() => setIsClicked(true)}
                                 placeholder="retype password"
                                 type="password"

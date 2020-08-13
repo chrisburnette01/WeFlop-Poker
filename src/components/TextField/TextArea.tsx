@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const TextFieldBase = styled('div')`
+const TextAreaBase = styled('div')`
     .wrapper {
         animation: ${({ theme }) => theme.animations.text};
         opacity: 0%;
@@ -9,10 +9,10 @@ const TextFieldBase = styled('div')`
     }
 
     .textarea {
-        font-size: ${({ theme }) => theme.typography.input!.fontSize};
+        font-size: ${({ theme }) => theme.typography.input1!.fontSize};
         font-family: ${({ theme }) => theme.typography.fontFamily};
         color: ${({ theme }) => theme.palette.primary};
-        letter-spacing: ${({ theme }) => theme.typography.input?.letterSpacing};
+        letter-spacing: ${({ theme }) => theme.typography.input1?.letterSpacing};
         position: relative;
         width: 291px;
         height: 176px;
@@ -54,18 +54,19 @@ const TextFieldBase = styled('div')`
     }
 `;
 
-interface TextFieldProps {
+interface TextAreaProps {
+    className?: string;
     placeholder?: string;
     register?: React.Ref<HTMLTextAreaElement>;
     name?: string;
     disabled?: boolean;
-    defaultValue?: string;
+    defaultValue?: string | number;
     onFocus?: any;
 }
 
-const TextField = ({ placeholder, name, register, disabled, defaultValue, onFocus }: TextFieldProps) => {
+const TextArea = ({ placeholder, name, register, disabled, defaultValue, onFocus, className }: TextAreaProps) => {
     return (
-        <TextFieldBase>
+        <TextAreaBase className={className}>
             <div className="wrapper">
                 <textarea
                     onFocus={onFocus}
@@ -77,8 +78,8 @@ const TextField = ({ placeholder, name, register, disabled, defaultValue, onFocu
                     disabled={disabled}
                 />
             </div>
-        </TextFieldBase>
+        </TextAreaBase>
     );
 };
 
-export default TextField;
+export default TextArea;

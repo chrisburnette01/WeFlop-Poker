@@ -49,7 +49,7 @@ const Secondary = ({ title, validated, form }: SecondaryButtonProps) => {
                 <Rectangle size="middle" color={color} border="big" />
                 <Line width="long" className="line-button" />
             </div>
-            <Typography component="span" variant="button2">
+            <Typography component="span" variant="button2" textTransform="uppercase">
                 {title}
             </Typography>
             <div className="lines-wrapper">

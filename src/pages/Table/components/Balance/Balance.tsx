@@ -10,7 +10,6 @@ interface BaseBalanceProps {
 const BaseBalance = styled.div<BaseBalanceProps>`
     height: ${({ size }) => (size === 'big' ? '30px' : '24px')};
     min-width: ${({ size }) => (size === 'big' ? '90px' : '66px')};
-    width: 100%;
     border-radius: ${({ size }) => (size === 'big' ? '10px' : '9px')};
     border: solid 1px rgba(255, 255, 255, 0.25);
     display: flex;
@@ -37,24 +36,23 @@ const BaseBalance = styled.div<BaseBalanceProps>`
 interface BalanceProps {
     size: 'small' | 'big';
     value: number;
+    className?: string;
 }
 
-const Balance = ({ size, value }) => {
+const Balance = ({ size, value, className }: BalanceProps) => {
     return (
-        <div>
-            <BaseBalance size={size}>
-                <div className="icon-outer">
-                    <div className="icon-inner" />
-                </div>
-                <Typography
-                    component="span"
-                    variant={size === 'big' ? 'balanceBig' : 'balanceSmall'}
-                    className="typography-balance"
-                >
-                    {value.toFixed(2)}
-                </Typography>
-            </BaseBalance>
-        </div>
+        <BaseBalance size={size} className={className}>
+            <div className="icon-outer">
+                <div className="icon-inner" />
+            </div>
+            <Typography
+                component="span"
+                variant={size === 'big' ? 'body1' : 'h6'}
+                className="typography-balance"
+            >
+                {value.toFixed(2)}
+            </Typography>
+        </BaseBalance>
     );
 };
 

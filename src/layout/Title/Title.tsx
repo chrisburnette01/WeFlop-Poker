@@ -15,13 +15,17 @@ const Title = ({ children, titleOnTop, color, className }: TitleProps) => {
         <div className={className}>
             <Line width="long" align="left" color="secondary" />
             <div style={{ padding: padding }}>
-                <Typography component="h1" variant="title" color={color === 'secondary' ? 'secondary' : 'primary'}>
+                <Typography component="h1" variant="h1" textTransform="uppercase" color={color!}>
                     {children}
                 </Typography>
             </div>
         </div>
     );
 };
+
+Title.defaultProps = {
+    color: 'primary'
+}
 
 export default styled(Title)<TitleProps>`
     display: flex;

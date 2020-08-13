@@ -1,9 +1,8 @@
-import Button from './Button/Button';
-import Input from './Input/Input';
+import Button from './Button';
 import Typography from './Typography/Typography';
 import Line from './Line/Line';
 import Rectangle from './Rectangle/Rectangle';
 import SlideDown from './SlideDown/SlideDown';
-import TextField from './TextField/TextField';
+import TextField from './TextField';
 
-export { Button, Input, Typography, Line, Rectangle, SlideDown, TextField };
+export { Button, Typography, Line, Rectangle, SlideDown, TextField };

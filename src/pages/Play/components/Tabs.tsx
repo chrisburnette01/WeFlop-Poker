@@ -4,12 +4,14 @@ import { Button, Line, SlideDown, Rectangle } from '../../../components';
 import { TableItem, Subtitle } from '../../../layout';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../store';
+import styled from 'styled-components';
 
 interface TabsProps {
     form: JSX.Element;
+    className?: string;
 }
 
-const Tabs = ({ form }) => {
+const Tabs = ({ form, className }: TabsProps) => {
     const removeGame = (id) => {
         // setData((prev) => data.filter((el) => el.game_number !== id));
     };
@@ -57,7 +59,7 @@ const Tabs = ({ form }) => {
         }
     };
     return (
-        <div className="play-options">
+        <div className={className}>
             <div className="button-wrapper-play">
                 <div className="left-button-wrapper">
                     <Button
@@ -121,13 +123,13 @@ const Tabs = ({ form }) => {
                     </div>
                     <SlideDown open={active.active}>
                         {application.tables?.active?.map((table) => (
-                            <TableItem key={Date.now().toString()} table={table} onRemove={removeGame} type="active" />
+                            <TableItem key={table.gameNumber} table={table} onRemove={removeGame} type="active" />
                         ))}
                         <Rectangle size="small" border="small" color="yellow" className="play-rect-bottom" />
                     </SlideDown>
                     <SlideDown open={active.archive}>
                         {application.tables?.archive?.map((table) => (
-                            <TableItem key={Date.now().toString()} table={table} onRemove={removeGame} type="archive" />
+                            <TableItem key={table.gameNumber} table={table} onRemove={removeGame} type="archive" />
                         ))}
                         <Rectangle
                             size="small"
@@ -142,4 +144,71 @@ const Tabs = ({ form }) => {
     );
 };
 
-export default Tabs;
+export default styled(Tabs)`
+    display: flex;
+    margin-top: 8px;
+    flex-direction: column;
+
+    .left-button-wrapper {
+        margin-right: 8px;
+        height: 58px;
+    }
+
+    .rect-play-wrapper {
+        height: 40px;
+    }
+
+    .right-button-wrapper {
+        margin-left: 8px;
+        height: 58px;
+    }
+
+    .left-button-wrapper.bottom {
+        margin-top: 22px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .right-button-wrapper.bottom {
+        margin-top: 22px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        align-self: flex-start;
+    }
+
+    .tables-subtitles-wrapper {
+        margin: 10px 0 10px 0;
+    }
+
+    .buttons-inside-wrapper {
+        display: flex;
+        align-content: flex-start;
+    }
+
+    .buttons-and-options-wrapper {
+        margin-left: 30px;
+    }
+
+    .button-wrapper-play {
+        display: flex;
+    }
+    .buttons-bottom-play {
+        display: flex;
+        flex-direction: column;
+        margin-left: 200px;
+    }
+    .play-rect-bottom {
+        align-self: flex-end;
+        margin: 8px 0 8px 197px;
+    }
+
+    .play-rect-bottom-left {
+        margin: 8px 0 8px 149px;
+    }
+
+    .create-table-slidedown {
+        margin-left: 128px;
+    }
+`;

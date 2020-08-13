@@ -4,6 +4,8 @@ import ToolTip from './ToolTip';
 
 interface BaseInputProps {
     validated: boolean;
+    width?: string;
+    size: 'large' | 'medium' | 'small';
 }
 
 const BaseInput = styled('div')<BaseInputProps>`
@@ -11,52 +13,44 @@ const BaseInput = styled('div')<BaseInputProps>`
         animation: ${({ theme }) => theme.animations.text};
         opacity: 0%;
         position: relative;
+        width: 100%;
+        max-width: ${({ width }) => width ? width : null};
     }
 
     .input {
         text-align: center;
-        font-size: ${({ theme }) => theme.typography.input!.fontSize};
+        font-size: ${({ theme }) => theme.typography.input1!.fontSize};
         font-family: ${({ theme }) => theme.typography.fontFamily};
-        color: ${({ theme, validated }) => (validated === true ? theme.palette.success : theme.palette.primary)};
-        letter-spacing: ${({ theme }) => theme.typography.input?.letterSpacing};
+        color: ${({ theme, validated, size }) => (validated === true && size === 'large' ? theme.palette.success : theme.palette.primary)};
+        letter-spacing: ${({ theme }) => theme.typography.input1?.letterSpacing};
         position: relative;
-        width: 291px;
+        width: ${({ width }) => width ? width : '291px'};
         background: transparent;
         border-width: 0;
-        border-radius: 4px;
-        padding: 16px;
+        padding: ${({ size }) => size === 'large' ? '0 10px' : size === 'medium' ? '0 8px' : '0 4px'};
         outline: none;
-        margin: 0 8px 0 8px;
         transition: all 0.4s ease-in-out;
+        height: ${({ size }) => size === 'large' ? '48px' : size === 'medium' ? '32px' : '16px'};
     }
-    .wrapper::before {
-        background-color: ${({ theme, validated }) =>
-            validated === true ? theme.palette.success : theme.palette.primary};
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 10px;
-        height: 100%;
-        border-radius: 2px;
-        margin-left: 3px;
-        transition: all 0.4s ease-in-out;
-    }
-    .wrapper::after {
-        background-color: ${({ theme, validated }) =>
-            validated === true ? theme.palette.success : theme.palette.primary};
+
+    .wrapper::after, .wrapper::before {
+        background-color: ${({ theme, validated, size }) =>
+            validated === true ? (size === 'large' ? theme.palette.success : theme.palette.secondary) : theme.palette.primary};
         content: '';
         display: block;
         position: absolute;
         top: 0;
         right: 0;
-        width: 10px;
+        width: ${({ size }) => size === 'large' ? '10px' : size === 'medium' ? '8px' : '4px' };
         height: 100%;
-        border-radius: 2px;
-        margin-right: 3px;
+        border-radius: ${({ size }) => (size === 'large' || size === 'medium') ? '2px' : '1px' } ;
         transition: all 0.4s ease-in-out;
     }
+
+    .wrapper::before {
+        left: 0;
+    }
+
     .input::placeholder {
         color: ${({ theme }) => theme.palette.primary};
         text-transform: uppercase;
@@ -64,15 +58,19 @@ const BaseInput = styled('div')<BaseInputProps>`
 `;
 
 interface InputProps {
+    className?: string;
+    size?: 'large' | 'medium' | 'small';
     placeholder?: string;
     type: string;
-    validated?: boolean;
+    validated: boolean;
     errorMessage?: string;
     register?: React.Ref<HTMLInputElement>;
     name?: string;
     disabled?: boolean;
     defaultValue?: string | number;
     onFocus?: any;
+    width?: string;
+    tooltipAlign: 'left' | 'right';
 }
 
 const Primary = ({
@@ -85,12 +83,16 @@ const Primary = ({
     disabled,
     defaultValue,
     onFocus,
+    width,
+    tooltipAlign,
+    size,
+    className
 }: InputProps) => {
-    const show = !validated! && errorMessage !== undefined ? true : false;
+    const show = !validated && errorMessage !== undefined ? true : false;
     return (
-        <BaseInput validated={validated!}>
+        <BaseInput validated={validated} width={width} size={size!} className={className}>
             <div className="wrapper">
-                <ToolTip message={errorMessage!} name={name} show={show} />
+                <ToolTip message={errorMessage!} name={name} show={show} align={tooltipAlign} />
                 <input
                     onFocus={onFocus}
                     defaultValue={defaultValue}
@@ -107,7 +109,8 @@ const Primary = ({
 };
 
 Primary.defaultProps = {
-    validated: false,
-};
+    size: 'large',
+    type: 'text'
+}
 
 export default Primary;

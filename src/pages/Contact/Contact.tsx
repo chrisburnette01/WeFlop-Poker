@@ -57,6 +57,7 @@ const Contact = () => {
                             notification={isMessageSent ? notification : null}
                         >
                             <TextField
+                                variant="textarea"
                                 onFocus={() => setIsClicked(true)}
                                 disabled={isMessageSent}
                                 name="feedback"

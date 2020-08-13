@@ -9,10 +9,10 @@ interface SubtitleProps {
 
 const Subtitle = ({ children, className }: SubtitleProps) => {
     return (
-        <div className={`wrapper-subtitle ${className}`}>
+        <div className={className}>
             <Rectangle size="small" border="small" color="secondary" />
             <div className="subtitles-wrapper">
-                <Typography component="h3" variant="subtitle1">
+                <Typography component="h3" variant="body1" fontStyle="italic">
                     {children}
                 </Typography>
             </div>
@@ -25,6 +25,8 @@ export default styled(Subtitle)`
     flex-direction: row;
     align-items: center;
     margin-left: 3px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 
     .subtitles-wrapper {
         margin-left: 8px;

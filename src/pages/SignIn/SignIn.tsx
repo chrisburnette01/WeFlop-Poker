@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom';
-import { Button, Input, Line } from '../../components';
-import { Title, LineContent, Subtitle, Form, Navigation, Content } from '../../layout';
+import { Button, TextField, Line } from '../../components';
+import { Title, LineContent, Subtitle, Form, Navigation, Content, Container } from '../../layout';
 import { checkValidation } from '../../helpers';
-import Container from '../../layout/Container/Container';
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
@@ -73,7 +72,7 @@ const SignIn = () => {
                         </div>
                         <Line width="long" height="short" align="left" color="secondary" />
                         <Form onSubmit={handleSubmit(onSubmit)} buttonSubmit={buttonSubmit} isClicked={isClicked}>
-                            <Input
+                            <TextField
                                 onFocus={() => setIsClicked(true)}
                                 placeholder="email adress"
                                 type="email"
@@ -99,7 +98,7 @@ const SignIn = () => {
                                 })}
                                 errorMessage={errors.email && errors.email.message}
                             />
-                            <Input
+                            <TextField
                                 onFocus={() => setIsClicked(true)}
                                 placeholder="password"
                                 type="password"

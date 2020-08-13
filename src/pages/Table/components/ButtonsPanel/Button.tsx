@@ -82,13 +82,14 @@ const Button = ({ size, border, justifyContent, alignItems, title, backgroundCol
     const variant = () => {
         switch (size) {
             case 'large':
-                return bold ? 'buttonGroupLargeBold' : 'buttonGroupLarge';
+                return bold ? 'h3' : 'h3';
             case 'medium':
-                return 'buttonGroupMedium';
+                return 'h4';
             case 'small':
-                return 'buttonGroupSmall';
+                return 'h6';
         }
     };
+
     return (
         <BaseButton
             size={size!}
@@ -99,7 +100,7 @@ const Button = ({ size, border, justifyContent, alignItems, title, backgroundCol
             onClick={onClick}
         >
             <div className="border-wrapper">
-                <Typography variant={variant()} component="span">
+                <Typography variant={variant()} component="span" textTransform="uppercase">
                     {title}
                 </Typography>
             </div>

@@ -1,16 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { Typography } from '../';
 
 interface BaseButtonProps {
-    styles: 'button1' | 'button2';
+    size: 'small' | 'big';
     align: 'left' | 'right';
     as: React.ElementType;
     to?: string;
     type?: 'button' | 'submit';
     active: boolean;
     bottomGutter: boolean;
-    color?: 'primary' | 'secondary' | 'initial' | string;
+    color: 'primary' | 'secondary' | 'initial' | string;
     disabled?: boolean;
 }
 
@@ -22,17 +23,12 @@ const BaseButton = styled('div')<BaseButtonProps>`
     background: transparent;
     padding: 0;
     display: flex;
-    align-items: center;
-    font-family: ${({ theme, styles }) => theme.typography.fontFamily};
-    font-weight: ${({ theme, styles }) => theme.typography[styles]!.fontWeight};
-    font-size: ${({ theme, styles }) => theme.typography[styles]!.fontSize};
-    text-transform: ${({ theme, styles }) => theme.typography[styles]!.textTransform};
-    letter-spacing: ${({ theme, styles }) => theme.typography[styles]!.letterSpacing};
-    color: ${({ theme, color }) => theme.palette[color!]};
+    align-items: center; 
+    color: ${({ theme, color }) => theme.palette[color] ? theme.palette[color] : theme.palette.common[color]};
     ${({ theme, active }) => (active ? `color: ${active ? theme.palette.secondary : theme.palette.primary};` : null)}
     text-align: ${({ align }) => align};
     align-self: ${({ align }) => (align === 'right' ? 'flex-end' : null)};
-    height: ${({ styles }) => (styles === 'button1' ? '64px' : '48px')};
+    height: ${({ size }) => (size === 'big' ? '64px' : '48px')};
     cursor: ${({ disabled }) => (disabled ? 'unset' : 'pointer')};
     margin-bottom: ${({ bottomGutter }) => (bottomGutter ? '64px' : null)};
 
@@ -46,7 +42,7 @@ const BaseButton = styled('div')<BaseButtonProps>`
         height: 16px;
     }
 
-    .title {
+    span {
         margin: ${({ align }) => (align === 'left' ? '0 0 0 16px' : '15px 16px 0 0')};
         animation: ${({ theme }) => theme.animations.text};
         opacity: 0;
@@ -89,13 +85,16 @@ const Primary = ({
             to={to}
             onClick={onClick}
             align={align!}
-            styles={size === 'big' ? 'button1' : 'button2'}
             active={active!}
             bottomGutter={bottomGutter!}
             color={color!}
+            size={size!}
         >
             {(align === undefined || align === 'left') && <span className="line" />}
-            <span className="title">{title}</span>
+            <Typography variant={size === 'big' ? 'button1' : 'button2'} color={color} textTransform='uppercase' component='span'>
+                {title}
+            </Typography>
+            <span className="title"></span>
             {align && align === 'right' && <span className="line" />}
         </BaseButton>
     );

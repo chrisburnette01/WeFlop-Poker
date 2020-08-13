@@ -4,14 +4,14 @@ import styled from 'styled-components';
 import { CSSTransition } from 'react-transition-group';
 
 interface BaseToolTipProps {
-    align?: 'left';
+    align: 'left' | 'right';
 }
 
 interface ToolTipProps {
     message: string;
     name: string | undefined;
     show: boolean | undefined;
-    align?: 'left';
+    align: 'left' | 'right';
 }
 
 const BaseToolTip = styled('div')<BaseToolTipProps>`
@@ -69,7 +69,7 @@ const ToolTip = ({ message, name, show, align }: ToolTipProps) => {
                     <ReactTooltip
                         id={`tooltip-${name}`}
                         effect="solid"
-                        place={align === 'left' ? 'left' : 'right'}
+                        place={align}
                         border={false}
                         multiline={true}
                         className="tooltip"

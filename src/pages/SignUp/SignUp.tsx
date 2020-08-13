@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { Button, Input, Line } from '../../components';
+import { Button, TextField, Line } from '../../components';
 import { Title, LineContent, Subtitle, Form, Navigation, Container, Content } from '../../layout';
 import { checkValidation } from '../../helpers';
 import { useForm } from 'react-hook-form';
@@ -72,10 +72,10 @@ const SignUp = () => {
                         </div>
                         <Line color="secondary" width="long" height="short" align="left" />
                         <Form onSubmit={handleSubmit(onSubmit)} buttonSubmit={buttonSubmit} isClicked={isClicked}>
-                            <Input
+                            <TextField
                                 onFocus={() => setIsClicked(true)}
                                 placeholder="unique display name"
-                                type="name"
+                                type="text"
                                 name="name"
                                 validated={check.name}
                                 register={register({
@@ -98,7 +98,7 @@ const SignUp = () => {
                                 })}
                                 errorMessage={errors.name && errors.name.message}
                             />
-                            <Input
+                            <TextField
                                 onFocus={() => setIsClicked(true)}
                                 placeholder="email adress"
                                 type="email"
@@ -124,7 +124,7 @@ const SignUp = () => {
                                 })}
                                 errorMessage={errors.email && errors.email.message}
                             />
-                            <Input
+                            <TextField
                                 onFocus={() => setIsClicked(true)}
                                 placeholder="password"
                                 type="password"
@@ -152,7 +152,7 @@ const SignUp = () => {
                                 })}
                                 errorMessage={errors.password && errors.password.message}
                             />
-                            <Input
+                            <TextField
                                 onFocus={() => setIsClicked(true)}
                                 placeholder="retype password"
                                 type="password"

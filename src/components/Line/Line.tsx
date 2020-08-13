@@ -31,7 +31,7 @@ interface LineProps {
 const Line = ({ width, height, align, color, className, wrapperClassName }: LineProps) => {
     return (
         <div
-            className={`${wrapperClassName} line`}
+            className={`${wrapperClassName ? wrapperClassName : ''} line`}
             style={height ? { height: height == 'long' ? '60px' : '48px' } : { height: 'inherit' }}
         >
             <BaseLine className={className} width={width} align={align} color={color!} />

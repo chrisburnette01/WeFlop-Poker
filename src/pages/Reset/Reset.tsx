@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { Button, Input, Line, Typography } from '../../components';
+import { Button, TextField, Line, Typography } from '../../components';
 import { Title, LineContent, Subtitle, Form, Navigation, Notification, Content } from '../../layout';
 import { checkValidation } from '../../helpers';
 import Container from '../../layout/Container/Container';
@@ -83,7 +83,7 @@ const Reset = () => {
                             isClicked={isClicked}
                             notification={isEmailSent ? notification : null}
                         >
-                            <Input
+                            <TextField
                                 onFocus={() => setIsClicked(true)}
                                 placeholder="email adress"
                                 type="email"

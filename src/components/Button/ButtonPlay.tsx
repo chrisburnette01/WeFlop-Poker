@@ -1,4 +1,5 @@
 import React from 'react';
+import { Typography } from '../';
 import styled from 'styled-components';
 
 interface ButtonPlayBase {
@@ -21,12 +22,8 @@ const ButtonPlayBase = styled.div<ButtonPlayBase>`
         margin: ${({ align }) => (align === 'left' ? '10px 8px 0 0' : '10px 0 0 8px')};
         transition: height 0.2s ease-in;
     }
-    .title {
-        font-family: ${({ theme }) => theme.typography.fontFamily};
-        font-weight: ${({ theme }) => theme.typography.buttonPlay!.fontWeight};
-        font-size: ${({ theme }) => theme.typography.buttonPlay!.fontSize};
-        text-transform: ${({ theme }) => theme.typography.buttonPlay!.textTransform};
-        letter-spacing: ${({ theme }) => theme.typography.buttonPlay!.letterSpacing};
+    
+    span {
         color: ${({ theme, active }) => (active ? theme.palette.yellow : theme.palette.initial)};
     }
 `;
@@ -42,7 +39,9 @@ const ButtonPlay = ({ title, active, align, onClick }: ButtonPlayProps) => {
     return (
         <ButtonPlayBase active={active} align={align} onClick={onClick}>
             {align === 'left' ? <span className="line" /> : null}
-            <span className="title">{title}</span>
+            <Typography variant='button3' textTransform='uppercase' component='span'>
+                {title}
+            </Typography>
             {align === 'right' ? <span className="line" /> : null}
         </ButtonPlayBase>
     );
