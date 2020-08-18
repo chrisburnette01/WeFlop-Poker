@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Typography, TextField } from '../../../../components';
+import { Typography, TextField, Button } from '../../../../components';
 import plus from '../../../../assets/images/plus.svg'
 
 interface BorderProps {
@@ -78,9 +78,30 @@ const BasePlayer = styled('div')<BasePlayerProps>`
         left: calc(50% - 16px);
     }
 
+    .top, .bottom {
+        display: flex;
+        position: absolute;
+        justify-content: center;
+        align-items: center;
+        width: 148px;
+        top: -40px;
+    }
+
+    .bottom {
+        top: 80px;
+    }
+
     .input {
         margin: 0 2px;
     }
+`;
+
+const Square = styled('div')`
+    background: ${({ theme }) => theme.palette.secondary};
+    height: 8px;
+    width: 8px;
+    margin: 0 12px;
+    border-radius: 2px;
 `;
 
 const Border = styled('div')<BorderProps>`
@@ -127,6 +148,18 @@ const Player = ({ className, username, balance, type }: PlayerProps) => {
     return (
         <div className={className}>
             <BasePlayer type={type}>
+                {type === 'buy-in' &&
+                <div className="top">
+                    <Square />
+                    <Typography textTransform="uppercase" fontWeight={600} component="h3" variant="body1" color="secondary">
+                        Buy-in
+                    </Typography>
+                    <Square />
+                </div>}
+                {type === 'buy-in' &&
+                <div className="bottom">
+                    <Button title="tetst" variant="secondary" size="small" />
+                </div>}
                 {type === 'empty' && 
                 <div className="icon">
                     <img src={plus} alt="plus-icon"/>
@@ -167,6 +200,7 @@ const Player = ({ className, username, balance, type }: PlayerProps) => {
                     <Divider size="big" color={BIG_DIVIDER_COLOR}/>
                 </div>
                 <Border align="right" color={BORDER_COLOR}/>
+                
             </BasePlayer>
         </div>
     );
@@ -174,7 +208,7 @@ const Player = ({ className, username, balance, type }: PlayerProps) => {
 
 
 Player.defaultProps = {
-    type: 'empty'
+    type: 'buy-in'
 }
 
 export default Player;

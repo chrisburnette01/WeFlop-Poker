@@ -4,7 +4,7 @@ import TextArea from './TextArea';
 
 interface InputProps {
     size?: 'large' | 'medium' | 'small';
-    className?: string; 
+    className?: string;
     placeholder?: string;
     type?: string;
     validated?: boolean;
@@ -17,6 +17,9 @@ interface InputProps {
     variant?: 'input' | 'textarea';
     width?: string;
     tooltipAlign?: 'left' | 'right';
+    autoresize?: boolean;
+    rightLine?: boolean;
+    onKeyDown?: any;
 }
 
 const TextField = ({
@@ -33,14 +36,17 @@ const TextField = ({
     variant,
     width,
     tooltipAlign,
-    className
+    className,
+    autoresize,
+    rightLine,
+    onKeyDown,
 }: InputProps) => {
     switch (variant) {
         case 'input':
             return (
                 <Input
                     className={className}
-                    size={size}
+                    size={size!}
                     width={width}
                     placeholder={placeholder}
                     validated={validated!}
@@ -57,13 +63,18 @@ const TextField = ({
         case 'textarea':
             return (
                 <TextArea
+                    onKeyDown={onKeyDown}
                     className={className}
+                    size={size!}
+                    width={width}
                     placeholder={placeholder}
                     name={name}
                     register={register!}
                     disabled={disabled}
                     defaultValue={defaultValue}
                     onFocus={onFocus}
+                    autoresize={autoresize}
+                    rightLine={rightLine}
                 />
             );
         default:
@@ -74,7 +85,8 @@ const TextField = ({
 TextField.defaultProps = {
     validated: false,
     variant: 'input',
-    tooltipAlign: 'right'
+    tooltipAlign: 'right',
+    size: 'large',
 };
 
 export default TextField;

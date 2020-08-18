@@ -36,7 +36,7 @@ const BaseInput = styled('div')<BaseInputProps>`
     .wrapper::after, .wrapper::before {
         background-color: ${({ theme, validated, size }) =>
             validated === true ? (size === 'large' ? theme.palette.success : theme.palette.secondary) : theme.palette.primary};
-        content: '';
+        content: "";
         display: block;
         position: absolute;
         top: 0;
@@ -50,16 +50,11 @@ const BaseInput = styled('div')<BaseInputProps>`
     .wrapper::before {
         left: 0;
     }
-
-    .input::placeholder {
-        color: ${({ theme }) => theme.palette.primary};
-        text-transform: uppercase;
-    }
 `;
 
 interface InputProps {
     className?: string;
-    size?: 'large' | 'medium' | 'small';
+    size: 'large' | 'medium' | 'small';
     placeholder?: string;
     type: string;
     validated: boolean;
@@ -90,8 +85,8 @@ const Primary = ({
 }: InputProps) => {
     const show = !validated && errorMessage !== undefined ? true : false;
     return (
-        <BaseInput validated={validated} width={width} size={size!} className={className}>
-            <div className="wrapper">
+        <BaseInput validated={validated} width={width} size={size} className={className}>
+            <div className="wrapper" >
                 <ToolTip message={errorMessage!} name={name} show={show} align={tooltipAlign} />
                 <input
                     onFocus={onFocus}
@@ -109,7 +104,6 @@ const Primary = ({
 };
 
 Primary.defaultProps = {
-    size: 'large',
     type: 'text'
 }
 

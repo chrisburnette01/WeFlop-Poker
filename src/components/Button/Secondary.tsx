@@ -4,23 +4,26 @@ import { Rectangle, Line, Typography } from '../';
 
 interface BaseSecondaryButtonProps {
     variant: 'auth' | 'play';
+    size: 'small' | 'big';
 }
+
+// bottom: ${({ variant }) => (variant === 'auth' ? '-96px' : 'unset')};
+// margin: ${({ variant }) => (variant === 'auth' ? '0 -25px 0 -25px' : '48px 0 0 0')};
+// position: ${({ variant }) => (variant === 'auth' ? 'absolute' : 'unset')};
+// min-width: ${({ variant }) => (variant === 'auth' ? '356px' : '238px')};
 
 const BaseSecondaryButton = styled('button')<BaseSecondaryButtonProps>`
     display: flex;
-    width: 100%;
     align-items: center;
-    height: 48px;
+    width: inherit;
+    height: ${({ size }) => (size === 'big' ? '48px' : '24px')};
     background: transparent;
     border: none;
     outline: none;
     cursor: pointer;
     justify-content: space-between;
     padding: 0;
-    bottom: ${({ variant }) => (variant === 'auth' ? '-96px' : 'unset')};
-    margin: ${({ variant }) => (variant === 'auth' ? '0 -25px 0 -25px' : '48px 0 0 0')};
-    position: ${({ variant }) => (variant === 'auth' ? 'absolute' : 'unset')};
-    min-width: ${({ variant }) => (variant === 'auth' ? '356px' : '238px')};
+    
     .line-button {
         margin: 0 0 0 8px;
     }
@@ -39,29 +42,31 @@ interface SecondaryButtonProps {
     title: string;
     validated?: boolean;
     form?: 'auth' | 'play';
+    size: 'small' | 'big';
+    className?: string;
 }
 
-const Secondary = ({ title, validated, form }: SecondaryButtonProps) => {
+const Secondary = ({ title, validated, form, size, className }: SecondaryButtonProps) => {
     const color = validated ? 'success' : 'primary';
     return (
-        <BaseSecondaryButton variant={form!} type='submit'>
+        <BaseSecondaryButton variant={form!} size={size} className={className} type='submit'>
             <div className="lines-wrapper">
-                <Rectangle size="middle" color={color} border="big" />
-                <Line width="long" className="line-button" />
+                <Rectangle size={size === "big" ? "medium" : "small"} color={color} border={size} />
+                <Line width={size === "big" ? "large" : "small"} className="line-button" />
             </div>
-            <Typography component="span" variant="button2" textTransform="uppercase">
+            <Typography component="span" variant={size === "big" ? "button2" : "h6"} textTransform="uppercase">
                 {title}
             </Typography>
             <div className="lines-wrapper">
-                <Line width="long" className="line-button line-button-last" />
-                <Rectangle size="middle" color={color} border="big" />
+                <Line width={size === "big" ? "large" : "small"} className="line-button line-button-last" />
+                <Rectangle size={size === "big" ? "medium" : "small"} color={color} border={size} />
             </div>
         </BaseSecondaryButton>
     );
 };
 
 Secondary.defaultProps = {
-    form: 'auth',
+    form: 'auth'
 };
 
 export default Secondary;

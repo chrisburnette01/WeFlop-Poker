@@ -20,7 +20,7 @@ interface NavButtonBaseProps {
 
 const NavButtonBase = styled.div<NavButtonBaseProps>`
     cursor: pointer;
-    margin: ${({ align, noMargin }) => (noMargin ? 0 : align === 'left' ? '-6px 0 -6px 44px' : '-6px 44px -6px 0')};
+    margin: ${({ align, noMargin }) => (noMargin ? 0 : align === 'left' ? '0 0 0 38px' : '0 38px 0 0')};
     display: flex;
     align-items: center;
     & > * + * {

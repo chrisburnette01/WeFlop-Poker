@@ -199,9 +199,9 @@ const Form = ({ onSubmit, notification, className }: FormProps) => {
                     </Typography>
                 </div>
             </div>
-            <Rectangle size="middle" color="yellow" />
+            <Rectangle size="medium" color="yellow" />
             <div className="play-button-notification-wrapper">
-                <Button variant="secondary" validated={isValidated} form="play" title="create" />
+                <Button variant="secondary" validated={isValidated} className="button-play" form="play" title="create" />
             </div>
             <Notification type="play">{notification}</Notification>
         </form>

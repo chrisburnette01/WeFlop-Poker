@@ -21,9 +21,9 @@ const Welcome = ({ className }: WelcomeProps) => {
                         </div>
                         <div className="content-enter">
                             <div className="content-inner">
-                                <Line width="long" color="darkblue" />
-                                <Line width="long" color="gray" />
-                                <Line width="long" color="darkblue" />
+                                <Line width="large" color="darkblue" />
+                                <Line width="large" color="gray" />
+                                <Line width="large" color="darkblue" />
                             </div>
                             <div className="typography-enter">
                                 <Typography component="h1" variant="display1" color="initial" textTransform="uppercase">
@@ -31,9 +31,9 @@ const Welcome = ({ className }: WelcomeProps) => {
                                 </Typography>
                             </div>
                             <div className="content-inner content-inner-footer">
-                                <Line width="long" color="darkblue" />
-                                <Line width="long" color="gray" />
-                                <Line width="long" color="darkblue" />
+                                <Line width="large" color="darkblue" />
+                                <Line width="large" color="gray" />
+                                <Line width="large" color="darkblue" />
                             </div>
                         </div>
                     </div>

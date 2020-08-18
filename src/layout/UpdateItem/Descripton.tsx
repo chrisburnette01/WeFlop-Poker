@@ -14,7 +14,7 @@ const Description = ({ content, className }: DescriptionProps) => {
     return contentArray.map((element, index) => {
         return (
             <div className={className} key={`${element}${index}`}>
-                <Line width="short" color="yellow" />
+                <Line width="medium" color="yellow" />
                 <div className="desc-wrapper-text">
                     <Typography component="p" variant="body1">
                         {element}

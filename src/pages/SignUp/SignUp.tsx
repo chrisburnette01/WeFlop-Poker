@@ -37,7 +37,7 @@ const SignUp = () => {
     };
 
     const isValidated = check.name && check.email && check.password && check.password_repeat;
-    const buttonSubmit = <Button variant="secondary" validated={isValidated} title="register" form="auth" />;
+    const buttonSubmit = <Button variant="secondary" validated={isValidated} className="button-form" title="register" form="auth" />;
 
     useEffect(() => {
         if (application.isLoading[SIGN_UP.REQUEST]) {
@@ -70,7 +70,7 @@ const SignUp = () => {
                             <Subtitle>We are committed to building the features you want.</Subtitle>
                             <Subtitle>Our beta supports home games with simple, intuitive ledgers.</Subtitle>
                         </div>
-                        <Line color="secondary" width="long" height="short" align="left" />
+                        <Line color="secondary" width="large" height="short" align="left" />
                         <Form onSubmit={handleSubmit(onSubmit)} buttonSubmit={buttonSubmit} isClicked={isClicked}>
                             <TextField
                                 onFocus={() => setIsClicked(true)}

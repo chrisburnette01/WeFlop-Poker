@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 
 interface BaseRectangleProps {
-    size: 'small' | 'middle' | 'big' | 'button' | 'line' | 'input';
+    size: 'small' | 'medium' | 'big' | 'button' | 'line' | 'input';
     color: 'primary' | 'secondary' | 'success' | string;
     border?: 'small' | 'big';
 }
@@ -15,7 +15,7 @@ const BaseRectangle = styled.span<BaseRectangleProps>`
     width: ${({ size }) =>
         size === 'small'
             ? '10px'
-            : size === 'middle'
+            : size === 'medium'
             ? '16px'
             : size === 'button'
             ? '12px'
@@ -27,7 +27,7 @@ const BaseRectangle = styled.span<BaseRectangleProps>`
     height: ${({ size }) =>
         size === 'small'
             ? '10px'
-            : size === 'middle'
+            : size === 'medium'
             ? '16px'
             : size === 'button'
             ? '12px'
@@ -40,7 +40,7 @@ const BaseRectangle = styled.span<BaseRectangleProps>`
 `;
 
 interface RectangleProps {
-    size: 'small' | 'middle' | 'big' | 'button' | 'line' | 'input';
+    size: 'small' | 'medium' | 'big' | 'button' | 'line' | 'input';
     color?: 'primary' | 'secondary' | 'success' | string;
     border?: 'small' | 'big';
     className?: string;

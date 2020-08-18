@@ -86,7 +86,7 @@ const Tabs = ({ form, className }: TabsProps) => {
                     <Subtitle className="subtitle-create">
                         More customizability coming soon. Let us know what you want!
                     </Subtitle>
-                    <Line color="yellow" width="long" height="short" align="left" />
+                    <Line color="yellow" width="large" height="short" align="left" />
                     {form}
                 </div>
             </SlideDown>
@@ -110,7 +110,7 @@ const Tabs = ({ form, className }: TabsProps) => {
                                 onClick={() => buttonHandler('archive')}
                             />
                         </div>
-                        <Line width="long" height="short" className="line-bottom-updates" color="yellow" />
+                        <Line width="large" height="short" className="line-bottom-updates" color="yellow" />
                         <div className="right-button-wrapper bottom">
                             <Button
                                 variant="play"

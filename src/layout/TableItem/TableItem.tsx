@@ -146,7 +146,7 @@ const TableItem = ({ table, type, onRemove }: TableItemProps) => {
                         {playersTable}
                     </Typography>
                     <Line
-                        width="long"
+                        width="large"
                         color={active ? 'yellow' : 'primary'}
                         className="table-item-wrapper-line"
                         height="short"
@@ -189,7 +189,7 @@ const TableItem = ({ table, type, onRemove }: TableItemProps) => {
                                 onClick={() => setSelectedButton('hide')}
                             />
                         </div>
-                        <Line width="long" color="yellow" className="table-item-wrapper-line" />
+                        <Line width="medium" color="yellow" className="table-item-wrapper-line" />
                         <div className="info-play-wrapper">
                             <div className="play-items-wrapper">
                                 <ActiveMenu selectedButton={selectedButton} table={table} onRemove={onRemove} />

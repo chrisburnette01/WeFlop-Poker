@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useParams, useHistory } from 'react-router-dom';
-import { Card, Player, ButtonsPanel, GameSection, Balance, Chat, Menu, Ledger, Leave, Settings } from './components';
+import { Card, Player, Balance } from './components';
 import { Container } from '../../layout';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import { resetPassword, RESET_PASSWORD } from '../../store/actions/application';
+
+import { Chat, Ledger, Leave, Settings } from './modals';
+import { Menu, ButtonsPanel, GameSection, ActionMenu } from './layout';
 
 import styled from 'styled-components';
 
@@ -31,7 +34,7 @@ const Table = ({ className }: TableProps) => {
         ) : navState === 'ledger' ? (
             <Ledger name="Alex’s Corner" />
         ) : navState === 'leave' ? (
-            <Leave />
+            <Leave onCancel={() => setNavState(undefined)} onLeave={() => console.log('leave')} />
         ) : navState === 'settings' ? (
             <Settings />
         ) : null;
@@ -47,7 +50,7 @@ const Table = ({ className }: TableProps) => {
             </Helmet>
             <Container className={className} type="table">
                 <div>{activeModal}</div>
-                <Menu navState={navState} setNavState={setNavStateHandler} />
+                <Menu navState={navState} setNavState={setNavStateHandler} type="blind" />
                 <div className="table-main">
                     <div className="row row-top">
                         <Player username="glenn" balance={99} className="flex-end" />
@@ -66,7 +69,8 @@ const Table = ({ className }: TableProps) => {
                         <Player username="glenn" balance={99} className="flex-start" />
                     </div>
                     <div className="panel">
-                        <ButtonsPanel balance={1000} />
+                        <ButtonsPanel balance={1000} type="bet" />
+                       
                     </div>
                 </div>
             </Container>
@@ -92,7 +96,6 @@ export default styled(Table)`
     .row-top {
         max-width: 1060px;
         max-height: 150px;
-        
     }
     .row-center {
         max-height: 300px;

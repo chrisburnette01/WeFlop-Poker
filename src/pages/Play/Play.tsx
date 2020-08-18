@@ -37,7 +37,7 @@ const Play = () => {
                                 <Subtitle>To invite your friends, simply share the table’s link.</Subtitle>
                                 <Subtitle>Every game you create or join via link is saved in “TABLES.”</Subtitle>
                             </div>
-                            <Line color="secondary" width="long" height="short" align="left" />
+                            <Line color="secondary" width="large" height="short" align="left" />
                         </LineContent>
                     </div>
                     <Tabs form={<Form onSubmit={onSubmit} notification={notification} />} />

@@ -34,7 +34,7 @@ const Reset = () => {
     };
 
     const isValidated = check.email;
-    const buttonSubmit = <Button variant="secondary" validated={isValidated} title="send reset" form="auth" />;
+    const buttonSubmit = <Button variant="secondary" validated={isValidated} className="button-form" title="send reset" form="auth" />;
     const notification = (
         <>
             <Typography component="span" variant="button2" color="primary">
@@ -76,7 +76,7 @@ const Reset = () => {
                             <Subtitle>Enter the email address associated with your account.</Subtitle>
                             <Subtitle>We’ll send you an email with a reset form.</Subtitle>
                         </div>
-                        <Line color="secondary" width="long" height="short" align="left" />
+                        <Line color="secondary" width="large" height="short" align="left" />
                         <Form
                             onSubmit={handleSubmit(onSubmit)}
                             buttonSubmit={buttonSubmit}

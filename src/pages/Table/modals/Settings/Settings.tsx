@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { ModalBase, Divider } from '../';
+import { Divider } from '../../layout';
 import { Line } from '../../../../components';
 import Checkbox from './CheckboxSettings';
+import { Container } from '../../../../layout';
 
 interface SettingsProps {
     className?: string;
@@ -18,11 +19,11 @@ const Settings = ({ className }: SettingsProps) => {
         }));
     };
     return (
-        <ModalBase>
+        <Container type="modal">
             <div className={className}>
-                <Line width="long" color="yellow" wrapperClassName="line-short" />
+                <Line width="large" color="yellow" wrapperClassName="line-short" />
                 <Divider margin="6px" />
-                <Line width="long" color="yellow" wrapperClassName="line-long" />
+                <Line width="large" color="yellow" wrapperClassName="line-long" />
                 <Divider margin="6px" />
                 <div className="checkboxes-wrapper">
                     <Checkbox
@@ -34,11 +35,11 @@ const Settings = ({ className }: SettingsProps) => {
                     <Checkbox title="GAME SOUNDS" active={isActive.sounds} onClick={() => checkboxHandler('sounds')} />
                 </div>
                 <Divider margin="6px" />
-                <Line width="long" color="yellow" wrapperClassName="line-long" />
+                <Line width="large" color="yellow" wrapperClassName="line-long" />
                 <Divider margin="6px" />
-                <Line width="long" color="yellow" wrapperClassName="line-short" />
+                <Line width="large" color="yellow" wrapperClassName="line-short" />
             </div>
-        </ModalBase>
+        </Container>
     );
 };
 

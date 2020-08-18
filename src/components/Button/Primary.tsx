@@ -52,7 +52,7 @@ const BaseButton = styled('div')<BaseButtonProps>`
 
 interface PrimaryButtonProps {
     title: string | null;
-    size?: 'small' | 'big';
+    size: 'small' | 'big';
     align?: 'left' | 'right';
     onClick?: () => void;
     component?: 'button' | 'link';
@@ -101,7 +101,6 @@ const Primary = ({
 };
 
 Primary.defaultProps = {
-    size: 'big',
     active: false,
     bottomGutter: false,
     color: 'primary',

@@ -32,7 +32,7 @@ const UpdateItem = ({ element, className }: UpdateItemProps) => {
                         {moment(element.date).format('HH:mm')}
                     </Typography>
                 </div>
-                <Line className="updates-note-item-line" width="long" color={open ? 'secondary' : 'primary'} />
+                <Line className="updates-note-item-line" width="large" color={open ? 'secondary' : 'primary'} />
                 <div className="updates-note-item-text-wrapper">
                     <Typography variant="button2" component="a">
                         {element.title}

@@ -2,25 +2,25 @@ import styled from 'styled-components';
 import React from 'react';
 
 interface BaseLineProps {
-    width: 'long' | 'short';
+    width: 'large' | 'medium' | 'small';
     align?: 'left' | 'right';
     color: 'primary' | 'secondary' | 'button' | 'initial' | string;
 }
 
 const BaseLine = styled.span<BaseLineProps>`
-    border-radius: ${({ width }) => (width === 'short' ? '2px' : '4px')};
+    border-radius: ${({ width }) => width === 'large' ? '4px' : width === 'medium' ? '2px' : '1px'};
     background-color: ${({ theme, color }) =>
         theme.palette[color] ? theme.palette[color] : theme.palette.common[color]};
     display: block;
     height: inherit;
-    width: ${({ width }) => (width === 'short' ? '12px' : '16px')};
+    width: ${({ width }) => width === 'large' ? '16px' : width === 'medium' ? '12px' : '8px'};
     margin-right: ${({ align }) => (align === 'left' ? '16px' : null)};
-    margin-left: ${({ width, align }) => (align === 'right' ? '16px' : width === 'short' ? '7px' : null)};
+    margin-left: ${({ width, align }) => (align === 'right' ? '16px' : null)};
     animation: ${({ theme }) => theme.animations.line};
 `;
 
 interface LineProps {
-    width: 'long' | 'short';
+    width: 'large' | 'medium' | 'small';
     height?: 'long' | 'short';
     align?: 'left' | 'right';
     color?: 'primary' | 'secondary' | 'button' | 'initial' | string;

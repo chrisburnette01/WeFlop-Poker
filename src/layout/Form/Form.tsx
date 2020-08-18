@@ -31,8 +31,8 @@ const Form = ({ children, onSubmit, buttonSubmit, isClicked, isRightIcon, notifi
             <form onSubmit={onSubmit} className="form" noValidate>
                 <FormAnimationWrapper isClicked={isClicked}>{children}</FormAnimationWrapper>
                 <div className="lines-container">
-                    <Line color="secondary" width="long" height="short" align="left" />
-                    <Line color="secondary" width="long" height="short" align="right" />
+                    <Line color="secondary" width="large" height="short" align="left" />
+                    <Line color="secondary" width="large" height="short" align="right" />
                 </div>
                 {buttonSubmit}
                 <Notification type="auth">{notification}</Notification>
@@ -40,7 +40,7 @@ const Form = ({ children, onSubmit, buttonSubmit, isClicked, isRightIcon, notifi
             <Line
                 color="secondary"
                 wrapperClassName="line-form-fix"
-                width="long"
+                width="large"
                 align="left"
                 className="form-line-right"
             />

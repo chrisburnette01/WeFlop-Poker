@@ -4,31 +4,54 @@ import styled from 'styled-components';
 interface ContainerProps {
     children: JSX.Element | JSX.Element[] | null;
     className?: string;
-    type?: 'table' | 'initial';
+    type?: 'table' | 'initial' | 'modal';
 }
 
 interface BaseContainerProps {
-	type: 'table' | 'initial';
+    type: 'table' | 'initial' | 'modal';
 }
 
+const ModalContainer = styled('div')`
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(3, 24, 45, 0.8);
+    top: 0;
+    left: 0;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+`;
+
 const BaseContainer = styled('div')<BaseContainerProps>`
-	height: 100vh;
-    padding: ${({type}) => type === 'initial' ? '60px' : '120px 100px 0 100px'};
+    height: 100vh;
+    padding: ${({ type }) => (type === 'initial' ? '60px' : '120px 100px 0 100px')};
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
 `;
 
 const Container = ({ children, className, type }: ContainerProps) => {
-    return (
-    	<BaseContainer className={className} type={type!}>
-	    	{children}
-	   	</BaseContainer>
-	);
+    switch (type) {
+        case 'table' || 'initial':
+            return (
+                <BaseContainer className={className} type={type!}>
+                    {children}
+                </BaseContainer>
+            );
+        case 'modal':
+            return <ModalContainer className={className}>{children}</ModalContainer>;
+        default:
+            return (
+                <BaseContainer className={className} type={type!}>
+                    {children}
+                </BaseContainer>
+            );
+    }
 };
 
 Container.defaultProps = {
-	type: 'initial'
-}
+    type: 'initial',
+};
 
 export default Container;

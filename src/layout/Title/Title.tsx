@@ -13,7 +13,7 @@ const Title = ({ children, titleOnTop, color, className }: TitleProps) => {
     const padding = titleOnTop ? '0 0 20px 0' : '10px 0 10px 0';
     return (
         <div className={className}>
-            <Line width="long" align="left" color="secondary" />
+            <Line width="large" align="left" color="secondary" />
             <div style={{ padding: padding }}>
                 <Typography component="h1" variant="h1" textTransform="uppercase" color={color!}>
                     {children}

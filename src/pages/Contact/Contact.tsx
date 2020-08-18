@@ -20,7 +20,7 @@ const Contact = () => {
 
     const feedback = watch('feedback', '');
 
-    const buttonSubmit = <Button variant="secondary" validated={Boolean(feedback)} title="Enter" />;
+    const buttonSubmit = <Button variant="secondary" className="button-form" validated={Boolean(feedback)} title="Enter" />;
     const notification = (
         <Typography component="span" variant="button2" color="primary">
             message was sent
@@ -48,7 +48,7 @@ const Contact = () => {
                             <Subtitle>We read all your messsages, even the not so nice ones…</Subtitle>
                             <Subtitle>Please also consider donating to our Patreon!</Subtitle>
                         </div>
-                        <Line color="secondary" width="long" height="short" align="left" />
+                        <Line color="secondary" width="large" height="short" align="left" />
                         <Form
                             onSubmit={handleSubmit(onSubmit)}
                             buttonSubmit={buttonSubmit}
@@ -61,13 +61,15 @@ const Contact = () => {
                                 onFocus={() => setIsClicked(true)}
                                 disabled={isMessageSent}
                                 name="feedback"
-                                register={register({
-                                    required: true,
-                                    minLength: 1,
-                                })}
+                                register={(ref) =>
+                                    register(ref, {
+                                        required: true,
+                                        minLength: 1,
+                                    })
+                                }
                             />
                             <Notification type="auth">
-                                
+                            
                             </Notification>
                         </Form>
                     </LineContent>

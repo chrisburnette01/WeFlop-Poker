@@ -1,29 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ModalBase, NavButton, Divider } from '../';
+import { NavButton } from '../../components';
+import { Divider } from '../../layout';
 import { Typography, Line } from '../../../../components';
+import { Container } from '../../../../layout';
 
 interface LeaveProps {
     className?: string;
+    onLeave: () => void;
+    onCancel: () => void;
 }
 
-const Leave = ({ className }: LeaveProps) => {
+const Leave = ({ className, onLeave, onCancel }: LeaveProps) => {
     return (
-        <ModalBase>
+        <Container type="modal">
             <div className={className}>
                 <Typography variant="h1" textTransform="uppercase" component="span" color="yellow">
                     ARE YOU SURE?
                 </Typography>
                 <Divider
-                    leftContent={<NavButton align="right" title="no" noMargin />}
-                    rightContent={<NavButton align="left" title="yes" noMargin />}
+                    leftContent={<NavButton align="right" title="no" noMargin onClick={onCancel} />}
+                    rightContent={<NavButton align="left" title="yes" noMargin onClick={onLeave} />}
                     className="buttons"
                 />
-                <Line width="long" color="yellow" wrapperClassName="line-long" />
+                <Line width="large" color="yellow" wrapperClassName="line-long" />
                 <Divider margin="6px" />
-                <Line width="long" color="yellow" wrapperClassName="line-short" />
+                <Line width="large" color="yellow" wrapperClassName="line-short" />
             </div>
-        </ModalBase>
+        </Container>
     );
 };
 

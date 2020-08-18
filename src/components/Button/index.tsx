@@ -18,6 +18,7 @@ interface ButtonProps {
     color?: 'primary' | 'secondary' | 'initial' | string;
     disabled?: boolean;
     form?: 'auth' | 'play';
+    className?: string;
 }
 
 const Button = ({
@@ -35,6 +36,7 @@ const Button = ({
     variant,
     disabled,
     form,
+    className
 }: ButtonProps) => {
     switch (variant) {
         case 'primary':
@@ -43,7 +45,7 @@ const Button = ({
                     title={title}
                     onClick={onClick}
                     align={align}
-                    size={size}
+                    size={size!}
                     component={component}
                     type={type}
                     to={to}
@@ -54,7 +56,7 @@ const Button = ({
                 />
             );
         case 'secondary':
-            return <Secondary title={title!} validated={validated} form={form} />;
+            return <Secondary title={title!} validated={validated} size={size!} form={form} className={className} />;
         case 'play':
             return <ButtonPlay title={title!} active={active} align={align!} onClick={onClick} />;
         default:

@@ -35,7 +35,7 @@ const SignIn = () => {
     };
 
     const isValidated = check.email && check.password;
-    const buttonSubmit = <Button variant="secondary" validated={isValidated} title="Enter" form="auth" />;
+    const buttonSubmit = <Button variant="secondary" validated={isValidated} className="button-form" title="Enter" form="auth" />;
 
     useEffect(() => {
         if (application.isLoading[SIGN_IN.REQUEST]) {
@@ -70,7 +70,7 @@ const SignIn = () => {
                             <Subtitle>We are committed to building the features you want.</Subtitle>
                             <Subtitle>Our beta supports home games with simple, intuitive ledgers.</Subtitle>
                         </div>
-                        <Line width="long" height="short" align="left" color="secondary" />
+                        <Line width="large" height="short" align="left" color="secondary" />
                         <Form onSubmit={handleSubmit(onSubmit)} buttonSubmit={buttonSubmit} isClicked={isClicked}>
                             <TextField
                                 onFocus={() => setIsClicked(true)}
@@ -78,24 +78,6 @@ const SignIn = () => {
                                 type="email"
                                 name="email"
                                 validated={check.email}
-                                register={register({
-                                    required: {
-                                        value: true,
-                                        message: 'This field is required',
-                                    },
-                                    minLength: {
-                                        value: 4,
-                                        message: 'Email should be at least 4 symbols',
-                                    },
-                                    maxLength: {
-                                        value: 254,
-                                        message: 'Email should not be longer then 254 symbols',
-                                    },
-                                    pattern: {
-                                        value: /\S+@\S+\.\S+/,
-                                        message: 'Email should have form user@email.com',
-                                    },
-                                })}
                                 errorMessage={errors.email && errors.email.message}
                             />
                             <TextField

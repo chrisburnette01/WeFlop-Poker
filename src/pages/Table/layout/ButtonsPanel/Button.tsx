@@ -65,6 +65,10 @@ const BaseButton = styled.div<BaseButtonProps>`
         justify-content: ${({ justifyContent }) => justifyContent};
         align-items: ${({ alignItems }) => alignItems};
     }
+    .button-title {
+        display: flex;
+        align-items: center;
+    }
 `;
 
 interface ButtonProps {
@@ -76,9 +80,20 @@ interface ButtonProps {
     alignItems?: 'center' | 'flex-end' | 'flex-start';
     bold?: boolean | undefined;
     onClick?: () => void;
+    optionalText?: string | undefined;
 }
 
-const Button = ({ size, border, justifyContent, alignItems, title, backgroundColor, bold, onClick }: ButtonProps) => {
+const Button = ({
+    size,
+    border,
+    justifyContent,
+    alignItems,
+    title,
+    backgroundColor,
+    bold,
+    onClick,
+    optionalText,
+}: ButtonProps) => {
     const variant = () => {
         switch (size) {
             case 'large':
@@ -100,8 +115,13 @@ const Button = ({ size, border, justifyContent, alignItems, title, backgroundCol
             onClick={onClick}
         >
             <div className="border-wrapper">
-                <Typography variant={variant()} component="span" textTransform="uppercase">
+                <Typography variant={variant()} component="span" textTransform="uppercase" className="button-title">
                     {title}
+                    {optionalText ? (
+                        <Typography variant="h6" component="span">
+                            {optionalText}
+                        </Typography>
+                    ) : null}
                 </Typography>
             </div>
         </BaseButton>

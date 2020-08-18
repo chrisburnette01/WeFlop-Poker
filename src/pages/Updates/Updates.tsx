@@ -30,7 +30,7 @@ const Updates = () => {
                             <Subtitle>We are constantly working to make WeFlop a better product for you.</Subtitle>
                             <Subtitle>This is where we post our updates and poll our community.</Subtitle>
                         </div>
-                        <Line color="secondary" width="long" height="short" align="left" />
+                        <Line color="secondary" width="large" height="short" align="left" />
                     </LineContent>
                     <div style={{ margin: '8px 0 0 16px' }}>
                         <Rectangle size="big" />

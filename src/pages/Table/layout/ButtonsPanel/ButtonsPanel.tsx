@@ -90,7 +90,12 @@ const BaseButtonsPanel = styled.div`
     }
 `;
 
-const ButtonsPanel = ({ balance }) => {
+interface ButtonsPanelProps {
+    balance: number;
+    type: 'bet' | 'call';
+}
+
+const ButtonsPanel = ({ balance, type }: ButtonsPanelProps) => {
     const min = 0.5;
     const [rangeValue, setRangeValue] = useState<number[]>([min]);
 
@@ -102,7 +107,7 @@ const ButtonsPanel = ({ balance }) => {
         <BaseButtonsPanel>
             <div className="button-section button-top-section">
                 <Button
-                    title="33%"
+                    title={type === 'bet' ? '33%' : 'MIN'}
                     size="small"
                     border="left"
                     alignItems="flex-end"
@@ -110,21 +115,21 @@ const ButtonsPanel = ({ balance }) => {
                     onClick={() => buttonPercentHandler(33)}
                 />
                 <Button
-                    title="50%"
+                    title={type === 'bet' ? '50%' : '3X'}
                     size="small"
                     alignItems="flex-end"
                     justifyContent="flex-end"
                     onClick={() => buttonPercentHandler(50)}
                 />
                 <Button
-                    title="66%"
+                    title={type === 'bet' ? '66%' : '5X'}
                     size="small"
                     alignItems="flex-end"
                     justifyContent="flex-start"
                     onClick={() => buttonPercentHandler(66)}
                 />
                 <Button
-                    title="100%"
+                    title={type === 'bet' ? '66%' : 'POT'}
                     size="small"
                     border="right"
                     alignItems="flex-end"
@@ -176,17 +181,33 @@ const ButtonsPanel = ({ balance }) => {
                     />
                 </div>
                 <Button
-                    title="bet"
+                    title={type === 'bet' ? 'bet' : 'raise'}
                     size="large"
                     border="right"
                     alignItems="center"
                     justifyContent="flex-start"
                     backgroundColor="secondary"
+                    onClick={() => console.log('bet')}
                 />
             </div>
             <div className="button-section button-bottom-section">
-                <Button size="medium" border="left" title="fold" alignItems="flex-end" justifyContent="flex-end" />
-                <Button size="medium" border="right" title="call" alignItems="flex-end" justifyContent="flex-start" />
+                <Button
+                    size="medium"
+                    border="left"
+                    title="fold"
+                    alignItems="flex-end"
+                    justifyContent="flex-end"
+                    onClick={() => console.log('fold')}
+                />
+                <Button
+                    size="medium"
+                    border="right"
+                    title={type === 'bet' ? 'check' : 'call'}
+                    alignItems="flex-end"
+                    justifyContent="flex-start"
+                    optionalText={type === 'bet' ? undefined : '.50'}
+                    onClick={() => console.log('call')}
+                />
             </div>
         </BaseButtonsPanel>
     );

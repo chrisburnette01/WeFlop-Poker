@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Typography } from '../../../../components';
-import { Card, Balance } from '../';
+import { Card, Balance } from '../../components';
 
 import styled from 'styled-components';
 
@@ -24,12 +24,7 @@ const GameSection = ({ totalPot, balance, pot, className }: GameSectionProps) =>
                         {`MAIN [${balance.main.toFixed(2)}]`}
                     </Typography>
                     {balance.sides.map((el) => (
-                        <Typography
-                            key={Date.now.toString()}
-                            component="span"
-                            variant="h6"
-                            className="wrapper-text"
-                        >
+                        <Typography key={Date.now.toString()} component="span" variant="h6" className="wrapper-text">
                             {` / SIDE [${el.toFixed(2)}]`}
                         </Typography>
                     ))}
