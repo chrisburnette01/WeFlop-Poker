@@ -33,7 +33,7 @@ const Updates = () => {
                         <Line color="secondary" width="large" height="short" align="left" />
                     </LineContent>
                     <div style={{ margin: '8px 0 0 16px' }}>
-                        <Rectangle size="big" />
+                        <Rectangle height="extralarge" width="extralarge" />
                         {application.updates &&
                             application.updates.map((element, index) => <UpdateItem element={element} />)}
                     </div>

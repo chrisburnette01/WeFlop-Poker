@@ -28,7 +28,7 @@ const ResetPassword = () => {
     };
 
     const isValidated = check.password && check.password_repeat;
-    const buttonSubmit = <Button variant="secondary" validated={isValidated} className="button-form" title="reset" form="auth" />;
+    const buttonSubmit = <Button variant="secondary" validated={isValidated} className="button-form" title="reset" />;
 
     return (
         <>

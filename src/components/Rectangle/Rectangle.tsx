@@ -2,61 +2,69 @@ import styled from 'styled-components';
 import React from 'react';
 
 interface BaseRectangleProps {
-    size: 'small' | 'medium' | 'big' | 'button' | 'line' | 'input';
+    width: 'extrasmall' | 'small' | 'medium' | 'large' | 'extralarge' | 'initial' | string;
+    height: 'extrasmall' | 'small' | 'medium' | 'large' | 'extralarge' | 'initial' | string;
     color: 'primary' | 'secondary' | 'success' | string;
-    border?: 'small' | 'big';
+    border?: 'small' | 'large';
 }
 
 const BaseRectangle = styled.span<BaseRectangleProps>`
-    border-radius: ${({ border }) => (border === 'big' ? '4px' : '2px')};
+    border-radius: ${({ border }) => (border === 'large' ? '4px' : '2px')};
     background-color: ${({ theme, color }) =>
         theme.palette[color!] ? theme.palette[color!] : theme.palette.common[color!]};
     display: block;
-    width: ${({ size }) =>
-        size === 'small'
+    width: ${({ width }) =>
+        width === 'extrasmall'
+            ? '8px'
+            : width === 'small'
             ? '10px'
-            : size === 'medium'
-            ? '16px'
-            : size === 'button'
+            : width === 'medium'
             ? '12px'
-            : size === 'line'
+            : width === 'large'
+            ? '16px'
+            : width === 'extralarge'
+            ? '40px'
+            : width === 'initial'
             ? '100%'
-            : size === 'input'
-            ? '32px'
-            : '40px'};
-    height: ${({ size }) =>
-        size === 'small'
+            : width};
+    height: ${({ height }) =>
+        height === 'extrasmall'
+            ? '8px'
+            : height === 'small'
             ? '10px'
-            : size === 'medium'
+            : height === 'medium'
+            ? '12px'
+            : height === 'large'
             ? '16px'
-            : size === 'button'
-            ? '12px'
-            : size === 'line'
-            ? '12px'
-            : size === 'input'
-            ? '32px'
-            : '40px'};
+            : height === 'extralarge'
+            ? '40px'
+            : height === 'initial'
+            ? '100%'
+            : height};
     transition: background-color 0.4s ease-in-out;
 `;
 
 interface RectangleProps {
-    size: 'small' | 'medium' | 'big' | 'button' | 'line' | 'input';
+    width?: 'extrasmall' | 'small' | 'medium' | 'large' | 'extralarge' | 'initial' | string;
+    height?: 'extrasmall' | 'small' | 'medium' | 'large' | 'extralarge' | 'initial' | string;
     color?: 'primary' | 'secondary' | 'success' | string;
-    border?: 'small' | 'big';
+    border?: 'small' | 'large';
     className?: string;
 }
 
-const Rectangle = ({ color, size, border, className }: RectangleProps) => {
+const Rectangle = ({ color, width, height, border, className }: RectangleProps) => {
     return (
         <div className={`rectangle-wrapper ${className ? className : ''}`}>
-            <BaseRectangle size={size} color={color!} border={border} />
+            <BaseRectangle width={width!} height={height!} color={color!} border={border} />
         </div>
     );
 };
 
 Rectangle.defaultProps = {
     color: 'secondary',
-    border: 'big',
+    border: 'large',
+    width: 'initial',
+    height: 'initial'
 };
 
 export default Rectangle;

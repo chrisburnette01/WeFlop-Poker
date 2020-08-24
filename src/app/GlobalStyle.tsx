@@ -11,12 +11,40 @@ const GlobalStyle = createGlobalStyle`
     	bottom: -96px;
 		margin: 0 -25px 0 -25px;
 		position: absolute;
-		min-width: 340px;
+		min-width: 352px;
     }
 
     .button-play {
         margin: 48px -25px 0 -25px;
         min-width: 286px;
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .justify-content-center {
+        justify-content: center;
+    }
+
+    .justify-content-start {
+        justify-content: flex-start;
+    }
+
+    .justify-content-end {
+        justify-content: flex-end;
+    }
+
+    .align-items-center {
+        align-items: center;
+    }
+
+    .align-items-start {
+        align-items: flex-start;
+    }
+
+    .align-items-end {
+        align-items: flex-end;
     }
 `;
 

@@ -136,7 +136,7 @@ const TableItem = ({ table, type, onRemove }: TableItemProps) => {
     return (
         <>
             <TableItemBase style={type === 'archive' ? { marginLeft: '61px' } : undefined}>
-                <Rectangle size="small" border="small" color="yellow" className="play-rect-top" />
+                <Rectangle height="small" width="small" border="small" color="yellow" className="play-rect-top" />
                 <div
                     className="table-item-container"
                     onClick={() => setActive((prev) => !prev)}
@@ -213,7 +213,7 @@ const ActiveMenu = ({ selectedButton, table, onRemove }: ActiveMenuProps) => {
         case 'play':
             return (
                 <div className="wrapper-play-button">
-                    <Rectangle size="small" color="secondary" border="small" className="rectangle-small" />
+                    <Rectangle height="small" width="small" color="secondary" border="small" className="rectangle-small" />
                     <Typography component="span" variant="h6">
                         {`${table.name} has opened in a new tab.`}
                     </Typography>
@@ -244,19 +244,19 @@ const ActiveMenu = ({ selectedButton, table, onRemove }: ActiveMenuProps) => {
             return (
                 <>
                     <div className="hide-text-wrapper">
-                        <Rectangle size="button" color="secondary" border="small" className="rectangle-ledger" />
+                        <Rectangle height="medium" width="medium" color="secondary" border="small" className="rectangle-ledger" />
                         <Typography component="span" variant="h6" className="hide-text-text">
                             If you hide this table, it will no longer be displayed in this list.
                         </Typography>
                     </div>
                     <div className="hide-text-wrapper">
-                        <Rectangle size="button" color="secondary" border="small" className="rectangle-ledger" />
+                        <Rectangle height="medium" width="medium" color="secondary" border="small" className="rectangle-ledger" />
                         <Typography component="span" variant="h6" className="hide-text-text">
                             However, if you were to rejoin this game via link, it will reappear in this list.
                         </Typography>
                     </div>
                     <div className="hide-text-button" onClick={() => onRemove(table.gameNumber)}>
-                        <Rectangle size="button" color="initial" border="small" className="rectangle-ledger" />
+                        <Rectangle height="medium" width="medium" color="initial" border="small" className="rectangle-ledger" />
                         <Typography component="span" variant="h5" className="hide-text-text">
                             hide
                         </Typography>
@@ -281,7 +281,7 @@ const TablesButton = ({ name, selectedButton, onClick }: TablesButtonProps) => {
             <Typography component="span" variant="h5" textTransform="uppercase" color={color}>
                 {name}
             </Typography>
-            <Rectangle size="button" color={color} border="small" className="rect-wrapper-play" />
+            <Rectangle height="medium" width="medium" color={color} border="small" className="rect-wrapper-play" />
         </div>
     );
 };
@@ -296,11 +296,11 @@ const LedgerItem = ({ balance, name }: LedgerItemProps) => {
     return (
         <div className="ledger-item">
             <div className="ledger-item-inner">
-                <Rectangle size="button" color={color} border="small" className="rectangle-ledger" />
+                <Rectangle height="medium" width="medium" color={color} border="small" className="rectangle-ledger" />
                 <Typography variant="h6" component="span" color={color} className="ledger-balance">
                     {balance}
                 </Typography>
-                <Rectangle size="line" color={color} border="small" className="line-horizontal-ledger" />
+                <Rectangle height="initial" width="medium" color={color} border="small" className="line-horizontal-ledger" />
             </div>
             <Typography variant="h6" component="span" className="player-name-ledger">
                 {name}
@@ -318,7 +318,7 @@ interface InfoItemProps {
 const InfoItem = ({ name, value, uppercase }: InfoItemProps) => {
     return (
         <div className="play-info-item">
-            <Rectangle size="button" color="secondary" border="small" className="rectangle-ledger" />
+            <Rectangle height="medium" width="medium" color="secondary" border="small" className="rectangle-ledger" />
             <Typography component="p" variant="h6" className="info-item-text" textTransform="uppercase">
                 {`${name}:`}
                 <Typography

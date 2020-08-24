@@ -23,6 +23,8 @@ const FormAnimationWrapper = styled.div<FormAnimationProps>`
     & > * {
         margin-top: 16px;
     }
+
+    min-width: 304px;
 `;
 
 const Form = ({ children, onSubmit, buttonSubmit, isClicked, isRightIcon, notification, className }: FormProps) => {
@@ -44,7 +46,6 @@ const Form = ({ children, onSubmit, buttonSubmit, isClicked, isRightIcon, notifi
                 align="left"
                 className="form-line-right"
             />
-            {isRightIcon && <PatreonIcon />}
         </div>
     );
 };

@@ -37,7 +37,7 @@ const SignUp = () => {
     };
 
     const isValidated = check.name && check.email && check.password && check.password_repeat;
-    const buttonSubmit = <Button variant="secondary" validated={isValidated} className="button-form" title="register" form="auth" />;
+    const buttonSubmit = <Button variant="secondary" validated={isValidated} className="button-form" title="register" />;
 
     useEffect(() => {
         if (application.isLoading[SIGN_UP.REQUEST]) {

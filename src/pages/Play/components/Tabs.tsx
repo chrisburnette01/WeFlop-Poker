@@ -70,7 +70,7 @@ const Tabs = ({ form, className }: TabsProps) => {
                         onClick={() => buttonHandler('create')}
                     />
                 </div>
-                <Rectangle size="big" className="rect-play-wrapper" />
+                <Rectangle height="extralarge" width="extralarge" className="rect-play-wrapper" />
                 <div className="right-button-wrapper">
                     <Button
                         variant="play"
@@ -125,14 +125,15 @@ const Tabs = ({ form, className }: TabsProps) => {
                         {application.tables?.active?.map((table) => (
                             <TableItem key={table.gameNumber} table={table} onRemove={removeGame} type="active" />
                         ))}
-                        <Rectangle size="small" border="small" color="yellow" className="play-rect-bottom" />
+                        <Rectangle height="small" width="small" border="small" color="yellow" className="play-rect-bottom" />
                     </SlideDown>
                     <SlideDown open={active.archive}>
                         {application.tables?.archive?.map((table) => (
                             <TableItem key={table.gameNumber} table={table} onRemove={removeGame} type="archive" />
                         ))}
                         <Rectangle
-                            size="small"
+                            height="small"
+                            width="small"
                             border="small"
                             color="yellow"
                             className="play-rect-bottom play-rect-bottom-left"

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { useParams, useHistory } from 'react-router-dom';
 import { Card, Player, Balance } from './components';
@@ -9,7 +9,7 @@ import { resetPassword, RESET_PASSWORD } from '../../store/actions/application';
 
 import { Chat, Ledger, Leave, Settings } from './modals';
 import { Menu, ButtonsPanel, GameSection, ActionMenu } from './layout';
-
+import useMeasure from 'react-use-measure';
 import styled from 'styled-components';
 
 interface TableProps {
@@ -20,6 +20,22 @@ const Table = ({ className }: TableProps) => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const application = useSelector((state: RootState) => state.application);
+
+    const [pot, setPot] = useState<number | undefined>(300);
+    const [lastAction, setLastAction] = useState<boolean>(true);
+
+    const betButtonHandler = () => {
+        setPot(undefined);
+        setLastAction(false);
+    };
+
+    // const [centerCoordinates, setCenterCoordinates] = useState(0);
+
+    const [centerRef, centerCoordinates] = useMeasure();
+
+    const [balanceRef, balanceCoordinates] = useMeasure();
+
+    // console.log(centerCoordinates.top);
 
     const balance = {
         main: 21,
@@ -43,6 +59,10 @@ const Table = ({ className }: TableProps) => {
         setNavState(modal);
     };
 
+    // useEffect(() => {
+    //     setCenterCoordinates(centerRef!.current.getBoundingClientRect().top);
+    // }, [centerRef]);
+
     return (
         <>
             <Helmet>
@@ -53,24 +73,121 @@ const Table = ({ className }: TableProps) => {
                 <Menu navState={navState} setNavState={setNavStateHandler} type="blind" />
                 <div className="table-main">
                     <div className="row row-top">
-                        <Player username="glenn" balance={99} className="flex-end" />
-                        <Player username="glenn" balance={99} className="flex-start" type="player" />
-                        <Player username="glenn" balance={99} className="flex-start" type="player" />
-                        <Player username="glenn" balance={99} className="flex-end" />
+                        <Player
+                            username="glenn"
+                            balance={99}
+                            className="flex-end"
+                            type="player"
+                            slot={4}
+                            timeLeft={30}
+                            dealer
+                            pot={300}
+                            centerRef={centerCoordinates}
+                            balanceRef={balanceCoordinates}
+                        />
+                        <Player
+                            username="glenn"
+                            balance={99}
+                            className="flex-start"
+                            type="player"
+                            slot={5}
+                            timeLeft={30}
+                            activeSlot
+                            pot={300}
+                            centerRef={centerCoordinates}
+                            balanceRef={balanceCoordinates}
+                        />
+                        <Player
+                            username="glenn"
+                            pot={300}
+                            balance={99}
+                            className="flex-start"
+                            type="player"
+                            slot={6}
+                            centerRef={centerCoordinates}
+                            timeLeft={30}
+                            balanceRef={balanceCoordinates}
+                        />
+                        <Player
+                            username="glenn"
+                            pot={300}
+                            balance={99}
+                            className="flex-end"
+                            type="player"
+                            slot={7}
+                            timeLeft={30}
+                            centerRef={centerCoordinates}
+                            balanceRef={balanceCoordinates}
+                        />
                     </div>
                     <div className="row row-center">
-                        <Player username="glenn" balance={99} />
-                        <GameSection totalPot={100} pot={32222.14} balance={balance} />
-                        <Player username="glenn" balance={99} />
+                        <Player
+                            username="glenn"
+                            balance={99}
+                            slot={3}
+                            timeLeft={30}
+                            pot={300}
+                            type="player"
+                            centerRef={centerCoordinates}
+                            balanceRef={balanceCoordinates}
+                        />
+                        <GameSection
+                            totalPot={100}
+                            pot={32222.14}
+                            balance={balance}
+                            centerRef={centerRef}
+                            balanceRef={balanceRef}
+                        />
+                        <Player
+                            username="glenn"
+                            balance={99}
+                            slot={8}
+                            timeLeft={30}
+                            pot={300}
+                            type="player"
+                            centerRef={centerCoordinates}
+                            balanceRef={balanceCoordinates}
+                        />
                     </div>
                     <div className="row row-bottom">
-                        <Player username="glenn" balance={99} className="flex-start" type="player" />
-                        <Player username="glenn" balance={99} className="flex-end" type="player" />
-                        <Player username="glenn" balance={99} className="flex-start" />
+                        <Player
+                            username="glenn"
+                            balance={99}
+                            className="flex-start"
+                            slot={2}
+                            timeLeft={30}
+                            type="player"
+                            pot={300}
+                            centerRef={centerCoordinates}
+                            balanceRef={balanceCoordinates}
+                        />
+                        <Player
+                            username="glenn"
+                            balance={99}
+                            className="flex-end"
+                            type="player"
+                            slot={1}
+                            timeLeft={30}
+                            pot={pot}
+                            centerRef={centerCoordinates}
+                            balanceRef={balanceCoordinates}
+                            lastAction="call 10"
+                            isAction={lastAction}
+                        />
+                        <Player
+                            username="glenn"
+                            balance={99}
+                            className="flex-start"
+                            slot={9}
+                            timeLeft={30}
+                            pot={300}
+                            type="player"
+                            centerRef={centerCoordinates}
+                            balanceRef={balanceCoordinates}
+                        />
                     </div>
                     <div className="panel">
-                        <ButtonsPanel balance={1000} type="bet" />
-                       
+                        <ButtonsPanel balance={1000} type="bet" betButtonHandler={() => betButtonHandler()} />
                     </div>
                 </div>
             </Container>
@@ -96,11 +213,13 @@ export default styled(Table)`
     .row-top {
         max-width: 1060px;
         max-height: 150px;
+        margin-bottom: 40px;
     }
     .row-center {
         max-height: 300px;
     }
     .row-bottom {
+        margin-top: 70px;
         max-width: 960px;
         max-height: 150px;
     }
@@ -109,6 +228,7 @@ export default styled(Table)`
         flex: 1;
         margin-top: 12px;
         align-items: flex-end;
+        margin-top: 80px;
     }
     .flex-end {
         align-self: flex-end;

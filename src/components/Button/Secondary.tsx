@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { Rectangle, Line, Typography } from '../';
 
 interface BaseSecondaryButtonProps {
-    variant: 'auth' | 'play';
-    size: 'small' | 'big';
+    size: 'small' | 'large';
 }
 
 // bottom: ${({ variant }) => (variant === 'auth' ? '-96px' : 'unset')};
@@ -16,7 +15,7 @@ const BaseSecondaryButton = styled('button')<BaseSecondaryButtonProps>`
     display: flex;
     align-items: center;
     width: inherit;
-    height: ${({ size }) => (size === 'big' ? '48px' : '24px')};
+    height: ${({ size }) => (size === 'large' ? '48px' : '24px')};
     background: transparent;
     border: none;
     outline: none;
@@ -41,32 +40,27 @@ const BaseSecondaryButton = styled('button')<BaseSecondaryButtonProps>`
 interface SecondaryButtonProps {
     title: string;
     validated?: boolean;
-    form?: 'auth' | 'play';
-    size: 'small' | 'big';
+    size: 'small' | 'large';
     className?: string;
 }
 
-const Secondary = ({ title, validated, form, size, className }: SecondaryButtonProps) => {
+const Secondary = ({ title, validated, size, className }: SecondaryButtonProps) => {
     const color = validated ? 'success' : 'primary';
     return (
-        <BaseSecondaryButton variant={form!} size={size} className={className} type='submit'>
+        <BaseSecondaryButton size={size} className={className} type='submit'>
             <div className="lines-wrapper">
-                <Rectangle size={size === "big" ? "medium" : "small"} color={color} border={size} />
-                <Line width={size === "big" ? "large" : "small"} className="line-button" />
+                <Rectangle width={size === "large" ? "large" : "extrasmall"} height={size === "large" ? "large" : "extrasmall"} color={color} border={size} />
+                <Line width={size === "large" ? "large" : "small"} className="line-button" />
             </div>
-            <Typography component="span" variant={size === "big" ? "button2" : "h6"} textTransform="uppercase">
+            <Typography component="span" variant={size === "large" ? "button2" : "h6"} fontWeight={600} textTransform="uppercase">
                 {title}
             </Typography>
             <div className="lines-wrapper">
-                <Line width={size === "big" ? "large" : "small"} className="line-button line-button-last" />
-                <Rectangle size={size === "big" ? "medium" : "small"} color={color} border={size} />
+                <Line width={size === "large" ? "large" : "small"} className="line-button line-button-last" />
+                <Rectangle width={size === "large" ? "large" : "extrasmall"} height={size === "large" ? "large" : "extrasmall"} color={color} border={size} />
             </div>
         </BaseSecondaryButton>
     );
-};
-
-Secondary.defaultProps = {
-    form: 'auth'
 };
 
 export default Secondary;

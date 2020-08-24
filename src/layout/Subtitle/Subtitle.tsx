@@ -10,7 +10,7 @@ interface SubtitleProps {
 const Subtitle = ({ children, className }: SubtitleProps) => {
     return (
         <div className={className}>
-            <Rectangle size="small" border="small" color="secondary" />
+            <Rectangle height="small" width="small" border="small" color="secondary" />
             <div className="subtitles-wrapper">
                 <Typography component="h3" variant="body1" fontStyle="italic">
                     {children}

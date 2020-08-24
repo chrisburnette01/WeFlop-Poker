@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import { animated } from 'react-spring';
 
 import { Typography } from '../../../../components';
 
 interface BaseBalanceProps {
     size: 'small' | 'big';
+    style?: any;
 }
 
-const BaseBalance = styled.div<BaseBalanceProps>`
+const BaseBalance = styled(animated.div)<BaseBalanceProps>`
     height: ${({ size }) => (size === 'big' ? '30px' : '24px')};
     min-width: ${({ size }) => (size === 'big' ? '90px' : '66px')};
     border-radius: ${({ size }) => (size === 'big' ? '10px' : '9px')};
@@ -36,24 +38,21 @@ const BaseBalance = styled.div<BaseBalanceProps>`
 interface BalanceProps {
     size: 'small' | 'big';
     value: number;
+    style?: any;
     className?: string;
 }
 
-const Balance = ({ size, value, className }: BalanceProps) => {
+const Balance = React.forwardRef(({ size, value, className, style }: BalanceProps, ref: any) => {
     return (
-        <BaseBalance size={size} className={className}>
+        <BaseBalance size={size} className={className} ref={ref} style={style}>
             <div className="icon-outer">
                 <div className="icon-inner" />
             </div>
-            <Typography
-                component="span"
-                variant={size === 'big' ? 'body1' : 'h6'}
-                className="typography-balance"
-            >
+            <Typography component="span" variant={size === 'big' ? 'body1' : 'h6'} className="typography-balance">
                 {value.toFixed(2)}
             </Typography>
         </BaseBalance>
     );
-};
+});
 
 export default Balance;

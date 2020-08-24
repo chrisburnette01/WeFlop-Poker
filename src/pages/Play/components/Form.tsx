@@ -62,7 +62,7 @@ const Form = ({ onSubmit, notification, className }: FormProps) => {
                         })}
                         errorMessage={errors.name && errors.name.message}
                     />
-                    <Typography component="span" variant="h4" color="yellow" className="title-create-table">
+                    <Typography component="span" variant="h4" textTransform="uppercase" fontWeight={800} color="yellow" className="title-create-table">
                         TABLE NAME
                     </Typography>
                 </div>
@@ -90,10 +90,10 @@ const Form = ({ onSubmit, notification, className }: FormProps) => {
                         })}
                         errorMessage={errors.blinds && errors.blinds.message}
                     />
-                    <Rectangle size="input" color="yellow" className="rect-play-input" />
-                    <Rectangle size="input" color="yellow" className="rect-play-input" />
-                    <Rectangle size="input" color="yellow" className="rect-play-input" />
-                    <Typography component="span" variant="h4" color="yellow" className="title-create-table">
+                    <Rectangle width="32px" height="32px" color="yellow" className="rect-play-input" />
+                    <Rectangle width="32px" height="32px" color="yellow" className="rect-play-input" />
+                    <Rectangle width="32px" height="32px" color="yellow" className="rect-play-input" />
+                    <Typography component="span" variant="h4" textTransform="uppercase" fontWeight={800} color="yellow" className="title-create-table">
                         BLINDS
                     </Typography>
                 </div>
@@ -124,10 +124,10 @@ const Form = ({ onSubmit, notification, className }: FormProps) => {
                         })}
                         errorMessage={errors.max_buyin && errors.max_buyin.message}
                     />
-                    <Rectangle size="input" color="yellow" className="rect-play-input" />
-                    <Rectangle size="input" color="yellow" className="rect-play-input" />
-                    <Rectangle size="input" color="yellow" className="rect-play-input" />
-                    <Typography component="span" variant="h4" color="yellow" className="title-create-table">
+                    <Rectangle width="32px" height="32px" color="yellow" className="rect-play-input" />
+                    <Rectangle width="32px" height="32px" color="yellow" className="rect-play-input" />
+                    <Rectangle width="32px" height="32px" color="yellow" className="rect-play-input" />
+                    <Typography component="span" variant="h4" textTransform="uppercase" fontWeight={800} color="yellow" className="title-create-table">
                         MAX BUY-IN
                     </Typography>
                 </div>
@@ -158,10 +158,10 @@ const Form = ({ onSubmit, notification, className }: FormProps) => {
                         })}
                         errorMessage={errors.min_buyin && errors.min_buyin.message}
                     />
-                    <Rectangle size="input" color="yellow" className="rect-play-input" />
-                    <Rectangle size="input" color="yellow" className="rect-play-input" />
-                    <Rectangle size="input" color="yellow" className="rect-play-input" />
-                    <Typography component="span" variant="h4" color="yellow" className="title-create-table">
+                    <Rectangle width="32px" height="32px" color="yellow" className="rect-play-input" />
+                    <Rectangle width="32px" height="32px" color="yellow" className="rect-play-input" />
+                    <Rectangle width="32px" height="32px" color="yellow" className="rect-play-input" />
+                    <Typography component="span" variant="h4" textTransform="uppercase" fontWeight={800} color="yellow" className="title-create-table">
                         MIN BUY-IN
                     </Typography>
                 </div>
@@ -190,18 +190,17 @@ const Form = ({ onSubmit, notification, className }: FormProps) => {
                         })}
                         errorMessage={errors.time && errors.time.message}
                     />
-                    <Rectangle size="input" color="yellow" className="rect-play-input" />
-                    <Rectangle size="input" color="yellow" className="rect-play-input" />
-                    <Rectangle size="input" color="yellow" className="rect-play-input" />
-                    <Rectangle size="input" color="yellow" className="rect-play-input" />
-                    <Typography component="span" variant="h4" color="yellow" className="title-create-table">
+                    <Rectangle width="32px" height="32px" color="yellow" className="rect-play-input" />
+                    <Rectangle width="32px" height="32px" color="yellow" className="rect-play-input" />
+                    <Rectangle width="32px" height="32px" color="yellow" className="rect-play-input" />
+                    <Typography component="span" variant="h4" textTransform="uppercase" fontWeight={800} color="yellow" className="title-create-table">
                         TIME BANK
                     </Typography>
                 </div>
             </div>
-            <Rectangle size="medium" color="yellow" />
+            <Rectangle height="large" width="large" color="yellow" />
             <div className="play-button-notification-wrapper">
-                <Button variant="secondary" validated={isValidated} className="button-play" form="play" title="create" />
+                <Button variant="secondary" validated={isValidated} className="button-play" title="create" />
             </div>
             <Notification type="play">{notification}</Notification>
         </form>

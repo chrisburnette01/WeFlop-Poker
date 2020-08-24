@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Typography } from '../';
 
 interface BaseButtonProps {
-    size: 'small' | 'big';
+    size: 'small' | 'large';
     align: 'left' | 'right';
     as: React.ElementType;
     to?: string;
@@ -28,7 +28,7 @@ const BaseButton = styled('div')<BaseButtonProps>`
     ${({ theme, active }) => (active ? `color: ${active ? theme.palette.secondary : theme.palette.primary};` : null)}
     text-align: ${({ align }) => align};
     align-self: ${({ align }) => (align === 'right' ? 'flex-end' : null)};
-    height: ${({ size }) => (size === 'big' ? '64px' : '48px')};
+    height: ${({ size }) => (size === 'large' ? '64px' : '48px')};
     cursor: ${({ disabled }) => (disabled ? 'unset' : 'pointer')};
     margin-bottom: ${({ bottomGutter }) => (bottomGutter ? '64px' : null)};
 
@@ -52,7 +52,7 @@ const BaseButton = styled('div')<BaseButtonProps>`
 
 interface PrimaryButtonProps {
     title: string | null;
-    size: 'small' | 'big';
+    size: 'small' | 'large';
     align?: 'left' | 'right';
     onClick?: () => void;
     component?: 'button' | 'link';
@@ -91,7 +91,7 @@ const Primary = ({
             size={size!}
         >
             {(align === undefined || align === 'left') && <span className="line" />}
-            <Typography variant={size === 'big' ? 'button1' : 'button2'} color={color} textTransform='uppercase' component='span'>
+            <Typography variant={size === 'large' ? 'button1' : 'button2'} color={color} textTransform='uppercase' component='span'>
                 {title}
             </Typography>
             <span className="title"></span>

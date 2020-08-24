@@ -93,9 +93,10 @@ const BaseButtonsPanel = styled.div`
 interface ButtonsPanelProps {
     balance: number;
     type: 'bet' | 'call';
+    betButtonHandler: () => void;
 }
 
-const ButtonsPanel = ({ balance, type }: ButtonsPanelProps) => {
+const ButtonsPanel = ({ balance, type, betButtonHandler }: ButtonsPanelProps) => {
     const min = 0.5;
     const [rangeValue, setRangeValue] = useState<number[]>([min]);
 
@@ -129,7 +130,7 @@ const ButtonsPanel = ({ balance, type }: ButtonsPanelProps) => {
                     onClick={() => buttonPercentHandler(66)}
                 />
                 <Button
-                    title={type === 'bet' ? '66%' : 'POT'}
+                    title={type === 'bet' ? '100%' : 'POT'}
                     size="small"
                     border="right"
                     alignItems="flex-end"
@@ -187,7 +188,7 @@ const ButtonsPanel = ({ balance, type }: ButtonsPanelProps) => {
                     alignItems="center"
                     justifyContent="flex-start"
                     backgroundColor="secondary"
-                    onClick={() => console.log('bet')}
+                    onClick={betButtonHandler}
                 />
             </div>
             <div className="button-section button-bottom-section">

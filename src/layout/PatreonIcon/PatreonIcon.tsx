@@ -7,7 +7,7 @@ interface PetreonIconProps {
 
 const PatreonIcon = ({ className }: PetreonIconProps) => {
     return (
-        <a href="#" className={`patreon-icon-wrapper ${className}`}>
+        <a href="#" className={className}>
             <span className="patreon-icon-line" />
             <span className="patreon-icon-round" />
         </a>
@@ -16,6 +16,7 @@ const PatreonIcon = ({ className }: PetreonIconProps) => {
 
 export default styled(PatreonIcon)<PetreonIconProps>`
     display: flex;
+    margin-top: 16px;
     .patreon-icon-line {
         display: block;
         height: 51px;

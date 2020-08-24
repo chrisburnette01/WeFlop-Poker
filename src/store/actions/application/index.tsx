@@ -1,62 +1,62 @@
 type Action = {
-    REQUEST: string,
-    SUCCESS: string,
-    ERROR: string
-}
+    REQUEST: string;
+    SUCCESS: string;
+    ERROR: string;
+};
 
 const SIGN_UP: Action = {
     REQUEST: 'SIGN_UP_REQUEST',
     SUCCESS: 'SIGN_UP_SUCCESS',
-    ERROR: 'SIGN_UP_ERROR'
-}
+    ERROR: 'SIGN_UP_ERROR',
+};
 
 const SIGN_IN: Action = {
     REQUEST: 'SIGN_IN_REQUEST',
     SUCCESS: 'SIGN_IN_SUCCESS',
-    ERROR: 'SIGN_IN_ERROR'
-}
+    ERROR: 'SIGN_IN_ERROR',
+};
 
 const RESET_PASSWORD: Action = {
     REQUEST: 'RESET_PASSWORD_REQUEST',
     SUCCESS: 'RESET_PASSWORD_SUCCESS',
-    ERROR: 'RESET_PASSWORD_ERROR'
-}
+    ERROR: 'RESET_PASSWORD_ERROR',
+};
 
 const SIGN_OUT: Action = {
     REQUEST: 'SIGN_OUT_REQUEST',
     SUCCESS: 'SIGN_OUT_SUCCESS',
-    ERROR: 'SIGN_OUT_ERROR'
-}
+    ERROR: 'SIGN_OUT_ERROR',
+};
 
 const SEND_FEEDBACK: Action = {
     REQUEST: 'SEND_FEEDBACK_REQUEST',
     SUCCESS: 'SEND_FEEDBACK_SUCCESS',
-    ERROR: 'SEND_FEEDBACK_ERROR'
-}
+    ERROR: 'SEND_FEEDBACK_ERROR',
+};
 
 const GET_UPDATES: Action = {
     REQUEST: 'GET_UPDATES_REQUEST',
     SUCCESS: 'GET_UPDATES_SUCCESS',
-    ERROR: 'GET_UPDATES_ERROR'
-}
+    ERROR: 'GET_UPDATES_ERROR',
+};
 
 const VOTE_POLL: Action = {
     REQUEST: 'VOTE_POLL_REQUEST',
     SUCCESS: 'VOTE_POLL_SUCCESS',
-    ERROR: 'VOTE_POLL_ERROR'
-}
+    ERROR: 'VOTE_POLL_ERROR',
+};
 
 const GET_TABLES: Action = {
     REQUEST: 'GET_TABLES_REQUEST',
     SUCCESS: 'GET_TABLES_SUCCESS',
-    ERROR: 'GET_TABLES_ERROR'
-}
+    ERROR: 'GET_TABLES_ERROR',
+};
 
 const CREATE_TABLE: Action = {
     REQUEST: 'CREATE_TABLE_REQUEST',
     SUCCESS: 'CREATE_TABLE_SUCCESS',
-    ERROR: 'CREATE_TABLE_ERROR'
-}
+    ERROR: 'CREATE_TABLE_ERROR',
+};
 
 /*
 
@@ -153,7 +153,7 @@ const signOut = () => {
 
 const signOutSuccess = () => {
     return {
-        type: SIGN_OUT.SUCCESS
+        type: SIGN_OUT.SUCCESS,
     };
 };
 
@@ -253,7 +253,7 @@ Get tables
 const getTables = (payload) => {
     return {
         type: GET_TABLES.REQUEST,
-        payload
+        payload,
     };
 };
 
@@ -334,5 +334,5 @@ export {
     getTablesError,
     createTable,
     createTableSuccess,
-    createTableError
-}
+    createTableError,
+};

@@ -41,7 +41,7 @@ const UpdateItem = ({ element, className }: UpdateItemProps) => {
             </div>
             <SlideDown open={open}>{list}</SlideDown>
             <div className="rectangle-wrapper-item">
-                <Rectangle size="big" />
+                <Rectangle height="extralarge" width="extralarge" />
             </div>
         </div>
     );

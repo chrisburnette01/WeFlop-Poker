@@ -59,6 +59,7 @@ type Typography = {
     date?: Text;
     input1?: Text;
     input2?: Text;
+    input3?: Text;
     display1?: Text;
 };
 
@@ -240,6 +241,11 @@ const defaultTypography: Typography = {
         fontWeight: 600,
         letterSpacing: '1.25px',
         fontSize: '1.4rem',
+    },
+    input3: {
+        fontWeight: 500,
+        letterSpacing: '1.07px',
+        fontSize: '1.2rem',
     },
     tooltip: {
         fontSize: '1.2rem',

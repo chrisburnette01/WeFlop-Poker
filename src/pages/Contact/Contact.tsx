@@ -49,29 +49,29 @@ const Contact = () => {
                             <Subtitle>Please also consider donating to our Patreon!</Subtitle>
                         </div>
                         <Line color="secondary" width="large" height="short" align="left" />
-                        <Form
-                            onSubmit={handleSubmit(onSubmit)}
-                            buttonSubmit={buttonSubmit}
-                            isClicked={isClicked}
-                            isRightIcon={true}
-                            notification={isMessageSent ? notification : null}
-                        >
-                            <TextField
-                                variant="textarea"
-                                onFocus={() => setIsClicked(true)}
-                                disabled={isMessageSent}
-                                name="feedback"
-                                register={(ref) =>
-                                    register(ref, {
-                                        required: true,
-                                        minLength: 1,
-                                    })
-                                }
-                            />
-                            <Notification type="auth">
-                            
-                            </Notification>
-                        </Form>
+                        <div className="d-flex">
+                            <Form
+                                onSubmit={handleSubmit(onSubmit)}
+                                buttonSubmit={buttonSubmit}
+                                isClicked={isClicked}
+                                isRightIcon={true}
+                                notification={isMessageSent ? notification : null}
+                            >
+                                <TextField
+                                    variant="textarea"
+                                    onFocus={() => setIsClicked(true)}
+                                    disabled={isMessageSent}
+                                    name="feedback"
+                                    register={(ref) =>
+                                        register(ref, {
+                                            required: true,
+                                            minLength: 1,
+                                        })
+                                    }
+                                />
+                            </Form>
+                            <PatreonIcon />
+                        </div>
                     </LineContent>
                 </Content>
             </Container>

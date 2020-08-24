@@ -4,6 +4,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import reducers from './reducers';
 import { ApplicationState } from './reducers/application/types';
+import { TableState } from './reducers/table/types';
 import sagas from './sagas';
 
 const persistConfig = {
@@ -24,5 +25,6 @@ export const persistor = persistStore(store);
 sagaMiddleware.run(sagas);
 
 export type RootState = {
-	application: ApplicationState
+	application: ApplicationState,
+	table: TableState
 };

@@ -1,0 +1,829 @@
+import {
+    JOIN_GAME,
+    BET,
+    CHECK,
+    FOLD,
+    RAISE,
+    CALL,
+    SIT_IN,
+    SIT_OUT,
+    CHANGE_SEATS,
+    WAIT_BB,
+    POST_BB,
+    SIT_OUT_NEXT_BB,
+    SIT_OUT_NEXT_HAND,
+    BUY_IN,
+    TOP_UP,
+    MUCK,
+    SHOW,
+    GET_CHAT,
+    GET_BALANCE,
+    SET_AUTO_MUCK,
+    SET_MUSIC,
+    SET_SOUNDS,
+    GET_LEDGER,
+    SEND_MESSAGE_CHAT,
+} from '../../actions/table';
+import { TableState, TableAction } from './types';
+
+const defaultTableState: TableState = {
+    isLoading: {},
+    error: {},
+    success: {},
+    players: [],
+    activeSlot: 1,
+    chat: [],
+    balance: {
+        totalPot: 0,
+    },
+    autoMuck: false,
+    music: false,
+    gameSounds: true,
+    ledger: undefined,
+};
+
+const table = (state: TableState = defaultTableState, action: TableAction) => {
+    switch (action.type) {
+        case JOIN_GAME.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [JOIN_GAME.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [JOIN_GAME.ERROR]: undefined,
+                },
+            };
+        case JOIN_GAME.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [JOIN_GAME.REQUEST]: undefined,
+                },
+                players: action.payload,
+            };
+        case JOIN_GAME.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [JOIN_GAME.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [JOIN_GAME.ERROR]: action.payload,
+                },
+            };
+        case BET.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [BET.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [BET.ERROR]: undefined,
+                },
+            };
+        case BET.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [BET.REQUEST]: undefined,
+                },
+            };
+        case BET.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [BET.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [BET.ERROR]: action.payload,
+                },
+            };
+        case CHECK.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [CHECK.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [CHECK.ERROR]: undefined,
+                },
+            };
+        case CHECK.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [CHECK.REQUEST]: undefined,
+                },
+            };
+        case CHECK.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [CHECK.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [CHECK.ERROR]: action.payload,
+                },
+            };
+        case FOLD.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [FOLD.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [FOLD.ERROR]: undefined,
+                },
+            };
+        case FOLD.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [FOLD.REQUEST]: undefined,
+                },
+            };
+        case FOLD.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [FOLD.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [FOLD.ERROR]: action.payload,
+                },
+            };
+        case RAISE.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [RAISE.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [RAISE.ERROR]: undefined,
+                },
+            };
+        case RAISE.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [RAISE.REQUEST]: undefined,
+                },
+            };
+        case RAISE.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [RAISE.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [RAISE.ERROR]: action.payload,
+                },
+            };
+        case CALL.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [CALL.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [CALL.ERROR]: undefined,
+                },
+            };
+        case CALL.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [CALL.REQUEST]: undefined,
+                },
+            };
+        case CALL.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [CALL.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [CALL.ERROR]: action.payload,
+                },
+            };
+        case SIT_IN.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SIT_IN.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [SIT_IN.ERROR]: undefined,
+                },
+            };
+        case SIT_IN.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SIT_IN.REQUEST]: undefined,
+                },
+            };
+        case SIT_IN.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SIT_IN.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [SIT_IN.ERROR]: action.payload,
+                },
+            };
+        case SIT_OUT.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SIT_OUT.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [SIT_OUT.ERROR]: undefined,
+                },
+            };
+        case SIT_OUT.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SIT_OUT.REQUEST]: undefined,
+                },
+            };
+        case SIT_OUT.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SIT_OUT.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [SIT_OUT.ERROR]: action.payload,
+                },
+            };
+        case CHANGE_SEATS.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [CHANGE_SEATS.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [CHANGE_SEATS.ERROR]: undefined,
+                },
+            };
+        case CHANGE_SEATS.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [CHANGE_SEATS.REQUEST]: undefined,
+                },
+            };
+        case CHANGE_SEATS.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [CHANGE_SEATS.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [CHANGE_SEATS.ERROR]: action.payload,
+                },
+            };
+        case WAIT_BB.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [WAIT_BB.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [WAIT_BB.ERROR]: undefined,
+                },
+            };
+        case WAIT_BB.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [WAIT_BB.REQUEST]: undefined,
+                },
+            };
+        case WAIT_BB.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [WAIT_BB.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [WAIT_BB.ERROR]: action.payload,
+                },
+            };
+        case POST_BB.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [POST_BB.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [POST_BB.ERROR]: undefined,
+                },
+            };
+        case POST_BB.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [POST_BB.REQUEST]: undefined,
+                },
+            };
+        case POST_BB.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [POST_BB.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [POST_BB.ERROR]: action.payload,
+                },
+            };
+        case SIT_OUT_NEXT_BB.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SIT_OUT_NEXT_BB.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [SIT_OUT_NEXT_BB.ERROR]: undefined,
+                },
+            };
+        case SIT_OUT_NEXT_BB.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SIT_OUT_NEXT_BB.REQUEST]: undefined,
+                },
+            };
+        case SIT_OUT_NEXT_BB.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SIT_OUT_NEXT_BB.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [SIT_OUT_NEXT_BB.ERROR]: action.payload,
+                },
+            };
+        case SIT_OUT_NEXT_HAND.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SIT_OUT_NEXT_HAND.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [SIT_OUT_NEXT_HAND.ERROR]: undefined,
+                },
+            };
+        case SIT_OUT_NEXT_HAND.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SIT_OUT_NEXT_HAND.REQUEST]: undefined,
+                },
+            };
+        case SIT_OUT_NEXT_HAND.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SIT_OUT_NEXT_HAND.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [SIT_OUT_NEXT_HAND.ERROR]: action.payload,
+                },
+            };
+        case BUY_IN.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [BUY_IN.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [BUY_IN.ERROR]: undefined,
+                },
+            };
+        case BUY_IN.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [BUY_IN.REQUEST]: undefined,
+                },
+            };
+        case BUY_IN.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [BUY_IN.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [BUY_IN.ERROR]: action.payload,
+                },
+            };
+        case TOP_UP.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [TOP_UP.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [TOP_UP.ERROR]: undefined,
+                },
+            };
+        case TOP_UP.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [TOP_UP.REQUEST]: undefined,
+                },
+            };
+        case TOP_UP.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [TOP_UP.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [TOP_UP.ERROR]: action.payload,
+                },
+            };
+        case MUCK.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [MUCK.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [MUCK.ERROR]: undefined,
+                },
+            };
+        case MUCK.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [MUCK.REQUEST]: undefined,
+                },
+            };
+        case MUCK.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [MUCK.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [MUCK.ERROR]: action.payload,
+                },
+            };
+        case SHOW.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SHOW.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [SHOW.ERROR]: undefined,
+                },
+            };
+        case SHOW.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SHOW.REQUEST]: undefined,
+                },
+            };
+        case SHOW.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SHOW.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [SHOW.ERROR]: action.payload,
+                },
+            };
+        case GET_CHAT.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [GET_CHAT.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [GET_CHAT.ERROR]: undefined,
+                },
+            };
+        case GET_CHAT.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [GET_CHAT.REQUEST]: undefined,
+                },
+                chat: action.payload,
+            };
+        case GET_CHAT.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [GET_CHAT.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [GET_CHAT.ERROR]: action.payload,
+                },
+            };
+        case GET_BALANCE.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [GET_BALANCE.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [GET_BALANCE.ERROR]: undefined,
+                },
+            };
+        case GET_BALANCE.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [GET_BALANCE.REQUEST]: undefined,
+                },
+                balance: action.payload,
+            };
+        case GET_BALANCE.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [GET_BALANCE.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [GET_BALANCE.ERROR]: action.payload,
+                },
+            };
+        case SET_AUTO_MUCK.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SET_AUTO_MUCK.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [SET_AUTO_MUCK.ERROR]: undefined,
+                },
+            };
+        case SET_AUTO_MUCK.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SET_AUTO_MUCK.REQUEST]: undefined,
+                },
+                autoMuck: action.payload,
+            };
+        case SET_AUTO_MUCK.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SET_AUTO_MUCK.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [SET_AUTO_MUCK.ERROR]: action.payload,
+                },
+            };
+        case SET_MUSIC.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SET_MUSIC.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [SET_MUSIC.ERROR]: undefined,
+                },
+            };
+        case SET_MUSIC.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SET_MUSIC.REQUEST]: undefined,
+                },
+                music: action.payload,
+            };
+        case SET_MUSIC.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SET_MUSIC.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [SET_MUSIC.ERROR]: action.payload,
+                },
+            };
+        case SET_SOUNDS.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SET_SOUNDS.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [SET_SOUNDS.ERROR]: undefined,
+                },
+            };
+        case SET_SOUNDS.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SET_SOUNDS.REQUEST]: undefined,
+                },
+                gameSounds: action.payload,
+            };
+        case SET_SOUNDS.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SET_SOUNDS.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [SET_SOUNDS.ERROR]: action.payload,
+                },
+            };
+        case GET_LEDGER.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [GET_LEDGER.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [GET_LEDGER.ERROR]: undefined,
+                },
+            };
+        case GET_LEDGER.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [GET_LEDGER.REQUEST]: undefined,
+                },
+                ledger: action.payload,
+            };
+        case GET_LEDGER.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [GET_LEDGER.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [GET_LEDGER.ERROR]: action.payload,
+                },
+            };
+        case SEND_MESSAGE_CHAT.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SEND_MESSAGE_CHAT.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [SEND_MESSAGE_CHAT.ERROR]: undefined,
+                },
+            };
+        case SEND_MESSAGE_CHAT.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SEND_MESSAGE_CHAT.REQUEST]: undefined,
+                },
+                chat: [...state.chat, action.payload],
+            };
+        case SEND_MESSAGE_CHAT.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SEND_MESSAGE_CHAT.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [SEND_MESSAGE_CHAT.ERROR]: action.payload,
+                },
+            };
+
+        default:
+            return state;
+    }
+};
+
+export default table;

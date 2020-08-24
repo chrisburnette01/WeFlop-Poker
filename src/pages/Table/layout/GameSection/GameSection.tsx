@@ -10,9 +10,11 @@ interface GameSectionProps {
     balance: any;
     pot: number;
     className?: string;
+    centerRef: any;
+    balanceRef: any;
 }
 
-const GameSection = ({ totalPot, balance, pot, className }: GameSectionProps) => {
+const GameSection = ({ totalPot, balance, pot, className, centerRef, balanceRef }: GameSectionProps) => {
     return (
         <div className={className}>
             <div className="wrapper">
@@ -23,23 +25,33 @@ const GameSection = ({ totalPot, balance, pot, className }: GameSectionProps) =>
                     <Typography component="span" variant="h6">
                         {`MAIN [${balance.main.toFixed(2)}]`}
                     </Typography>
-                    {balance.sides.map((el) => (
-                        <Typography key={Date.now.toString()} component="span" variant="h6" className="wrapper-text">
-                            {` / SIDE [${el.toFixed(2)}]`}
-                        </Typography>
-                    ))}
                 </div>
                 <div className="wrapper-cards">
-                    <Card />
-                    <Card />
-                    <Card variant="H1" />
-                    <Card />
-                    <Card />
+                    <div className="card-item">
+                        <div className="skeleton" />
+                        <Card />
+                    </div>
+                    <div className="card-item">
+                        <div className="skeleton" />
+                        <Card />
+                    </div>
+                    <div className="card-item" id="center-card">
+                        <div className="skeleton" />
+                        <Card variant="H1" ref={centerRef} />
+                    </div>
+                    <div className="card-item">
+                        <div className="skeleton" />
+                        <Card />
+                    </div>
+                    <div className="card-item">
+                        <div className="skeleton" />
+                        <Card />
+                    </div>
                 </div>
                 <div className="wrapper-balances">
                     <Balance value={pot} size="small" className="balance-gutter" />
                     <Balance value={pot} size="small" className="balance-gutter" />
-                    <Balance value={pot} size="big" className="balance-gutter" />
+                    <Balance value={pot} size="big" className="balance-gutter" ref={balanceRef} />
                     <Balance value={pot} size="small" className="balance-gutter" />
                     <Balance value={pot} size="small" className="balance-gutter" />
                 </div>
@@ -69,5 +81,18 @@ export default styled(GameSection)`
 
     .balance-gutter {
         margin: 0 2.5px;
+    }
+
+    .card-item {
+        width: 58px;
+        height: 79px;
+    }
+
+    .skeleton {
+        position: absolute;
+        border: 3px solid ${({ theme }) => theme.palette.secondary};
+        border-radius: 3px;
+        height: inherit;
+        width: inherit;
     }
 `;

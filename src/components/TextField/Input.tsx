@@ -19,10 +19,10 @@ const BaseInput = styled('div')<BaseInputProps>`
 
     .input {
         text-align: center;
-        font-size: ${({ theme }) => theme.typography.input1!.fontSize};
+        font-size: ${({ theme, size }) => size === 'large' ? theme.typography.input1!.fontSize : theme.typography.input3!.fontSize};
         font-family: ${({ theme }) => theme.typography.fontFamily};
         color: ${({ theme, validated, size }) => (validated === true && size === 'large' ? theme.palette.success : theme.palette.primary)};
-        letter-spacing: ${({ theme }) => theme.typography.input1?.letterSpacing};
+        letter-spacing: ${({ theme, size }) => size === 'large' ? theme.typography.input1!.letterSpacing : theme.typography.input3!.letterSpacing};
         position: relative;
         width: ${({ width }) => width ? width : '291px'};
         background: transparent;

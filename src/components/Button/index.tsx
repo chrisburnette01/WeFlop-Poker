@@ -6,7 +6,7 @@ import ButtonPlay from './ButtonPlay';
 interface ButtonProps {
     title: string | null;
     variant?: 'primary' | 'secondary' | 'play';
-    size?: 'small' | 'big';
+    size?: 'small' | 'large';
     align?: 'left' | 'right';
     onClick?: any;
     component?: 'button' | 'link';
@@ -17,7 +17,6 @@ interface ButtonProps {
     validated?: boolean;
     color?: 'primary' | 'secondary' | 'initial' | string;
     disabled?: boolean;
-    form?: 'auth' | 'play';
     className?: string;
 }
 
@@ -35,7 +34,6 @@ const Button = ({
     validated,
     variant,
     disabled,
-    form,
     className
 }: ButtonProps) => {
     switch (variant) {
@@ -56,7 +54,7 @@ const Button = ({
                 />
             );
         case 'secondary':
-            return <Secondary title={title!} validated={validated} size={size!} form={form} className={className} />;
+            return <Secondary title={title!} validated={validated} size={size!} className={className} />;
         case 'play':
             return <ButtonPlay title={title!} active={active} align={align!} onClick={onClick} />;
         default:
@@ -65,7 +63,7 @@ const Button = ({
 };
 
 Button.defaultProps = {
-    size: 'big',
+    size: 'large',
     active: false,
     bottomGutter: false,
     color: 'primary',

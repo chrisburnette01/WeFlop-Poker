@@ -1,14 +1,14 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { 
-	SIGN_IN,
-	SIGN_UP,
-	RESET_PASSWORD,
-	SIGN_OUT,
-	SEND_FEEDBACK,
-	GET_UPDATES,
-	VOTE_POLL,
-	GET_TABLES,
-	CREATE_TABLE,
+import {
+    SIGN_IN,
+    SIGN_UP,
+    RESET_PASSWORD,
+    SIGN_OUT,
+    SEND_FEEDBACK,
+    GET_UPDATES,
+    VOTE_POLL,
+    GET_TABLES,
+    CREATE_TABLE,
     signUpSuccess,
     signUpError,
     signInSuccess,
@@ -26,35 +26,24 @@ import {
     getTablesSuccess,
     getTablesError,
     createTableSuccess,
-    createTableError
+    createTableError,
 } from '../../actions/application';
-import {
-	signUpRequest,
-	signInRequest,
-	resetPasswordRequest
-} from '../../../api/auth';
-import {
-	sendFeedbackRequest,
-	getUpdatesRequest,
-	votePollRequest
-} from '../../../api/general';
-import {
-	getTablesRequest,
-	createTableRequest
-} from '../../../api/table';
+import { signUpRequest, signInRequest, resetPasswordRequest } from '../../../api/auth';
+import { sendFeedbackRequest, getUpdatesRequest, votePollRequest } from '../../../api/general';
+import { getTablesRequest, createTableRequest } from '../../../api/table';
 
 const signIn = function* (action) {
     try {
         const data = yield call(signInRequest, action.payload);
 
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("expire", data.expire);
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('expire', data.expire);
 
         yield put(signInSuccess(data));
     } catch (error) {
-        localStorage.removeItem("token");
-        localStorage.removeItem("expire");
-        
+        localStorage.removeItem('token');
+        localStorage.removeItem('expire');
+
         yield put(signInError(error));
     }
 };
@@ -70,9 +59,9 @@ const signUp = function* (action) {
 
 const signOut = function* (action) {
     try {
-        localStorage.removeItem("token");
-        localStorage.removeItem("expire");
-        
+        localStorage.removeItem('token');
+        localStorage.removeItem('expire');
+
         yield put(signOutSuccess());
     } catch (error) {
         yield put(signOutError(error));
@@ -134,7 +123,7 @@ const createTable = function* (action) {
 };
 
 const application = function* () {
-	yield takeLatest(SIGN_IN.REQUEST, signIn);
+    yield takeLatest(SIGN_IN.REQUEST, signIn);
     yield takeLatest(SIGN_UP.REQUEST, signUp);
     yield takeLatest(SIGN_OUT.REQUEST, signOut);
     yield takeLatest(RESET_PASSWORD.REQUEST, resetPassword);
