@@ -44,8 +44,8 @@ const BaseCard = styled(animated.div)<BaseCardProps>`
                 : theme.palette.common[color]};
     background: ${({ theme, back }) => back && theme.palette.secondary};
     border-radius: 3px;
-    width: 58px;
-    height: 79px;
+    width: 5.8rem;
+    height: 7.9rem;
     position: absolute;
 `;
 
