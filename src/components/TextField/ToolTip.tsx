@@ -16,18 +16,18 @@ interface ToolTipProps {
 
 const BaseToolTip = styled('div')<BaseToolTipProps>`
     .tooltip {
-        width: ${({ align }) => (align !== 'left' ? '400px' : 'unset')};
+        width: ${({ align }) => (align !== 'left' ? '40rem' : 'unset')};
         padding: 0;
 
     }
     .tooltip-img {
-        right: ${({ align }) => (align !== 'left' ? '-63px' : null)};
-        left: ${({ align }) => (align === 'left' ? '-32px' : null)};
-        width: 24px;
-        height: 24px;
+        right: ${({ align }) => (align !== 'left' ? '-6.3rem' : null)};
+        left: ${({ align }) => (align === 'left' ? '-3.2rem' : null)};
+        width: 2.4rem;
+        height: 2.4rem;
         position: absolute;
         top: 50%;
-        right: -63px;
+        right: -6.3rem;
     }
     .tooltip-text {
         font-size: ${({ theme }) => theme.typography.tooltip!.fontSize};
@@ -48,8 +48,8 @@ const ToolTip = ({ message, name, show, align }: ToolTipProps) => {
             <CSSTransition timeout={1000} in={show} classNames="tooltip" unmountOnExit>
                 <>
                     <svg
-                        width="24px"
-                        height="24px"
+                        width="2.4rem"
+                        height="2.4rem"
                         viewBox="0 0 24 24"
                         className="tooltip-img"
                         data-tip

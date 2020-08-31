@@ -20,11 +20,11 @@ interface NavButtonBaseProps {
 
 const NavButtonBase = styled.div<NavButtonBaseProps>`
     cursor: pointer;
-    margin: ${({ align, noMargin }) => (noMargin ? 0 : align === 'left' ? '0 0 0 38px' : '0 38px 0 0')};
+    margin: ${({ align, noMargin }) => (noMargin ? 0 : align === 'left' ? '0 0 0 3.8rem' : '0 3.8rem 0 0')};
     display: flex;
     align-items: center;
     & > * + * {
-        margin-left: ${({ noMargin }) => (noMargin ? '6px' : '10px')};
+        margin-left: ${({ noMargin }) => (noMargin ? '0.6rem' : '1rem')};
     }
     &:hover .rect-nav {
         background-color: ${({ theme }) => theme.palette.yellow};
@@ -37,10 +37,10 @@ interface RectangleProps {
 }
 
 const Rectangle = styled.div<RectangleProps>`
-    width: 16px;
-    height: 24px;
+    width: 1.6rem;
+    height: 2.4rem;
     background-color: ${({ theme, active }) => (active ? theme.palette.yellow : theme.palette.initial)};
-    border-radius: 2px;
+    border-radius: 0.2rem;
     transition: background-color 0.4s ease-in-out;
 `;
 

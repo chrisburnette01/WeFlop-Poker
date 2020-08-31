@@ -64,7 +64,7 @@ const SignUp = () => {
                 <Navigation type={'basic'} />
                 <Content>
                     <LineContent>
-                        <Title>Welcome!</Title>
+                        <Title color="secondary">Welcome!</Title>
                         <div className="subtitles-wrapper-inner">
                             <Subtitle>WeFlop is a player-supported online poker platform.</Subtitle>
                             <Subtitle>We are committed to building the features you want.</Subtitle>

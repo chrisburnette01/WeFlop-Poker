@@ -27,8 +27,8 @@ const Description = ({ content, className }: DescriptionProps) => {
 
 export default styled(Description)`
     display: flex;
-    margin: 8px 0 0 7px;
+    margin: 0.8rem 0 0 1.3rem;
     .desc-wrapper-text {
-        margin-left: 11px;
+        margin-left: 1.1rem;
     }
 `;

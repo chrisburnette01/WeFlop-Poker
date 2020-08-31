@@ -24,7 +24,7 @@ const Leave = ({ className, onLeave, onCancel }: LeaveProps) => {
                     className="buttons"
                 />
                 <Line width="large" color="yellow" wrapperClassName="line-long" />
-                <Divider margin="6px" />
+                <Divider margin="0.6rem" />
                 <Line width="large" color="yellow" wrapperClassName="line-short" />
             </div>
         </Container>
@@ -32,7 +32,7 @@ const Leave = ({ className, onLeave, onCancel }: LeaveProps) => {
 };
 
 export default styled(Leave)`
-    height: calc(50% + 45px);
+    height: calc(50% + 4.5rem);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -42,9 +42,9 @@ export default styled(Leave)`
         flex: 1;
     }
     .buttons {
-        margin: 53px 0 0 2px;
+        margin: 5.3rem 0 0 2rem;
     }
     .line-short {
-        height: 24px !important;
+        height: 2.4rem !important;
     }
 `;

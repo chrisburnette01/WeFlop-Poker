@@ -10,25 +10,25 @@ interface ChatItemBaseProps {
 const ChatItemBase = styled.div<ChatItemBaseProps>`
     display: flex;
     align-items: center;
-    margin-bottom: 6px;
+    margin-bottom: 0.6rem;
     height: inherit;
     height: 100%;
     .chat-item-name {
-        width: 150px;
+        width: 15rem;
         display: block;
         text-align: right;
     }
     .line-chat {
         height: inherit;
-        min-width: 8px;
+        min-width: 0.8rem;
         background-color: ${({ theme, color }) =>
             theme.palette[color] ? theme.palette[color] : theme.palette.common[color]};
-        margin: 0 12px 0 12px;
-        border-radius: 1px;
+        margin: 0 1.2rem 0 1.2rem;
+        border-radius: 0.1rem;
     }
     .message-wrapper {
         display: flex;
-        max-width: 910px;
+        max-width: 91rem;
         width: 100%;
     }
     .chat-item-message {

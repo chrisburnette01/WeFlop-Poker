@@ -9,40 +9,40 @@ const BaseButtonsPanel = styled.div`
     flex-direction: column;
     align-items: center;
     .range-track {
-        height: 7px;
+        height: 0.7rem;
         width: 100%;
         background: ${({ theme }) => theme.palette.background};
-        border-radius: 3.5px;
+        border-radius: 0.35rem;
     }
     .range-thumb {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 17px;
-        width: 17px;
+        height: 1.7rem;
+        width: 1.7rem;
         background-color: ${({ theme }) => theme.palette.primary};
-        border-radius: 4px;
+        border-radius: 0.4rem;
         outline: none;
-        padding: 5px 4px;
+        padding: 0.5rem 0.4rem;
     }
     .line-thumb-small {
         display: block;
-        width: 2px;
-        height: 5px;
-        border-radius: 1px;
+        width: 0.2rem;
+        height: 0.5rem;
+        border-radius: 0.1rem;
         background-color: ${({ theme }) => theme.palette.background};
     }
     .line-thumb-big {
         display: block;
-        width: 3px;
-        height: 7px;
-        border-radius: 1px;
+        width: 0.3rem;
+        height: 0.7rem;
+        border-radius: 0.1rem;
         background-color: ${({ theme }) => theme.palette.background};
     }
     .slider-wrapper {
-        padding: 8px;
+        padding: 0.8rem;
         background-color: ${({ theme }) => theme.palette.secondary};
-        width: 217px;
+        width: 21.7rem;
         display: flex;
         align-items: center;
         position: relative;
@@ -52,9 +52,9 @@ const BaseButtonsPanel = styled.div`
             background-color: ${({ theme }) => theme.palette.secondary};
             width: 104%;
             position: absolute;
-            top: 4px;
-            height: 4px;
-            left: -4px;
+            top: 0.4rem;
+            height: 0.4rem;
+            left: -0.4rem;
         }
         &::after {
             content: '';
@@ -62,9 +62,9 @@ const BaseButtonsPanel = styled.div`
             background-color: ${({ theme }) => theme.palette.secondary};
             width: 104%;
             position: absolute;
-            bottom: 4px;
-            height: 4px;
-            left: -4px;
+            bottom: 0.4rem;
+            height: 0.4rem;
+            left: -0.4rem;
         }
     }
     .wrapper-slider-buttons {
@@ -75,28 +75,27 @@ const BaseButtonsPanel = styled.div`
         display: flex;
         z-index: 1;
         & > * + * {
-            margin-left: 5px;
+            margin-left: 0.5rem;
         }
     }
     .button-top-section {
-        padding: 7px 5px;
-        margin-bottom: -16px;
-        border-radius: 0 0 16px 16px;
+        padding: 0.7rem 0.5rem;
+        margin-bottom: -1.6rem;
+        border-radius: 0 0 1.6rem 1.6rem;
     }
     .button-bottom-section {
-        padding: 7px 2px;
-        margin-top: -16px;
-        border-radius: 16px 16px 0 0;
+        padding: 0.7rem 0.2rem;
+        margin-top: -1.6rem;
+        border-radius: 1.6rem 1.6rem 0 0;
     }
 `;
 
 interface ButtonsPanelProps {
     balance: number;
     type: 'bet' | 'call';
-    betButtonHandler: () => void;
 }
 
-const ButtonsPanel = ({ balance, type, betButtonHandler }: ButtonsPanelProps) => {
+const ButtonsPanel = ({ balance, type }: ButtonsPanelProps) => {
     const min = 0.5;
     const [rangeValue, setRangeValue] = useState<number[]>([min]);
 
@@ -188,7 +187,7 @@ const ButtonsPanel = ({ balance, type, betButtonHandler }: ButtonsPanelProps) =>
                     alignItems="center"
                     justifyContent="flex-start"
                     backgroundColor="secondary"
-                    onClick={betButtonHandler}
+                    onClick={() => console.log('bet')}
                 />
             </div>
             <div className="button-section button-bottom-section">

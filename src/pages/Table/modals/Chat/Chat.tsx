@@ -8,11 +8,14 @@ import { useForm } from 'react-hook-form';
 
 const ChatBase = styled.div`
     align-self: flex-end;
+    height: inherit;
+    
     .chat-wrapper {
-        max-width: 1200px;
+        max-width: 120rem;
         width: 100%;
+        height: inherit;
         display: flex;
-        padding: 70px;
+        padding: 7rem;
         flex-direction: column;
     }
 
@@ -22,7 +25,7 @@ const ChatBase = styled.div`
     }
     .input-message-chat {
         width: 100%;
-        max-width: 878px;
+        max-width: 87.8rem;
         background: transparent;
         outline: none;
         padding: 0;
@@ -35,34 +38,34 @@ const ChatBase = styled.div`
     }
     .line {
         height: inherit;
-        width: 8px;
+        width: 0.8rem;
         background-color: ${({ theme }) => theme.palette.initial};
-        margin: 0 12px 0 12px;
-        border-radius: 1px;
+        margin: 0 1.2rem 0 1.2rem;
+        border-radius: 0.1rem;
     }
     .chat-player-name {
-        width: 150px;
+        width: 15rem;
         display: block;
         text-align: right;
         align-self: center;
-        margin-right: 8px;
+        margin-right: 0.8rem;
     }
     .rect-divider {
-        margin: 6px 0 0 162px;
-        width: 8px;
-        height: 8px;
-        border-radius: 1px;
+        margin: 0.6rem 0 0 16.2rem;
+        width: 0.8rem;
+        height: 0.8rem;
+        border-radius: 0.1rem;
         background-color: ${({ theme }) => theme.palette.secondary};
     }
     .rect-divider-top {
-        margin: 6px 0 6px 162px;
+        margin: 0.6rem 0 0.6rem 16.2rem;
     }
     .overflow-container {
-        max-height: 75vh;
-        max-width: 1060px;
+        max-height: 100%;
+        max-width: 106rem;
         width: 100%;
         overflow-y: auto;
-        margin-bottom: 44px;
+        margin-bottom: 4.4rem;
         &::-webkit-scrollbar {
             display: none;
         }

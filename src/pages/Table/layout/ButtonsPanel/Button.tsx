@@ -13,24 +13,24 @@ interface BaseButtonProps {
 
 const BaseButton = styled.div<BaseButtonProps>`
     cursor: ${({ onClick }) => (onClick ? 'pointer' : 'default')};
-    width: ${({ size }) => (size === 'small' ? '49px' : size === 'medium' ? '106px' : '114px')};
-    height: ${({ size }) => (size === 'small' ? '26px' : size === 'medium' ? '44px' : '55px')};
+    width: ${({ size }) => (size === 'small' ? '4.9rem' : size === 'medium' ? '10.6rem' : '11.4rem')};
+    height: ${({ size }) => (size === 'small' ? '2.6rem' : size === 'medium' ? '4.4rem' : '5.5rem')};
     display: flex;
     border-radius: ${({ border, size }) => {
         switch (size) {
             case 'small':
-                return border !== undefined ? (border === 'left' ? '13px 4px 4px 13px' : '4px 13px 13px 4px') : '4px';
+                return border !== undefined ? (border === 'left' ? '1.3rem 0.4rem 0.4rem 1.3rem' : '0.4rem 1.3rem 1.3rem 0.4rem') : '0.4rem';
             case 'medium':
-                return border !== undefined ? (border === 'left' ? '25px 6px 6px 25px' : '6px 25px 25px 6px') : '6px';
+                return border !== undefined ? (border === 'left' ? '2.5rem 0.6rem 0.6rem 2.5rem' : '0.6rem 2.5rem 2.5rem 0.6rem') : '0.6rem';
             case 'large':
                 return border !== undefined
                     ? border === 'left'
-                        ? '28px 10px 10px 28px'
-                        : '10px 28px 28px 10px'
-                    : '10px';
+                        ? '2.8rem 1rem 1rem 2.8rem'
+                        : '1rem 2.8rem 2.8rem 1rem'
+                    : '1rem';
         }
     }};
-    padding: ${({ size }) => (size === 'small' ? '2px' : size === 'medium' ? '3px' : '4px')};
+    padding: ${({ size }) => (size === 'small' ? '0.2rem' : size === 'medium' ? '0.3rem' : '0.4rem')};
     background: ${({ theme }) => theme.palette.secondary};
 
     .border-wrapper {
@@ -43,25 +43,25 @@ const BaseButton = styled.div<BaseButtonProps>`
                 case 'small':
                     return border !== undefined
                         ? border === 'left'
-                            ? '13px 4px 4px 13px'
-                            : '4px 13px 13px 4px'
-                        : '4px';
+                            ? '1.3rem 0.4rem 0.4rem 1.3rem'
+                            : '0.4rem 1.3rem 1.3rem 0.4rem'
+                        : '0.4rem';
                 case 'medium':
                     return border !== undefined
                         ? border === 'left'
-                            ? '25px 6px 6px 25px'
-                            : '6px 25px 25px 6px'
-                        : '6px';
+                            ? '2.5rem 0.6rem 0.6rem 2.5rem'
+                            : '0.6rem 2.5rem 2.5rem 0.6rem'
+                        : '0.6rem';
                 case 'large':
                     return border !== undefined
                         ? border === 'left'
-                            ? '28px 10px 10px 28px'
-                            : '10px 28px 28px 10px'
-                        : '10px';
+                            ? '2.8rem 1rem 1rem 2.8rem'
+                            : '1rem 2.8rem 2.8rem 1rem'
+                        : '1rem';
             }
         }};
-        border: 1px solid ${({ theme }) => theme.palette.background};
-        padding: ${({ size }) => (size === 'small' ? '0 2px 0 2px' : size === 'medium' ? '3px' : '4px')};
+        border: 0.1rem solid ${({ theme }) => theme.palette.background};
+        padding: ${({ size }) => (size === 'small' ? '0 0.2rem 0 0.2rem' : size === 'medium' ? '0.3rem' : '0.4rem')};
         justify-content: ${({ justifyContent }) => justifyContent};
         align-items: ${({ alignItems }) => alignItems};
     }

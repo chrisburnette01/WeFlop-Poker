@@ -2,8 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-	SEND_MESSAGE_CHAT,
-	sendMessageChatSuccess
+	updateInfo
 } from '../store/actions/table';
 
 interface SocketProviderProps {
@@ -29,14 +28,8 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
 		}
 
 		socket.onmessage = (event) => {
-			const data = JSON.parse(event.data)
-			switch (data.type) {
-				case SEND_MESSAGE_CHAT.REQUEST:
-					dispatch(sendMessageChatSuccess({}))
-					break
-				default:
-					break
-			}
+			const data = JSON.parse(event.data);
+			dispatch(updateInfo(data))
 		}
 	}, []);
 

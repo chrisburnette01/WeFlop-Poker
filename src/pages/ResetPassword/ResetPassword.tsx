@@ -39,7 +39,7 @@ const ResetPassword = () => {
                 <Navigation type="basic" />
                 <Content>
                     <LineContent>
-                        <Title>Change Your Password</Title>
+                        <Title color="secondary">Change Your Password</Title>
                         <div className="subtitles-wrapper-inner">
                             <Subtitle>Change the password of the account attached to:</Subtitle>
                             <Subtitle>{email}</Subtitle>

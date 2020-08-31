@@ -27,20 +27,32 @@ interface TypographyProps {
 const BaseTypography = styled('div')<BaseTypographyProps>`
     font-size: ${({ theme, variant }) => theme.typography[variant].fontSize};
     font-family: ${({ theme }) => theme.typography.fontFamily};
-    font-weight: ${({ theme, variant, fontWeight }) => fontWeight ? fontWeight : theme.typography[variant].fontWeight};
+    font-weight: ${({ theme, variant, fontWeight }) =>
+        fontWeight ? fontWeight : theme.typography[variant].fontWeight};
     letter-spacing: ${({ theme, variant }) => theme.typography[variant].letterSpacing};
-    text-transform: ${({ theme, variant, textTransform }) => textTransform ? textTransform : theme.typography[variant].textTransform};
-    font-style: ${({ theme, variant, fontStyle }) => fontStyle ? fontStyle : theme.typography[variant].fontStyle};
+    text-transform: ${({ theme, variant, textTransform }) =>
+        textTransform ? textTransform : theme.typography[variant].textTransform};
+    font-style: ${({ theme, variant, fontStyle }) => (fontStyle ? fontStyle : theme.typography[variant].fontStyle)};
     color: ${({ theme, color }) => (theme.palette[color!] ? theme.palette[color!] : theme.palette.common[color!])};
     margin: 0;
     & > p {
         margin: 0;
     }
     opacity: 0;
-    animation: ${({ theme }) => theme.animations.text};
+    animation: ${({ theme, style }) => (style?.opacity ? 'none' : theme.animations.text)};
 `;
 
-const Typography = ({ component, children, variant, color, className, textTransform, fontStyle, fontWeight, style }: TypographyProps) => {
+const Typography = ({
+    component,
+    children,
+    variant,
+    color,
+    className,
+    textTransform,
+    fontStyle,
+    fontWeight,
+    style,
+}: TypographyProps) => {
     return (
         <BaseTypography
             color={color}
@@ -58,7 +70,7 @@ const Typography = ({ component, children, variant, color, className, textTransf
 };
 
 Typography.defaultProps = {
-    color: 'primary'
+    color: 'primary',
 };
 
 export default Typography;

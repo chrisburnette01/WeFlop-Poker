@@ -20,6 +20,7 @@ interface InputProps {
     autoresize?: boolean;
     rightLine?: boolean;
     onKeyDown?: any;
+    style?: Record<string, any>;
 }
 
 const TextField = ({
@@ -40,6 +41,7 @@ const TextField = ({
     autoresize,
     rightLine,
     onKeyDown,
+    style,
 }: InputProps) => {
     switch (variant) {
         case 'input':
@@ -58,11 +60,13 @@ const TextField = ({
                     defaultValue={defaultValue}
                     onFocus={onFocus}
                     tooltipAlign={tooltipAlign!}
+                    style={style}
                 />
             );
         case 'textarea':
             return (
                 <TextArea
+                    validated={validated}
                     onKeyDown={onKeyDown}
                     className={className}
                     size={size!}
@@ -75,6 +79,7 @@ const TextField = ({
                     onFocus={onFocus}
                     autoresize={autoresize}
                     rightLine={rightLine}
+                    style={style}
                 />
             );
         default:

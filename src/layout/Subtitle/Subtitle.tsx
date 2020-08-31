@@ -5,14 +5,16 @@ import styled from 'styled-components';
 interface SubtitleProps {
     children: string;
     className?: string;
+    color?: string;
+    style?: Record<string, unknown>;
 }
 
-const Subtitle = ({ children, className }: SubtitleProps) => {
+const Subtitle = ({ children, className, color, style }: SubtitleProps) => {
     return (
         <div className={className}>
-            <Rectangle height="small" width="small" border="small" color="secondary" />
-            <div className="subtitles-wrapper">
-                <Typography component="h3" variant="body1" fontStyle="italic">
+            <Rectangle height="small" width="small" border="small" color={color ? color : 'yellow'} />
+            <div className="subtitles-wrapper" style={style}>
+                <Typography component="h3" variant="body1" fontStyle="italic" style={style}>
                     {children}
                 </Typography>
             </div>
@@ -24,11 +26,9 @@ export default styled(Subtitle)`
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-left: 3px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-left: 0.3rem;
 
     .subtitles-wrapper {
-        margin-left: 8px;
+        margin-left: 0.8rem;
     }
 `;

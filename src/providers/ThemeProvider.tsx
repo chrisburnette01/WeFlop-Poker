@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { ThemeProvider as StyledProvider } from 'styled-components';
 import GlobalStyle from '../app/GlobalStyle';
+import { useWindowSize } from '../helpers';
 
 interface ThemeProviderProps {
     children: any;
@@ -285,6 +286,7 @@ const themeContextState: ThemeContextType = {
 export const ThemeContext = React.createContext<ThemeContextType>(themeContextState);
 
 export const ThemeProvider = ({ children, mode }: ThemeProviderProps) => {
+    const size = useWindowSize();
     const [themeMode, setThemeMode] = useState<'dark' | 'light'>(mode ? mode : 'light');
     const [lightPalette, setLightPalette] = useState<Palette>(defaultLightPalette);
     const [darkPalette, setDarkPalette] = useState<Palette>(defaultDarkPalette);
@@ -304,7 +306,7 @@ export const ThemeProvider = ({ children, mode }: ThemeProviderProps) => {
             }}
         >
             <StyledProvider theme={theme}>
-                <GlobalStyle />
+                <GlobalStyle size={size} />
                 {children}
             </StyledProvider>
         </ThemeContext.Provider>

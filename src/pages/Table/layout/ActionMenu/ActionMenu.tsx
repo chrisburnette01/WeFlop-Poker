@@ -13,9 +13,9 @@ interface CheckboxProps {
 }
 const Checkbox = styled.div<CheckboxProps>`
     cursor: pointer;
-    height: 16px;
-    width: 24px;
-    border-radius: 2px;
+    height: 1.6rem;
+    width: 2.4rem;
+    border-radius: 0.2rem;
     background: ${({ theme, active }) => (active ? theme.palette.yellow : theme.palette.initial)};
     transition: background-color 0.4s ease-in-out;
     &:hover {
@@ -29,7 +29,7 @@ interface ActionMenuBaseProps {
 
 const ActionMenuBase = styled.div<ActionMenuBaseProps>`
     .button-hor {
-        margin-bottom: ${({ type }) => (type === 'muck' ? '24px' : '8px')};
+        margin-bottom: ${({ type }) => (type === 'muck' ? '2.4rem' : '0.8rem')};
     }
 `;
 

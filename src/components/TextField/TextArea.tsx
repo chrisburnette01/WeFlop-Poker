@@ -5,6 +5,7 @@ interface BaseTextAreaProps {
     width?: string;
     size: 'large' | 'medium' | 'small';
     rightLine: boolean;
+    validated?: boolean;
 }
 
 const TextAreaBase = styled('div')<BaseTextAreaProps>`
@@ -20,32 +21,34 @@ const TextAreaBase = styled('div')<BaseTextAreaProps>`
     .textarea {
         font-size: ${({ theme }) => theme.typography.input1!.fontSize};
         font-family: ${({ theme }) => theme.typography.fontFamily};
-        color: ${({ theme }) => theme.palette.primary};
+        color: ${({ theme, validated }) => (validated ? theme.palette.yellow : theme.palette.primary)};
         letter-spacing: ${({ theme }) => theme.typography.input1?.letterSpacing};
         position: relative;
-        width: ${({ width }) => (width ? width : '291px')};
+        width: ${({ width }) => (width ? width : '29.1rem')};
         height: 100%;
         background: transparent;
         border-width: 0;
-        border-radius: 4px;
-        padding: ${({ size }) => (size === 'large' ? '0 10px' : size === 'medium' ? '0 8px' : '0 4px')};
+        border-radius: 0.4rem;
+        padding: ${({ size }) => (size === 'large' ? '0 1rem' : size === 'medium' ? '0 0.8rem' : '0 0.4rem')};
         outline: none;
-        margin: 0 8px 0 8px;
+        margin: 0 0.8rem 0 0.8rem;
         resize: none;
+        transition: color 0.4s ease-in;
     }
 
     .wrapper::after,
     .wrapper::before {
-        background-color: ${({ theme }) => theme.palette.primary};
+        background-color: ${({ theme, validated }) => (validated ? theme.palette.yellow : theme.palette.primary)};
+        transition: background-color 0.4s ease-in;
         content: '';
         display: block;
         position: absolute;
         top: 0;
         right: 0;
-        width: ${({ size }) => (size === 'large' ? '10px' : size === 'medium' ? '8px' : '4px')};
+        width: ${({ size }) => (size === 'large' ? '1rem' : size === 'medium' ? '0.8rem' : '0.4rem')};
         height: 100%;
-        border-radius: ${({ size }) => (size === 'large' || size === 'medium' ? '2px' : '1px')};
-        margin-left: 3px;
+        border-radius: ${({ size }) => (size === 'large' || size === 'medium' ? '0.2rem' : '0.1rem')};
+        margin-left: 0.3rem;
     }
 
     .wrapper::before {
@@ -54,6 +57,7 @@ const TextAreaBase = styled('div')<BaseTextAreaProps>`
 
     .wrapper::after {
         display: ${({ rightLine }) => (rightLine ? 'block' : 'none')};
+        margin: 0 0.3rem 0 0;
     }
 
     .input::placeholder {
@@ -75,6 +79,8 @@ interface TextAreaProps {
     autoresize?: boolean;
     rightLine?: boolean;
     onKeyDown?: () => void;
+    validated?: boolean;
+    style?: Record<string, undefined>;
 }
 
 const TextArea = ({
@@ -90,8 +96,10 @@ const TextArea = ({
     size,
     rightLine,
     onKeyDown,
+    validated,
+    style,
 }: TextAreaProps) => {
-    const [height, setHeight] = useState(autoresize ? 'auto' : '176px');
+    const [height, setHeight] = useState(autoresize ? 'auto' : '17.6rem');
     const [text, setText] = useState('');
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
@@ -109,7 +117,7 @@ const TextArea = ({
     };
 
     return (
-        <TextAreaBase className={className} width={width} size={size} rightLine={rightLine!}>
+        <TextAreaBase className={className} width={width} size={size} rightLine={rightLine!} validated={validated}>
             <div className="wrapper">
                 <textarea
                     onKeyDown={onKeyDown}
@@ -124,7 +132,7 @@ const TextArea = ({
                     placeholder={placeholder}
                     disabled={disabled}
                     onChange={(event) => autoresize && onChangeHandler(event)}
-                    style={{ height }}
+                    style={{ height, ...style }}
                 />
             </div>
         </TextAreaBase>

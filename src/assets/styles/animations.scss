@@ -25,7 +25,7 @@
 
 @keyframes emailNotification {
     from {
-        margin-top: 20px;
+        margin-top: 2rem;
         opacity: 0;
     }
     to {
@@ -36,7 +36,7 @@
 
 .tooltip-enter {
     opacity: 0;
-    transform: translate(-15px, -50%);
+    transform: translate(-1.5rem, -50%);
 }
 .tooltip-enter-active {
     opacity: 1;
@@ -52,11 +52,11 @@
 }
 .tooltip-exit-active {
     opacity: 0;
-    transform: translate(-15px, -50%);
+    transform: translate(-1.5rem, -50%);
     transition: opacity 0.5s, transform 0.5s;
 }
 .tooltip-exit-done {
-    transform: translate(-15px, -50%);
+    transform: translate(-1.5rem, -50%);
 }
 .react-slidedown.slidedown-updates {
     transition-duration: 0.3s;

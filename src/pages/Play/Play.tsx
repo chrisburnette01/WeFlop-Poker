@@ -14,7 +14,7 @@ const Play = () => {
     };
 
     const notification = isCreated ? (
-        <Typography component="span" variant="button2" color="primary">
+        <Typography component="span" variant="button2" color="secondary">
             TABLE CREATED.
         </Typography>
     ) : null;
@@ -27,11 +27,9 @@ const Play = () => {
             <Container>
                 <Navigation type={'auth'} />
                 <Content>
-                    <div style={{ marginLeft: '136px' }}>
+                    <div style={{ marginLeft: '13.6rem' }}>
                         <LineContent>
-                            <Title titleOnTop color="secondary">
-                                HOME GAMES
-                            </Title>
+                            <Title color="secondary">HOME GAMES</Title>
                             <div className="subtitles-wrapper-inner">
                                 <Subtitle>Click “CREATE” to customize your own poker game. </Subtitle>
                                 <Subtitle>To invite your friends, simply share the table’s link.</Subtitle>
@@ -40,7 +38,10 @@ const Play = () => {
                             <Line color="secondary" width="large" height="short" align="left" />
                         </LineContent>
                     </div>
-                    <Tabs form={<Form onSubmit={onSubmit} notification={notification} />} />
+                    <Tabs
+                        form={<Form onSubmit={onSubmit} notification={notification} isCreated={isCreated} />}
+                        isCreated={isCreated}
+                    />
                 </Content>
             </Container>
         </>

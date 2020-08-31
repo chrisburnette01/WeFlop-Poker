@@ -18,14 +18,10 @@ interface CardProps {
 }
 
 interface BaseCardProps {
+    path?: string;
     back?: boolean;
     opacity?: any;
     transform?: any;
-}
-
-interface ImageProps {
-    path: string | undefined;
-    color?: string;
 }
 
 interface BaseCardWrapper {
@@ -35,23 +31,18 @@ interface BaseCardWrapper {
 }
 
 const BaseCard = styled(animated.div)<BaseCardProps>`
-    border: 3px solid
+    border: 0.3rem solid
         ${({ theme, color }) =>
             !color
                 ? theme.palette.secondary
                 : theme.palette[color]
                 ? theme.palette[color]
                 : theme.palette.common[color]};
-    background: ${({ theme, back }) => back && theme.palette.secondary};
-    border-radius: 3px;
-    width: 5.8rem;
-    height: 7.9rem;
+    border-radius: 0.3rem;
+    width: inherit;
+    height: inherit;
     position: absolute;
-`;
-
-const Image = styled.div<ImageProps>`
-    padding-top: 140%;
-    background: ${({ path, theme }) => (path != undefined ? `url(${path})` : theme.palette.background)};
+    background: ${({ path, back, theme }) => back ? theme.palette.secondary : (path ? `url(${path})` : theme.palette.background)};
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -61,7 +52,7 @@ const Card = React.forwardRef(({ variant, color, flipped, onClick, style, classN
     const isCardRes = isCard(variant);
     const { opacity, transform, top } = useSpring<any>({
         opacity: flipped ? 1 : 0,
-        transform: `perspective(600px) rotateY(${flipped ? 180 : 0}deg)`,
+        transform: `perspective(60rem) rotateY(${flipped ? 180 : 0}deg)`,
         config: { mass: 5, tension: 500, friction: 80 },
     });
 
@@ -70,8 +61,8 @@ const Card = React.forwardRef(({ variant, color, flipped, onClick, style, classN
             <BaseCard
                 color={color}
                 style={{ opacity, top, transform: transform.interpolate((t) => `${t} rotateX(180deg)`) }}
+                path={isCardRes ? `${baseImagePath}/${variant}.svg` : undefined}
             >
-                <Image path={isCardRes ? `${baseImagePath}/${variant}.svg` : undefined} />
             </BaseCard>
             {isCardRes && <BaseCard back style={{ opacity: opacity.interpolate((o: any) => 1 - o), transform, top }} />}
         </animated.div>
@@ -83,9 +74,7 @@ Card.defaultProps = {
 };
 
 export default styled(Card)`
-    position: ${({ animated }) => (animated ? 'absolute' : 'static')};
-    right: ${({ right }) => (right ? '0' : 'unset')};
-    left: ${({ left }) => (left ? '0' : 'unset')};
-    width: 58px;
-    height: 79px;
+    position: absolute;
+    width: 5.8rem;
+    height: 7.9rem;
 `;

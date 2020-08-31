@@ -8,14 +8,14 @@ interface BaseLineProps {
 }
 
 const BaseLine = styled.span<BaseLineProps>`
-    border-radius: ${({ width }) => width === 'large' ? '4px' : width === 'medium' ? '2px' : '1px'};
+    border-radius: ${({ width }) => (width === 'large' ? '0.4rem' : width === 'medium' ? '0.2rem' : '0.1rem')};
     background-color: ${({ theme, color }) =>
         theme.palette[color] ? theme.palette[color] : theme.palette.common[color]};
     display: block;
     height: inherit;
-    width: ${({ width }) => width === 'large' ? '16px' : width === 'medium' ? '12px' : '8px'};
-    margin-right: ${({ align }) => (align === 'left' ? '16px' : null)};
-    margin-left: ${({ width, align }) => (align === 'right' ? '16px' : null)};
+    width: ${({ width }) => (width === 'large' ? '1.6rem' : width === 'medium' ? '1.2rem' : '0.8rem')};
+    margin-right: ${({ align }) => (align === 'left' ? '1.6rem' : null)};
+    margin-left: ${({ width, align }) => (align === 'right' ? '1.6rem' : null)};
     animation: ${({ theme }) => theme.animations.line};
 `;
 
@@ -32,7 +32,7 @@ const Line = ({ width, height, align, color, className, wrapperClassName }: Line
     return (
         <div
             className={`${wrapperClassName ? wrapperClassName : ''} line`}
-            style={height ? { height: height == 'long' ? '60px' : '48px' } : { height: 'inherit' }}
+            style={height ? { height: height == 'long' ? '6rem' : '4.8rem' } : { height: 'inherit' }}
         >
             <BaseLine className={className} width={width} align={align} color={color!} />
         </div>

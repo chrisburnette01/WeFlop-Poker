@@ -16,20 +16,20 @@ const PatreonIcon = ({ className }: PetreonIconProps) => {
 
 export default styled(PatreonIcon)<PetreonIconProps>`
     display: flex;
-    margin-top: 16px;
+    margin-top: 1.6rem;
     .patreon-icon-line {
         display: block;
-        height: 51px;
-        width: 10px;
-        border-radius: 4px;
+        height: 5.1rem;
+        width: 1rem;
+        border-radius: 0.4rem;
         background-color: #fff;
     }
 
     .patreon-icon-round {
-        margin-left: 5px;
+        margin-left: 0.5rem;
         display: block;
-        height: 38px;
-        width: 38px;
+        height: 3.8rem;
+        width: 3.8rem;
         border-radius: 50%;
         background-color: #fff;
     }

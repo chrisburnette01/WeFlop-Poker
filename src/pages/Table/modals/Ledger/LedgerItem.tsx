@@ -10,21 +10,21 @@ const LedgerItemBase = styled.div<LedgerItemBaseProps>`
     display: flex;
     align-items: center;
     & + & {
-        margin-top: 12px;
+        margin-top: 1.2rem;
     }
     .player-name-ledger {
-        width: 200px;
+        width: 20rem;
         display: block;
         text-align: right;
     }
     .round {
-        margin: 0 24px 0 24px;
-        width: 36px;
-        height: 36px;
+        margin: 0 2.4rem 0 2.4rem;
+        width: 3.6rem;
+        height: 3.6rem;
         display: flex;
         justify-content: center;
         align-items: center;
-        border-radius: 18px;
+        border-radius: 1.8rem;
         background-color: ${({ balance, theme }) => (balance < 0 ? theme.palette.error : theme.palette.success)};
     }
 `;

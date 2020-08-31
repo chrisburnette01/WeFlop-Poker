@@ -49,7 +49,7 @@ export default styled(Welcome)<WelcomeProps>`
     background-color: #8b112f;
 
     .inner-enter {
-        padding: 60px;
+        padding: 6rem;
         height: 100%;
     }
 
@@ -70,13 +70,13 @@ export default styled(Welcome)<WelcomeProps>`
     .content-enter {
         display: flex;
         flex-direction: column;
-        max-width: 337px;
+        max-width: 33.7rem;
         width: 100%;
     }
 
     .content-inner {
         margin: 0 auto 0 auto;
-        max-width: 304px;
+        max-width: 30.4rem;
         width: 100%;
         display: flex;
         flex: 3;
@@ -84,7 +84,8 @@ export default styled(Welcome)<WelcomeProps>`
     }
 
     .typography-enter {
-        padding: 34px 0 34px 0;
+        padding: 3.4rem 0 3.4rem 0;
+        text-align: center;
     }
 
     .content-inner-footer {

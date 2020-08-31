@@ -7,6 +7,7 @@ interface ButtonPlayBase {
     active?: boolean;
     align: 'left' | 'right';
     onClick?: any;
+    activeColor?: string;
 }
 
 const ButtonPlayBase = styled.div<ButtonPlayBase>`
@@ -14,17 +15,19 @@ const ButtonPlayBase = styled.div<ButtonPlayBase>`
     cursor: pointer;
     .line {
         display: block;
-        width: 16px;
-        height: ${({ active }) => (active ? '48px' : '16px')};
-        border-radius: 4px;
-        background-color: ${({ theme, active }) => (active ? theme.palette.yellow : theme.palette.initial)};
-        margin-bottom: 3px;
-        margin: ${({ align }) => (align === 'left' ? '10px 8px 0 0' : '10px 0 0 8px')};
+        width: 1.6rem;
+        height: ${({ active }) => (active ? '4.8rem' : '1.6rem')};
+        border-radius: 0.4rem;
+        background-color: ${({ theme, active, activeColor }) =>
+            active ? (activeColor ? theme.palette[activeColor] : theme.palette.yellow) : theme.palette.initial};
+        margin-bottom: 0.3rem;
+        margin: ${({ align }) => (align === 'left' ? '1rem 0.8rem 0 0' : '1rem 0 0 0.8rem')};
         transition: height 0.2s ease-in;
     }
-    
+
     span {
-        color: ${({ theme, active }) => (active ? theme.palette.yellow : theme.palette.initial)};
+        color: ${({ theme, active, activeColor }) =>
+            active ? (activeColor ? theme.palette[activeColor] : theme.palette.yellow) : theme.palette.initial};
     }
 `;
 
@@ -33,13 +36,15 @@ interface ButtonPlayProps {
     active?: boolean;
     align: 'left' | 'right';
     onClick?: any;
+    activeColor?: string;
+    textStyle?: Record<string, unknown>;
 }
 
-const ButtonPlay = ({ title, active, align, onClick }: ButtonPlayProps) => {
+const ButtonPlay = ({ title, active, align, onClick, activeColor, textStyle }: ButtonPlayProps) => {
     return (
-        <ButtonPlayBase active={active} align={align} onClick={onClick}>
+        <ButtonPlayBase active={active} align={align} onClick={onClick} activeColor={activeColor}>
             {align === 'left' ? <span className="line" /> : null}
-            <Typography variant='button3' textTransform='uppercase' component='span'>
+            <Typography variant="button3" textTransform="uppercase" component="span" style={textStyle}>
                 {title}
             </Typography>
             {align === 'right' ? <span className="line" /> : null}

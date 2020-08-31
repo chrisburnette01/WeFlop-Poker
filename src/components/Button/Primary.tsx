@@ -23,30 +23,27 @@ const BaseButton = styled('div')<BaseButtonProps>`
     background: transparent;
     padding: 0;
     display: flex;
-    align-items: center; 
-    color: ${({ theme, color }) => theme.palette[color] ? theme.palette[color] : theme.palette.common[color]};
-    ${({ theme, active }) => (active ? `color: ${active ? theme.palette.secondary : theme.palette.primary};` : null)}
+    align-items: center;
     text-align: ${({ align }) => align};
     align-self: ${({ align }) => (align === 'right' ? 'flex-end' : null)};
-    height: ${({ size }) => (size === 'large' ? '64px' : '48px')};
+    height: ${({ size }) => (size === 'large' ? '6.4rem' : '4.8rem')};
     cursor: ${({ disabled }) => (disabled ? 'unset' : 'pointer')};
-    margin-bottom: ${({ bottomGutter }) => (bottomGutter ? '64px' : null)};
+    margin-bottom: ${({ bottomGutter }) => (bottomGutter ? '6.4rem' : null)};
 
     .line {
         background-color: ${({ theme, color }) => theme.palette[color!]};
         ${({ theme, active }) =>
             active ? `background-color: ${active ? theme.palette.secondary : theme.palette.primary};` : null};
-        margin-bottom: 3px;
-        border-radius: 4px;
-        width: 16px;
-        height: 16px;
+        margin-bottom: 0.3rem;
+        border-radius: 0.4rem;
+        width: 1.6rem;
+        height: 1.6rem;
     }
 
     span {
-        margin: ${({ align }) => (align === 'left' ? '0 0 0 16px' : '15px 16px 0 0')};
+        margin: ${({ align }) => (align === 'left' ? '0 0 0 1.6rem' : '1.5rem 1.6rem 0 0')};
         animation: ${({ theme }) => theme.animations.text};
         opacity: 0;
-
     }
 `;
 
@@ -91,7 +88,12 @@ const Primary = ({
             size={size!}
         >
             {(align === undefined || align === 'left') && <span className="line" />}
-            <Typography variant={size === 'large' ? 'button1' : 'button2'} color={color} textTransform='uppercase' component='span'>
+            <Typography
+                variant={size === 'large' ? 'button1' : 'button2'}
+                textTransform="uppercase"
+                component="span"
+                color={active ? 'secondary' : color}
+            >
                 {title}
             </Typography>
             <span className="title"></span>

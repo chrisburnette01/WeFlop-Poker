@@ -1,6 +1,14 @@
 import { createGlobalStyle } from 'styled-components';
 
-const GlobalStyle = createGlobalStyle`
+interface GlobalStyleProps {
+    size: any
+}
+
+const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
+    html {
+        font-size: ${({size}) => size.height! > size.width!/(16/9) ? size.width*0.0065 : size.height*0.0115}px;
+    }
+
     body {
         background-color: ${({ theme }) => theme.palette.background};
         margin: 0;
@@ -8,15 +16,15 @@ const GlobalStyle = createGlobalStyle`
     }
 
     .button-form {
-    	bottom: -96px;
-		margin: 0 -25px 0 -25px;
+    	bottom: -9.6rem;
+		margin: 0 -2.5rem 0 -2.5rem;
 		position: absolute;
-		min-width: 352px;
+		min-width: 35.2rem;
     }
 
     .button-play {
-        margin: 48px -25px 0 -25px;
-        min-width: 286px;
+        margin: 4.8rem -2.5rem 0 -2.5rem;
+        min-width: 28.6rem;
     }
 
     .d-flex {

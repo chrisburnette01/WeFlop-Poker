@@ -8,12 +8,12 @@ interface LineProps {
 }
 
 const Line = styled.div<LineProps>`
-    width: ${({ type }) => (type === 'vertical' ? '16px' : '24px')};
-    height: ${({ type }) => (type === 'vertical' ? '24px' : '16px')};
-    border-radius: 2px;
+    width: ${({ type }) => (type === 'vertical' ? '1.6rem' : '2.4rem')};
+    height: ${({ type }) => (type === 'vertical' ? '2.4rem' : '1.6rem')};
+    border-radius: 0.2rem;
     background-color: ${({ theme }) => theme.palette.secondary};
     margin: ${({ lineTop, lineBottom }) =>
-        lineTop && lineBottom ? 0 : lineBottom ? '0 0 24px 0' : lineTop ? '24px 0 0 0' : 0};
+        lineTop && lineBottom ? 0 : lineBottom ? '0 0 2.4rem 0' : lineTop ? '2.4rem 0 0 0' : 0};
 `;
 
 interface BaseDividerProps {
@@ -24,11 +24,11 @@ interface BaseDividerProps {
 
 const BaseDivider = styled.div<BaseDividerProps>`
     .rect-divider {
-        height: 32px;
-        width: 32px;
-        margin: 6px;
+        height: 3.2rem;
+        width: 3.2rem;
+        margin: 0.6rem;
         background-color: ${({ theme }) => theme.palette.secondary};
-        border-radius: 2px;
+        border-radius: 0.2rem;
     }
     .vertical-lines-wrapper {
         display: flex;

@@ -125,18 +125,17 @@ const Ledger = ({ className, name }: LedgerProps) => {
 };
 
 export default styled(Ledger)`
-    padding: 105px 115px 48px 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
     .ledger-list-wrapper {
-        margin: 80px 75px 0 0;
+        padding: 4rem 7.5rem 4rem 0;
         overflow-y: auto;
         &::-webkit-scrollbar {
             display: none;
         }
     }
     .ledger-title {
-        margin-top: 80px;
+        margin-top: 8rem;
     }
 `;

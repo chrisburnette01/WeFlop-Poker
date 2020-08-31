@@ -14,7 +14,7 @@ const UpdateItem = ({ element, className }: UpdateItemProps) => {
 
     const list =
         element.type === 'poll' ? (
-            <div style={{ marginTop: '8px' }}>
+            <div style={{ marginTop: '0.8rem' }}>
                 <Poll content={element.content} updateId={element.id} optional={element.optionalText} />
             </div>
         ) : element.type === 'text' ? (
@@ -32,7 +32,7 @@ const UpdateItem = ({ element, className }: UpdateItemProps) => {
                         {moment(element.date).format('HH:mm')}
                     </Typography>
                 </div>
-                <Line className="updates-note-item-line" width="large" color={open ? 'secondary' : 'primary'} />
+                <Line className="updates-note-item-line" width="large" color={open ? 'yellow' : 'primary'} />
                 <div className="updates-note-item-text-wrapper">
                     <Typography variant="button2" component="a">
                         {element.title}
@@ -49,29 +49,29 @@ const UpdateItem = ({ element, className }: UpdateItemProps) => {
 
 export default styled(UpdateItem)`
     .updates-note-item {
-        height: 48px;
+        height: 4.8rem;
         cursor: pointer;
         display: flex;
         align-items: center;
-        margin: 8px 0 0 -98px;
+        margin: 0.8rem 0 0 -9.8rem;
         &-line {
-            height: 48px;
+            height: 4.8rem;
         }
         &-wrapper {
             display: flex;
             flex-direction: row;
         }
         &-text-wrapper {
-            margin-left: 11px;
+            margin-left: 1.1rem;
         }
         &-date-wrapper {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            margin-right: 11px;
+            margin-right: 1.1rem;
         }
     }
     .rectangle-wrapper-item {
-        margin-top: 8px;
+        margin-top: 0.8rem;
     }
 `;

@@ -23,16 +23,14 @@ const Updates = () => {
                 <Navigation type={'auth'} />
                 <Content>
                     <LineContent>
-                        <Title titleOnTop color="secondary">
-                            BETA V1.01
-                        </Title>
+                        <Title color="secondary">BETA V1.01</Title>
                         <div className="subtitles-wrapper-inner">
                             <Subtitle>We are constantly working to make WeFlop a better product for you.</Subtitle>
                             <Subtitle>This is where we post our updates and poll our community.</Subtitle>
                         </div>
                         <Line color="secondary" width="large" height="short" align="left" />
                     </LineContent>
-                    <div style={{ margin: '8px 0 0 16px' }}>
+                    <div style={{ margin: '0.8rem 0 0 1.6rem' }}>
                         <Rectangle height="extralarge" width="extralarge" />
                         {application.updates &&
                             application.updates.map((element, index) => <UpdateItem element={element} />)}

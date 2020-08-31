@@ -34,7 +34,15 @@ const Reset = () => {
     };
 
     const isValidated = check.email;
-    const buttonSubmit = <Button variant="secondary" validated={isValidated} className="button-form" title="send reset" />;
+    const buttonSubmit = (
+        <Button
+            variant="secondary"
+            validated={isValidated}
+            className="button-form"
+            title="send reset"
+            isActionCompleted={isEmailSent}
+        />
+    );
     const notification = (
         <>
             <Typography component="span" variant="button2" color="primary">
@@ -62,6 +70,8 @@ const Reset = () => {
         // setIsEmailSent(true);
     }, [application.user]);
 
+    const opacity = isEmailSent ? { opacity: 0 } : { opacity: 1 };
+
     return (
         <>
             <Helmet>
@@ -71,10 +81,12 @@ const Reset = () => {
                 <Navigation type={'basic'} />
                 <Content>
                     <LineContent>
-                        <Title>Forgot Your Password?</Title>
+                        <Title color="secondary" style={opacity}>
+                            Forgot Your Password?
+                        </Title>
                         <div className="subtitles-wrapper-inner">
-                            <Subtitle>Enter the email address associated with your account.</Subtitle>
-                            <Subtitle>We’ll send you an email with a reset form.</Subtitle>
+                            <Subtitle style={opacity}>Enter the email address associated with your account.</Subtitle>
+                            <Subtitle style={opacity}>We’ll send you an email with a reset form.</Subtitle>
                         </div>
                         <Line color="secondary" width="large" height="short" align="left" />
                         <Form
@@ -88,6 +100,7 @@ const Reset = () => {
                                 placeholder="email adress"
                                 type="email"
                                 name="email"
+                                style={opacity}
                                 validated={check.email}
                                 disabled={isEmailSent}
                                 register={register({

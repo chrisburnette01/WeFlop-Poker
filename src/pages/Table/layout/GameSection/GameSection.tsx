@@ -1,11 +1,12 @@
 // @ts-nocheck
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Typography } from '../../../../components';
 import { Card, Balance } from '../../components';
 
 import styled from 'styled-components';
-import { useTransition, useChain } from 'react-spring';
+import { useTransition, animated } from 'react-spring';
+import useMeasure from 'react-use-measure';
 
 interface GameSectionProps {
     totalPot: number;
@@ -14,13 +15,35 @@ interface GameSectionProps {
     className?: string;
     centerRef: any;
     balanceRef: any;
+    action: any;
     // cards: string[];
 }
 
-const GameSection = ({ totalPot, balance, pot, className, centerRef, balanceRef }: GameSectionProps) => {
+const GameSection = ({ totalPot, balance, pot, className, centerRef, balanceRef, action }: GameSectionProps) => {
     const cards = ['H1', 'H1', 'H1', 'H1', 'H1'];
 
     const [flipped, setFlipped] = useState([false, false, false, false, false]);
+    const [potStatus, setPotStatus] = useState(true);
+
+    const [winRef, winBounds] = useMeasure();
+
+    useEffect(() => {
+        if (action) {
+            switch (action.type) {
+                case 'win':
+                    winAnimate();
+                    break;
+                case 'pot':
+                    setPotStatus('pot');
+            }
+        }
+    }, [action]);
+
+    const winAnimate = async () => {
+        await setPotStatus('win');
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await setPotStatus(null);
+    };
 
     const setFlippedHandler = (num) => {
         setFlipped((prev) =>
@@ -32,8 +55,6 @@ const GameSection = ({ totalPot, balance, pot, className, centerRef, balanceRef 
             }),
         );
     };
-
-    const delayStart = 0;
 
     const animationConfig = (num, delay) => {
         return {
@@ -54,17 +75,29 @@ const GameSection = ({ totalPot, balance, pot, className, centerRef, balanceRef 
     const cardFour = useTransition(cards[3], null, animationConfig(3, 3000));
     const cardFive = useTransition(cards[4], null, animationConfig(4, 4000));
 
+    const potComponent = useTransition(potStatus, null, {
+        from: { opacity: 0, top: '1rem' },
+        enter: { opacity: 1 },
+        leave: potStatus === null ? { top: '-100%', opacity: 0 } : { opacity: 0 },
+        config: { duration: 4000 },
+    });
+
     return (
         <div className={className}>
             <div className="wrapper">
-                <Typography component="span" variant="h2" color="yellow">
-                    {`TOTAL POT: $${totalPot.toFixed(2)}`}
-                </Typography>
-                <div>
-                    <Typography component="span" variant="h6">
-                        {`MAIN [${balance.main.toFixed(2)}]`}
-                    </Typography>
-                </div>
+                {potComponent.map(({ item, key, props }) =>
+                    item === 'pot' ? (
+                        <animated.div style={props} key={key} className="total-pot-wrapper">
+                            <Typography component="span" variant="h2" color="yellow">
+                                {`TOTAL POT: $${totalPot.toFixed(2)}`}
+                            </Typography>
+                        </animated.div>
+                    ) : item === 'win' ? (
+                        <animated.div style={props} key={key} className="total-pot-wrapper">
+                            <Balance value={pot} size="small" className="balance-gutter" ref={winRef} />
+                        </animated.div>
+                    ) : null,
+                )}
                 <div className="wrapper-cards">
                     <div className="card-item">
                         <div className="skeleton" />
@@ -123,13 +156,19 @@ export default styled(GameSection)`
         display: flex;
         flex-direction: column;
         align-items: center;
+        position: relative;
+    }
+    .total-pot-wrapper {
+        position: absolute;
+        top: 0;
     }
 
     .wrapper-cards {
         width: 33.8rem;
         display: flex;
         justify-content: space-between;
-        margin: 10px 0 10px 0;
+        margin: 6.4rem 0 1rem 0;
+        position: relative;
     }
 
     .wrapper-balances {
@@ -138,18 +177,18 @@ export default styled(GameSection)`
     }
 
     .balance-gutter {
-        margin: 0 2.5px;
+        margin: 0 0.25rem;
     }
 
     .card-item {
-        width: 58px;
-        height: 79px;
+        width: 5.8rem;
+        height: 7.9rem;
     }
 
     .skeleton {
         position: absolute;
-        border: 3px solid ${({ theme }) => theme.palette.secondary};
-        border-radius: 3px;
+        border: 0.3rem solid ${({ theme }) => theme.palette.secondary};
+        border-radius: 0.3rem;
         height: inherit;
         width: inherit;
     }

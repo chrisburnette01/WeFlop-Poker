@@ -18,6 +18,10 @@ interface ButtonProps {
     color?: 'primary' | 'secondary' | 'initial' | string;
     disabled?: boolean;
     className?: string;
+    activeColor?: string;
+    isActionCompleted?: boolean;
+    actionCompletedColor?: string;
+    textStyle?: Record<string, unknown>;
 }
 
 const Button = ({
@@ -34,7 +38,11 @@ const Button = ({
     validated,
     variant,
     disabled,
-    className
+    className,
+    activeColor,
+    isActionCompleted,
+    actionCompletedColor,
+    textStyle,
 }: ButtonProps) => {
     switch (variant) {
         case 'primary':
@@ -54,9 +62,27 @@ const Button = ({
                 />
             );
         case 'secondary':
-            return <Secondary title={title!} validated={validated} size={size!} className={className} />;
+            return (
+                <Secondary
+                    actionCompletedColor={actionCompletedColor}
+                    title={title!}
+                    validated={validated}
+                    size={size!}
+                    className={className}
+                    isActionCompleted={isActionCompleted}
+                />
+            );
         case 'play':
-            return <ButtonPlay title={title!} active={active} align={align!} onClick={onClick} />;
+            return (
+                <ButtonPlay
+                    title={title!}
+                    active={active}
+                    align={align!}
+                    onClick={onClick}
+                    activeColor={activeColor}
+                    textStyle={textStyle}
+                />
+            );
         default:
             return null;
     }

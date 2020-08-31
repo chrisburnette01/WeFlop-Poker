@@ -25,7 +25,7 @@ const ModalContainer = styled('div')`
 
 const BaseContainer = styled('div')<BaseContainerProps>`
     height: 100vh;
-    padding: ${({ type }) => (type === 'initial' ? '60px' : '100px 100px 0 100px')};
+    padding: ${({ type }) => (type === 'initial' ? '6rem' : '10rem 10rem 0 10rem')};
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;

@@ -21,13 +21,13 @@ interface FormAnimationProps {
 const FormAnimationWrapper = styled.div<FormAnimationProps>`
     animation: ${({ theme, isClicked }) => (isClicked ? null : theme.animations.inputs)};
     & > * {
-        margin-top: 16px;
+        margin-top: 1.6rem;
     }
 
-    min-width: 304px;
+    min-width: 30.4rem;
 `;
 
-const Form = ({ children, onSubmit, buttonSubmit, isClicked, isRightIcon, notification, className }: FormProps) => {
+const Form = ({ children, onSubmit, buttonSubmit, isClicked, notification, className }: FormProps) => {
     return (
         <div className={className}>
             <form onSubmit={onSubmit} className="form" noValidate>
@@ -54,21 +54,21 @@ export default styled(Form)`
     display: flex;
     flex-direction: row;
     .line-form-fix {
-        margin-top: 16px;
+        margin-top: 1.6rem;
     }
     .line-wrapper-page {
         display: flex;
-        padding-left: 25px;
-        max-width: 756px;
+        padding-left: 2.5rem;
+        max-width: 75.6rem;
         width: 100%;
     }
     .form-line-right {
-        margin: 0 8px 0 8px !important;
+        margin: 0 0.8rem 0 0.8rem !important;
     }
     .form {
         position: relative;
         & > *:not(:first-child) {
-            margin-top: 16px;
+            margin-top: 1.6rem;
         }
     }
 `;

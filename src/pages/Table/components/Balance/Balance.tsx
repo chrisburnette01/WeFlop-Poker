@@ -10,28 +10,28 @@ interface BaseBalanceProps {
 }
 
 const BaseBalance = styled(animated.div)<BaseBalanceProps>`
-    height: ${({ size }) => (size === 'big' ? '30px' : '24px')};
-    min-width: ${({ size }) => (size === 'big' ? '90px' : '66px')};
-    border-radius: ${({ size }) => (size === 'big' ? '10px' : '9px')};
-    border: solid 1px rgba(255, 255, 255, 0.25);
+    height: ${({ size }) => (size === 'big' ? '3rem' : '2.4rem')};
+    min-width: ${({ size }) => (size === 'big' ? '9rem' : '6.6rem')};
+    border-radius: ${({ size }) => (size === 'big' ? '1rem' : '0.9rem')};
+    border: solid 0.1rem rgba(255, 255, 255, 0.25);
     display: flex;
     align-items: center;
-    padding: 5px;
+    padding: 0.5rem;
     .icon-outer {
-        width: ${({ size }) => (size === 'big' ? '18px' : '12px')};
-        height: ${({ size }) => (size === 'big' ? '18px' : '12px')};
-        border-radius: 12px;
-        border: ${({ theme, size }) => `solid ${size === 'big' ? '3px' : '2px'} ${theme.palette.yellow}`};
-        padding: ${({ size }) => (size === 'big' ? '3px' : '2px')};
+        width: ${({ size }) => (size === 'big' ? '1.8rem' : '1.2rem')};
+        height: ${({ size }) => (size === 'big' ? '1.8rem' : '1.2rem')};
+        border-radius: 1.2rem;
+        border: ${({ theme, size }) => `solid ${size === 'big' ? '0.3rem' : '0.2rem'} ${theme.palette.yellow}`};
+        padding: ${({ size }) => (size === 'big' ? '0.3rem' : '0.2rem')};
     }
     .icon-inner {
-        width: ${({ size }) => (size === 'big' ? '6px' : '4px')};
-        height: ${({ size }) => (size === 'big' ? '6px' : '4px')};
-        border-radius: 9px;
+        width: ${({ size }) => (size === 'big' ? '0.6rem' : '0.4rem')};
+        height: ${({ size }) => (size === 'big' ? '0.6rem' : '0.4rem')};
+        border-radius: 0.9rem;
         background: ${({ theme }) => theme.palette.yellow};
     }
     .typography-balance {
-        margin: ${({ size }) => (size === 'big' ? '0 0 0 8px' : '0 0 1px 5px')};
+        margin: ${({ size }) => (size === 'big' ? '0 0 0 0.8rem' : '0 0 0.1rem 0.5rem')};
     }
 `;
 

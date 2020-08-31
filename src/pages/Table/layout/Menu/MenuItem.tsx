@@ -23,7 +23,7 @@ const MenuItemBase = styled.div<MenuItemBaseProps>`
     align-items: ${({ left }) => (left ? 'flex-start' : 'flex-end')};
     display: flex;
     & > * + * {
-        margin-top: 6px;
+        margin-top: 0.6rem;
     }
 `;
 

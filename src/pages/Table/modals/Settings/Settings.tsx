@@ -22,9 +22,9 @@ const Settings = ({ className }: SettingsProps) => {
         <Container type="modal">
             <div className={className}>
                 <Line width="large" color="yellow" wrapperClassName="line-short" />
-                <Divider margin="6px" />
+                <Divider margin="0.6rem" />
                 <Line width="large" color="yellow" wrapperClassName="line-long" />
-                <Divider margin="6px" />
+                <Divider margin="0.6rem" />
                 <div className="checkboxes-wrapper">
                     <Checkbox
                         title="AUTO-MUCK ALL HANDS"
@@ -34,9 +34,9 @@ const Settings = ({ className }: SettingsProps) => {
                     <Checkbox title="MUSIC" active={isActive.music} onClick={() => checkboxHandler('music')} />
                     <Checkbox title="GAME SOUNDS" active={isActive.sounds} onClick={() => checkboxHandler('sounds')} />
                 </div>
-                <Divider margin="6px" />
+                <Divider margin="0.6rem" />
                 <Line width="large" color="yellow" wrapperClassName="line-long" />
-                <Divider margin="6px" />
+                <Divider margin="0.6rem" />
                 <Line width="large" color="yellow" wrapperClassName="line-short" />
             </div>
         </Container>
@@ -52,9 +52,9 @@ export default styled(Settings)`
         flex: 1;
     }
     .line-short {
-        height: 24px !important;
+        height: 2.4rem !important;
     }
     .checkboxes-wrapper {
-        margin-right: 220px;
+        margin-right: 22rem;
     }
 `;

@@ -26,10 +26,10 @@ export default styled(LineContent)<LineContentProps>`
     }
 
     .title-wrapper-text {
-        margin-left: 8px;
+        margin-left: 0.8rem;
     }
 
     .subtitles-wrapper-inner {
-        margin: 10px 0 10px 0;
+        margin: 1rem 0 1rem 0;
     }
 `;

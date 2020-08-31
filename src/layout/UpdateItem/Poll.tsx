@@ -12,24 +12,24 @@ interface PollItemProps {
 }
 
 const PollItem = styled.div<PollItemProps>`
-    margin-left: 12px;
+    margin-left: 1.2rem;
     display: flex;
     align-items: center;
     cursor: pointer;
 
     & + & {
-        margin-top: 2px;
+        margin-top: 0.2rem;
     }
 
     .poll-vote-icon {
-        height: 16px;
-        width: 16px;
+        height: 1.6rem;
+        width: 1.6rem;
         display: block;
         background-color: ${({ active, theme }) => (active ? theme.palette.secondary : theme.palette.primary)};
-        border-radius: 8px;
+        border-radius: 0.8rem;
     }
     .poll-vote-text {
-        margin-left: 9px;
+        margin-left: 0.9rem;
     }
 `;
 
@@ -39,14 +39,14 @@ const Poll = ({ content, optional, updateId }) => {
 
     const optionalText =
         optional !== undefined ? (
-            <div style={{ marginTop: '4px' }}>
+            <div style={{ marginTop: '0.4rem' }}>
                 <Description content={optional} />
             </div>
         ) : null;
 
     const onClickHandler = (id) => {
         setActive(id);
-        dispatch(votePoll({updateId, id}));
+        dispatch(votePoll({ updateId, id }));
     };
 
     const totalVotes = () => {
@@ -56,7 +56,6 @@ const Poll = ({ content, optional, updateId }) => {
     return (
         <div>
             {content.options.map((element, index) => {
-                const asterisk = index === active ? '*' : null;
                 const votes = active !== undefined ? ` (${Math.round((element.votes / totalVotes()) * 100)}%)` : null;
                 return (
                     <PollItem
@@ -71,10 +70,8 @@ const Poll = ({ content, optional, updateId }) => {
                                 variant="body1"
                                 color={index === active ? 'secondary' : 'primary'}
                             >
-                                {asterisk}
                                 {element.title}
                                 {votes}
-                                {asterisk}
                             </Typography>
                         </div>
                     </PollItem>

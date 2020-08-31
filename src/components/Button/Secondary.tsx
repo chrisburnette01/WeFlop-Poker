@@ -6,29 +6,29 @@ interface BaseSecondaryButtonProps {
     size: 'small' | 'large';
 }
 
-// bottom: ${({ variant }) => (variant === 'auth' ? '-96px' : 'unset')};
-// margin: ${({ variant }) => (variant === 'auth' ? '0 -25px 0 -25px' : '48px 0 0 0')};
+// bottom: ${({ variant }) => (variant === 'auth' ? '-9.6rem' : 'unset')};
+// margin: ${({ variant }) => (variant === 'auth' ? '0 -2.5rem 0 -2.5rem' : '4.8rem 0 0 0')};
 // position: ${({ variant }) => (variant === 'auth' ? 'absolute' : 'unset')};
-// min-width: ${({ variant }) => (variant === 'auth' ? '356px' : '238px')};
+// min-width: ${({ variant }) => (variant === 'auth' ? '35.6rem' : '23.8rem')};
 
 const BaseSecondaryButton = styled('button')<BaseSecondaryButtonProps>`
     display: flex;
     align-items: center;
     width: inherit;
-    height: ${({ size }) => (size === 'large' ? '48px' : '24px')};
+    height: ${({ size }) => (size === 'large' ? '4.8rem' : '2.4rem')};
     background: transparent;
     border: none;
     outline: none;
     cursor: pointer;
     justify-content: space-between;
     padding: 0;
-    
+
     .line-button {
-        margin: 0 0 0 8px;
+        margin: 0 0 0 0.8rem;
     }
 
     .line-button-last {
-        margin: 0 8px 0 0;
+        margin: 0 0.8rem 0 0;
     }
     .lines-wrapper {
         display: flex;
@@ -42,22 +42,55 @@ interface SecondaryButtonProps {
     validated?: boolean;
     size: 'small' | 'large';
     className?: string;
+    isActionCompleted?: boolean;
+    actionCompletedColor?: string;
 }
 
-const Secondary = ({ title, validated, size, className }: SecondaryButtonProps) => {
+const Secondary = ({
+    title,
+    validated,
+    size,
+    className,
+    isActionCompleted,
+    actionCompletedColor,
+}: SecondaryButtonProps) => {
     const color = validated ? 'success' : 'primary';
     return (
-        <BaseSecondaryButton size={size} className={className} type='submit'>
+        <BaseSecondaryButton size={size} className={className} type="submit">
             <div className="lines-wrapper">
-                <Rectangle width={size === "large" ? "large" : "extrasmall"} height={size === "large" ? "large" : "extrasmall"} color={color} border={size} />
-                <Line width={size === "large" ? "large" : "small"} className="line-button" />
+                <Rectangle
+                    width={size === 'large' ? 'large' : 'extrasmall'}
+                    height={size === 'large' ? 'large' : 'extrasmall'}
+                    color={color}
+                    border={size}
+                />
+                <Line
+                    width={size === 'large' ? 'large' : 'small'}
+                    className="line-button"
+                    color={isActionCompleted ? (actionCompletedColor ? actionCompletedColor : 'yellow') : undefined}
+                />
             </div>
-            <Typography component="span" variant={size === "large" ? "button2" : "h6"} fontWeight={600} textTransform="uppercase">
+            <Typography
+                component="span"
+                variant={size === 'large' ? 'button2' : 'h6'}
+                fontWeight={600}
+                textTransform="uppercase"
+                style={isActionCompleted ? { opacity: '0' } : undefined}
+            >
                 {title}
             </Typography>
             <div className="lines-wrapper">
-                <Line width={size === "large" ? "large" : "small"} className="line-button line-button-last" />
-                <Rectangle width={size === "large" ? "large" : "extrasmall"} height={size === "large" ? "large" : "extrasmall"} color={color} border={size} />
+                <Line
+                    width={size === 'large' ? 'large' : 'small'}
+                    className="line-button line-button-last"
+                    color={isActionCompleted ? (actionCompletedColor ? actionCompletedColor : 'yellow') : undefined}
+                />
+                <Rectangle
+                    width={size === 'large' ? 'large' : 'extrasmall'}
+                    height={size === 'large' ? 'large' : 'extrasmall'}
+                    color={color}
+                    border={size}
+                />
             </div>
         </BaseSecondaryButton>
     );

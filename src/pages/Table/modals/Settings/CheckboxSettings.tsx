@@ -12,14 +12,14 @@ const CheckboxBase = styled.div<CheckboxBaseProps>`
     display: flex;
     align-items: center;
     & + & {
-        margin-top: 6px;
+        margin-top: 0.6rem;
     }
     .name-checkbox {
-        width: 260px;
+        width: 26rem;
         text-align: right;
     }
     .checkbox-activity {
-        width: 41px;
+        width: 4.1rem;
         text-align: left;
     }
 `;
@@ -29,11 +29,11 @@ interface RectangleProps {
 }
 
 const Rectangle = styled.div<RectangleProps>`
-    margin: 0 10px;
-    width: 16px;
-    height: 24px;
+    margin: 0 1rem;
+    width: 1.6rem;
+    height: 2.4rem;
     background-color: ${({ theme, active }) => (active ? theme.palette.yellow : theme.palette.initial)};
-    border-radius: 2px;
+    border-radius: 0.2rem;
     transition: background-color 0.4s ease-in-out;
 `;
 

@@ -9,35 +9,35 @@ interface BaseRectangleProps {
 }
 
 const BaseRectangle = styled.span<BaseRectangleProps>`
-    border-radius: ${({ border }) => (border === 'large' ? '4px' : '2px')};
+    border-radius: ${({ border }) => (border === 'large' ? '0.4rem' : '0.2rem')};
     background-color: ${({ theme, color }) =>
         theme.palette[color!] ? theme.palette[color!] : theme.palette.common[color!]};
     display: block;
     width: ${({ width }) =>
         width === 'extrasmall'
-            ? '8px'
+            ? '0.8rem'
             : width === 'small'
-            ? '10px'
+            ? '1rem'
             : width === 'medium'
-            ? '12px'
+            ? '1.2rem'
             : width === 'large'
-            ? '16px'
+            ? '1.6rem'
             : width === 'extralarge'
-            ? '40px'
+            ? '4rem'
             : width === 'initial'
             ? '100%'
             : width};
     height: ${({ height }) =>
         height === 'extrasmall'
-            ? '8px'
+            ? '0.8rem'
             : height === 'small'
-            ? '10px'
+            ? '1rem'
             : height === 'medium'
-            ? '12px'
+            ? '1.2rem'
             : height === 'large'
-            ? '16px'
+            ? '1.6rem'
             : height === 'extralarge'
-            ? '40px'
+            ? '4rem'
             : height === 'initial'
             ? '100%'
             : height};

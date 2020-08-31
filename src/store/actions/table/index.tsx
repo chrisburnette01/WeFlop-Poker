@@ -147,12 +147,19 @@ const SEND_MESSAGE_CHAT: Action = {
     SUCCESS: 'SEND_MESSAGE_CHAT_SUCCESS',
     ERROR: 'SEND_MESSAGE_CHAT_ERROR',
 };
+
+const UPDATE_INFO: Action = {
+    REQUEST: 'UPDATE_INFO_REQUEST',
+    SUCCESS: 'UPDATE_INFO_SUCCESS',
+    ERROR: 'UPDATE_INFO_ERROR',
+};
 // join game
 
-const joinGame = (payload) => {
+const joinGame = (payload, socket) => {
     return {
         type: JOIN_GAME.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -172,10 +179,11 @@ const joinGameError = (payload) => {
 
 // bet
 
-const bet = (payload) => {
+const bet = (payload, socket) => {
     return {
         type: BET.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -195,10 +203,11 @@ const betError = (payload) => {
 
 // check
 
-const check = (payload) => {
+const check = (payload, socket) => {
     return {
         type: CHECK.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -218,10 +227,11 @@ const checkError = (payload) => {
 
 // fold
 
-const fold = (payload) => {
+const fold = (payload, socket) => {
     return {
         type: FOLD.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -241,10 +251,11 @@ const foldError = (payload) => {
 
 // raise
 
-const raise = (payload) => {
+const raise = (payload, socket) => {
     return {
         type: RAISE.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -264,10 +275,11 @@ const raiseError = (payload) => {
 
 // call
 
-const call = (payload) => {
+const call = (payload, socket) => {
     return {
         type: CALL.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -287,10 +299,11 @@ const callError = (payload) => {
 
 // sit in
 
-const sitIn = (payload) => {
+const sitIn = (payload, socket) => {
     return {
         type: SIT_IN.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -310,10 +323,11 @@ const sitInError = (payload) => {
 
 // sit out
 
-const sitOut = (payload) => {
+const sitOut = (payload, socket) => {
     return {
         type: SIT_OUT.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -333,10 +347,11 @@ const sitOutError = (payload) => {
 
 // change seats
 
-const changeSeats = (payload) => {
+const changeSeats = (payload, socket) => {
     return {
         type: BET.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -356,10 +371,11 @@ const changeSeatsError = (payload) => {
 
 // wait bb
 
-const waitBB = (payload) => {
+const waitBB = (payload, socket) => {
     return {
         type: WAIT_BB.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -379,10 +395,11 @@ const waitBBError = (payload) => {
 
 // post bb
 
-const postBB = (payload) => {
+const postBB = (payload, socket) => {
     return {
         type: POST_BB.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -402,10 +419,11 @@ const postBBError = (payload) => {
 
 // sit out next bb
 
-const sitOutNextBB = (payload) => {
+const sitOutNextBB = (payload, socket) => {
     return {
         type: SIT_OUT_NEXT_BB.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -425,10 +443,11 @@ const sitOutNextBBError = (payload) => {
 
 // sit out next hand
 
-const sitOutNextHand = (payload) => {
+const sitOutNextHand = (payload, socket) => {
     return {
         type: SIT_OUT_NEXT_HAND.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -448,10 +467,11 @@ const sitOutNextHandError = (payload) => {
 
 // buy in
 
-const buyIn = (payload) => {
+const buyIn = (payload, socket) => {
     return {
         type: BUY_IN.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -471,10 +491,11 @@ const buyInError = (payload) => {
 
 // top up
 
-const topUp = (payload) => {
+const topUp = (payload, socket) => {
     return {
         type: TOP_UP.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -494,17 +515,18 @@ const topUpError = (payload) => {
 
 // muck
 
-const muck = (payload) => {
+const muck = (payload, socket) => {
     return {
         type: MUCK.REQUEST,
         payload,
+        socket
     };
 };
 
 const muckSuccess = (payload) => {
     return {
         type: MUCK.SUCCESS,
-        payload,
+        payload
     };
 };
 
@@ -517,10 +539,11 @@ const muckError = (payload) => {
 
 // show
 
-const show = (payload) => {
+const show = (payload, socket) => {
     return {
         type: BET.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -540,10 +563,11 @@ const showError = (payload) => {
 
 // get chat
 
-const getChat = (payload) => {
+const getChat = (payload, socket) => {
     return {
         type: GET_CHAT.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -563,10 +587,11 @@ const getChatError = (payload) => {
 
 // get balance
 
-const getBalance = (payload) => {
+const getBalance = (payload, socket) => {
     return {
         type: GET_BALANCE.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -586,10 +611,11 @@ const getBalanceError = (payload) => {
 
 // set auto muck
 
-const setAutoMuck = (payload) => {
+const setAutoMuck = (payload, socket) => {
     return {
         type: SET_AUTO_MUCK.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -655,10 +681,11 @@ const setSoundsError = (payload) => {
 
 // get ledger
 
-const getLedger = (payload) => {
+const getLedger = (payload, socket) => {
     return {
         type: GET_LEDGER.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -678,10 +705,11 @@ const getLedgerError = (payload) => {
 
 // send message chat
 
-const sendMessageChat = (payload) => {
+const sendMessageChat = (payload, socket) => {
     return {
         type: SEND_MESSAGE_CHAT.REQUEST,
         payload,
+        socket
     };
 };
 
@@ -698,6 +726,30 @@ const sendMessageChatError = (payload) => {
         payload,
     };
 };
+
+// send message chat
+
+const updateInfo = (payload) => {
+    return {
+        type: UPDATE_INFO.REQUEST,
+        payload
+    };
+};
+
+const updateInfoSuccess = (payload) => {
+    return {
+        type: UPDATE_INFO.SUCCESS,
+        payload
+    };
+};
+
+const updateInfoError = (payload) => {
+    return {
+        type: UPDATE_INFO.ERROR,
+        payload
+    };
+};
+
 
 export {
     JOIN_GAME,
@@ -724,6 +776,7 @@ export {
     SET_SOUNDS,
     GET_LEDGER,
     SEND_MESSAGE_CHAT,
+    UPDATE_INFO,
     joinGame,
     joinGameSuccess,
     joinGameError,
@@ -796,4 +849,7 @@ export {
     sendMessageChat,
     sendMessageChatSuccess,
     sendMessageChatError,
+    updateInfo,
+    updateInfoSuccess,
+    updateInfoError
 };

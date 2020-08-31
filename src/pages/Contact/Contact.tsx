@@ -11,7 +11,7 @@ import { sendFeedback, SEND_FEEDBACK } from '../../store/actions/application';
 const Contact = () => {
     const dispatch = useDispatch();
     const application = useSelector((state: RootState) => state.application);
-    const { register, watch, handleSubmit } = useForm({
+    const { register, watch, errors, handleSubmit } = useForm({
         mode: 'all',
         shouldFocusError: true,
     });
@@ -20,9 +20,17 @@ const Contact = () => {
 
     const feedback = watch('feedback', '');
 
-    const buttonSubmit = <Button variant="secondary" className="button-form" validated={Boolean(feedback)} title="Enter" />;
+    const buttonSubmit = (
+        <Button
+            variant="secondary"
+            className="button-form"
+            validated={Boolean(feedback)}
+            title="Enter"
+            isActionCompleted={isMessageSent}
+        />
+    );
     const notification = (
-        <Typography component="span" variant="button2" color="primary">
+        <Typography component="span" variant="button2" color="yellow" textTransform="uppercase">
             message was sent
         </Typography>
     );
@@ -31,6 +39,16 @@ const Contact = () => {
         setIsMessageSent(true);
         dispatch(sendFeedback(data));
     };
+
+    const onEnterPress = (e) => {
+        if (e.keyCode == 13 && e.shiftKey == false) {
+            e.preventDefault();
+            handleSubmit(onSubmit)();
+        }
+    };
+
+    const opacity = isMessageSent ? { opacity: 0 } : { opacity: 1 };
+
     return (
         <>
             <Helmet>
@@ -40,13 +58,13 @@ const Contact = () => {
                 <Navigation type={'auth'} />
                 <Content>
                     <LineContent>
-                        <Title titleOnTop color="secondary">
+                        <Title color="secondary" style={opacity}>
                             GIVE US FEEDBACK!
                         </Title>
                         <div className="subtitles-wrapper-inner">
-                            <Subtitle>We want to hear what you have to say.</Subtitle>
-                            <Subtitle>We read all your messsages, even the not so nice ones…</Subtitle>
-                            <Subtitle>Please also consider donating to our Patreon!</Subtitle>
+                            <Subtitle style={opacity}>We want to hear what you have to say.</Subtitle>
+                            <Subtitle style={opacity}>We read all your messsages, even the not so nice ones…</Subtitle>
+                            <Subtitle style={opacity}>Please also consider donating to our Patreon!</Subtitle>
                         </div>
                         <Line color="secondary" width="large" height="short" align="left" />
                         <div className="d-flex">
@@ -58,10 +76,13 @@ const Contact = () => {
                                 notification={isMessageSent ? notification : null}
                             >
                                 <TextField
+                                    style={opacity}
                                     variant="textarea"
+                                    onKeyDown={onEnterPress}
                                     onFocus={() => setIsClicked(true)}
                                     disabled={isMessageSent}
                                     name="feedback"
+                                    validated={Boolean(feedback) && !errors.message}
                                     register={(ref) =>
                                         register(ref, {
                                             required: true,
