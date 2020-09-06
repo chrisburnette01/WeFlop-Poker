@@ -1,5 +1,6 @@
 import {
     JOIN_GAME,
+    CHOOSE_PANEL,
     BET,
     CHECK,
     FOLD,
@@ -25,21 +26,47 @@ import {
     SEND_MESSAGE_CHAT,
 } from '../../actions/table';
 import { TableState, TableAction } from './types';
+import { stat } from 'fs';
 
 const defaultTableState: TableState = {
     isLoading: {},
     error: {},
     success: {},
-    players: [],
-    activeSlot: 1,
+    slot: undefined,
+    players: [
+        {
+            username: 'john',
+            slot: 1,
+            balance: {
+                main: 100,
+            },
+            lastAction: {},
+        },
+        {
+            username: 'glenn',
+            slot: 2,
+            balance: {
+                main: 100,
+            },
+            lastAction: {},
+        },
+        {
+            username: 'nick',
+            slot: 6,
+            balance: {
+                main: 100,
+            },
+            lastAction: {},
+        },
+    ],
+    player: undefined,
     chat: [],
-    balance: {
-        totalPot: 0,
-    },
+    balance: undefined,
     autoMuck: false,
     music: false,
     gameSounds: true,
     ledger: undefined,
+    status: 'started',
 };
 
 const table = (state: TableState = defaultTableState, action: TableAction) => {
@@ -63,7 +90,9 @@ const table = (state: TableState = defaultTableState, action: TableAction) => {
                     ...state.isLoading,
                     [JOIN_GAME.REQUEST]: undefined,
                 },
-                players: action.payload,
+                slot: action.payload!.slot,
+                player: undefined,
+                players: [...state.players, { ...state.player, ...action.payload }],
             };
         case JOIN_GAME.ERROR:
             return {
@@ -77,6 +106,45 @@ const table = (state: TableState = defaultTableState, action: TableAction) => {
                     [JOIN_GAME.ERROR]: action.payload,
                 },
             };
+
+        case CHOOSE_PANEL.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [CHOOSE_PANEL.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [CHOOSE_PANEL.ERROR]: undefined,
+                },
+            };
+        case CHOOSE_PANEL.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [CHOOSE_PANEL.REQUEST]: undefined,
+                },
+                player: {
+                    username: action.payload!.username,
+                    slot: action.payload!.slot,
+                    lastAction: {},
+                },
+            };
+        case CHOOSE_PANEL.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [CHOOSE_PANEL.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [CHOOSE_PANEL.ERROR]: action.payload,
+                },
+            };
+
         case BET.REQUEST:
             return {
                 ...state,
@@ -96,6 +164,15 @@ const table = (state: TableState = defaultTableState, action: TableAction) => {
                     ...state.isLoading,
                     [BET.REQUEST]: undefined,
                 },
+                players: state.players.map((player) => {
+                    return player.slot === state.slot
+                        ? {
+                              ...player,
+                              balance: { ...player.balance, pot: action.payload!.value },
+                              lastAction: { type: 'bet', params: { value: action.payload!.value } },
+                          }
+                        : player;
+                }),
             };
         case BET.ERROR:
             return {
@@ -128,6 +205,14 @@ const table = (state: TableState = defaultTableState, action: TableAction) => {
                     ...state.isLoading,
                     [CHECK.REQUEST]: undefined,
                 },
+                players: state.players.map((player) => {
+                    return player.slot === state.slot
+                        ? {
+                              ...player,
+                              lastAction: { type: 'check' },
+                          }
+                        : player;
+                }),
             };
         case CHECK.ERROR:
             return {
@@ -160,6 +245,14 @@ const table = (state: TableState = defaultTableState, action: TableAction) => {
                     ...state.isLoading,
                     [FOLD.REQUEST]: undefined,
                 },
+                players: state.players.map((player) => {
+                    return player.slot === state.slot
+                        ? {
+                              ...player,
+                              status: 'folded',
+                          }
+                        : player;
+                }),
             };
         case FOLD.ERROR:
             return {
@@ -192,6 +285,15 @@ const table = (state: TableState = defaultTableState, action: TableAction) => {
                     ...state.isLoading,
                     [RAISE.REQUEST]: undefined,
                 },
+                players: state.players.map((player) => {
+                    return player.slot === state.slot
+                        ? {
+                              ...player,
+                              balance: { ...player.balance, pot: player.balance!.pot! + action.payload!.value },
+                              lastAction: { type: 'raise', params: { value: action.payload!.value } },
+                          }
+                        : player;
+                }),
             };
         case RAISE.ERROR:
             return {
@@ -224,6 +326,15 @@ const table = (state: TableState = defaultTableState, action: TableAction) => {
                     ...state.isLoading,
                     [CALL.REQUEST]: undefined,
                 },
+                players: state.players.map((player) => {
+                    return player.slot === state.slot
+                        ? {
+                              ...player,
+                              balance: { ...player.balance, pot: player.balance!.pot! + action.payload!.value },
+                              lastAction: { type: 'call', params: { value: action.payload!.value } },
+                          }
+                        : player;
+                }),
             };
         case CALL.ERROR:
             return {
@@ -544,6 +655,14 @@ const table = (state: TableState = defaultTableState, action: TableAction) => {
                     ...state.isLoading,
                     [MUCK.REQUEST]: undefined,
                 },
+                players: state.players.map((player) => {
+                    return player.slot === state.slot
+                        ? {
+                              ...player,
+                              lastAction: { type: 'muck' },
+                          }
+                        : player;
+                }),
             };
         case MUCK.ERROR:
             return {
@@ -576,6 +695,14 @@ const table = (state: TableState = defaultTableState, action: TableAction) => {
                     ...state.isLoading,
                     [SHOW.REQUEST]: undefined,
                 },
+                players: state.players.map((player) => {
+                    return player.slot === state.slot
+                        ? {
+                              ...player,
+                              lastAction: { type: 'show' },
+                          }
+                        : player;
+                }),
             };
         case SHOW.ERROR:
             return {

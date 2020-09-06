@@ -1,5 +1,4 @@
 import React from 'react';
-import { Typography } from '../../components';
 import styled from 'styled-components';
 
 const NotificationAnimationWrapper = styled.div`

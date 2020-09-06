@@ -1,27 +1,13 @@
 import React, { useState } from 'react';
 import { Divider } from '../';
 import { NavButton } from '../../components';
+import { Rectangle } from '../../../../components';
 import styled from 'styled-components';
 
 interface ActionMenuProps {
     className?: string;
     type: 'fold' | 'check-fold' | 'muck';
 }
-
-interface CheckboxProps {
-    active: boolean;
-}
-const Checkbox = styled.div<CheckboxProps>`
-    cursor: pointer;
-    height: 1.6rem;
-    width: 2.4rem;
-    border-radius: 0.2rem;
-    background: ${({ theme, active }) => (active ? theme.palette.yellow : theme.palette.initial)};
-    transition: background-color 0.4s ease-in-out;
-    &:hover {
-        background: ${({ theme }) => theme.palette.yellow};
-    }
-`;
 
 interface ActionMenuBaseProps {
     type: 'fold' | 'check-fold' | 'muck';
@@ -30,6 +16,12 @@ interface ActionMenuBaseProps {
 const ActionMenuBase = styled.div<ActionMenuBaseProps>`
     .button-hor {
         margin-bottom: ${({ type }) => (type === 'muck' ? '2.4rem' : '0.8rem')};
+    }
+    .rect-nav {
+        cursor: pointer;
+        &:hover > span {
+            background-color: ${({ theme }) => theme.palette.yellow};
+        }
     }
 `;
 
@@ -40,7 +32,14 @@ const ActionMenu = ({ className, type }: ActionMenuProps) => {
             <Divider
                 topContent={
                     type === 'muck' ? undefined : (
-                        <Checkbox active={active === 'default'} onClick={() => setActive('default')} />
+                        <Rectangle
+                            className="rect-nav"
+                            border="small"
+                            color={active === 'default' ? 'yellow' : 'initial'}
+                            width="2.4rem"
+                            height="large"
+                            onClick={() => setActive('default')}
+                        />
                     )
                 }
                 leftContent={

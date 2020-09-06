@@ -1,6 +1,5 @@
 import React from 'react';
 import { Line } from '../../components';
-import { PatreonIcon } from '../';
 import { Notification } from '../';
 import styled from 'styled-components';
 

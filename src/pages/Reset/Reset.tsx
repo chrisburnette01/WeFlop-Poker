@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Button, TextField, Line, Typography } from '../../components';
-import { Title, LineContent, Subtitle, Form, Navigation, Notification, Content } from '../../layout';
+import { Title, LineContent, Subtitle, Form, Navigation, Content } from '../../layout';
 import { checkValidation } from '../../helpers';
 import Container from '../../layout/Container/Container';
 import { useForm } from 'react-hook-form';

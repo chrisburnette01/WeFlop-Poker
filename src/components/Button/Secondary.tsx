@@ -42,6 +42,7 @@ interface SecondaryButtonProps {
     validated?: boolean;
     size: 'small' | 'large';
     className?: string;
+    onClick: any;
     isActionCompleted?: boolean;
     actionCompletedColor?: string;
 }
@@ -53,10 +54,11 @@ const Secondary = ({
     className,
     isActionCompleted,
     actionCompletedColor,
+    onClick
 }: SecondaryButtonProps) => {
     const color = validated ? 'success' : 'primary';
     return (
-        <BaseSecondaryButton size={size} className={className} type="submit">
+        <BaseSecondaryButton size={size} className={className} type="submit" onClick={onClick}>
             <div className="lines-wrapper">
                 <Rectangle
                     width={size === 'large' ? 'large' : 'extrasmall'}

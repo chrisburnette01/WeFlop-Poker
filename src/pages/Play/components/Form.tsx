@@ -38,9 +38,6 @@ const Form = ({ onSubmit, notification, className, isCreated }: FormProps) => {
     };
     const isValidated = check.name && check.blinds && check.max_buyin && check.min_buyin && check.time;
 
-    console.log(isActive.max_buyin);
-    console.log(isActive.min_buyin);
-
     return (
         <form onSubmit={handleSubmit(onSubmit)} noValidate className={className}>
             <div className="inner-inputs-play">

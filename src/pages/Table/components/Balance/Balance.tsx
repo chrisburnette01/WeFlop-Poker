@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
 
@@ -42,7 +42,7 @@ interface BalanceProps {
     className?: string;
 }
 
-const Balance = React.forwardRef(({ size, value, className, style }: BalanceProps, ref: any) => {
+const Balance = forwardRef(({ size, value, className, style }: BalanceProps, ref: any) => {
     return (
         <BaseBalance size={size} className={className} ref={ref} style={style}>
             <div className="icon-outer">

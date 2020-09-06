@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import { Range } from 'react-range';
 import styled from 'styled-components';
 import Button from './Button';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../../../store';
+import { SocketContext } from '../../../../providers';
+
+import { bet, check, fold, raise, call } from '../../../../store/actions/table';
 
 const BaseButtonsPanel = styled.div`
     display: flex;
@@ -99,8 +104,32 @@ const ButtonsPanel = ({ balance, type }: ButtonsPanelProps) => {
     const min = 0.5;
     const [rangeValue, setRangeValue] = useState<number[]>([min]);
 
+    const table = useSelector((state: RootState) => state.table);
+    const dispatch = useDispatch();
+    const { socket } = useContext(SocketContext);
+
     const buttonPercentHandler = (percents) => {
         setRangeValue([(balance / 100) * percents]);
+    };
+
+    const action = (type) => {
+        switch (type) {
+            case 'bet':
+                dispatch(bet({ value: rangeValue[0] }, socket));
+                break;
+            case 'call':
+                dispatch(call({ value: rangeValue[0] }, socket));
+                break;
+            case 'raise':
+                dispatch(raise({ value: rangeValue[0] }, socket));
+                break;
+            case 'check':
+                dispatch(check(socket));
+                break;
+            case 'fold':
+                dispatch(fold(socket));
+        }
+        setRangeValue([min]);
     };
 
     return (
@@ -187,7 +216,7 @@ const ButtonsPanel = ({ balance, type }: ButtonsPanelProps) => {
                     alignItems="center"
                     justifyContent="flex-start"
                     backgroundColor="secondary"
-                    onClick={() => console.log('bet')}
+                    onClick={() => action(type === 'bet' ? 'bet' : 'raise')}
                 />
             </div>
             <div className="button-section button-bottom-section">
@@ -197,7 +226,7 @@ const ButtonsPanel = ({ balance, type }: ButtonsPanelProps) => {
                     title="fold"
                     alignItems="flex-end"
                     justifyContent="flex-end"
-                    onClick={() => console.log('fold')}
+                    onClick={() => action('fold')}
                 />
                 <Button
                     size="medium"
@@ -206,7 +235,7 @@ const ButtonsPanel = ({ balance, type }: ButtonsPanelProps) => {
                     alignItems="flex-end"
                     justifyContent="flex-start"
                     optionalText={type === 'bet' ? undefined : '.50'}
-                    onClick={() => console.log('call')}
+                    onClick={() => action(type === 'bet' ? 'check' : 'call')}
                 />
             </div>
         </BaseButtonsPanel>

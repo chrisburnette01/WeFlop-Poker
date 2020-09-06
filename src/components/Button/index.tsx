@@ -68,6 +68,7 @@ const Button = ({
                     title={title!}
                     validated={validated}
                     size={size!}
+                    onClick={onClick}
                     className={className}
                     isActionCompleted={isActionCompleted}
                 />

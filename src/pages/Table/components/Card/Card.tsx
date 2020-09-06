@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { isCard } from '../../../../helpers';
 import { useSpring, animated } from 'react-spring';
@@ -24,11 +24,6 @@ interface BaseCardProps {
     transform?: any;
 }
 
-interface BaseCardWrapper {
-    animated?: boolean;
-    right?: boolean;
-    left?: boolean;
-}
 
 const BaseCard = styled(animated.div)<BaseCardProps>`
     border: 0.3rem solid
@@ -42,7 +37,8 @@ const BaseCard = styled(animated.div)<BaseCardProps>`
     width: inherit;
     height: inherit;
     position: absolute;
-    background: ${({ path, back, theme }) => back ? theme.palette.secondary : (path ? `url(${path})` : theme.palette.background)};
+    background: ${({ path, back, theme }) =>
+        back ? theme.palette.secondary : path ? `url(${path})` : theme.palette.background};
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -62,8 +58,7 @@ const Card = React.forwardRef(({ variant, color, flipped, onClick, style, classN
                 color={color}
                 style={{ opacity, top, transform: transform.interpolate((t) => `${t} rotateX(180deg)`) }}
                 path={isCardRes ? `${baseImagePath}/${variant}.svg` : undefined}
-            >
-            </BaseCard>
+            ></BaseCard>
             {isCardRes && <BaseCard back style={{ opacity: opacity.interpolate((o: any) => 1 - o), transform, top }} />}
         </animated.div>
     );

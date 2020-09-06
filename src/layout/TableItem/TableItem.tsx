@@ -122,7 +122,7 @@ const TableItemBase = styled.div`
 
 interface TableItemProps {
     table: Record<string, any>;
-    onRemove: Function;
+    onRemove: (id: any) => void;
     type: 'archive' | 'active';
 }
 

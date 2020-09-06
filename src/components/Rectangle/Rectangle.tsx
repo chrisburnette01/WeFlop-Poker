@@ -50,11 +50,12 @@ interface RectangleProps {
     color?: 'primary' | 'secondary' | 'success' | string;
     border?: 'small' | 'large';
     className?: string;
+    onClick?: () => void;
 }
 
-const Rectangle = ({ color, width, height, border, className }: RectangleProps) => {
+const Rectangle = ({ color, width, height, border, className, onClick }: RectangleProps) => {
     return (
-        <div className={`rectangle-wrapper ${className ? className : ''}`}>
+        <div className={`rectangle-wrapper ${className ? className : ''}`} onClick={onClick}>
             <BaseRectangle width={width!} height={height!} color={color!} border={border} />
         </div>
     );
@@ -64,7 +65,7 @@ Rectangle.defaultProps = {
     color: 'secondary',
     border: 'large',
     width: 'initial',
-    height: 'initial'
+    height: 'initial',
 };
 
 export default Rectangle;

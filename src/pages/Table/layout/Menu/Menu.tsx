@@ -39,6 +39,7 @@ const BaseMenu = styled.div<BaseMenuProps>`
     .bottom-right-menu {
         right: 0;
         bottom: 0;
+        z-index: 1;
     }
     .animation-opacity {
         transition: ${({ navState }) => (!navState ? 'opacity 0.2s ease-in-out' : 'none')};

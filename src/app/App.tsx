@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import Route from './Route';
-import { ThemeProvider } from '../providers';
+import { ThemeProvider, SocketProvider } from '../providers';
 import { Helmet } from 'react-helmet';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
@@ -49,7 +49,9 @@ const App = () => {
                         <Contact />
                     </Route>
                     <Route path="/table/:id" exact privateRoute isAuthenticated={application.isAuthenticated}>
-                        <Table />
+                        <SocketProvider>
+                            <Table />
+                        </SocketProvider>
                     </Route>
                 </Switch>
             </BrowserRouter>

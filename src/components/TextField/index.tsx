@@ -20,6 +20,7 @@ interface InputProps {
     autoresize?: boolean;
     rightLine?: boolean;
     onKeyDown?: any;
+    onChange?: any;
     style?: Record<string, any>;
 }
 
@@ -41,6 +42,7 @@ const TextField = ({
     autoresize,
     rightLine,
     onKeyDown,
+    onChange,
     style,
 }: InputProps) => {
     switch (variant) {
@@ -60,6 +62,7 @@ const TextField = ({
                     defaultValue={defaultValue}
                     onFocus={onFocus}
                     tooltipAlign={tooltipAlign!}
+                    onChange={onChange}
                     style={style}
                 />
             );

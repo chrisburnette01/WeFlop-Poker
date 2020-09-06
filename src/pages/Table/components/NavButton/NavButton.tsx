@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Typography } from '../../../../components';
+import { Typography, Rectangle } from '../../../../components';
 
 interface NavButtonProps {
     align: 'left' | 'right';
@@ -26,28 +26,23 @@ const NavButtonBase = styled.div<NavButtonBaseProps>`
     & > * + * {
         margin-left: ${({ noMargin }) => (noMargin ? '0.6rem' : '1rem')};
     }
-    &:hover .rect-nav {
+    &:hover .rect-nav > span {
         background-color: ${({ theme }) => theme.palette.yellow};
     }
-`;
-
-interface RectangleProps {
-    active?: boolean | undefined;
-    className?: string;
-}
-
-const Rectangle = styled.div<RectangleProps>`
-    width: 1.6rem;
-    height: 2.4rem;
-    background-color: ${({ theme, active }) => (active ? theme.palette.yellow : theme.palette.initial)};
-    border-radius: 0.2rem;
-    transition: background-color 0.4s ease-in-out;
 `;
 
 const NavButton = ({ align, title, className, onClick, active, noMargin }: NavButtonProps) => {
     return (
         <NavButtonBase className={className} align={align} onClick={onClick} noMargin={noMargin}>
-            {align === 'left' && <Rectangle className="rect-nav" active={active} />}
+            {align === 'left' && (
+                <Rectangle
+                    className="rect-nav"
+                    border="small"
+                    color={active ? 'yellow' : 'initial'}
+                    width="large"
+                    height="2.4rem"
+                />
+            )}
             <Typography
                 variant="h4"
                 color={active ? 'yellow' : 'initial'}
@@ -57,7 +52,15 @@ const NavButton = ({ align, title, className, onClick, active, noMargin }: NavBu
             >
                 {title}
             </Typography>
-            {align === 'right' && <Rectangle className="rect-nav" active={active} />}
+            {align === 'right' && (
+                <Rectangle
+                    className="rect-nav"
+                    border="small"
+                    color={active ? 'yellow' : 'initial'}
+                    width="large"
+                    height="2.4rem"
+                />
+            )}
         </NavButtonBase>
     );
 };

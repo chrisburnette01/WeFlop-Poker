@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Typography } from '../../../../components';
+import { Typography, Rectangle } from '../../../../components';
 
 interface CheckboxBaseProps {
     onClick: () => void;
@@ -22,19 +22,9 @@ const CheckboxBase = styled.div<CheckboxBaseProps>`
         width: 4.1rem;
         text-align: left;
     }
-`;
-
-interface RectangleProps {
-    active: boolean | undefined;
-}
-
-const Rectangle = styled.div<RectangleProps>`
-    margin: 0 1rem;
-    width: 1.6rem;
-    height: 2.4rem;
-    background-color: ${({ theme, active }) => (active ? theme.palette.yellow : theme.palette.initial)};
-    border-radius: 0.2rem;
-    transition: background-color 0.4s ease-in-out;
+    .rect-nav {
+        margin: 0 1rem;
+    }
 `;
 
 interface CheckboxProps {
@@ -56,7 +46,13 @@ const Checkbox = ({ active, title, onClick }: CheckboxProps) => {
             >
                 {title}
             </Typography>
-            <Rectangle className="rect-nav" active={active} />
+            <Rectangle
+                className="rect-nav"
+                border="small"
+                color={active ? 'yellow' : 'initial'}
+                width="large"
+                height="2.4rem"
+            />
             <Typography
                 variant="h4"
                 color={active ? 'yellow' : 'initial'}

@@ -10,7 +10,6 @@ import useMeasure from 'react-use-measure';
 
 interface GameSectionProps {
     totalPot: number;
-    balance: any;
     pot: number;
     className?: string;
     centerRef: any;
@@ -19,7 +18,7 @@ interface GameSectionProps {
     // cards: string[];
 }
 
-const GameSection = ({ totalPot, balance, pot, className, centerRef, balanceRef, action }: GameSectionProps) => {
+const GameSection = ({ totalPot, pot, className, centerRef, balanceRef, action }: GameSectionProps) => {
     const cards = ['H1', 'H1', 'H1', 'H1', 'H1'];
 
     const [flipped, setFlipped] = useState([false, false, false, false, false]);

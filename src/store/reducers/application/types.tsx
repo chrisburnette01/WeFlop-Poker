@@ -53,6 +53,6 @@ export interface ApplicationState {
 }
 
 export interface ApplicationAction {
-    payload?: Record<string, unknown>;
+    payload?: Record<string, any>;
     type: string;
 }

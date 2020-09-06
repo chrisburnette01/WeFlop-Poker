@@ -19,9 +19,17 @@ const BaseButton = styled.div<BaseButtonProps>`
     border-radius: ${({ border, size }) => {
         switch (size) {
             case 'small':
-                return border !== undefined ? (border === 'left' ? '1.3rem 0.4rem 0.4rem 1.3rem' : '0.4rem 1.3rem 1.3rem 0.4rem') : '0.4rem';
+                return border !== undefined
+                    ? border === 'left'
+                        ? '1.3rem 0.4rem 0.4rem 1.3rem'
+                        : '0.4rem 1.3rem 1.3rem 0.4rem'
+                    : '0.4rem';
             case 'medium':
-                return border !== undefined ? (border === 'left' ? '2.5rem 0.6rem 0.6rem 2.5rem' : '0.6rem 2.5rem 2.5rem 0.6rem') : '0.6rem';
+                return border !== undefined
+                    ? border === 'left'
+                        ? '2.5rem 0.6rem 0.6rem 2.5rem'
+                        : '0.6rem 2.5rem 2.5rem 0.6rem'
+                    : '0.6rem';
             case 'large':
                 return border !== undefined
                     ? border === 'left'

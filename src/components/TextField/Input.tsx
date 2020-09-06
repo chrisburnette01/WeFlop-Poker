@@ -87,6 +87,7 @@ interface InputProps {
     defaultValue?: string | number;
     onFocus?: any;
     width?: string;
+    onChange?: any;
     tooltipAlign: 'left' | 'right';
     style?: Record<string, unknown>;
 }
@@ -105,6 +106,7 @@ const Primary = ({
     tooltipAlign,
     size,
     className,
+    onChange,
     style,
 }: InputProps) => {
     const show = !validated && errorMessage !== undefined ? true : false;
@@ -117,6 +119,7 @@ const Primary = ({
                     onFocus={onFocus}
                     defaultValue={defaultValue}
                     className="input"
+                    onChange={onChange}
                     name={name}
                     ref={register}
                     type={type}

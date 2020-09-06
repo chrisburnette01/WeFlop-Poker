@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 const ChatBase = styled.div`
     align-self: flex-end;
     height: inherit;
-    
+
     .chat-wrapper {
         max-width: 120rem;
         width: 100%;
@@ -71,10 +71,6 @@ const ChatBase = styled.div`
         }
     }
 `;
-
-interface ChatProps {
-    name: string;
-}
 
 const Chat = ({ name }) => {
     const { register, handleSubmit, setValue } = useForm();

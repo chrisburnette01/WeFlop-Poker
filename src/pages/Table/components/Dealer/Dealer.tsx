@@ -1,8 +1,7 @@
 // @ts-nocheck
-import React, { useEffect, memo } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import useMeasure from 'react-use-measure';
-import { animated, useSpring } from 'react-spring';
+import { animated } from 'react-spring';
 
 import { Typography } from '../../../../components';
 
@@ -26,8 +25,7 @@ const DealerBase = styled(animated.div)<TokenBaseProps>`
     }
 `;
 
-const Dealer = ({ playerCoordinates, activeSlot, className }) => {
-
+const Dealer = ({ className }) => {
     return (
         <DealerBase className={className}>
             <Typography textTransform="uppercase" component="span" color="yellow" fontWeight={700} variant="body1">
@@ -37,4 +35,4 @@ const Dealer = ({ playerCoordinates, activeSlot, className }) => {
     );
 };
 
-export default memo(Dealer);
+export default Dealer;

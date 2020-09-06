@@ -1,6 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import {
     JOIN_GAME,
+    CHOOSE_PANEL,
     BET,
     CHECK,
     FOLD,
@@ -24,6 +25,8 @@ import {
     SET_SOUNDS,
     GET_LEDGER,
     SEND_MESSAGE_CHAT,
+    choosePanelSuccess,
+    choosePanelError,
     joinGameSuccess,
     joinGameError,
     betSuccess,
@@ -75,36 +78,41 @@ import {
 } from '../../actions/table';
 
 const joinGame = function* (action) {
-    const data = {};
     try {
-        yield put(joinGameSuccess(data));
+        yield put(joinGameSuccess(action.payload));
     } catch (error) {
         yield put(joinGameError(error));
+    }
+};
+
+const choosePanel = function* (action) {
+    try {
+        yield put(choosePanelSuccess(action.payload));
+    } catch (error) {
+        yield put(choosePanelError(error));
     }
 };
 
 const bet = function* (action) {
     const data = {};
     try {
-        yield put(betSuccess(data));
+        yield put(betSuccess(action.payload));
     } catch (error) {
         yield put(betError(error));
     }
 };
 
-const check = function* (action) {
-    const data = {};
+const check = function* () {
     try {
-        yield put(checkSuccess(data));
+        yield put(checkSuccess());
     } catch (error) {
         yield put(checkError(error));
     }
 };
 
-const fold = function* (action) {
-    const data = {};
+const fold = function* () {
     try {
-        yield put(foldSuccess(data));
+        yield put(foldSuccess());
     } catch (error) {
         yield put(foldError(error));
     }
@@ -113,16 +121,15 @@ const fold = function* (action) {
 const raise = function* (action) {
     const data = {};
     try {
-        yield put(raiseSuccess(data));
+        yield put(raiseSuccess(action.payload));
     } catch (error) {
         yield put(raiseError(error));
     }
 };
 
 const callAction = function* (action) {
-    const data = {};
     try {
-        yield put(callSuccess(data));
+        yield put(callSuccess(action.payload));
     } catch (error) {
         yield put(callError(error));
     }
@@ -292,8 +299,9 @@ const sendMessageChat = function* (action) {
 
 const table = function* () {
     yield takeLatest(JOIN_GAME.REQUEST, joinGame);
+    yield takeLatest(CHOOSE_PANEL.REQUEST, choosePanel);
     yield takeLatest(BET.REQUEST, bet);
-    yield takeLatest(CHECK.REQUEST, check);    
+    yield takeLatest(CHECK.REQUEST, check);
     yield takeLatest(FOLD.REQUEST, fold);
     yield takeLatest(RAISE.REQUEST, raise);
     yield takeLatest(CALL.REQUEST, callAction);

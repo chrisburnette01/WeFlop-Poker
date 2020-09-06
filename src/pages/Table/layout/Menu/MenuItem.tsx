@@ -27,11 +27,13 @@ const MenuItemBase = styled.div<MenuItemBaseProps>`
     }
 `;
 
-const MenuItem = ({ children, top, bottom, left, right, className }: MenuItemProps) => {
+const MenuItem = ({ children, top, bottom, left, right }: MenuItemProps) => {
     return (
         <>
             {bottom && <Divider lineRight={right} lineLeft={left} />}
-            <MenuItemBase top={top} bottom={bottom} left={left} right={right}>{children}</MenuItemBase>
+            <MenuItemBase top={top} bottom={bottom} left={left} right={right}>
+                {children}
+            </MenuItemBase>
             {top && <Divider lineRight={right} lineLeft={left} />}
         </>
     );

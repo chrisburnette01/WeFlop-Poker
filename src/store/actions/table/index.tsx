@@ -4,6 +4,12 @@ type Action = {
     ERROR: string;
 };
 
+const CHOOSE_PANEL: Action = {
+    REQUEST: 'CHOOSE_PANEL_REQUEST',
+    SUCCESS: 'CHOOSE_PANEL_SUCCESS',
+    ERROR: 'CHOOSE_PANEL_ERROR',
+};
+
 const JOIN_GAME: Action = {
     REQUEST: 'JOIN_GAME_REQUEST',
     SUCCESS: 'JOIN_GAME_SUCCESS',
@@ -153,6 +159,30 @@ const UPDATE_INFO: Action = {
     SUCCESS: 'UPDATE_INFO_SUCCESS',
     ERROR: 'UPDATE_INFO_ERROR',
 };
+
+// choose panel
+
+const choosePanel = (payload) => {
+    return {
+        type: CHOOSE_PANEL.REQUEST,
+        payload
+    };
+};
+
+const choosePanelSuccess = (payload) => {
+    return {
+        type: CHOOSE_PANEL.SUCCESS,
+        payload,
+    };
+};
+
+const choosePanelError = (payload) => {
+    return {
+        type: CHOOSE_PANEL.ERROR,
+        payload,
+    };
+};
+
 // join game
 
 const joinGame = (payload, socket) => {
@@ -203,18 +233,16 @@ const betError = (payload) => {
 
 // check
 
-const check = (payload, socket) => {
+const check = (socket) => {
     return {
         type: CHECK.REQUEST,
-        payload,
         socket
     };
 };
 
-const checkSuccess = (payload) => {
+const checkSuccess = () => {
     return {
         type: CHECK.SUCCESS,
-        payload,
     };
 };
 
@@ -227,18 +255,16 @@ const checkError = (payload) => {
 
 // fold
 
-const fold = (payload, socket) => {
+const fold = (socket) => {
     return {
         type: FOLD.REQUEST,
-        payload,
         socket
     };
 };
 
-const foldSuccess = (payload) => {
+const foldSuccess = () => {
     return {
         type: FOLD.SUCCESS,
-        payload,
     };
 };
 
@@ -753,6 +779,7 @@ const updateInfoError = (payload) => {
 
 export {
     JOIN_GAME,
+    CHOOSE_PANEL,
     BET,
     CHECK,
     FOLD,
@@ -851,5 +878,8 @@ export {
     sendMessageChatError,
     updateInfo,
     updateInfoSuccess,
-    updateInfoError
+    updateInfoError,
+    choosePanel,
+    choosePanelSuccess,
+    choosePanelError
 };
