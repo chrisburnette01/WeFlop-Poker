@@ -17,7 +17,7 @@ interface TableProps {
 }
 
 const PLAYERS_ALIGNMENT = [
-    { bottom: 5, left: 45 },
+    { bottom: 7, left: 45 },
     { bottom: 15, left: 20 },
     { top: 50, left: 5 },
     { top: 30, left: 20 },
@@ -53,9 +53,6 @@ const Table = ({ className }: TableProps) => {
     const isHeightHigher = size.height! > size.width! / (16 / 9);
 
     const [potAction, setPotAction] = useState<any>();
-
-    const [centerRef, centerCoordinates] = useMeasure();
-    const [balanceRef, balanceCoordinates] = useMeasure();
 
     const betButtonHandler = () => {
         // setPot(undefined);
@@ -138,12 +135,10 @@ const Table = ({ className }: TableProps) => {
                 <div>{activeModal}</div>
                 <Menu navState={navState} setNavState={setNavStateHandler} type="blind" />
                 <div id="game">
-                    {table.balance && (
+                    {table.balance && table.status !== "waiting" && (
                         <GameSection
                             totalPot={table.balance?.totalPot!}
                             pot={table.balance?.currentPot!}
-                            centerRef={centerRef}
-                            balanceRef={balanceRef}
                             action={potAction}
                         />
                     )}
@@ -159,7 +154,6 @@ const Table = ({ className }: TableProps) => {
                             return (
                                 <Player
                                     username={player.username}
-                                    balanceRef={balanceRef}
                                     alignment={PLAYERS_ALIGNMENT[slot - 1]}
                                     index={slot}
                                     slot={slot}
@@ -177,7 +171,6 @@ const Table = ({ className }: TableProps) => {
                     {table.player && !table.slot && (
                         <Player
                             username={table.player!.username}
-                            balanceRef={balanceRef}
                             alignment={PLAYERS_ALIGNMENT[0]}
                             index={table.player!.slot}
                             slot={table.player!.slot}
@@ -196,7 +189,6 @@ const Table = ({ className }: TableProps) => {
                                 return (
                                     <Player
                                         username={player.username}
-                                        balanceRef={balanceRef}
                                         alignment={alignment}
                                         index={index + 1}
                                         slot={player.slot}
@@ -213,7 +205,6 @@ const Table = ({ className }: TableProps) => {
 
                             return (
                                 <Player
-                                    balanceRef={balanceRef}
                                     alignment={alignment}
                                     index={index + 1}
                                     key={index}
@@ -234,7 +225,6 @@ const Table = ({ className }: TableProps) => {
                             return (
                                 <Player
                                     username={player.username}
-                                    balanceRef={balanceRef}
                                     alignment={PLAYERS_ALIGNMENT[slot - 1]}
                                     index={slot}
                                     slot={player.slot}

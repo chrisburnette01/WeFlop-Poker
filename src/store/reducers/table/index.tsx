@@ -66,7 +66,7 @@ const defaultTableState: TableState = {
     music: false,
     gameSounds: true,
     ledger: undefined,
-    status: 'started',
+    status: 'waiting',
 };
 
 const table = (state: TableState = defaultTableState, action: TableAction) => {
@@ -91,7 +91,12 @@ const table = (state: TableState = defaultTableState, action: TableAction) => {
                     [JOIN_GAME.REQUEST]: undefined,
                 },
                 slot: action.payload!.slot,
+                status: 'started',
                 player: undefined,
+                balance: {
+                    totalPot: 0,
+                    currentPot: 0
+                },
                 players: [...state.players, { ...state.player, ...action.payload }],
             };
         case JOIN_GAME.ERROR:

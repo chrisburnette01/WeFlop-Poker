@@ -2,6 +2,7 @@
 import React, { useEffect, useState, forwardRef } from 'react';
 import styled from 'styled-components';
 import { Typography, TextField, Button } from '../../../../components';
+import { useWindowSize } from '../../../../helpers';
 import plus from '../../../../assets/images/plus.svg';
 import { Card, Balance, Dealer } from '../../components';
 import { useSelector } from 'react-redux';
@@ -97,8 +98,8 @@ const POT_ALIGNMENT = [
     },
 ];
 
-const FINISHED = 'FINISHED';
-const CHANGED = 'CHANGED';
+const FINISHED = 'finished';
+const CHANGED = 'changed';
 
 interface BasePlayerProps {
     type: 'buy-in' | 'empty' | 'player';
@@ -259,7 +260,6 @@ interface PlayerProps {
     pot?: number;
     timeLeft?: number;
     onUpdateBalance?: (arg0?: any) => void;
-    balanceRef: any;
     alignment: {
         top?: number;
         bottom?: number;
@@ -285,7 +285,6 @@ const Player = forwardRef(
             pot,
             timeLeft,
             lastAction,
-            balanceRef,
             index,
             onAccept,
             dealer,
@@ -297,8 +296,9 @@ const Player = forwardRef(
     ) => {
         const [topUp, setTopUp] = useState(100);
         const [flipped, setFlipped] = useState(false);
-        const [potAnimationType, setPotAnimationType] = useState<string | undefined>();
-        const [action, setAction] = useState({ action: '', show: false, loading: false });
+        const size = useWindowSize();
+        const [potAnimationType, setPotAnimationType] = useState<'finished' | 'changed' | undefined>();
+        const [action, setAction] = useState("");
         const [timeWidth, setTimeWidth] = useState(100);
         const table = useSelector((state: RootState) => state.table);
         const [potRef, potBounds] = useMeasure();
@@ -327,7 +327,7 @@ const Player = forwardRef(
                 switch (lastAction.type) {
                     case 'bet':
                         newAction(`bet ${lastAction?.params.value}`);
-                        newPot(CHANGED);
+                        newPot(FINISHED);
                         break;
                     case 'call':
                         newAction(`call ${lastAction?.params.value}`);
@@ -430,16 +430,16 @@ const Player = forwardRef(
                 left: `${CENTER[index - 1].left}%`,
                 right: `${CENTER[index - 1].right}%`,
             },
-            config: { duration: 3000 },
+            config: { duration: 300 },
         });
 
         const leaveAnimation =
             potAnimationType === FINISHED
-                ? {
-                      top: `${balanceRef.top - potBounds.top}`,
-                      left: `${balanceRef.left - potBounds.left}`,
-                      opacity: '0',
-                  }
+                ?   {
+                        top: `${((size.height/2) - potBounds.top)/10}rem`,
+                        left: `${((size.width/2) - potBounds.left)/10}rem`,
+                        opacity: '0',
+                    }
                 : { opacity: '0' };
 
         const newPot = (type) => {
@@ -450,7 +450,7 @@ const Player = forwardRef(
             }
         };
 
-        const potComponent = useTransition(pot !== 0 && potAnimationType !== FINISHED, null, {
+        const potComponent = useTransition(pot, null, {
             from: {
                 left: `${POT_ALIGNMENT[index - 1].left}`,
                 top: `${POT_ALIGNMENT[index - 1].top}`,
@@ -468,19 +468,13 @@ const Player = forwardRef(
         });
 
         const newAction = (value) => {
-            setAction((prev) => ({ ...prev, show: false, loading: false }));
+            setAction(value);
 
             setTimeout(() => {
-                setAction({ action: value, show: true, loading: true });
-            }, 300);
-
-            setTimeout(() => {
-                if (action.loading) {
-                    setAction((prev) => ({ ...prev, show: false, loading: false }));
-                }
-            }, 3000);
+                setAction((prev) => prev === value ? null : prev);
+            }, 3000)
         };
-        const lastActionComponent = useTransition(action.show, null, {
+        const lastActionComponent = useTransition(action, null, {
             from: { bottom: '0rem', opacity: '0' },
             enter: { opacity: '1', bottom: '-2rem' },
             leave: { opacity: '0', bottom: '0rem' },
@@ -496,11 +490,9 @@ const Player = forwardRef(
                                 item && (
                                     <>
                                         <Card
-                                            key={key}
                                             variant="H1"
                                             animated
                                             style={
-                                                // index === 1
                                                 {
                                                     marginLeft: '1.4rem',
                                                     top: props.top,
@@ -512,7 +504,6 @@ const Player = forwardRef(
                                             flipped={flipped}
                                         />
                                         <Card
-                                            key={key}
                                             variant="H1"
                                             animated
                                             style={{
@@ -531,27 +522,23 @@ const Player = forwardRef(
 
                 {dealer && <Dealer className="dealer-circle" />}
                 <BasePlayer type={type} index={index!} ref={ref} lastAction={lastAction}>
-                    <div className="pot-container">
+                    {pot ? <div className="pot-container">
                         <div className="pot-inner">
                             {potComponent.map(
                                 ({ item, key, props }) =>
-                                    item &&
-                                    pot && (
-                                        <Balance
-                                            value={pot}
-                                            key={key}
-                                            size="small"
-                                            className="pot"
-                                            style={props}
-                                            ref={potRef}
-                                        />
-                                    ),
+                                    item !== 0 && <Balance
+                                        value={item}
+                                        key={key}
+                                        size="small"
+                                        className="pot"
+                                        style={props}
+                                        ref={potRef}
+                                    />
                             )}
                         </div>
-                    </div>
+                    </div> : null}
                     {lastActionComponent.map(
                         ({ item, key, props }) =>
-                            item && (
                                 <animated.div className="last-action" style={props} key={key}>
                                     <Typography
                                         variant="h6"
@@ -559,10 +546,9 @@ const Player = forwardRef(
                                         textTransform="uppercase"
                                         fontWeight={200}
                                     >
-                                        {action.action}
+                                        {item}
                                     </Typography>
                                 </animated.div>
-                            ),
                     )}
                     {(type === 'buy-in' || type === 'top-up') && (
                         <div className="top">

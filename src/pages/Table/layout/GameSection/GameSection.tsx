@@ -12,13 +12,11 @@ interface GameSectionProps {
     totalPot: number;
     pot: number;
     className?: string;
-    centerRef: any;
-    balanceRef: any;
     action: any;
     // cards: string[];
 }
 
-const GameSection = ({ totalPot, pot, className, centerRef, balanceRef, action }: GameSectionProps) => {
+const GameSection = ({ totalPot, pot, className, action }: GameSectionProps) => {
     const cards = ['H1', 'H1', 'H1', 'H1', 'H1'];
 
     const [flipped, setFlipped] = useState([false, false, false, false, false]);
@@ -64,21 +62,21 @@ const GameSection = ({ totalPot, pot, className, centerRef, balanceRef, action }
                 await setFlippedHandler(num);
             },
             leave: {},
-            config: { duration: 2000 },
+            config: { duration: 500 },
         };
     };
 
     const cardOne = useTransition(cards[0], null, animationConfig(0, 0));
-    const cardTwo = useTransition(cards[1], null, animationConfig(1, 1000));
-    const cardThree = useTransition(cards[2], null, animationConfig(2, 2000));
-    const cardFour = useTransition(cards[3], null, animationConfig(3, 3000));
-    const cardFive = useTransition(cards[4], null, animationConfig(4, 4000));
+    const cardTwo = useTransition(cards[1], null, animationConfig(1, 100));
+    const cardThree = useTransition(cards[2], null, animationConfig(2, 200));
+    const cardFour = useTransition(cards[3], null, animationConfig(3, 300));
+    const cardFive = useTransition(cards[4], null, animationConfig(4, 400));
 
     const potComponent = useTransition(potStatus, null, {
         from: { opacity: 0, top: '1rem' },
         enter: { opacity: 1 },
         leave: potStatus === null ? { top: '-100%', opacity: 0 } : { opacity: 0 },
-        config: { duration: 4000 },
+        config: { duration: 300 },
     });
 
     return (
@@ -116,7 +114,7 @@ const GameSection = ({ totalPot, pot, className, centerRef, balanceRef, action }
                         <div className="skeleton" />
                         {cardThree.map(
                             ({ item, key, props }) =>
-                                item && <Card style={props} flipped={flipped[2]} variant={cards[2]} ref={centerRef} />,
+                                item && <Card style={props} flipped={flipped[2]} variant={cards[2]}/>,
                         )}
                     </div>
                     <div className="card-item">
@@ -137,7 +135,7 @@ const GameSection = ({ totalPot, pot, className, centerRef, balanceRef, action }
                 <div className="wrapper-balances">
                     <Balance value={pot} size="small" className="balance-gutter" />
                     <Balance value={pot} size="small" className="balance-gutter" />
-                    <Balance value={pot} size="big" className="balance-gutter" ref={balanceRef} />
+                    <Balance value={pot} size="big" className="balance-gutter" />
                     <Balance value={pot} size="small" className="balance-gutter" />
                     <Balance value={pot} size="small" className="balance-gutter" />
                 </div>
