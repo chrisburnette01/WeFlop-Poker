@@ -28,7 +28,9 @@ const ResetPassword = () => {
     };
 
     const isValidated = check.password && check.password_repeat;
-    const buttonSubmit = <Button variant="secondary" validated={isValidated} className="button-form" title="reset" />;
+    const buttonSubmit = (
+        <Button variant="secondary" validated={isValidated} className="button-form" title="reset" animated />
+    );
 
     return (
         <>
@@ -39,13 +41,16 @@ const ResetPassword = () => {
                 <Navigation type="basic" />
                 <Content>
                     <LineContent>
-                        <Title color="secondary">Change Your Password</Title>
+                        <Title animated color="secondary">
+                            Change Your Password
+                        </Title>
                         <div className="subtitles-wrapper-inner">
-                            <Subtitle>Change the password of the account attached to:</Subtitle>
-                            <Subtitle>{email}</Subtitle>
+                            <Subtitle animated>Change the password of the account attached to:</Subtitle>
+                            <Subtitle animated>{email}</Subtitle>
                         </div>
                         <Form onSubmit={handleSubmit(onSubmit)} buttonSubmit={buttonSubmit} isClicked={isClicked}>
                             <TextField
+                                animated
                                 onFocus={() => setIsClicked(true)}
                                 placeholder="password"
                                 type="password"
@@ -74,6 +79,7 @@ const ResetPassword = () => {
                                 errorMessage={errors.password && errors.password.message}
                             />
                             <TextField
+                                animated
                                 onFocus={() => setIsClicked(true)}
                                 placeholder="retype password"
                                 type="password"

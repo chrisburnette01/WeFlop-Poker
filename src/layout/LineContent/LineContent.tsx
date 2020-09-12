@@ -10,7 +10,7 @@ interface LineContentProps {
 const LineContent = ({ children, className }: LineContentProps) => {
     return (
         <div className={className}>
-            <Line color="secondary" width="large" align="right" />
+            <Line color="secondary" width="large" align="right" animated />
             <div className="title-wrapper-text">{children}</div>
         </div>
     );

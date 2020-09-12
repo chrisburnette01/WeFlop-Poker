@@ -58,15 +58,21 @@ const Contact = () => {
                 <Navigation type={'auth'} />
                 <Content>
                     <LineContent>
-                        <Title color="secondary" style={opacity}>
+                        <Title animated color="secondary" style={opacity}>
                             GIVE US FEEDBACK!
                         </Title>
                         <div className="subtitles-wrapper-inner">
-                            <Subtitle style={opacity}>We want to hear what you have to say.</Subtitle>
-                            <Subtitle style={opacity}>We read all your messsages, even the not so nice ones…</Subtitle>
-                            <Subtitle style={opacity}>Please also consider donating to our Patreon!</Subtitle>
+                            <Subtitle animated style={opacity}>
+                                We want to hear what you have to say.
+                            </Subtitle>
+                            <Subtitle animated style={opacity}>
+                                We read all your messsages, even the not so nice ones…
+                            </Subtitle>
+                            <Subtitle animated style={opacity}>
+                                Please also consider donating to our Patreon!
+                            </Subtitle>
                         </div>
-                        <Line color="secondary" width="large" height="short" align="left" />
+                        <Line color="secondary" width="large" height="short" align="left" animated />
                         <div className="d-flex">
                             <Form
                                 onSubmit={handleSubmit(onSubmit)}
@@ -74,8 +80,10 @@ const Contact = () => {
                                 isClicked={isClicked}
                                 isRightIcon={true}
                                 notification={isMessageSent ? notification : null}
+                                page="contact"
                             >
                                 <TextField
+                                    animated={true}
                                     style={opacity}
                                     variant="textarea"
                                     onKeyDown={onEnterPress}

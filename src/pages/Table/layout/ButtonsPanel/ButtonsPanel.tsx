@@ -128,6 +128,7 @@ const ButtonsPanel = ({ balance, type }: ButtonsPanelProps) => {
                 break;
             case 'fold':
                 dispatch(fold(socket));
+                break;
         }
         setRangeValue([min]);
     };

@@ -25,9 +25,9 @@ const DealerBase = styled(animated.div)<TokenBaseProps>`
     }
 `;
 
-const Dealer = ({ className }) => {
+const Dealer = ({ className, style }) => {
     return (
-        <DealerBase className={className}>
+        <DealerBase className={className} style={style}>
             <Typography textTransform="uppercase" component="span" color="yellow" fontWeight={700} variant="body1">
                 d
             </Typography>

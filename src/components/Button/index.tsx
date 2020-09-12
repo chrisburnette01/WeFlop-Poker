@@ -22,6 +22,7 @@ interface ButtonProps {
     isActionCompleted?: boolean;
     actionCompletedColor?: string;
     textStyle?: Record<string, unknown>;
+    animated?: boolean;
 }
 
 const Button = ({
@@ -43,6 +44,7 @@ const Button = ({
     isActionCompleted,
     actionCompletedColor,
     textStyle,
+    animated,
 }: ButtonProps) => {
     switch (variant) {
         case 'primary':
@@ -64,6 +66,7 @@ const Button = ({
         case 'secondary':
             return (
                 <Secondary
+                    animated={animated}
                     actionCompletedColor={actionCompletedColor}
                     title={title!}
                     validated={validated}
@@ -76,6 +79,7 @@ const Button = ({
         case 'play':
             return (
                 <ButtonPlay
+                    animated={animated}
                     title={title!}
                     active={active}
                     align={align!}

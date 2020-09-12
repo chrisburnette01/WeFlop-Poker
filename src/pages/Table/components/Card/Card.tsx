@@ -38,7 +38,7 @@ const BaseCard = styled(animated.div)<BaseCardProps>`
     height: inherit;
     position: absolute;
     background: ${({ path, back, theme }) =>
-        back ? theme.palette.secondary : path ? `url(${path})` : theme.palette.background};
+        back ? theme.palette.secondary : path ? `url(${path})` : theme.palette.secondary};
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

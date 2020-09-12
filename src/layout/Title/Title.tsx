@@ -7,14 +7,15 @@ interface TitleProps {
     color?: 'secondary' | 'primary';
     className?: string;
     style?: Record<string, unknown>;
+    animated?: boolean;
 }
 
-const Title = ({ children, color, className, style }: TitleProps) => {
+const Title = ({ children, color, className, style, animated }: TitleProps) => {
     return (
         <div className={className}>
-            <Line width="large" align="left" color="secondary" />
+            <Line width="large" align="left" color="secondary" animated={animated} />
             <div className="title-wrapper" style={style}>
-                <Typography component="h1" variant="h1" textTransform="uppercase" color={color!}>
+                <Typography component="h1" variant="h1" textTransform="uppercase" color={color!} animated={animated}>
                     {children}
                 </Typography>
             </div>

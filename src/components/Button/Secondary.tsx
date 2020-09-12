@@ -45,6 +45,7 @@ interface SecondaryButtonProps {
     onClick: any;
     isActionCompleted?: boolean;
     actionCompletedColor?: string;
+    animated?: boolean;
 }
 
 const Secondary = ({
@@ -54,7 +55,8 @@ const Secondary = ({
     className,
     isActionCompleted,
     actionCompletedColor,
-    onClick
+    onClick,
+    animated,
 }: SecondaryButtonProps) => {
     const color = validated ? 'success' : 'primary';
     return (
@@ -72,15 +74,17 @@ const Secondary = ({
                     color={isActionCompleted ? (actionCompletedColor ? actionCompletedColor : 'yellow') : undefined}
                 />
             </div>
-            <Typography
-                component="span"
-                variant={size === 'large' ? 'button2' : 'h6'}
-                fontWeight={600}
-                textTransform="uppercase"
-                style={isActionCompleted ? { opacity: '0' } : undefined}
-            >
-                {title}
-            </Typography>
+            <div style={isActionCompleted ? { opacity: 0 } : undefined}>
+                <Typography
+                    component="span"
+                    variant={size === 'large' ? 'button2' : 'h6'}
+                    fontWeight={600}
+                    textTransform="uppercase"
+                    animated={animated}
+                >
+                    {title}
+                </Typography>
+            </div>
             <div className="lines-wrapper">
                 <Line
                     width={size === 'large' ? 'large' : 'small'}

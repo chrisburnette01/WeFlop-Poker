@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Rectangle, Button, TextField, Typography } from '../../../components';
 import { Notification } from '../../../layout';
@@ -15,8 +15,38 @@ interface FormProps {
     isCreated: boolean;
 }
 
+interface FormBaseProps {
+    isClicked: boolean;
+}
+
+const BaseForm = styled.form<FormBaseProps>`
+    .inner-inputs-play {
+        margin: 1.6rem 0 1.6rem 0.3rem;
+    }
+    .input-and-title-wrapper {
+        display: flex;
+        align-items: center;
+    }
+    .title-create-table {
+        margin-left: 1.6rem !important;
+    }
+    .rect-play-input {
+        margin-left: 0.8rem;
+    }
+    .play-button-notification-wrapper {
+        max-width: 24rem;
+    }
+    .input-and-title-wrapper + .input-and-title-wrapper {
+        margin-top: 0.8rem;
+    }
+    .input-pulsate {
+        animation: ${({ theme, isClicked }) => (isClicked ? null : theme.animations.inputs)};
+    }
+`;
+
 const Form = ({ onSubmit, notification, className, isCreated }: FormProps) => {
     const opacity = isCreated ? { opacity: '0' } : { opacity: '1' };
+    const [isClicked, setIsClicked] = useState(false);
 
     const { register, errors, handleSubmit, watch } = useForm({
         mode: 'all',
@@ -39,10 +69,12 @@ const Form = ({ onSubmit, notification, className, isCreated }: FormProps) => {
     const isValidated = check.name && check.blinds && check.max_buyin && check.min_buyin && check.time;
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} noValidate className={className}>
+        <BaseForm onSubmit={handleSubmit(onSubmit)} noValidate className={className} isClicked={isClicked}>
             <div className="inner-inputs-play">
                 <div className="input-and-title-wrapper">
                     <TextField
+                        onFocus={() => setIsClicked(true)}
+                        className="input-pulsate"
                         style={opacity}
                         size="medium"
                         tooltipAlign="left"
@@ -80,6 +112,8 @@ const Form = ({ onSubmit, notification, className, isCreated }: FormProps) => {
                 </div>
                 <div className="input-and-title-wrapper">
                     <TextField
+                        onFocus={() => setIsClicked(true)}
+                        className="input-pulsate"
                         style={opacity}
                         size="medium"
                         tooltipAlign="left"
@@ -120,6 +154,8 @@ const Form = ({ onSubmit, notification, className, isCreated }: FormProps) => {
                 </div>
                 <div className="input-and-title-wrapper">
                     <TextField
+                        onFocus={() => setIsClicked(true)}
+                        className="input-pulsate"
                         style={opacity}
                         size="medium"
                         tooltipAlign="left"
@@ -164,6 +200,8 @@ const Form = ({ onSubmit, notification, className, isCreated }: FormProps) => {
                 </div>
                 <div className="input-and-title-wrapper">
                     <TextField
+                        onFocus={() => setIsClicked(true)}
+                        className="input-pulsate"
                         style={opacity}
                         size="medium"
                         tooltipAlign="left"
@@ -207,6 +245,8 @@ const Form = ({ onSubmit, notification, className, isCreated }: FormProps) => {
                 </div>
                 <div className="input-and-title-wrapper">
                     <TextField
+                        onFocus={() => setIsClicked(true)}
+                        className="input-pulsate"
                         style={opacity}
                         size="medium"
                         tooltipAlign="left"
@@ -259,28 +299,8 @@ const Form = ({ onSubmit, notification, className, isCreated }: FormProps) => {
                 />
             </div>
             <Notification type="play">{notification}</Notification>
-        </form>
+        </BaseForm>
     );
 };
 
-export default styled(Form)`
-    .inner-inputs-play {
-        margin: 1.6rem 0 1.6rem 0.3rem;
-    }
-    .input-and-title-wrapper {
-        display: flex;
-        align-items: center;
-    }
-    .title-create-table {
-        margin-left: 1.6rem !important;
-    }
-    .rect-play-input {
-        margin-left: 0.8rem;
-    }
-    .play-button-notification-wrapper {
-        max-width: 24rem;
-    }
-    .input-and-title-wrapper + .input-and-title-wrapper {
-        margin-top: 0.8rem;
-    }
-`;
+export default Form;

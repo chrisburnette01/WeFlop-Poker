@@ -70,9 +70,9 @@ const Table = ({ className }: TableProps) => {
 
     const activeModal =
         navState === 'chat' ? (
-            <Chat name="glenn" />
+            <Chat />
         ) : navState === 'ledger' ? (
-            <Ledger name="Alex’s Corner" />
+            <Ledger />
         ) : navState === 'leave' ? (
             <Leave onCancel={() => setNavState(undefined)} onLeave={() => console.log('leave')} />
         ) : navState === 'settings' ? (
@@ -82,6 +82,18 @@ const Table = ({ className }: TableProps) => {
     const setNavStateHandler = (modal) => {
         setNavState(modal);
     };
+
+    /*    useEffect(() => {
+        const player = table.players.find((player) => player.slot === table.slot);
+        if(player.active && player.status === "won" && player.status ==="lost") {
+            if (table.settings.showCards) {
+                dispatch(SHOW);
+            } else {
+                dispatch(MUCK);
+            }
+            
+        }
+    }, [table])*/
 
     // useEffect(() => {
     //     setTimeout(() => {
@@ -110,12 +122,28 @@ const Table = ({ className }: TableProps) => {
     //     }, 9000);
     // }, []);
 
+    const isActive = table.players.find((player) => player.slot === table.slot && player.active);
+    const actionMenuType = table.players.find(
+        (player) => player.slot === table.slot && (player.status === 'won' || player.status === 'lost'),
+    );
+
     const addPlayer = (slot) => {
         dispatch(choosePanel({ slot, username: 'test' }));
     };
 
     const join = (slot, balance) => {
-        dispatch(joinGame({ slot, balance: { main: parseFloat(balance) }, username: 'test' }, socket));
+        dispatch(
+            joinGame(
+                {
+                    slot,
+                    balance: { main: parseFloat(balance) },
+                    username: 'test',
+                    cards: ['H1', 'H1'],
+                    color: '#028561',
+                },
+                socket,
+            ),
+        );
     };
 
     return (
@@ -135,13 +163,13 @@ const Table = ({ className }: TableProps) => {
                 <div>{activeModal}</div>
                 <Menu navState={navState} setNavState={setNavStateHandler} type="blind" />
                 <div id="game">
-                    {table.balance && table.status !== "waiting" && (
-                        <GameSection
-                            totalPot={table.balance?.totalPot!}
-                            pot={table.balance?.currentPot!}
-                            action={potAction}
-                        />
-                    )}
+                    <GameSection
+                        cards={table.cards}
+                        sidePots={table.balance?.sidePots}
+                        totalPot={table.balance?.totalPot}
+                        currentPot={table.balance?.currentPot}
+                        action={potAction}
+                    />
 
                     {table.player &&
                         !table.slot &&
@@ -154,12 +182,14 @@ const Table = ({ className }: TableProps) => {
                             return (
                                 <Player
                                     username={player.username}
+                                    cards={player.cards}
                                     alignment={PLAYERS_ALIGNMENT[slot - 1]}
                                     index={slot}
                                     slot={slot}
                                     key={slot}
                                     balance={player.balance?.main}
                                     dealer={player.isDealer}
+                                    active={player.active}
                                     pot={player.balance?.pot}
                                     timeLeft={player.timeLeft}
                                     lastAction={player.lastAction}
@@ -188,12 +218,14 @@ const Table = ({ className }: TableProps) => {
                             if (player) {
                                 return (
                                     <Player
+                                        cards={player.cards}
                                         username={player.username}
                                         alignment={alignment}
                                         index={index + 1}
                                         slot={player.slot}
                                         key={player.slot}
                                         balance={player.balance?.main}
+                                        active={player.active}
                                         dealer={player.isDealer}
                                         pot={player.balance?.pot}
                                         timeLeft={player.timeLeft}
@@ -224,12 +256,14 @@ const Table = ({ className }: TableProps) => {
 
                             return (
                                 <Player
+                                    cards={player.cards}
                                     username={player.username}
                                     alignment={PLAYERS_ALIGNMENT[slot - 1]}
                                     index={slot}
                                     slot={player.slot}
                                     key={player.slot}
                                     balance={player.balance?.main}
+                                    active={player.active}
                                     dealer={player.isDealer}
                                     pot={player.balance?.pot}
                                     timeLeft={player.timeLeft}
@@ -240,7 +274,18 @@ const Table = ({ className }: TableProps) => {
                         })}
                 </div>
                 <div id="action-menu">
-                    <ButtonsPanel type={table.balance?.totalPot ? 'call' : 'bet'} balance={1000} />
+                    {isActive && table.status === 'betting' && (
+                        <ButtonsPanel type={table.balance?.totalPot ? 'call' : 'bet'} balance={1000} />
+                    )}
+                    {!isActive && table.status === 'betting' && (
+                        <ActionMenu
+                            type={
+                                actionMenuType?.status === 'won' || actionMenuType?.status === 'lost'
+                                    ? 'muck'
+                                    : 'check-fold'
+                            }
+                        />
+                    )}
                 </div>
             </div>
         </>

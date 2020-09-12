@@ -9,16 +9,15 @@ import { useTransition, animated } from 'react-spring';
 import useMeasure from 'react-use-measure';
 
 interface GameSectionProps {
-    totalPot: number;
-    pot: number;
+    totalPot?: number;
+    currentPot?: number;
+    sidePots?: number[];
     className?: string;
     action: any;
-    // cards: string[];
+    cards?: string[];
 }
 
-const GameSection = ({ totalPot, pot, className, action }: GameSectionProps) => {
-    const cards = ['H1', 'H1', 'H1', 'H1', 'H1'];
-
+const GameSection = ({ totalPot, currentPot, sidePots, cards, className, action }: GameSectionProps) => {
     const [flipped, setFlipped] = useState([false, false, false, false, false]);
     const [potStatus, setPotStatus] = useState(true);
 
@@ -72,6 +71,11 @@ const GameSection = ({ totalPot, pot, className, action }: GameSectionProps) => 
     const cardFour = useTransition(cards[3], null, animationConfig(3, 300));
     const cardFive = useTransition(cards[4], null, animationConfig(4, 400));
 
+    // const cardTwo = useTransition(cards[1], null, animationConfig(1, 100));
+    // const cardThree = useTransition(cards[2], null, animationConfig(2, 200));
+    // const cardFour = useTransition(cards[3], null, animationConfig(3, 300));
+    // const cardFive = useTransition(cards[4], null, animationConfig(4, 400));
+
     const potComponent = useTransition(potStatus, null, {
         from: { opacity: 0, top: '1rem' },
         enter: { opacity: 1 },
@@ -82,20 +86,7 @@ const GameSection = ({ totalPot, pot, className, action }: GameSectionProps) => 
     return (
         <div className={className}>
             <div className="wrapper">
-                {potComponent.map(({ item, key, props }) =>
-                    item === 'pot' ? (
-                        <animated.div style={props} key={key} className="total-pot-wrapper">
-                            <Typography component="span" variant="h2" color="yellow">
-                                {`TOTAL POT: $${totalPot.toFixed(2)}`}
-                            </Typography>
-                        </animated.div>
-                    ) : item === 'win' ? (
-                        <animated.div style={props} key={key} className="total-pot-wrapper">
-                            <Balance value={pot} size="small" className="balance-gutter" ref={winRef} />
-                        </animated.div>
-                    ) : null,
-                )}
-                <div className="wrapper-cards">
+                 <div className="wrapper-cards">
                     <div className="card-item">
                         <div className="skeleton" />
                         {cardOne.map(
@@ -132,17 +123,23 @@ const GameSection = ({ totalPot, pot, className, action }: GameSectionProps) => 
                         )}
                     </div>
                 </div>
-                <div className="wrapper-balances">
-                    <Balance value={pot} size="small" className="balance-gutter" />
-                    <Balance value={pot} size="small" className="balance-gutter" />
-                    <Balance value={pot} size="big" className="balance-gutter" />
-                    <Balance value={pot} size="small" className="balance-gutter" />
-                    <Balance value={pot} size="small" className="balance-gutter" />
+
+                <div className="wrapper-balances">                
+                    <Balance value={sidePots.length > 2 && sidePots[2]} size="small" className={`balance-gutter ${(sidePots[2] === 0 || !sidePots[2]) && "disable"}`} />
+                    <Balance value={sidePots.length > 0 && sidePots[0]} size="small" className={`balance-gutter ${(sidePots[0] === 0 || !sidePots[0]) && "disable"}`} />
+                    <Balance value={currentPot} size="big" className={`balance-gutter ${currentPot === undefined && "disable"}`} />
+                    <Balance value={sidePots.length > 1 && sidePots[1]} size="small" className={`balance-gutter ${(sidePots[1] === 0 || !sidePots[1]) && "disable"}`} />
+                    <Balance value={sidePots.length > 3 && sidePots[3]} size="small" className={`balance-gutter ${(sidePots[3] === 0 || !sidePots[3]) && "disable"}`} />
                 </div>
             </div>
         </div>
     );
 };
+
+GameSection.defaultProps = {
+    sidePots: [],
+    cards: []
+}
 
 export default styled(GameSection)`
     position: absolute;
@@ -175,6 +172,10 @@ export default styled(GameSection)`
 
     .balance-gutter {
         margin: 0 0.25rem;
+    }
+
+    .disable {
+        opacity: 0;
     }
 
     .card-item {

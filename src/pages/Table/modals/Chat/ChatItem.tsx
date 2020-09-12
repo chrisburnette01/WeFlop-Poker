@@ -11,7 +11,6 @@ const ChatItemBase = styled.div<ChatItemBaseProps>`
     display: flex;
     align-items: center;
     margin-bottom: 0.6rem;
-    height: inherit;
     height: 100%;
     .chat-item-name {
         width: 15rem;
@@ -21,8 +20,7 @@ const ChatItemBase = styled.div<ChatItemBaseProps>`
     .line-chat {
         height: inherit;
         min-width: 0.8rem;
-        background-color: ${({ theme, color }) =>
-            theme.palette[color] ? theme.palette[color] : theme.palette.common[color]};
+        background-color: ${({ color }) => color};
         margin: 0 1.2rem 0 1.2rem;
         border-radius: 0.1rem;
     }
@@ -33,6 +31,7 @@ const ChatItemBase = styled.div<ChatItemBaseProps>`
     }
     .chat-item-message {
         width: 100%;
+        max-width: 85.2rem;
     }
 `;
 

@@ -160,12 +160,18 @@ const UPDATE_INFO: Action = {
     ERROR: 'UPDATE_INFO_ERROR',
 };
 
+const SET_AUTO_ACTION: Action = {
+    REQUEST: 'SET_AUTO_ACTION_REQUEST',
+    SUCCESS: 'SET_AUTO_ACTION_SUCCESS',
+    ERROR: 'SET_AUTO_ACTION_ERROR',
+};
+
 // choose panel
 
 const choosePanel = (payload) => {
     return {
         type: CHOOSE_PANEL.REQUEST,
-        payload
+        payload,
     };
 };
 
@@ -189,7 +195,7 @@ const joinGame = (payload, socket) => {
     return {
         type: JOIN_GAME.REQUEST,
         payload,
-        socket
+        socket,
     };
 };
 
@@ -213,7 +219,7 @@ const bet = (payload, socket) => {
     return {
         type: BET.REQUEST,
         payload,
-        socket
+        socket,
     };
 };
 
@@ -236,7 +242,7 @@ const betError = (payload) => {
 const check = (socket) => {
     return {
         type: CHECK.REQUEST,
-        socket
+        socket,
     };
 };
 
@@ -258,7 +264,7 @@ const checkError = (payload) => {
 const fold = (socket) => {
     return {
         type: FOLD.REQUEST,
-        socket
+        socket,
     };
 };
 
@@ -281,7 +287,7 @@ const raise = (payload, socket) => {
     return {
         type: RAISE.REQUEST,
         payload,
-        socket
+        socket,
     };
 };
 
@@ -305,7 +311,7 @@ const call = (payload, socket) => {
     return {
         type: CALL.REQUEST,
         payload,
-        socket
+        socket,
     };
 };
 
@@ -329,7 +335,7 @@ const sitIn = (payload, socket) => {
     return {
         type: SIT_IN.REQUEST,
         payload,
-        socket
+        socket,
     };
 };
 
@@ -353,7 +359,7 @@ const sitOut = (payload, socket) => {
     return {
         type: SIT_OUT.REQUEST,
         payload,
-        socket
+        socket,
     };
 };
 
@@ -377,7 +383,7 @@ const changeSeats = (payload, socket) => {
     return {
         type: BET.REQUEST,
         payload,
-        socket
+        socket,
     };
 };
 
@@ -401,7 +407,7 @@ const waitBB = (payload, socket) => {
     return {
         type: WAIT_BB.REQUEST,
         payload,
-        socket
+        socket,
     };
 };
 
@@ -425,7 +431,7 @@ const postBB = (payload, socket) => {
     return {
         type: POST_BB.REQUEST,
         payload,
-        socket
+        socket,
     };
 };
 
@@ -449,7 +455,7 @@ const sitOutNextBB = (payload, socket) => {
     return {
         type: SIT_OUT_NEXT_BB.REQUEST,
         payload,
-        socket
+        socket,
     };
 };
 
@@ -473,7 +479,7 @@ const sitOutNextHand = (payload, socket) => {
     return {
         type: SIT_OUT_NEXT_HAND.REQUEST,
         payload,
-        socket
+        socket,
     };
 };
 
@@ -497,7 +503,7 @@ const buyIn = (payload, socket) => {
     return {
         type: BUY_IN.REQUEST,
         payload,
-        socket
+        socket,
     };
 };
 
@@ -521,7 +527,7 @@ const topUp = (payload, socket) => {
     return {
         type: TOP_UP.REQUEST,
         payload,
-        socket
+        socket,
     };
 };
 
@@ -541,18 +547,16 @@ const topUpError = (payload) => {
 
 // muck
 
-const muck = (payload, socket) => {
+const muck = (socket) => {
     return {
         type: MUCK.REQUEST,
-        payload,
-        socket
+        socket,
     };
 };
 
-const muckSuccess = (payload) => {
+const muckSuccess = () => {
     return {
         type: MUCK.SUCCESS,
-        payload
     };
 };
 
@@ -565,18 +569,16 @@ const muckError = (payload) => {
 
 // show
 
-const show = (payload, socket) => {
+const show = (socket) => {
     return {
         type: BET.REQUEST,
-        payload,
-        socket
+        socket,
     };
 };
 
-const showSuccess = (payload) => {
+const showSuccess = () => {
     return {
         type: SHOW.SUCCESS,
-        payload,
     };
 };
 
@@ -593,7 +595,7 @@ const getChat = (payload, socket) => {
     return {
         type: GET_CHAT.REQUEST,
         payload,
-        socket
+        socket,
     };
 };
 
@@ -617,7 +619,7 @@ const getBalance = (payload, socket) => {
     return {
         type: GET_BALANCE.REQUEST,
         payload,
-        socket
+        socket,
     };
 };
 
@@ -637,18 +639,16 @@ const getBalanceError = (payload) => {
 
 // set auto muck
 
-const setAutoMuck = (payload, socket) => {
+const setAutoMuck = (socket) => {
     return {
         type: SET_AUTO_MUCK.REQUEST,
-        payload,
-        socket
+        socket,
     };
 };
 
-const setAutoMuckSuccess = (payload) => {
+const setAutoMuckSuccess = () => {
     return {
         type: SET_AUTO_MUCK.SUCCESS,
-        payload,
     };
 };
 
@@ -661,17 +661,15 @@ const setAutoMuckError = (payload) => {
 
 // set music
 
-const setMusic = (payload) => {
+const setMusic = () => {
     return {
         type: SET_MUSIC.REQUEST,
-        payload,
     };
 };
 
-const setMusicSuccess = (payload) => {
+const setMusicSuccess = () => {
     return {
         type: SET_MUSIC.SUCCESS,
-        payload,
     };
 };
 
@@ -684,17 +682,15 @@ const setMusicError = (payload) => {
 
 // set sounds
 
-const setSounds = (payload) => {
+const setSounds = () => {
     return {
         type: SET_SOUNDS.REQUEST,
-        payload,
     };
 };
 
-const setSoundsSuccess = (payload) => {
+const setSoundsSuccess = () => {
     return {
         type: SET_SOUNDS.SUCCESS,
-        payload,
     };
 };
 
@@ -711,7 +707,7 @@ const getLedger = (payload, socket) => {
     return {
         type: GET_LEDGER.REQUEST,
         payload,
-        socket
+        socket,
     };
 };
 
@@ -735,7 +731,7 @@ const sendMessageChat = (payload, socket) => {
     return {
         type: SEND_MESSAGE_CHAT.REQUEST,
         payload,
-        socket
+        socket,
     };
 };
 
@@ -758,24 +754,46 @@ const sendMessageChatError = (payload) => {
 const updateInfo = (payload) => {
     return {
         type: UPDATE_INFO.REQUEST,
-        payload
+        payload,
     };
 };
 
 const updateInfoSuccess = (payload) => {
     return {
         type: UPDATE_INFO.SUCCESS,
-        payload
+        payload,
     };
 };
 
 const updateInfoError = (payload) => {
     return {
         type: UPDATE_INFO.ERROR,
-        payload
+        payload,
     };
 };
 
+// set auto action
+
+const setAutoAction = (payload) => {
+    return {
+        type: SET_AUTO_ACTION.REQUEST,
+        payload,
+    };
+};
+
+const setAutoActionSuccess = (payload) => {
+    return {
+        type: SET_AUTO_ACTION.SUCCESS,
+        payload,
+    };
+};
+
+const setAutoActionError = (payload) => {
+    return {
+        type: SET_AUTO_ACTION.ERROR,
+        payload,
+    };
+};
 
 export {
     JOIN_GAME,
@@ -804,6 +822,7 @@ export {
     GET_LEDGER,
     SEND_MESSAGE_CHAT,
     UPDATE_INFO,
+    SET_AUTO_ACTION,
     joinGame,
     joinGameSuccess,
     joinGameError,
@@ -881,5 +900,8 @@ export {
     updateInfoError,
     choosePanel,
     choosePanelSuccess,
-    choosePanelError
+    choosePanelError,
+    setAutoAction,
+    setAutoActionError,
+    setAutoActionSuccess,
 };

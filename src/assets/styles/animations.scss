@@ -23,41 +23,6 @@
     }
 }
 
-@keyframes emailNotification {
-    from {
-        margin-top: 2rem;
-        opacity: 0;
-    }
-    to {
-        margin-top: 0;
-        opacity: 1;
-    }
-}
-
-.tooltip-enter {
-    opacity: 0;
-    transform: translate(-1.5rem, -50%);
-}
-.tooltip-enter-active {
-    opacity: 1;
-    transform: translate(0, -50%);
-    transition: opacity 0.5s, transform 0.5s;
-}
-.tooltip-enter-done {
-    transform: translate(0, -50%);
-}
-.tooltip-exit {
-    opacity: 1;
-    transform: translate(0, -50%);
-}
-.tooltip-exit-active {
-    opacity: 0;
-    transform: translate(-1.5rem, -50%);
-    transition: opacity 0.5s, transform 0.5s;
-}
-.tooltip-exit-done {
-    transform: translate(-1.5rem, -50%);
-}
 .react-slidedown.slidedown-updates {
     transition-duration: 0.3s;
     transition-timing-function: linear;

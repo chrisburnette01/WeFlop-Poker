@@ -1,14 +1,22 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import ChatItem from './ChatItem';
 import { Typography, TextField } from '../../../../components';
 import { Container } from '../../../../layout';
-
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
+import { sendMessageChat } from '../../../../store/actions/table';
+import { SocketContext } from '../../../../providers';
 
 const ChatBase = styled.div`
     align-self: flex-end;
     height: inherit;
+    width: 100%;
+
+    .chat-holder {
+        flex: 1;
+    }
 
     .chat-wrapper {
         max-width: 120rem;
@@ -17,6 +25,7 @@ const ChatBase = styled.div`
         display: flex;
         padding: 7rem;
         flex-direction: column;
+        margin: 0 auto;
     }
 
     .input-wrapper-chat {
@@ -72,131 +81,13 @@ const ChatBase = styled.div`
     }
 `;
 
-const Chat = ({ name }) => {
+const Chat = () => {
+    const { socket } = useContext(SocketContext);
     const { register, handleSubmit, setValue } = useForm();
-
-    const [data, setData] = useState([
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutpat mi. Curabitur ut lacus velit. Fusce volutpat odio eu blandit iaculis. In pulvinar, eros vitae hendrerit gravida, tellus turpis suscipit nibh, sed aliquam erat libero eget sem. Maecenas',
-            user: { username: 'glenn', color: 'yellow' },
-        },
-        {
-            message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            user: { username: 'glenn', color: 'yellow' },
-        },
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutpat mi. ',
-            user: { username: 'jacob', color: 'success' },
-        },
-        {
-            message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-            user: { username: 'jacob', color: 'success' },
-        },
-        {
-            message: 'Lorem ipsum dolor sit',
-            user: { username: 'john', color: 'error' },
-        },
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutp',
-            user: { username: 'john', color: 'error' },
-        },
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutp',
-            user: { username: 'john', color: 'error' },
-        },
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutp',
-            user: { username: 'john', color: 'error' },
-        },
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutp',
-            user: { username: 'john', color: 'error' },
-        },
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutp',
-            user: { username: 'john', color: 'error' },
-        },
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutp',
-            user: { username: 'john', color: 'error' },
-        },
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutp',
-            user: { username: 'john', color: 'error' },
-        },
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutp',
-            user: { username: 'john', color: 'error' },
-        },
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutp',
-            user: { username: 'john', color: 'error' },
-        },
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutp',
-            user: { username: 'john', color: 'error' },
-        },
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutp',
-            user: { username: 'john', color: 'error' },
-        },
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutp',
-            user: { username: 'john', color: 'error' },
-        },
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutp',
-            user: { username: 'john', color: 'error' },
-        },
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutp',
-            user: { username: 'john', color: 'error' },
-        },
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutp',
-            user: { username: 'john', color: 'error' },
-        },
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutp',
-            user: { username: 'john', color: 'error' },
-        },
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutp',
-            user: { username: 'john', color: 'error' },
-        },
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutp',
-            user: { username: 'john', color: 'error' },
-        },
-        {
-            message:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id gravida elit. Nam a ante velit. Donec pellentesque rutrum sem, malesuada sodales ligula blandit vitae. Phasellus hendrerit nulla id ornare accumsan. Nullam a erat aliquet, pharetra risus eget, volutp',
-            user: { username: 'john', color: 'error' },
-        },
-    ]);
-
-    const onSubmit = (newData) => {
-        setData((prev) => [...prev, { message: newData.message, user: { username: name, color: 'yellow' } }]);
+    const dispatch = useDispatch();
+    const table = useSelector((state: RootState) => state.table);
+    const onSubmit = (data) => {
+        dispatch(sendMessageChat({ message: data.message }, socket));
         setValue('message', '');
     };
 
@@ -212,7 +103,7 @@ const Chat = ({ name }) => {
 
     useEffect(scrollOnStart, []);
 
-    useEffect(scrollToBottom, [data]);
+    useEffect(scrollToBottom, [table.chat]);
 
     const onEnterPress = (e) => {
         if (e.keyCode == 13 && e.shiftKey == false) {
@@ -221,21 +112,24 @@ const Chat = ({ name }) => {
         }
     };
 
+    const player = table.players.find((player) => player.slot === table.slot);
+
     return (
         <Container type="modal">
             <ChatBase>
                 <div className="chat-wrapper">
+                    <div className="chat-holder" />
                     <div className="overflow-container">
                         <div className="rect-divider rect-divider-top" />
                         <div className="messages-wrapper">
-                            {data.map((el, id) => (
+                            {table.chat.map((el, id) => (
                                 <ChatItem
                                     key={`${el.message}${el.user.username}`}
                                     color={el.user.color}
                                     message={el.message}
                                     name={
                                         id !== 0
-                                            ? el.user.username === data[id - 1].user.username
+                                            ? el.user.username === table.chat[id - 1].user.username
                                                 ? ''
                                                 : el.user.username
                                             : el.user.username
@@ -247,7 +141,7 @@ const Chat = ({ name }) => {
                     </div>
                     <form className="input-wrapper-chat" onSubmit={handleSubmit(onSubmit)}>
                         <Typography variant="body1" component="span" className="chat-player-name">
-                            {name}
+                            {player!.username}
                         </Typography>
                         <TextField
                             onKeyDown={onEnterPress}

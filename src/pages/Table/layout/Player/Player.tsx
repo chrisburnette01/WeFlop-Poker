@@ -1,14 +1,16 @@
 // @ts-nocheck
-import React, { useEffect, useState, forwardRef } from 'react';
+import React, { useEffect, useState, forwardRef, useContext, useRef } from 'react';
 import styled from 'styled-components';
 import { Typography, TextField, Button } from '../../../../components';
 import { useWindowSize } from '../../../../helpers';
 import plus from '../../../../assets/images/plus.svg';
 import { Card, Balance, Dealer } from '../../components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { muck, show, fold, call } from '../../../../store/actions/table';
 import { RootState } from '../../store';
 import { Square, Border, Line, Divider, TimerLine } from './components';
 import { useSpring, animated, useTransition, config } from 'react-spring';
+import { SocketContext } from '../../../../providers';
 import useMeasure from 'react-use-measure';
 
 const CENTER = [
@@ -156,7 +158,16 @@ const BasePlayer = styled('div')<BasePlayerProps>`
     }
 
     .line-container-middle {
-        margin: 0.2rem 0.3rem 0 0.3rem;
+        margin: 0.2rem 0 0 0;
+    }
+
+    .line-timeline-divider {
+        &-left {
+            margin: 0 0.3rem 0 0.3rem;
+        }
+        &-right {
+            margin: 0 0.3rem 0 0.3rem;
+        }
     }
 
     .bottom-gutter {
@@ -270,20 +281,22 @@ interface PlayerProps {
     onAccept?: () => void;
     status?: 'selected' | 'sitted-in' | 'sitted-out' | 'folded' | 'won' | 'lost';
     lastAction?: {
-        type?: 'bet' | 'call' | 'raise' | 'check';
+        type?: 'bet' | 'call' | 'raise' | 'check' | 'muck' | 'show';
         params?: Record<string, any>;
     };
+    active?: boolean;
+    cards?: [string, string];
 }
 
 const Player = forwardRef(
     (
         {
+            cards,
             className,
             username,
             balance,
             slot,
             pot,
-            timeLeft,
             lastAction,
             index,
             onAccept,
@@ -291,16 +304,20 @@ const Player = forwardRef(
             alingment,
             onUpdateBalance,
             status,
+            active,
         }: PlayerProps,
         ref: any,
     ) => {
+        const timer = useRef();
         const [topUp, setTopUp] = useState(100);
         const [flipped, setFlipped] = useState(false);
         const size = useWindowSize();
         const [potAnimationType, setPotAnimationType] = useState<'finished' | 'changed' | undefined>();
-        const [action, setAction] = useState("");
+        const [action, setAction] = useState('');
         const [timeWidth, setTimeWidth] = useState(100);
         const table = useSelector((state: RootState) => state.table);
+        const { socket } = useContext(SocketContext);
+        const dispatch = useDispatch();
         const [potRef, potBounds] = useMeasure();
 
         const type = !slot ? 'empty' : slot && !balance ? 'buy-in' : 'player';
@@ -317,7 +334,7 @@ const Player = forwardRef(
             BIG_DIVIDER_COLOR = 'initial';
         }
 
-        if (lastAction === 'active') {
+        if (active) {
             BORDER_COLOR = 'initial';
             BIG_DIVIDER_COLOR = 'initial';
         }
@@ -327,7 +344,7 @@ const Player = forwardRef(
                 switch (lastAction.type) {
                     case 'bet':
                         newAction(`bet ${lastAction?.params.value}`);
-                        newPot(FINISHED);
+                        newPot(CHANGED);
                         break;
                     case 'call':
                         newAction(`call ${lastAction?.params.value}`);
@@ -362,6 +379,15 @@ const Player = forwardRef(
                     case 'folded':
                         newAction('fold');
                         break;
+                    case 'won':
+                    case 'lost':
+                        if (table.autoMuck || table.autoAction === 'muck') {
+                            dispatch(muck());
+                            break;
+                        } else if (!table.autoMuck && table.autoAction === 'show') {
+                            dispatch(show());
+                            break;
+                        }
                 }
             }
         }, [status]);
@@ -375,29 +401,53 @@ const Player = forwardRef(
         }, [table.status]);
 
         useEffect(() => {
-            if (lastAction) {
-                if (lastAction.type === 'active') {
-                    const interval = 100 / timeLeft;
-                    const timer = setInterval(() => {
-                        setTimeWidth((prev) => prev - interval);
-                    }, 1000);
-                    setTimeout(() => {
-                        clearInterval(timer);
-                    }, timeLeft * 100);
+            if (active) {
+                const interval = 100 / table.timeBank;
+                timer.current = setInterval(() => {
+                    setTimeWidth((prev) => prev - interval);
+                }, 1000);
+
+                switch (table.autoAction) {
+                    case 'default':
+                        break;
+                    case 'checkfold':
+                        const isBiggerPot = table.players.find((player) => player.balance.pot > pot);
+                        if (isBiggerPot) {
+                            dispatch(fold());
+                            break;
+                        }
+                        dispatch(check());
+                        break;
+                    case 'callany':
+                        const player = table.players.find((player) => player.slot === table.slot);
+                        const biggestPot = table.players.reduce(
+                            (max, player) => (player.balance.pot > max ? player.balance.pot : max),
+                            table.players[0].balance.pot,
+                        );
+                        const pot = biggestPot > player.balance.main ? player.balance.main : biggestPot;
+                        dispatch(call({ value: pot }, socket));
                 }
             }
-        }, []);
+        }, [active]);
+
+        useEffect(() => {
+            if (timeWidth <= 0) {
+                clearInterval(timer.current);
+                setTimeWidth(100);
+                dispatch(fold());
+            }
+        }, [timeWidth]);
 
         const timerAnimation = useSpring({ to: { width: `${timeWidth}%` }, config: config.gentle });
 
         const cardSet =
-            table.status === 'started' || table.status === 'betting'
+            table.status === 'betting' || table.status === 'finished-round'
                 ? true
-                : table.status === 'finished-round'
+                : table.status === 'finished'
                 ? false
                 : false;
 
-        const cards = useTransition(cardSet, null, {
+        const cardsComponent = useTransition(cardSet, null, {
             from: {
                 opacity: 0,
                 top: `${CENTER[index - 1].top}%`,
@@ -430,16 +480,16 @@ const Player = forwardRef(
                 left: `${CENTER[index - 1].left}%`,
                 right: `${CENTER[index - 1].right}%`,
             },
-            config: { duration: 300 },
+            config: { duration: 3000 },
         });
 
         const leaveAnimation =
             potAnimationType === FINISHED
-                ?   {
-                        top: `${((size.height/2) - potBounds.top)/10}rem`,
-                        left: `${((size.width/2) - potBounds.left)/10}rem`,
-                        opacity: '0',
-                    }
+                ? {
+                      top: `${(size.height / 2 - potBounds.top) / 10}rem`,
+                      left: `${(size.width / 2 - potBounds.left) / 10}rem`,
+                      opacity: '0',
+                  }
                 : { opacity: '0' };
 
         const newPot = (type) => {
@@ -468,11 +518,14 @@ const Player = forwardRef(
         });
 
         const newAction = (value) => {
+            if (timer.current) {
+                clearInterval(timer.current);
+                setTimeWidth(100);
+            }
             setAction(value);
-
             setTimeout(() => {
-                setAction((prev) => prev === value ? null : prev);
-            }, 3000)
+                setAction((prev) => (prev === value ? null : prev));
+            }, 3000);
         };
         const lastActionComponent = useTransition(action, null, {
             from: { bottom: '0rem', opacity: '0' },
@@ -481,31 +534,35 @@ const Player = forwardRef(
             config: { duration: 300 },
         });
 
+        const dealerComponent = useTransition(dealer, null, {
+            from: { opacity: 0 },
+            enter: { opacity: 1 },
+            leave: { opacity: 0 },
+            config: { duration: 300 },
+        });
+
         return (
             <div className={className}>
                 <div className="cards-player-wrapper">
                     {type === 'player' &&
-                        cards.map(
-                            ({ item, key, props }, index) =>
+                        cards &&
+                        cardsComponent.map(
+                            ({ item, key, props }) =>
                                 item && (
                                     <>
                                         <Card
-                                            variant="H1"
-                                            animated
-                                            style={
-                                                {
-                                                    marginLeft: '1.4rem',
-                                                    top: props.top,
-                                                    left: props.left,
-                                                    opacity: props.opacity,
-                                                    transform: props.transform,
-                                                }
-                                            }
+                                            variant={cards[0]}
+                                            style={{
+                                                marginLeft: '1.4rem',
+                                                top: props.top,
+                                                left: props.left,
+                                                opacity: props.opacity,
+                                                transform: props.transform,
+                                            }}
                                             flipped={flipped}
                                         />
                                         <Card
-                                            variant="H1"
-                                            animated
+                                            variant={cards[1]}
                                             style={{
                                                 marginRight: '1.4rem',
                                                 top: props.top,
@@ -520,36 +577,36 @@ const Player = forwardRef(
                         )}
                 </div>
 
-                {dealer && <Dealer className="dealer-circle" />}
+                {dealerComponent.map(
+                    ({ item, key, props }) => item && <Dealer style={props} className="dealer-circle" />,
+                )}
                 <BasePlayer type={type} index={index!} ref={ref} lastAction={lastAction}>
-                    {pot ? <div className="pot-container">
-                        <div className="pot-inner">
-                            {potComponent.map(
-                                ({ item, key, props }) =>
-                                    item !== 0 && <Balance
-                                        value={item}
-                                        key={key}
-                                        size="small"
-                                        className="pot"
-                                        style={props}
-                                        ref={potRef}
-                                    />
-                            )}
+                    {pot ? (
+                        <div className="pot-container">
+                            <div className="pot-inner">
+                                {potComponent.map(
+                                    ({ item, key, props }) =>
+                                        item !== 0 && (
+                                            <Balance
+                                                value={item}
+                                                key={key}
+                                                size="small"
+                                                className="pot"
+                                                style={props}
+                                                ref={potRef}
+                                            />
+                                        ),
+                                )}
+                            </div>
                         </div>
-                    </div> : null}
-                    {lastActionComponent.map(
-                        ({ item, key, props }) =>
-                                <animated.div className="last-action" style={props} key={key}>
-                                    <Typography
-                                        variant="h6"
-                                        component="span"
-                                        textTransform="uppercase"
-                                        fontWeight={200}
-                                    >
-                                        {item}
-                                    </Typography>
-                                </animated.div>
-                    )}
+                    ) : null}
+                    {lastActionComponent.map(({ item, key, props }) => (
+                        <animated.div className="last-action" style={props} key={key}>
+                            <Typography variant="h6" component="span" textTransform="uppercase" fontWeight={200}>
+                                {item}
+                            </Typography>
+                        </animated.div>
+                    ))}
                     {(type === 'buy-in' || type === 'top-up') && (
                         <div className="top">
                             <Square />
@@ -602,7 +659,12 @@ const Player = forwardRef(
                             <Line size="big" color={BIG_LINE_COLOR} />
                         </div>
                         <div className="line-container line-container-middle">
-                            <Line size="small" color={status === 'won' ? 'success' : SMALL_LINE_COLOR} type={type} />
+                            <Line
+                                size="small"
+                                color={status === 'won' ? 'success' : SMALL_LINE_COLOR}
+                                type={type}
+                                className="line-timeline-divider line-timeline-divider-left"
+                            />
                             {type === 'player' && (
                                 <div className="block-container">
                                     <Divider size="small" color={status === 'won' ? 'success' : 'yellow'} />
@@ -610,7 +672,12 @@ const Player = forwardRef(
                                     <Divider size="small" color={status === 'won' ? 'success' : 'yellow'} />
                                 </div>
                             )}
-                            <Line size="small" color={status === 'won' ? 'success' : SMALL_LINE_COLOR} type={type} />
+                            <Line
+                                size="small"
+                                color={status === 'won' ? 'success' : SMALL_LINE_COLOR}
+                                type={type}
+                                className="line-timeline-divider line-timeline-divider-right"
+                            />
                         </div>
                         <div className="line-container bottom-gutter">
                             <Line size="big" color={BIG_LINE_COLOR} />
@@ -643,6 +710,7 @@ Player.defaultProps = {
     type: 'buy-in',
     index: 1,
     pot: 0,
+    cards: [undefined, undefined],
 };
 
 export default styled(Player)`
@@ -662,6 +730,21 @@ export default styled(Player)`
     }
 
     .dealer-circle {
-        left: calc(100% + 1rem);
+        top: 5rem;
+        ${({ index }) => {
+            switch (index) {
+                case 1:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                    return 'left: calc(100% + 1rem)';
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    return 'right: calc(100% + 1rem)';
+            }
+        }}
     }
 `;

@@ -4,14 +4,18 @@ export interface TableState {
     success: Record<string, unknown>;
     players: Player[];
     slot?: number;
-    chat: { username: string; message: string }[] | [];
+    cards?: string[];
+    chat: { user: { username: string; color: string }; message: string }[];
     balance?: { totalPot?: number; currentPot?: number; sidePots?: number[] };
     autoMuck: boolean;
     music: boolean;
     gameSounds: boolean;
-    ledger?: [{ username: string; id: number; balance: number }];
     player?: Player;
     status: 'waiting' | 'started' | 'betting' | 'finished-round' | 'finished';
+    timeBank: number;
+    autoAction: 'default' | 'checkfold' | 'callany' | 'muck' | 'show';
+    ledger: { name: string; id: string; balance: number }[];
+    tableName: string;
 }
 
 export interface TableAction {
@@ -22,13 +26,15 @@ export interface TableAction {
 export interface Player {
     username: string;
     lastAction: {
-        type?: 'bet' | 'call' | 'raise' | 'check';
+        type?: 'bet' | 'call' | 'raise' | 'check' | 'muck' | 'show';
         params?: Record<string, any>;
     };
     balance?: { pot?: number; main?: number };
+    active?: boolean;
     slot: number;
-    cards?: [];
     isDealer?: boolean;
     timeLeft?: number;
     status?: 'selected' | 'sitted-in' | 'sitted-out' | 'folded' | 'won' | 'lost';
+    cards: [string, string];
+    color: string;
 }

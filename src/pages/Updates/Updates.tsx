@@ -23,12 +23,16 @@ const Updates = () => {
                 <Navigation type={'auth'} />
                 <Content>
                     <LineContent>
-                        <Title color="secondary">BETA V1.01</Title>
+                        <Title animated color="secondary">
+                            BETA V1.01
+                        </Title>
                         <div className="subtitles-wrapper-inner">
-                            <Subtitle>We are constantly working to make WeFlop a better product for you.</Subtitle>
-                            <Subtitle>This is where we post our updates and poll our community.</Subtitle>
+                            <Subtitle animated>
+                                We are constantly working to make WeFlop a better product for you.
+                            </Subtitle>
+                            <Subtitle animated>This is where we post our updates and poll our community.</Subtitle>
                         </div>
-                        <Line color="secondary" width="large" height="short" align="left" />
+                        <Line color="secondary" width="large" height="short" align="left" animated />
                     </LineContent>
                     <div style={{ margin: '0.8rem 0 0 1.6rem' }}>
                         <Rectangle height="extralarge" width="extralarge" />

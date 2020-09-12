@@ -24,6 +24,7 @@ import {
     SET_SOUNDS,
     GET_LEDGER,
     SEND_MESSAGE_CHAT,
+    SET_AUTO_ACTION,
 } from '../../actions/table';
 import { TableState, TableAction } from './types';
 import { stat } from 'fs';
@@ -33,6 +34,19 @@ const defaultTableState: TableState = {
     error: {},
     success: {},
     slot: undefined,
+    tableName: 'Test table',
+    ledger: [
+        {
+            name: 'glenn',
+            id: '1',
+            balance: -14,
+        },
+        {
+            name: 'glenn',
+            id: '2',
+            balance: 2,
+        },
+    ],
     players: [
         {
             username: 'john',
@@ -41,6 +55,8 @@ const defaultTableState: TableState = {
                 main: 100,
             },
             lastAction: {},
+            cards: ['H1', 'H1'],
+            color: '#C49D3A',
         },
         {
             username: 'glenn',
@@ -49,24 +65,40 @@ const defaultTableState: TableState = {
                 main: 100,
             },
             lastAction: {},
+            active: true,
+            cards: ['H1', 'H1'],
+            isDealer: true,
+            color: '#C49D3A',
         },
         {
             username: 'nick',
+            color: '#C49D3A',
             slot: 6,
             balance: {
                 main: 100,
             },
             lastAction: {},
+            cards: ['H1', 'H1'],
         },
     ],
+    timeBank: 7,
     player: undefined,
-    chat: [],
+    chat: [
+        {
+            message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+            user: { username: 'jacob', color: '#C49D3A' },
+        },
+        {
+            message: 'Lorem ipsum dolor sit',
+            user: { username: 'john', color: '#8B112F' },
+        },
+    ],
     balance: undefined,
     autoMuck: false,
     music: false,
     gameSounds: true,
-    ledger: undefined,
     status: 'waiting',
+    autoAction: 'default',
 };
 
 const table = (state: TableState = defaultTableState, action: TableAction) => {
@@ -95,7 +127,7 @@ const table = (state: TableState = defaultTableState, action: TableAction) => {
                 player: undefined,
                 balance: {
                     totalPot: 0,
-                    currentPot: 0
+                    currentPot: 0,
                 },
                 players: [...state.players, { ...state.player, ...action.payload }],
             };
@@ -806,7 +838,7 @@ const table = (state: TableState = defaultTableState, action: TableAction) => {
                     ...state.isLoading,
                     [SET_AUTO_MUCK.REQUEST]: undefined,
                 },
-                autoMuck: action.payload,
+                autoMuck: !state.autoMuck,
             };
         case SET_AUTO_MUCK.ERROR:
             return {
@@ -839,7 +871,7 @@ const table = (state: TableState = defaultTableState, action: TableAction) => {
                     ...state.isLoading,
                     [SET_MUSIC.REQUEST]: undefined,
                 },
-                music: action.payload,
+                music: !state.music,
             };
         case SET_MUSIC.ERROR:
             return {
@@ -872,7 +904,7 @@ const table = (state: TableState = defaultTableState, action: TableAction) => {
                     ...state.isLoading,
                     [SET_SOUNDS.REQUEST]: undefined,
                 },
-                gameSounds: action.payload,
+                gameSounds: !state.gameSounds,
             };
         case SET_SOUNDS.ERROR:
             return {
@@ -932,13 +964,17 @@ const table = (state: TableState = defaultTableState, action: TableAction) => {
                 },
             };
         case SEND_MESSAGE_CHAT.SUCCESS:
+            const player = state.players.find((player) => player.slot === state.slot);
             return {
                 ...state,
                 isLoading: {
                     ...state.isLoading,
                     [SEND_MESSAGE_CHAT.REQUEST]: undefined,
                 },
-                chat: [...state.chat, action.payload],
+                chat: [
+                    ...state.chat,
+                    { message: action.payload!.message, user: { username: player!.username, color: player!.color } },
+                ],
             };
         case SEND_MESSAGE_CHAT.ERROR:
             return {
@@ -950,6 +986,40 @@ const table = (state: TableState = defaultTableState, action: TableAction) => {
                 error: {
                     ...state.error,
                     [SEND_MESSAGE_CHAT.ERROR]: action.payload,
+                },
+            };
+
+        case SET_AUTO_ACTION.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SET_AUTO_ACTION.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [SET_AUTO_ACTION.ERROR]: undefined,
+                },
+            };
+        case SET_AUTO_ACTION.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SET_AUTO_ACTION.REQUEST]: undefined,
+                },
+                autoAction: action.payload!.name,
+            };
+        case SET_AUTO_ACTION.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [SET_AUTO_ACTION.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [SET_AUTO_ACTION.ERROR]: action.payload,
                 },
             };
 

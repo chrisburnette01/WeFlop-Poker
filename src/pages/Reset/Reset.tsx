@@ -41,6 +41,7 @@ const Reset = () => {
             className="button-form"
             title="send reset"
             isActionCompleted={isEmailSent}
+            animated
         />
     );
     const notification = (
@@ -81,14 +82,18 @@ const Reset = () => {
                 <Navigation type={'basic'} />
                 <Content>
                     <LineContent>
-                        <Title color="secondary" style={opacity}>
+                        <Title animated color="secondary" style={opacity}>
                             Forgot Your Password?
                         </Title>
                         <div className="subtitles-wrapper-inner">
-                            <Subtitle style={opacity}>Enter the email address associated with your account.</Subtitle>
-                            <Subtitle style={opacity}>We’ll send you an email with a reset form.</Subtitle>
+                            <Subtitle animated style={opacity}>
+                                Enter the email address associated with your account.
+                            </Subtitle>
+                            <Subtitle animated style={opacity}>
+                                We’ll send you an email with a reset form.
+                            </Subtitle>
                         </div>
-                        <Line color="secondary" width="large" height="short" align="left" />
+                        <Line color="secondary" width="large" height="short" align="left" animated />
                         <Form
                             onSubmit={handleSubmit(onSubmit)}
                             buttonSubmit={buttonSubmit}
@@ -102,6 +107,7 @@ const Reset = () => {
                                 name="email"
                                 style={opacity}
                                 validated={check.email}
+                                animated
                                 disabled={isEmailSent}
                                 register={register({
                                     required: {

@@ -38,7 +38,7 @@ const SignUp = () => {
 
     const isValidated = check.name && check.email && check.password && check.password_repeat;
     const buttonSubmit = (
-        <Button variant="secondary" validated={isValidated} className="button-form" title="register" />
+        <Button variant="secondary" validated={isValidated} className="button-form" title="register" animated />
     );
 
     useEffect(() => {
@@ -66,15 +66,18 @@ const SignUp = () => {
                 <Navigation type={'basic'} />
                 <Content>
                     <LineContent>
-                        <Title color="secondary">Welcome!</Title>
+                        <Title color="secondary" animated>
+                            Welcome!
+                        </Title>
                         <div className="subtitles-wrapper-inner">
-                            <Subtitle>WeFlop is a player-supported online poker platform.</Subtitle>
-                            <Subtitle>We are committed to building the features you want.</Subtitle>
-                            <Subtitle>Our beta supports home games with simple, intuitive ledgers.</Subtitle>
+                            <Subtitle animated>WeFlop is a player-supported online poker platform.</Subtitle>
+                            <Subtitle animated>We are committed to building the features you want.</Subtitle>
+                            <Subtitle animated>Our beta supports home games with simple, intuitive ledgers.</Subtitle>
                         </div>
-                        <Line color="secondary" width="large" height="short" align="left" />
+                        <Line color="secondary" width="large" height="short" align="left" animated />
                         <Form onSubmit={handleSubmit(onSubmit)} buttonSubmit={buttonSubmit} isClicked={isClicked}>
                             <TextField
+                                animated
                                 onFocus={() => setIsClicked(true)}
                                 placeholder="unique display name"
                                 type="text"
@@ -101,6 +104,7 @@ const SignUp = () => {
                                 errorMessage={errors.name && errors.name.message}
                             />
                             <TextField
+                                animated
                                 onFocus={() => setIsClicked(true)}
                                 placeholder="email adress"
                                 type="email"
@@ -127,6 +131,7 @@ const SignUp = () => {
                                 errorMessage={errors.email && errors.email.message}
                             />
                             <TextField
+                                animated
                                 onFocus={() => setIsClicked(true)}
                                 placeholder="password"
                                 type="password"
@@ -155,6 +160,7 @@ const SignUp = () => {
                                 errorMessage={errors.password && errors.password.message}
                             />
                             <TextField
+                                animated
                                 onFocus={() => setIsClicked(true)}
                                 placeholder="retype password"
                                 type="password"

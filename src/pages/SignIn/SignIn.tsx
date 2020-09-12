@@ -35,7 +35,9 @@ const SignIn = () => {
     };
 
     const isValidated = check.email && check.password;
-    const buttonSubmit = <Button variant="secondary" validated={isValidated} className="button-form" title="Enter" />;
+    const buttonSubmit = (
+        <Button variant="secondary" validated={isValidated} className="button-form" title="Enter" animated />
+    );
 
     useEffect(() => {
         if (application.isLoading[SIGN_IN.REQUEST]) {
@@ -64,15 +66,18 @@ const SignIn = () => {
                 <Navigation type={'basic'} />
                 <Content>
                     <LineContent>
-                        <Title color="secondary">Welcome back!</Title>
+                        <Title animated color="secondary">
+                            Welcome back!
+                        </Title>
                         <div className="subtitles-wrapper-inner">
-                            <Subtitle>WeFlop is a player-supported online poker platform.</Subtitle>
-                            <Subtitle>We are committed to building the features you want.</Subtitle>
-                            <Subtitle>Our beta supports home games with simple, intuitive ledgers.</Subtitle>
+                            <Subtitle animated>WeFlop is a player-supported online poker platform.</Subtitle>
+                            <Subtitle animated>We are committed to building the features you want.</Subtitle>
+                            <Subtitle animated>Our beta supports home games with simple, intuitive ledgers.</Subtitle>
                         </div>
-                        <Line width="large" height="short" align="left" color="secondary" />
+                        <Line width="large" height="short" align="left" color="secondary" animated />
                         <Form onSubmit={handleSubmit(onSubmit)} buttonSubmit={buttonSubmit} isClicked={isClicked}>
                             <TextField
+                                animated
                                 onFocus={() => setIsClicked(true)}
                                 placeholder="email adress"
                                 type="email"
@@ -81,6 +86,7 @@ const SignIn = () => {
                                 errorMessage={errors.email && errors.email.message}
                             />
                             <TextField
+                                animated
                                 onFocus={() => setIsClicked(true)}
                                 placeholder="password"
                                 type="password"

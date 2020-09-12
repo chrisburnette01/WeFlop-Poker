@@ -29,13 +29,17 @@ const Play = () => {
                 <Content>
                     <div style={{ marginLeft: '13.6rem' }}>
                         <LineContent>
-                            <Title color="secondary">HOME GAMES</Title>
+                            <Title animated color="secondary">
+                                HOME GAMES
+                            </Title>
                             <div className="subtitles-wrapper-inner">
-                                <Subtitle>Click “CREATE” to customize your own poker game. </Subtitle>
-                                <Subtitle>To invite your friends, simply share the table’s link.</Subtitle>
-                                <Subtitle>Every game you create or join via link is saved in “TABLES.”</Subtitle>
+                                <Subtitle animated>Click “CREATE” to customize your own poker game. </Subtitle>
+                                <Subtitle animated>To invite your friends, simply share the table’s link.</Subtitle>
+                                <Subtitle animated>
+                                    Every game you create or join via link is saved in “TABLES.”
+                                </Subtitle>
                             </div>
-                            <Line color="secondary" width="large" height="short" align="left" />
+                            <Line color="secondary" width="large" height="short" align="left" animated />
                         </LineContent>
                     </div>
                     <Tabs

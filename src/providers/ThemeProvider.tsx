@@ -36,7 +36,6 @@ type Animations = {
     line: string;
     text: string;
     inputs: string;
-    emailNotification: string;
 };
 
 type Typography = {
@@ -269,10 +268,9 @@ const defaultTypography: Typography = {
 };
 
 const defaultAnimations: Animations = {
-    text: 'fadeText 0s ease-in-out 0s forwards',
-    line: 'setHeight 0s ease-in-out 0s forwards',
-    inputs: 'fadeInputs 0s infinite 0s ease-in-out',
-    emailNotification: 'emailNotification 0s ease-in-out forwards',
+    text: 'fadeText 0.4s ease-in-out 0.4s forwards',
+    line: 'setHeight 0.4s ease-in-out 0s forwards',
+    inputs: 'fadeInputs 5s infinite 0.8s ease-in-out',
 };
 
 const themeContextState: ThemeContextType = {

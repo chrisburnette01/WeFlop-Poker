@@ -31,7 +31,7 @@ const LedgerItemBase = styled.div<LedgerItemBaseProps>`
 
 interface LedgerItemProps {
     name: string;
-    id: number;
+    id: string;
     balance: number;
 }
 

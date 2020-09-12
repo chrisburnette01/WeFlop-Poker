@@ -25,16 +25,16 @@ const UpdateItem = ({ element, className }: UpdateItemProps) => {
         <div className={className}>
             <div className="updates-note-item" onClick={() => setOpen((prev) => !prev)}>
                 <div className="updates-note-item-date-wrapper">
-                    <Typography variant="date" component="span">
+                    <Typography variant="date" component="span" animated>
                         {moment(element.date).format('MM.DD.YYYY')}
                     </Typography>
-                    <Typography variant="date" component="span">
+                    <Typography variant="date" component="span" animated>
                         {moment(element.date).format('HH:mm')}
                     </Typography>
                 </div>
                 <Line className="updates-note-item-line" width="large" color={open ? 'yellow' : 'primary'} />
                 <div className="updates-note-item-text-wrapper">
-                    <Typography variant="button2" component="a">
+                    <Typography variant="button2" component="a" animated>
                         {element.title}
                     </Typography>
                 </div>

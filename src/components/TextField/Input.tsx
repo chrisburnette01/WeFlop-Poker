@@ -6,12 +6,13 @@ interface BaseInputProps {
     validated: boolean | undefined;
     width?: string;
     size: 'large' | 'medium' | 'small';
+    animated?: boolean;
 }
 
 const BaseInput = styled('div')<BaseInputProps>`
     .wrapper {
-        animation: ${({ theme }) => theme.animations.text};
-        opacity: 0%;
+        animation: ${({ theme, animated }) => (animated ? theme.animations.text : 'none')};
+        opacity: ${({ theme, animated }) => (animated ? 0 : 1)};
         position: relative;
         width: 100%;
         max-width: ${({ width }) => (width ? width : null)};
@@ -75,6 +76,7 @@ const BaseInput = styled('div')<BaseInputProps>`
 `;
 
 interface InputProps {
+    animated?: boolean;
     className?: string;
     size: 'large' | 'medium' | 'small';
     placeholder?: string;
@@ -108,11 +110,12 @@ const Primary = ({
     className,
     onChange,
     style,
+    animated,
 }: InputProps) => {
-    const show = !validated && errorMessage !== undefined ? true : false;
-    const isValidated = errorMessage ? false : validated === true ? true : undefined;
+    const show = !validated && errorMessage !== undefined;
+    const isValidated = errorMessage ? false : validated ? true : undefined;
     return (
-        <BaseInput validated={isValidated} width={width} size={size} className={className}>
+        <BaseInput validated={isValidated} width={width} size={size} className={className} animated={animated}>
             <div className="wrapper">
                 <ToolTip message={errorMessage!} name={name} show={show} align={tooltipAlign} />
                 <input

@@ -25,6 +25,7 @@ import {
     SET_SOUNDS,
     GET_LEDGER,
     SEND_MESSAGE_CHAT,
+    SET_AUTO_ACTION,
     choosePanelSuccess,
     choosePanelError,
     joinGameSuccess,
@@ -75,6 +76,8 @@ import {
     getLedgerError,
     sendMessageChatSuccess,
     sendMessageChatError,
+    setAutoActionSuccess,
+    setAutoActionError,
 } from '../../actions/table';
 
 const joinGame = function* (action) {
@@ -217,18 +220,16 @@ const topUp = function* (action) {
 };
 
 const muck = function* (action) {
-    const data = {};
     try {
-        yield put(muckSuccess(data));
+        yield put(muckSuccess());
     } catch (error) {
         yield put(muckError(error));
     }
 };
 
 const show = function* (action) {
-    const data = {};
     try {
-        yield put(showSuccess(data));
+        yield put(showSuccess());
     } catch (error) {
         yield put(showError(error));
     }
@@ -253,27 +254,24 @@ const getBalance = function* (action) {
 };
 
 const setMusic = function* (action) {
-    const data = {};
     try {
-        yield put(setMusicSuccess(data));
+        yield put(setMusicSuccess());
     } catch (error) {
         yield put(setMusicError(error));
     }
 };
 
 const setAutoMuck = function* (action) {
-    const data = {};
     try {
-        yield put(setAutoMuckSuccess(data));
+        yield put(setAutoMuckSuccess());
     } catch (error) {
         yield put(setAutoMuckError(error));
     }
 };
 
 const setSounds = function* (action) {
-    const data = {};
     try {
-        yield put(setSoundsSuccess(data));
+        yield put(setSoundsSuccess());
     } catch (error) {
         yield put(setSoundsError(error));
     }
@@ -289,11 +287,18 @@ const getLedger = function* (action) {
 };
 
 const sendMessageChat = function* (action) {
-    const data = {};
     try {
-        yield put(sendMessageChatSuccess(data));
+        yield put(sendMessageChatSuccess(action.payload));
     } catch (error) {
         yield put(sendMessageChatError(error));
+    }
+};
+
+const setAutoAction = function* (action) {
+    try {
+        yield put(setAutoActionSuccess(action.payload));
+    } catch (error) {
+        yield put(setAutoActionError(error));
     }
 };
 
@@ -323,6 +328,7 @@ const table = function* () {
     yield takeLatest(SET_SOUNDS.REQUEST, setSounds);
     yield takeLatest(GET_LEDGER.REQUEST, getLedger);
     yield takeLatest(SEND_MESSAGE_CHAT.REQUEST, sendMessageChat);
+    yield takeLatest(SET_AUTO_ACTION.REQUEST, setAutoAction);
 };
 
 export default table;

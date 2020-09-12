@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Divider } from '../../layout';
 import { Line } from '../../../../components';
 import Checkbox from './CheckboxSettings';
+import { RootState } from '../../../../store';
+import { setMusic, setSounds, setAutoMuck } from '../../../../store/actions/table';
 import { Container } from '../../../../layout';
+import { useDispatch, useSelector } from 'react-redux';
+import { SocketContext } from '../../../../providers';
 
 interface SettingsProps {
     className?: string;
 }
 
 const Settings = ({ className }: SettingsProps) => {
-    const [isActive, setIsActive] = useState({ autoMuck: false, music: true, sounds: false });
+    const dispatch = useDispatch();
+    const table = useSelector((state: RootState) => state.table);
+    const { socket } = useContext(SocketContext);
 
-    const checkboxHandler = (name) => {
-        setIsActive((prev) => ({
-            ...prev,
-            [name]: !isActive[name],
-        }));
-    };
     return (
         <Container type="modal">
             <div className={className}>
@@ -28,11 +28,11 @@ const Settings = ({ className }: SettingsProps) => {
                 <div className="checkboxes-wrapper">
                     <Checkbox
                         title="AUTO-MUCK ALL HANDS"
-                        active={isActive.autoMuck}
-                        onClick={() => checkboxHandler('autoMuck')}
+                        active={table.autoMuck}
+                        onClick={() => dispatch(setAutoMuck(socket))}
                     />
-                    <Checkbox title="MUSIC" active={isActive.music} onClick={() => checkboxHandler('music')} />
-                    <Checkbox title="GAME SOUNDS" active={isActive.sounds} onClick={() => checkboxHandler('sounds')} />
+                    <Checkbox title="MUSIC" active={table.music} onClick={() => dispatch(setMusic())} />
+                    <Checkbox title="GAME SOUNDS" active={table.gameSounds} onClick={() => dispatch(setSounds())} />
                 </div>
                 <Divider margin="0.6rem" />
                 <Line width="large" color="yellow" wrapperClassName="line-long" />

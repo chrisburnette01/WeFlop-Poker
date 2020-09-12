@@ -6,12 +6,13 @@ interface BaseTextAreaProps {
     size: 'large' | 'medium' | 'small';
     rightLine: boolean;
     validated?: boolean;
+    animated?: boolean;
 }
 
 const TextAreaBase = styled('div')<BaseTextAreaProps>`
     .wrapper {
-        animation: ${({ theme }) => theme.animations.text};
-        opacity: 0%;
+        animation: ${({ theme, animated }) => (animated ? theme.animations.text : 'none')};
+        opacity: ${({ animated }) => (animated ? 0 : 1)};
         position: relative;
         width: 100%;
         height: 100%;
@@ -81,6 +82,7 @@ interface TextAreaProps {
     onKeyDown?: () => void;
     validated?: boolean;
     style?: Record<string, undefined>;
+    animated?: boolean;
 }
 
 const TextArea = ({
@@ -98,6 +100,7 @@ const TextArea = ({
     onKeyDown,
     validated,
     style,
+    animated,
 }: TextAreaProps) => {
     const [height, setHeight] = useState(autoresize ? 'auto' : '17.6rem');
     const [text, setText] = useState('');
@@ -117,7 +120,14 @@ const TextArea = ({
     };
 
     return (
-        <TextAreaBase className={className} width={width} size={size} rightLine={rightLine!} validated={validated}>
+        <TextAreaBase
+            className={className}
+            width={width}
+            size={size}
+            rightLine={rightLine!}
+            validated={validated}
+            animated={animated}
+        >
             <div className="wrapper">
                 <textarea
                     onKeyDown={onKeyDown}

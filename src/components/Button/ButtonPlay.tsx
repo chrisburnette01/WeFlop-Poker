@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography } from '../';
 import styled from 'styled-components';
+import { animated } from 'react-spring';
 
 interface ButtonPlayBase {
     title?: string;
@@ -38,15 +39,18 @@ interface ButtonPlayProps {
     onClick?: any;
     activeColor?: string;
     textStyle?: Record<string, unknown>;
+    animated?: boolean;
 }
 
-const ButtonPlay = ({ title, active, align, onClick, activeColor, textStyle }: ButtonPlayProps) => {
+const ButtonPlay = ({ title, active, align, onClick, activeColor, textStyle, animated }: ButtonPlayProps) => {
     return (
         <ButtonPlayBase active={active} align={align} onClick={onClick} activeColor={activeColor}>
             {align === 'left' ? <span className="line" /> : null}
-            <Typography variant="button3" textTransform="uppercase" component="span" style={textStyle}>
-                {title}
-            </Typography>
+            <div style={textStyle}>
+                <Typography variant="button3" textTransform="uppercase" component="span" animated={animated}>
+                    {title}
+                </Typography>
+            </div>
             {align === 'right' ? <span className="line" /> : null}
         </ButtonPlayBase>
     );

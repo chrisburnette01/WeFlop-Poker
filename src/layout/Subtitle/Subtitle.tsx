@@ -7,14 +7,15 @@ interface SubtitleProps {
     className?: string;
     color?: string;
     style?: Record<string, unknown>;
+    animated?: boolean;
 }
 
-const Subtitle = ({ children, className, color, style }: SubtitleProps) => {
+const Subtitle = ({ children, className, color, style, animated }: SubtitleProps) => {
     return (
         <div className={className}>
             <Rectangle height="small" width="small" border="small" color={color ? color : 'yellow'} />
             <div className="subtitles-wrapper" style={style}>
-                <Typography component="h3" variant="body1" fontStyle="italic" style={style}>
+                <Typography component="h3" variant="body1" fontStyle="italic" animated={animated}>
                     {children}
                 </Typography>
             </div>

@@ -44,21 +44,23 @@ const Tabs = ({ form, className, isCreated }: TabsProps) => {
     };
 
     const buttonHandler = (title) => {
-        switch (title) {
-            case 'archive':
-                !active[title] && dispatch(getTables({ type: title }));
-                activeStateHandler('archive', 'active');
-                break;
-            case 'active':
-                !active[title] && dispatch(getTables({ type: title }));
-                activeStateHandler('active', 'archive');
-                break;
-            case 'tables':
-                activeStateHandler('tables', 'create');
-                break;
-            case 'create':
-                activeStateHandler('create', 'tables');
-                break;
+        if (!isCreated) {
+            switch (title) {
+                case 'archive':
+                    !active[title] && dispatch(getTables({ type: title }));
+                    activeStateHandler('archive', 'active');
+                    break;
+                case 'active':
+                    !active[title] && dispatch(getTables({ type: title }));
+                    activeStateHandler('active', 'archive');
+                    break;
+                case 'tables':
+                    activeStateHandler('tables', 'create');
+                    break;
+                case 'create':
+                    activeStateHandler('create', 'tables');
+                    break;
+            }
         }
     };
     return (
@@ -72,6 +74,7 @@ const Tabs = ({ form, className, isCreated }: TabsProps) => {
                         align="right"
                         onClick={() => buttonHandler('create')}
                         textStyle={opacity}
+                        animated
                     />
                 </div>
                 <Rectangle height="extralarge" width="extralarge" className="rect-play-wrapper" />
@@ -82,6 +85,7 @@ const Tabs = ({ form, className, isCreated }: TabsProps) => {
                         active={active.tables}
                         align="left"
                         onClick={() => buttonHandler('tables')}
+                        animated
                     />
                 </div>
             </div>
@@ -228,6 +232,6 @@ export default styled(Tabs)`
     }
 
     .create-table-slidedown {
-        margin-left: 12.8rem;
+        margin-left: 12.6rem;
     }
 `;

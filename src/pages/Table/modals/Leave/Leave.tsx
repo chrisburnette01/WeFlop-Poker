@@ -42,7 +42,7 @@ export default styled(Leave)`
         flex: 1;
     }
     .buttons {
-        margin: 5.3rem 0 0 2rem;
+        margin: 5.3rem 0 0 0.5rem;
     }
     .line-short {
         height: 2.4rem !important;

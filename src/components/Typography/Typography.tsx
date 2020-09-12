@@ -10,6 +10,7 @@ interface BaseTypographyProps {
     color?: 'primary' | 'secondary' | 'initial' | string;
     className?: string;
     style?: Record<string, unknown> | null;
+    animated?: boolean;
 }
 
 interface TypographyProps {
@@ -22,6 +23,7 @@ interface TypographyProps {
     color?: 'primary' | 'secondary' | 'initial' | string;
     className?: string;
     style?: Record<string, unknown> | null;
+    animated?: boolean;
 }
 
 const BaseTypography = styled('div')<BaseTypographyProps>`
@@ -38,8 +40,8 @@ const BaseTypography = styled('div')<BaseTypographyProps>`
     & > p {
         margin: 0;
     }
-    opacity: 0;
-    animation: ${({ theme, style }) => (style?.opacity ? 'none' : theme.animations.text)};
+    opacity: ${({ animated }) => (animated ? 0 : 1)};
+    animation: ${({ theme, animated }) => (animated ? theme.animations.text : 'none')};
 `;
 
 const Typography = ({
@@ -52,6 +54,7 @@ const Typography = ({
     fontStyle,
     fontWeight,
     style,
+    animated,
 }: TypographyProps) => {
     return (
         <BaseTypography
@@ -63,6 +66,7 @@ const Typography = ({
             textTransform={textTransform}
             className={className}
             style={style}
+            animated={animated}
         >
             {children}
         </BaseTypography>

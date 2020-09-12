@@ -37,7 +37,7 @@ const BaseBalance = styled(animated.div)<BaseBalanceProps>`
 
 interface BalanceProps {
     size: 'small' | 'big';
-    value: number;
+    value?: number;
     style?: any;
     className?: string;
 }
@@ -49,7 +49,7 @@ const Balance = forwardRef(({ size, value, className, style }: BalanceProps, ref
                 <div className="icon-inner" />
             </div>
             <Typography component="span" variant={size === 'big' ? 'body1' : 'h6'} className="typography-balance">
-                {value.toFixed(2)}
+                {value ? value.toFixed(2) : "0.00"}
             </Typography>
         </BaseBalance>
     );

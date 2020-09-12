@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { Divider } from '../';
 import { NavButton } from '../../components';
 import { Rectangle } from '../../../../components';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../../../store';
+import { setAutoAction } from '../../../../store/actions/table';
+
 import styled from 'styled-components';
 
 interface ActionMenuProps {
@@ -26,7 +30,12 @@ const ActionMenuBase = styled.div<ActionMenuBaseProps>`
 `;
 
 const ActionMenu = ({ className, type }: ActionMenuProps) => {
-    const [active, setActive] = useState('default');
+    const dispatch = useDispatch();
+    const table = useSelector((state: RootState) => state.table);
+
+    const setActive = (name) => {
+        dispatch(setAutoAction({ name }));
+    };
     return (
         <ActionMenuBase type={type}>
             <Divider
@@ -35,7 +44,7 @@ const ActionMenu = ({ className, type }: ActionMenuProps) => {
                         <Rectangle
                             className="rect-nav"
                             border="small"
-                            color={active === 'default' ? 'yellow' : 'initial'}
+                            color={table.autoAction === 'default' ? 'yellow' : 'initial'}
                             width="2.4rem"
                             height="large"
                             onClick={() => setActive('default')}
@@ -48,10 +57,8 @@ const ActionMenu = ({ className, type }: ActionMenuProps) => {
                         title={type === 'fold' ? 'fold' : type === 'check-fold' ? 'check/fold' : 'muck'}
                         noMargin
                         className="button-hor"
-                        active={active === 'fold'}
-                        onClick={() =>
-                            setActive(type === 'fold' ? 'fold' : type === 'check-fold' ? 'check/fold' : 'muck')
-                        }
+                        active={table.autoAction === 'checkfold' || table.autoAction === 'muck'}
+                        onClick={() => setActive(type === 'fold' || type === 'check-fold' ? 'checkfold' : 'muck')}
                     />
                 }
                 rightContent={
@@ -60,10 +67,8 @@ const ActionMenu = ({ className, type }: ActionMenuProps) => {
                         title={type === 'fold' ? 'call any' : type === 'check-fold' ? 'call any' : 'show'}
                         noMargin
                         className="button-hor"
-                        active={active === 'call'}
-                        onClick={() =>
-                            setActive(type === 'fold' ? 'call any' : type === 'check-fold' ? 'call any' : 'show')
-                        }
+                        active={table.autoAction === 'callany' || table.autoAction === 'show'}
+                        onClick={() => setActive(type === 'fold' || type === 'check-fold' ? 'callany' : 'show')}
                     />
                 }
                 className={className}

@@ -42,8 +42,6 @@ const BaseButton = styled('div')<BaseButtonProps>`
 
     span {
         margin: ${({ align }) => (align === 'left' ? '0 0 0 1.6rem' : '1.5rem 1.6rem 0 0')};
-        animation: ${({ theme }) => theme.animations.text};
-        opacity: 0;
     }
 `;
 
@@ -89,6 +87,7 @@ const Primary = ({
         >
             {(align === undefined || align === 'left') && <span className="line" />}
             <Typography
+                animated
                 variant={size === 'large' ? 'button1' : 'button2'}
                 textTransform="uppercase"
                 component="span"

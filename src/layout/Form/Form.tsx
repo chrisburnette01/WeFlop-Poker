@@ -11,6 +11,7 @@ interface FormProps {
     isRightIcon?: boolean;
     notification?: JSX.Element[] | JSX.Element | null;
     className?: string;
+    page?: 'contact';
 }
 
 interface FormAnimationProps {
@@ -26,17 +27,19 @@ const FormAnimationWrapper = styled.div<FormAnimationProps>`
     min-width: 30.4rem;
 `;
 
-const Form = ({ children, onSubmit, buttonSubmit, isClicked, notification, className }: FormProps) => {
+const Form = ({ children, onSubmit, buttonSubmit, isClicked, notification, className, page }: FormProps) => {
     return (
         <div className={className}>
             <form onSubmit={onSubmit} className="form" noValidate>
                 <FormAnimationWrapper isClicked={isClicked}>{children}</FormAnimationWrapper>
                 <div className="lines-container">
-                    <Line color="secondary" width="large" height="short" align="left" />
-                    <Line color="secondary" width="large" height="short" align="right" />
+                    <Line color="secondary" width="large" height="short" align="left" animated />
+                    <Line color="secondary" width="large" height="short" align="right" animated />
                 </div>
                 {buttonSubmit}
-                <Notification type="auth">{notification}</Notification>
+                <Notification page={page} type="auth">
+                    {notification}
+                </Notification>
             </form>
             <Line
                 color="secondary"
@@ -44,6 +47,7 @@ const Form = ({ children, onSubmit, buttonSubmit, isClicked, notification, class
                 width="large"
                 align="left"
                 className="form-line-right"
+                animated
             />
         </div>
     );

@@ -22,9 +22,11 @@ interface InputProps {
     onKeyDown?: any;
     onChange?: any;
     style?: Record<string, any>;
+    animated?: boolean;
 }
 
 const TextField = ({
+    animated,
     size,
     placeholder,
     validated,
@@ -64,6 +66,7 @@ const TextField = ({
                     tooltipAlign={tooltipAlign!}
                     onChange={onChange}
                     style={style}
+                    animated={animated}
                 />
             );
         case 'textarea':
@@ -83,6 +86,7 @@ const TextField = ({
                     autoresize={autoresize}
                     rightLine={rightLine}
                     style={style}
+                    animated={animated}
                 />
             );
         default:
