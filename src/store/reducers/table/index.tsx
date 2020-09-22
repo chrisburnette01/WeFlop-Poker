@@ -25,6 +25,8 @@ import {
     GET_LEDGER,
     SEND_MESSAGE_CHAT,
     SET_AUTO_ACTION,
+    CANCEL_CHOOSING,
+    UPDATE_INFO,
 } from '../../actions/table';
 import { TableState, TableAction } from './types';
 import { stat } from 'fs';
@@ -65,7 +67,6 @@ const defaultTableState: TableState = {
                 main: 100,
             },
             lastAction: {},
-            active: true,
             cards: ['H1', 'H1'],
             isDealer: true,
             color: '#C49D3A',
@@ -103,6 +104,40 @@ const defaultTableState: TableState = {
 
 const table = (state: TableState = defaultTableState, action: TableAction) => {
     switch (action.type) {
+        case UPDATE_INFO.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [UPDATE_INFO.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [UPDATE_INFO.ERROR]: undefined,
+                },
+            };
+        case UPDATE_INFO.SUCCESS:
+            return {
+                ...state,
+                ...action.payload,
+                isLoading: {
+                    ...state.isLoading,
+                    [UPDATE_INFO.REQUEST]: undefined,
+                },
+            };
+        case UPDATE_INFO.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [UPDATE_INFO.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [UPDATE_INFO.ERROR]: action.payload,
+                },
+            };
+
         case JOIN_GAME.REQUEST:
             return {
                 ...state,
@@ -1023,6 +1058,39 @@ const table = (state: TableState = defaultTableState, action: TableAction) => {
                 },
             };
 
+        case CANCEL_CHOOSING.REQUEST:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [CANCEL_CHOOSING.REQUEST]: true,
+                },
+                error: {
+                    ...state.error,
+                    [CANCEL_CHOOSING.ERROR]: undefined,
+                },
+            };
+        case CANCEL_CHOOSING.SUCCESS:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [CANCEL_CHOOSING.REQUEST]: undefined,
+                },
+                player: undefined,
+            };
+        case CANCEL_CHOOSING.ERROR:
+            return {
+                ...state,
+                isLoading: {
+                    ...state.isLoading,
+                    [CANCEL_CHOOSING.REQUEST]: false,
+                },
+                error: {
+                    ...state.error,
+                    [CANCEL_CHOOSING.ERROR]: action.payload,
+                },
+            };
         default:
             return state;
     }

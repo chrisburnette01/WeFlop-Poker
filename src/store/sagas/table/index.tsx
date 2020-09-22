@@ -26,6 +26,8 @@ import {
     GET_LEDGER,
     SEND_MESSAGE_CHAT,
     SET_AUTO_ACTION,
+    UPDATE_INFO,
+    CANCEL_CHOOSING,
     choosePanelSuccess,
     choosePanelError,
     joinGameSuccess,
@@ -78,6 +80,10 @@ import {
     sendMessageChatError,
     setAutoActionSuccess,
     setAutoActionError,
+    cancelChoosingSuccess,
+    cancelChoosingError,
+    updateInfoSuccess,
+    updateInfoError,
 } from '../../actions/table';
 
 const joinGame = function* (action) {
@@ -302,6 +308,22 @@ const setAutoAction = function* (action) {
     }
 };
 
+const updateInfo = function* (action) {
+    try {
+        yield put(updateInfoSuccess(action.payload));
+    } catch (error) {
+        yield put(updateInfoError(error));
+    }
+};
+
+const cancelChoosing = function* (action) {
+    try {
+        yield put(cancelChoosingSuccess());
+    } catch (error) {
+        yield put(cancelChoosingError(error));
+    }
+};
+
 const table = function* () {
     yield takeLatest(JOIN_GAME.REQUEST, joinGame);
     yield takeLatest(CHOOSE_PANEL.REQUEST, choosePanel);
@@ -329,6 +351,9 @@ const table = function* () {
     yield takeLatest(GET_LEDGER.REQUEST, getLedger);
     yield takeLatest(SEND_MESSAGE_CHAT.REQUEST, sendMessageChat);
     yield takeLatest(SET_AUTO_ACTION.REQUEST, setAutoAction);
+    yield takeLatest(UPDATE_INFO.REQUEST, updateInfo);
+    yield takeLatest(CANCEL_CHOOSING.REQUEST, cancelChoosing);
+    yield takeLatest(UPDATE_INFO.REQUEST, updateInfo);
 };
 
 export default table;

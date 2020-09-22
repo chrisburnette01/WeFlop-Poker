@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,10 +7,11 @@ import { RootState } from '../../store';
 import { Chat, Ledger, Leave, Settings } from './modals';
 import { Menu, ButtonsPanel, GameSection, ActionMenu, Player } from './layout';
 import { SocketContext } from '../../providers';
-import { choosePanel, joinGame } from '../../store/actions/table';
+import { choosePanel, joinGame, updateInfo } from '../../store/actions/table';
 
 import useMeasure from 'react-use-measure';
 import styled from 'styled-components';
+import { useTransition } from 'react-spring';
 
 interface TableProps {
     className?: string;
@@ -47,7 +48,6 @@ const Table = ({ className }: TableProps) => {
     const dispatch = useDispatch();
     const { socket } = useContext(SocketContext);
     const table = useSelector((state: RootState) => state.table);
-    const [pot, setPot] = useState<number | undefined>(0);
     const size = useWindowSize();
     const [navState, setNavState] = useState<string | undefined>();
     const isHeightHigher = size.height! > size.width! / (16 / 9);
@@ -91,7 +91,7 @@ const Table = ({ className }: TableProps) => {
             } else {
                 dispatch(MUCK);
             }
-            
+
         }
     }, [table])*/
 
@@ -122,10 +122,452 @@ const Table = ({ className }: TableProps) => {
     //     }, 9000);
     // }, []);
 
-    const isActive = table.players.find((player) => player.slot === table.slot && player.active);
-    const actionMenuType = table.players.find(
-        (player) => player.slot === table.slot && (player.status === 'won' || player.status === 'lost'),
-    );
+    useEffect(() => {
+        const delay = 3000;
+        async function animate() {
+            await new Promise((resolve) => setTimeout(resolve, delay));
+            dispatch(updateInfo({ player: { username: 'test', slot: 3, lastAction: {} } }));
+            await new Promise((resolve) => setTimeout(resolve, delay));
+            dispatch(
+                updateInfo({
+                    slot: 3,
+                    player: undefined,
+                    balance: {
+                        totalPot: 0,
+                        currentPot: 100,
+                    },
+                    players: [
+                        {
+                            username: 'john',
+                            slot: 1,
+                            balance: {
+                                main: 100,
+                            },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                            color: '#C49D3A',
+                        },
+                        {
+                            username: 'glenn',
+                            slot: 2,
+                            balance: {
+                                main: 100,
+                            },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                            isDealer: true,
+                            color: '#C49D3A',
+                        },
+                        {
+                            username: 'nick',
+                            color: '#C49D3A',
+                            slot: 6,
+                            balance: {
+                                main: 100,
+                            },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                        },
+                        {
+                            username: 'test',
+                            slot: 3,
+                            balance: {
+                                main: 100,
+                            },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                        },
+                    ],
+                }),
+            );
+            await new Promise((resolve) => setTimeout(resolve, delay));
+            dispatch(updateInfo({ status: 'betting' }));
+            await new Promise((resolve) => setTimeout(resolve, delay));
+            dispatch(
+                updateInfo({
+                    players: [
+                        {
+                            username: 'john',
+                            slot: 1,
+                            balance: { main: 100, pot: 20 },
+                            lastAction: { type: 'call', params: { value: 20 } },
+                            cards: ['H1', 'H1'],
+                            color: '#C49D3A',
+                        },
+                        {
+                            username: 'glenn',
+                            slot: 2,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                            isDealer: true,
+                            color: '#C49D3A',
+                        },
+                        {
+                            username: 'nick',
+                            color: '#C49D3A',
+                            slot: 6,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                        },
+                        {
+                            username: 'test',
+                            slot: 3,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                        },
+                    ],
+                }),
+            );
+            await new Promise((resolve) => setTimeout(resolve, delay));
+            dispatch(
+                updateInfo({
+                    players: [
+                        {
+                            username: 'john',
+                            slot: 1,
+                            balance: { main: 100, pot: 20 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                            color: '#C49D3A',
+                        },
+                        {
+                            username: 'glenn',
+                            slot: 2,
+                            balance: { main: 100, pot: 20 },
+                            lastAction: { type: 'call', params: { value: 20 } },
+                            cards: ['H1', 'H1'],
+                            isDealer: true,
+                            color: '#C49D3A',
+                        },
+                        {
+                            username: 'nick',
+                            color: '#C49D3A',
+                            slot: 6,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                        },
+                        {
+                            username: 'test',
+                            slot: 3,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                        },
+                    ],
+                }),
+            );
+            await new Promise((resolve) => setTimeout(resolve, delay));
+            dispatch(
+                updateInfo({
+                    players: [
+                        {
+                            username: 'john',
+                            slot: 1,
+                            balance: { main: 100, pot: 20 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                            color: '#C49D3A',
+                        },
+                        {
+                            username: 'glenn',
+                            slot: 2,
+                            balance: { main: 100, pot: 20 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                            isDealer: true,
+                            color: '#C49D3A',
+                        },
+                        {
+                            username: 'nick',
+                            color: '#C49D3A',
+                            slot: 6,
+                            balance: { main: 100, pot: 20 },
+                            lastAction: { type: 'call', params: { value: 20 } },
+                            cards: ['H1', 'H1'],
+                        },
+                        {
+                            username: 'test',
+                            slot: 3,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                        },
+                    ],
+                }),
+            );
+            await new Promise((resolve) => setTimeout(resolve, delay));
+            dispatch(
+                updateInfo({
+                    players: [
+                        {
+                            username: 'john',
+                            slot: 1,
+                            balance: { main: 100, pot: 20 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                            color: '#C49D3A',
+                        },
+                        {
+                            username: 'glenn',
+                            slot: 2,
+                            balance: { main: 100, pot: 20 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                            isDealer: true,
+                            color: '#C49D3A',
+                        },
+                        {
+                            username: 'nick',
+                            color: '#C49D3A',
+                            slot: 6,
+                            balance: { main: 100, pot: 20 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                        },
+                        {
+                            username: 'test',
+                            slot: 3,
+                            balance: { main: 100, pot: 20 },
+                            lastAction: { type: 'call', params: { value: 20 } },
+                            cards: ['H1', 'H1'],
+                        },
+                    ],
+                }),
+            );
+            await new Promise((resolve) => setTimeout(resolve, delay));
+            dispatch(updateInfo({ status: 'finished-round' }));
+            await new Promise((resolve) => setTimeout(resolve, delay));
+            dispatch(
+                updateInfo({
+                    balance: {
+                        totalPot: 0,
+                        currentPot: 180,
+                    },
+                    players: [
+                        {
+                            username: 'john',
+                            slot: 1,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                            color: '#C49D3A',
+                        },
+                        {
+                            username: 'glenn',
+                            slot: 2,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                            isDealer: true,
+                            color: '#C49D3A',
+                        },
+                        {
+                            username: 'nick',
+                            color: '#C49D3A',
+                            slot: 6,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                        },
+                        {
+                            username: 'test',
+                            slot: 3,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                        },
+                    ],
+                }),
+            );
+            await new Promise((resolve) => setTimeout(resolve, delay));
+            dispatch(updateInfo({ status: 'betting', cards: ['H1', 'H1', 'H1'] }));
+            await new Promise((resolve) => setTimeout(resolve, delay));
+            dispatch(
+                updateInfo({
+                    players: [
+                        {
+                            username: 'john',
+                            slot: 1,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                            color: '#C49D3A',
+                        },
+                        {
+                            username: 'glenn',
+                            slot: 2,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                            isDealer: true,
+                            color: '#C49D3A',
+                        },
+                        {
+                            username: 'nick',
+                            color: '#C49D3A',
+                            slot: 6,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                        },
+                        {
+                            username: 'test',
+                            slot: 3,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            active: true,
+                            cards: ['H1', 'H1'],
+                        },
+                    ],
+                }),
+            );
+            await new Promise((resolve) => setTimeout(resolve, 7000));
+            dispatch(
+                updateInfo({
+                    players: [
+                        {
+                            username: 'john',
+                            slot: 1,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                            color: '#C49D3A',
+                        },
+                        {
+                            username: 'glenn',
+                            slot: 2,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                            isDealer: true,
+                            color: '#C49D3A',
+                        },
+                        {
+                            username: 'nick',
+                            color: '#C49D3A',
+                            slot: 6,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                        },
+                        {
+                            username: 'test',
+                            slot: 3,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                            status: 'folded',
+                        },
+                    ],
+                }),
+            );
+            await new Promise((resolve) => setTimeout(resolve, delay));
+            dispatch(
+                updateInfo({
+                    players: [
+                        {
+                            username: 'john',
+                            slot: 1,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                            color: '#C49D3A',
+                            status: 'won',
+                        },
+                        {
+                            username: 'glenn',
+                            slot: 2,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                            isDealer: true,
+                            color: '#C49D3A',
+                            status: 'lost',
+                        },
+                        {
+                            username: 'nick',
+                            color: '#C49D3A',
+                            slot: 6,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                        },
+                        {
+                            username: 'test',
+                            slot: 3,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                            status: 'folded',
+                        },
+                    ],
+                }),
+            );
+            await new Promise((resolve) => setTimeout(resolve, delay));
+            dispatch(
+                updateInfo({
+                    players: [
+                        {
+                            username: 'john',
+                            slot: 1,
+                            balance: { main: 100 },
+                            lastAction: { type: 'muck' },
+                            cards: ['H1', 'H1'],
+                            color: '#C49D3A',
+                            status: 'won',
+                        },
+                        {
+                            username: 'glenn',
+                            slot: 2,
+                            balance: { main: 100 },
+                            lastAction: { type: 'show' },
+                            cards: ['H1', 'H1'],
+                            isDealer: true,
+                            color: '#C49D3A',
+                            status: 'lost',
+                        },
+                        {
+                            username: 'nick',
+                            color: '#C49D3A',
+                            slot: 6,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                        },
+                        {
+                            username: 'test',
+                            slot: 3,
+                            balance: { main: 100 },
+                            lastAction: {},
+                            cards: ['H1', 'H1'],
+                            status: 'folded',
+                        },
+                    ],
+                }),
+            );
+            await new Promise((resolve) => setTimeout(resolve, delay));
+            dispatch(updateInfo({ status: 'finished' }));
+        }
+        animate();
+    }, []);
+
+    const player = table.players.find((player) => player.slot === table.slot);
+    const isActive = player?.active;
+
+    const menuType =
+        table.player?.slot && !table.player?.balance?.main
+            ? 'cancel'
+            : table.slot && table.players.length === 1 && table.status === 'waiting'
+            ? 'sit-in'
+            : table.status !== 'waiting' && player?.status !== 'waiting'
+            ? 'sit-in-next'
+            : player?.status === 'waiting'
+            ? 'blind'
+            : undefined;
 
     const addPlayer = (slot) => {
         dispatch(choosePanel({ slot, username: 'test' }));
@@ -146,6 +588,12 @@ const Table = ({ className }: TableProps) => {
         );
     };
 
+    const actionMenuAnimated = useTransition(!isActive && table.status === 'betting' && table.slot, null, {
+        from: { opacity: 0 },
+        enter: { opacity: 1 },
+        leave: { opacity: 0 },
+    });
+
     return (
         <>
             <Helmet>
@@ -161,7 +609,7 @@ const Table = ({ className }: TableProps) => {
                 }}
             >
                 <div>{activeModal}</div>
-                <Menu navState={navState} setNavState={setNavStateHandler} type="blind" />
+                <Menu navState={navState} setNavState={setNavStateHandler} type={menuType} />
                 <div id="game">
                     <GameSection
                         cards={table.cards}
@@ -277,14 +725,14 @@ const Table = ({ className }: TableProps) => {
                     {isActive && table.status === 'betting' && (
                         <ButtonsPanel type={table.balance?.totalPot ? 'call' : 'bet'} balance={1000} />
                     )}
-                    {!isActive && table.status === 'betting' && (
-                        <ActionMenu
-                            type={
-                                actionMenuType?.status === 'won' || actionMenuType?.status === 'lost'
-                                    ? 'muck'
-                                    : 'check-fold'
-                            }
-                        />
+                    {actionMenuAnimated.map(
+                        ({ item, key, props }) =>
+                            item && (
+                                <ActionMenu
+                                    style={props}
+                                    type={player?.status === 'won' || player?.status === 'lost' ? 'muck' : 'check-fold'}
+                                />
+                            ),
                     )}
                 </div>
             </div>

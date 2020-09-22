@@ -34,7 +34,7 @@ export interface Player {
     slot: number;
     isDealer?: boolean;
     timeLeft?: number;
-    status?: 'selected' | 'sitted-in' | 'sitted-out' | 'folded' | 'won' | 'lost';
+    status?: 'selected' | 'sitted-in' | 'sitted-out' | 'folded' | 'won' | 'lost' | 'waiting';
     cards: [string, string];
     color: string;
 }

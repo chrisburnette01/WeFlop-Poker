@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { NavButton } from '../../components';
 import { Divider } from '../';
 import MenuItem from './MenuItem';
+import { useDispatch } from 'react-redux';
+import { cancelChoosing } from '../../../../store/actions/table';
 
 interface BaseMenuProps {
     navState: string | undefined;
@@ -107,8 +109,9 @@ const Menu = ({ navState, setNavState, type }) => {
 };
 
 const BottomRightMenu = ({ type }) => {
+    const dispatch = useDispatch();
     switch (type) {
-        case 'sit-in':
+        case 'sit-in-next':
             return (
                 <>
                     <MenuItem bottom right>
@@ -135,42 +138,32 @@ const BottomRightMenu = ({ type }) => {
                     <Divider lineRight lineBottom />
                 </>
             );
-        case 'sit-out':
+        case 'sit-in':
             return (
                 <>
                     <MenuItem bottom right>
                         <NavButton title="SIT IN" align="right" />
                     </MenuItem>
                     <MenuItem bottom right>
-                        <NavButton title="SIT OUT NEXT BB" align="right" />
                         <NavButton title="SIT OUT NEXT HAND" align="right" />
                     </MenuItem>
+                    <MenuItem bottom right>
+                        <NavButton title="SIT OUT NEXT BB" align="right" />
+                    </MenuItem>
+                    <Divider lineRight lineBottom />
                 </>
             );
         case 'cancel':
             return (
                 <>
                     <MenuItem bottom right>
-                        <NavButton title="CANCEL" align="right" />
+                        <NavButton title="CANCEL" align="right" onClick={() => dispatch(cancelChoosing())} />
                     </MenuItem>
                     <Divider lineRight lineBottom />
                 </>
             );
         default:
-            return (
-                <>
-                    <MenuItem bottom right>
-                        <NavButton title="SIT IN" align="right" />
-                    </MenuItem>
-                    <MenuItem bottom right>
-                        <NavButton title="SIT OUT NEXT HAND" align="right" />
-                    </MenuItem>
-                    <MenuItem bottom right>
-                        <NavButton title="SIT OUT NEXT BB" align="right" />
-                    </MenuItem>
-                    <Divider lineRight lineBottom />
-                </>
-            );
+            return null;
     }
 };
 

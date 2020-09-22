@@ -7,17 +7,20 @@ import { RootState } from '../../../../store';
 import { setAutoAction } from '../../../../store/actions/table';
 
 import styled from 'styled-components';
+import { animated, InterpolationChain } from 'react-spring';
 
 interface ActionMenuProps {
     className?: string;
     type: 'fold' | 'check-fold' | 'muck';
+    style: any;
 }
 
 interface ActionMenuBaseProps {
     type: 'fold' | 'check-fold' | 'muck';
+    style: any;
 }
 
-const ActionMenuBase = styled.div<ActionMenuBaseProps>`
+const ActionMenuBase = styled(animated.div)<ActionMenuBaseProps>`
     .button-hor {
         margin-bottom: ${({ type }) => (type === 'muck' ? '2.4rem' : '0.8rem')};
     }
@@ -29,7 +32,7 @@ const ActionMenuBase = styled.div<ActionMenuBaseProps>`
     }
 `;
 
-const ActionMenu = ({ className, type }: ActionMenuProps) => {
+const ActionMenu = ({ className, type, style }: ActionMenuProps) => {
     const dispatch = useDispatch();
     const table = useSelector((state: RootState) => state.table);
 
@@ -37,7 +40,7 @@ const ActionMenu = ({ className, type }: ActionMenuProps) => {
         dispatch(setAutoAction({ name }));
     };
     return (
-        <ActionMenuBase type={type}>
+        <ActionMenuBase type={type} style={style}>
             <Divider
                 topContent={
                     type === 'muck' ? undefined : (

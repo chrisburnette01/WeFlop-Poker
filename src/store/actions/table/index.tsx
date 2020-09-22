@@ -166,6 +166,12 @@ const SET_AUTO_ACTION: Action = {
     ERROR: 'SET_AUTO_ACTION_ERROR',
 };
 
+const CANCEL_CHOOSING: Action = {
+    REQUEST: 'CANCEL_CHOOSING_REQUEST',
+    SUCCESS: 'CANCEL_CHOOSING_SUCCESS',
+    ERROR: 'CANCEL_CHOOSING_ERROR',
+};
+
 // choose panel
 
 const choosePanel = (payload) => {
@@ -795,6 +801,27 @@ const setAutoActionError = (payload) => {
     };
 };
 
+// remove player
+
+const cancelChoosing = () => {
+    return {
+        type: CANCEL_CHOOSING.REQUEST,
+    };
+};
+
+const cancelChoosingSuccess = () => {
+    return {
+        type: CANCEL_CHOOSING.SUCCESS,
+    };
+};
+
+const cancelChoosingError = (payload) => {
+    return {
+        type: CANCEL_CHOOSING.ERROR,
+        payload,
+    };
+};
+
 export {
     JOIN_GAME,
     CHOOSE_PANEL,
@@ -823,6 +850,7 @@ export {
     SEND_MESSAGE_CHAT,
     UPDATE_INFO,
     SET_AUTO_ACTION,
+    CANCEL_CHOOSING,
     joinGame,
     joinGameSuccess,
     joinGameError,
@@ -904,4 +932,7 @@ export {
     setAutoAction,
     setAutoActionError,
     setAutoActionSuccess,
+    cancelChoosing,
+    cancelChoosingError,
+    cancelChoosingSuccess,
 };

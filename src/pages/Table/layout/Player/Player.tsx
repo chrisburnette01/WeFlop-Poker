@@ -127,8 +127,8 @@ const BasePlayer = styled('div')<BasePlayerProps>`
     .last-action {
         position: absolute;
         left: 50%;
-        transform: translateX(-50%);
         z-index: -1;
+        bottom: -2rem;
     }
     .player-content {
         display: flex;
@@ -279,7 +279,7 @@ interface PlayerProps {
     };
     index: number;
     onAccept?: () => void;
-    status?: 'selected' | 'sitted-in' | 'sitted-out' | 'folded' | 'won' | 'lost';
+    status?: 'selected' | 'sitted-in' | 'sitted-out' | 'folded' | 'won' | 'lost' | 'waiting';
     lastAction?: {
         type?: 'bet' | 'call' | 'raise' | 'check' | 'muck' | 'show';
         params?: Record<string, any>;
@@ -455,24 +455,28 @@ const Player = forwardRef(
                 right: `${CENTER[index - 1].right}%`,
                 transform: 'translateY(0%)',
             },
+            enter: (item) => async (next, cancel) => {
+                await next({ opacity: 1, top: '0%', left: '0%', right: '0%' });
+                setFlipped(index === 1);
+            },
             update: () => async (next) => {
                 const animation =
                     status !== 'folded'
                         ? { transform: 'translateY(-40%)', opacity: status === 'lost' ? 0.75 : 1 }
                         : { opacity: 0.25 };
-                if (status === 'folded' || status === 'won' || status === 'lost') {
-                    await next(animation);
-                    if (lastAction.type === 'show') {
-                        setFlipped(true);
-                    }
-                    if (table.status === 'finished-round' && status === 'folded') {
-                        await next({ opacity: 0 });
+                if (table.status === 'finished-round' && status === 'folded') {
+                    await next({ opacity: 0 });
+                } else {
+                    if (status === 'folded' || status === 'won' || status === 'lost') {
+                        await next(animation);
+                        if (lastAction.type === 'show') {
+                            setFlipped(true);
+                        }
+                    } else {
+                        await next({ opacity: 1, top: '0%', left: '0%', right: '0%' });
+                        setFlipped(index === 1);
                     }
                 }
-            },
-            enter: (item) => async (next, cancel) => {
-                await next({ opacity: 1, top: '0%', left: '0%', right: '0%' });
-                setFlipped(index === 1);
             },
             leave: {
                 opacity: 0,
@@ -480,7 +484,7 @@ const Player = forwardRef(
                 left: `${CENTER[index - 1].left}%`,
                 right: `${CENTER[index - 1].right}%`,
             },
-            config: { duration: 3000 },
+            config: { duration: 300 },
         });
 
         const leaveAnimation =
@@ -528,9 +532,9 @@ const Player = forwardRef(
             }, 3000);
         };
         const lastActionComponent = useTransition(action, null, {
-            from: { bottom: '0rem', opacity: '0' },
-            enter: { opacity: '1', bottom: '-2rem' },
-            leave: { opacity: '0', bottom: '0rem' },
+            from: { transform: 'translateX(-150%)', opacity: '0' },
+            enter: { transform: 'translateX(-50%)', opacity: '1' },
+            leave: { transform: 'translateX(100%)', opacity: '0' },
             config: { duration: 300 },
         });
 
@@ -581,25 +585,23 @@ const Player = forwardRef(
                     ({ item, key, props }) => item && <Dealer style={props} className="dealer-circle" />,
                 )}
                 <BasePlayer type={type} index={index!} ref={ref} lastAction={lastAction}>
-                    {pot ? (
-                        <div className="pot-container">
-                            <div className="pot-inner">
-                                {potComponent.map(
-                                    ({ item, key, props }) =>
-                                        item !== 0 && (
-                                            <Balance
-                                                value={item}
-                                                key={key}
-                                                size="small"
-                                                className="pot"
-                                                style={props}
-                                                ref={potRef}
-                                            />
-                                        ),
-                                )}
-                            </div>
+                    <div className="pot-container">
+                        <div className="pot-inner">
+                            {potComponent.map(
+                                ({ item, key, props }) =>
+                                    item !== 0 && (
+                                        <Balance
+                                            value={item}
+                                            key={key}
+                                            size="small"
+                                            className="pot"
+                                            style={props}
+                                            ref={potRef}
+                                        />
+                                    ),
+                            )}
                         </div>
-                    ) : null}
+                    </div>
                     {lastActionComponent.map(({ item, key, props }) => (
                         <animated.div className="last-action" style={props} key={key}>
                             <Typography variant="h6" component="span" textTransform="uppercase" fontWeight={200}>
@@ -718,12 +720,12 @@ export default styled(Player)`
     width: 10%;
     height: 7.5%;
     margin-bottom: 5.5rem;
-    opacity: ${({ status }) => (status === 'sitted-out' ? '0.5' : 'unset')};
+    opacity: ${({ status }) => (status === 'sitted-out' || status === 'waiting' ? '0.5' : 'unset')};
     top: ${({ alignment }) => (alignment.top ? alignment.top : null)}%;
     bottom: ${({ alignment }) => (alignment.bottom ? alignment.bottom : null)}%;
     left: ${({ alignment }) => (alignment.left ? alignment.left : null)}%;
     right: ${({ alignment }) => (alignment.right ? alignment.right : null)}%;
-
+    transition: opacity 0.3s ease-in-out;
     .cards-player-wrapper {
         height: 100%;
         position: relative;

@@ -91,35 +91,35 @@ const GameSection = ({ totalPot, currentPot, sidePots, cards, className, action 
                         <div className="skeleton" />
                         {cardOne.map(
                             ({ item, key, props }) =>
-                                item && <Card style={props} flipped={flipped[0]} variant={cards[0]} />,
+                                item && <Card style={props} flipped={true} variant={cards[0]} />,
                         )}
                     </div>
                     <div className="card-item">
                         <div className="skeleton" />
                         {cardTwo.map(
                             ({ item, key, props }) =>
-                                item && <Card style={props} flipped={flipped[1]} variant={cards[1]} />,
+                                item && <Card style={props} flipped={true} variant={cards[1]} />,
                         )}
                     </div>
                     <div className="card-item" id="center-card">
                         <div className="skeleton" />
                         {cardThree.map(
                             ({ item, key, props }) =>
-                                item && <Card style={props} flipped={flipped[2]} variant={cards[2]}/>,
+                                item && <Card style={props} flipped={true} variant={cards[2]}/>,
                         )}
                     </div>
                     <div className="card-item">
                         <div className="skeleton" />
                         {cardFour.map(
                             ({ item, key, props }) =>
-                                item && <Card style={props} flipped={flipped[3]} variant={cards[3]} />,
+                                item && <Card style={props} flipped={true} variant={cards[3]} />,
                         )}
                     </div>
                     <div className="card-item">
                         <div className="skeleton" />
                         {cardFive.map(
                             ({ item, key, props }) =>
-                                item && <Card style={props} flipped={flipped[4]} variant={cards[4]} />,
+                                item && <Card style={props} flipped={true} variant={cards[4]} />,
                         )}
                     </div>
                 </div>
