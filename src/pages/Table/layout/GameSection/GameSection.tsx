@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 
 import { Typography } from '../../../../components';
 import { Card, Balance } from '../../components';
+import { Player } from '../../../../store/reducers/table/types';
 
 import styled from 'styled-components';
 import { useTransition, animated } from 'react-spring';
@@ -13,27 +14,27 @@ interface GameSectionProps {
     currentPot?: number;
     sidePots?: number[];
     className?: string;
-    action: any;
+    winner?: Player;
     cards?: string[];
+    alignments: {
+        top?: number,
+        bottom?: number,
+        left?: number,
+        right?: number
+    }[];
 }
 
-const GameSection = ({ totalPot, currentPot, sidePots, cards, className, action }: GameSectionProps) => {
+const GameSection = ({ totalPot, currentPot, sidePots, cards, className, winner, alignments }: GameSectionProps) => {
     const [flipped, setFlipped] = useState([false, false, false, false, false]);
-    const [potStatus, setPotStatus] = useState(true);
+    const [potStatus, setPotStatus] = useState('pot');
 
     const [winRef, winBounds] = useMeasure();
 
     useEffect(() => {
-        if (action) {
-            switch (action.type) {
-                case 'win':
-                    winAnimate();
-                    break;
-                case 'pot':
-                    setPotStatus('pot');
-            }
+        if (winner) {
+            winAnimate();
         }
-    }, [action]);
+    }, [winner]);
 
     const winAnimate = async () => {
         await setPotStatus('win');
@@ -52,76 +53,47 @@ const GameSection = ({ totalPot, currentPot, sidePots, cards, className, action 
         );
     };
 
-    const animationConfig = (num, delay) => {
-        return {
-            from: { transform: 'translateY(-200%)', opacity: '0' },
-            enter: (item) => async (next, cancel) => {
-                await new Promise((resolve) => setTimeout(resolve, delay));
-                await next({ transform: 'translateY(0%)', opacity: '1' });
-                await setFlippedHandler(num);
-            },
-            leave: {},
-            config: { duration: 500 },
-        };
-    };
-
-    const cardOne = useTransition(cards[0], null, animationConfig(0, 0));
-    const cardTwo = useTransition(cards[1], null, animationConfig(1, 100));
-    const cardThree = useTransition(cards[2], null, animationConfig(2, 200));
-    const cardFour = useTransition(cards[3], null, animationConfig(3, 300));
-    const cardFive = useTransition(cards[4], null, animationConfig(4, 400));
-
-    // const cardTwo = useTransition(cards[1], null, animationConfig(1, 100));
-    // const cardThree = useTransition(cards[2], null, animationConfig(2, 200));
-    // const cardFour = useTransition(cards[3], null, animationConfig(3, 300));
-    // const cardFive = useTransition(cards[4], null, animationConfig(4, 400));
+    const cardsAnimation = useTransition(cards, (item, index) => index, {
+        from: { transform: 'translateY(-200%)', opacity: '0' },
+        enter: { transform: 'translateY(0%)', opacity: '1' },
+        leave: { transform: 'translateY(-200%)', opacity: '0' },
+        trail: 100,
+        config: { duration: 500 },
+    });
 
     const potComponent = useTransition(potStatus, null, {
         from: { opacity: 0, top: '1rem' },
         enter: { opacity: 1 },
-        leave: potStatus === null ? { top: '-100%', opacity: 0 } : { opacity: 0 },
+        leave: potStatus === null ? { top: '-100%', opacity: 0 } : potStatus === "win" ? { top: "-100%", opacity: 0 } : { opacity: 0 },
         config: { duration: 300 },
     });
 
     return (
         <div className={className}>
             <div className="wrapper">
+                {potComponent.map(({ item, key, props }) =>
+                    item === 'pot' ? (
+                        <animated.div style={props} key={key} className="total-pot-wrapper">
+                            <Typography component="span" variant="h2" color="yellow">
+                                {`TOTAL POT: $${totalPot.toFixed(2)}`}
+                            </Typography>
+                        </animated.div>
+                    ) : item === 'win' ? (
+                        <animated.div style={props} key={key} className="total-pot-wrapper">
+                            <Balance value={totalPot} size="small" className="balance-gutter" ref={winRef} />
+                        </animated.div>
+                    ) : null,
+                )}
                  <div className="wrapper-cards">
-                    <div className="card-item">
-                        <div className="skeleton" />
-                        {cardOne.map(
-                            ({ item, key, props }) =>
-                                item && <Card style={props} flipped={true} variant={cards[0]} />,
-                        )}
-                    </div>
-                    <div className="card-item">
-                        <div className="skeleton" />
-                        {cardTwo.map(
-                            ({ item, key, props }) =>
-                                item && <Card style={props} flipped={true} variant={cards[1]} />,
-                        )}
-                    </div>
-                    <div className="card-item" id="center-card">
-                        <div className="skeleton" />
-                        {cardThree.map(
-                            ({ item, key, props }) =>
-                                item && <Card style={props} flipped={true} variant={cards[2]}/>,
-                        )}
-                    </div>
-                    <div className="card-item">
-                        <div className="skeleton" />
-                        {cardFour.map(
-                            ({ item, key, props }) =>
-                                item && <Card style={props} flipped={true} variant={cards[3]} />,
-                        )}
-                    </div>
-                    <div className="card-item">
-                        <div className="skeleton" />
-                        {cardFive.map(
-                            ({ item, key, props }) =>
-                                item && <Card style={props} flipped={true} variant={cards[4]} />,
-                        )}
-                    </div>
+                    {cardsAnimation.map(
+                        ({ item, key, props }, index) =>
+                            <Card style={props} flipped={true} variant={item} className={`card-${index+1}`} />,
+                    )}
+                    <div className="skeleton card-1" />
+                    <div className="skeleton card-2" />
+                    <div className="skeleton card-3" />
+                    <div className="skeleton card-4" />
+                    <div className="skeleton card-5" />
                 </div>
 
                 <div className="wrapper-balances">                
@@ -138,7 +110,8 @@ const GameSection = ({ totalPot, currentPot, sidePots, cards, className, action 
 
 GameSection.defaultProps = {
     sidePots: [],
-    cards: []
+    cards: [],
+    totalPot: 0
 }
 
 export default styled(GameSection)`
@@ -158,9 +131,8 @@ export default styled(GameSection)`
     }
 
     .wrapper-cards {
-        width: 33.8rem;
-        display: flex;
-        justify-content: space-between;
+        width: 33rem;
+        height: 7.9rem;
         margin: 6.4rem 0 1rem 0;
         position: relative;
     }
@@ -183,11 +155,31 @@ export default styled(GameSection)`
         height: 7.9rem;
     }
 
+    .card-1 {
+        left: 0
+    }
+
+    .card-2 {
+        left: 6.8rem
+    }
+
+    .card-3 {
+        left: 13.6rem
+    }
+
+    .card-4 {
+        left: 20.4rem
+    }
+
+    .card-5 {
+        left: 27.2rem
+    }
+
     .skeleton {
         position: absolute;
         border: 0.3rem solid ${({ theme }) => theme.palette.secondary};
         border-radius: 0.3rem;
-        height: inherit;
-        width: inherit;
+        width: 5.8rem;
+        height: 7.9rem;
     }
 `;

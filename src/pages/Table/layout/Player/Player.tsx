@@ -6,7 +6,7 @@ import { useWindowSize } from '../../../../helpers';
 import plus from '../../../../assets/images/plus.svg';
 import { Card, Balance, Dealer } from '../../components';
 import { useSelector, useDispatch } from 'react-redux';
-import { muck, show, fold, call } from '../../../../store/actions/table';
+import { muck, show, fold, call, check } from '../../../../store/actions/table';
 import { RootState } from '../../store';
 import { Square, Border, Line, Divider, TimerLine } from './components';
 import { useSpring, animated, useTransition, config } from 'react-spring';
@@ -407,25 +407,20 @@ const Player = forwardRef(
                     setTimeWidth((prev) => prev - interval);
                 }, 1000);
 
-                switch (table.autoAction) {
-                    case 'default':
-                        break;
-                    case 'checkfold':
-                        const isBiggerPot = table.players.find((player) => player.balance.pot > pot);
-                        if (isBiggerPot) {
-                            dispatch(fold());
-                            break;
-                        }
-                        dispatch(check());
-                        break;
-                    case 'callany':
-                        const player = table.players.find((player) => player.slot === table.slot);
-                        const biggestPot = table.players.reduce(
-                            (max, player) => (player.balance.pot > max ? player.balance.pot : max),
-                            table.players[0].balance.pot,
-                        );
-                        const pot = biggestPot > player.balance.main ? player.balance.main : biggestPot;
-                        dispatch(call({ value: pot }, socket));
+                if (table.autoAction === "checkfold") {
+                    const isBiggerPot = table.players.find((player) => player.balance.pot > pot);
+                    if (isBiggerPot) {
+                        dispatch(fold());
+                    }
+                    dispatch(check());
+                } else if (table.autoAction === "callany") {
+                    const player = table.players.find((player) => player.slot === table.slot);
+                    const biggestPot = table.players.reduce(
+                        (max, player) => (player.balance.pot > max ? player.balance.pot : max),
+                        table.players[0].balance.pot,
+                    );
+                    const pot = biggestPot > player.balance.main ? player.balance.main : biggestPot;
+                    dispatch(call({ value: pot }, socket));
                 }
             }
         }, [active]);

@@ -246,14 +246,14 @@ const Table = ({ className }: TableProps) => {
                             username: 'nick',
                             color: '#C49D3A',
                             slot: 6,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: {},
                             cards: ['H1', 'H1'],
                         },
                         {
                             username: 'test',
                             slot: 3,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: {},
                             cards: ['H1', 'H1'],
                         },
@@ -351,7 +351,7 @@ const Table = ({ className }: TableProps) => {
                         {
                             username: 'john',
                             slot: 1,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: {},
                             cards: ['H1', 'H1'],
                             color: '#C49D3A',
@@ -359,7 +359,7 @@ const Table = ({ className }: TableProps) => {
                         {
                             username: 'glenn',
                             slot: 2,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: {},
                             cards: ['H1', 'H1'],
                             isDealer: true,
@@ -369,14 +369,14 @@ const Table = ({ className }: TableProps) => {
                             username: 'nick',
                             color: '#C49D3A',
                             slot: 6,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: {},
                             cards: ['H1', 'H1'],
                         },
                         {
                             username: 'test',
                             slot: 3,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: {},
                             cards: ['H1', 'H1'],
                         },
@@ -392,7 +392,7 @@ const Table = ({ className }: TableProps) => {
                         {
                             username: 'john',
                             slot: 1,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: {},
                             cards: ['H1', 'H1'],
                             color: '#C49D3A',
@@ -400,7 +400,7 @@ const Table = ({ className }: TableProps) => {
                         {
                             username: 'glenn',
                             slot: 2,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: {},
                             cards: ['H1', 'H1'],
                             isDealer: true,
@@ -410,14 +410,14 @@ const Table = ({ className }: TableProps) => {
                             username: 'nick',
                             color: '#C49D3A',
                             slot: 6,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: {},
                             cards: ['H1', 'H1'],
                         },
                         {
                             username: 'test',
                             slot: 3,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: {},
                             active: true,
                             cards: ['H1', 'H1'],
@@ -432,7 +432,7 @@ const Table = ({ className }: TableProps) => {
                         {
                             username: 'john',
                             slot: 1,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: {},
                             cards: ['H1', 'H1'],
                             color: '#C49D3A',
@@ -440,7 +440,7 @@ const Table = ({ className }: TableProps) => {
                         {
                             username: 'glenn',
                             slot: 2,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: {},
                             cards: ['H1', 'H1'],
                             isDealer: true,
@@ -450,14 +450,14 @@ const Table = ({ className }: TableProps) => {
                             username: 'nick',
                             color: '#C49D3A',
                             slot: 6,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: {},
                             cards: ['H1', 'H1'],
                         },
                         {
                             username: 'test',
                             slot: 3,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: {},
                             cards: ['H1', 'H1'],
                             status: 'folded',
@@ -472,7 +472,7 @@ const Table = ({ className }: TableProps) => {
                         {
                             username: 'john',
                             slot: 1,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: {},
                             cards: ['H1', 'H1'],
                             color: '#C49D3A',
@@ -481,7 +481,7 @@ const Table = ({ className }: TableProps) => {
                         {
                             username: 'glenn',
                             slot: 2,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: {},
                             cards: ['H1', 'H1'],
                             isDealer: true,
@@ -492,14 +492,14 @@ const Table = ({ className }: TableProps) => {
                             username: 'nick',
                             color: '#C49D3A',
                             slot: 6,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: {},
                             cards: ['H1', 'H1'],
                         },
                         {
                             username: 'test',
                             slot: 3,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: {},
                             cards: ['H1', 'H1'],
                             status: 'folded',
@@ -514,7 +514,7 @@ const Table = ({ className }: TableProps) => {
                         {
                             username: 'john',
                             slot: 1,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: { type: 'muck' },
                             cards: ['H1', 'H1'],
                             color: '#C49D3A',
@@ -523,7 +523,7 @@ const Table = ({ className }: TableProps) => {
                         {
                             username: 'glenn',
                             slot: 2,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: { type: 'show' },
                             cards: ['H1', 'H1'],
                             isDealer: true,
@@ -534,14 +534,14 @@ const Table = ({ className }: TableProps) => {
                             username: 'nick',
                             color: '#C49D3A',
                             slot: 6,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: {},
                             cards: ['H1', 'H1'],
                         },
                         {
                             username: 'test',
                             slot: 3,
-                            balance: { main: 100 },
+                            balance: { main: 100, pot: 0 },
                             lastAction: {},
                             cards: ['H1', 'H1'],
                             status: 'folded',
@@ -616,7 +616,8 @@ const Table = ({ className }: TableProps) => {
                         sidePots={table.balance?.sidePots}
                         totalPot={table.balance?.totalPot}
                         currentPot={table.balance?.currentPot}
-                        action={potAction}
+                        winner={table.players.find((p) => p.status === "won")}
+                        alignments={PLAYERS_ALIGNMENT}
                     />
 
                     {table.player &&
