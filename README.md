@@ -10,8 +10,8 @@
  - yarn >= 1.2 - [https://classic.yarnpkg.com/en/docs/install](https://classic.yarnpkg.com/en/docs/install)
 
 ### Process
- 1. Clone this repository - `git clone https://github.com/abrevnov17/WeFlop-Browser-Client.git`
- 2. Open project folder in terminal - `cd WeFlop-Browser-Client`
+ 1. Clone this repository - `git clone https://github.com/frontexpert/WeFlop-Poker.git`
+ 2. Open project folder in terminal - `cd WeFlop-Poker`
  3. Install all dependencies using Yarn - `yarn install`
  4. Run the app - `yarn start`
 
