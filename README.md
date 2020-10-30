@@ -1,5 +1,5 @@
 # We Flop - player-supported online poker platform
-![We Flop platform](https://i.imgur.com/g0pqt8S.png) (http://prntscr.com/v9skjh)
+![We Flop platform](https://i.imgur.com/g0pqt8S.png) <br> (https://i.imgur.com/qwTSDWi.png)
 ## Deployment
 
 ### Requirements
